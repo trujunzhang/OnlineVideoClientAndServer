@@ -7,6 +7,7 @@
 //
 
 
+#import <google-api-services-youtube/GYoutubeHelper.h>
 #import "GYoutubeHelper.h"
 #import "Online_Request.h"
 #import "OnlineServerInfo.h"
@@ -41,7 +42,7 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)initOnlineClient:(SqliteResponseBlock)downloadCompletionBlock {
+- (void)initOnlineClient:(SqliteResponseBlock)downloadCompletionBlock checkVersion:(BOOL)checkVersion {
    [self.delegate showStepInfo:@"Fetching OnlineVideoInfo frome parse.com !"];
 
    ParseHelperResultBlock parseHelperResultBlock = ^(OnlineServerInfo * object, NSError * error) {
@@ -49,7 +50,7 @@ static GYoutubeHelper * instance = nil;
        if (error) {
           [self.delegate showStepInfo:@"Fetching failure?"];
        } else {
-          [self checkAndFetchSqliteFileFromRemote:downloadCompletionBlock object:object];
+          [self checkAndFetchSqliteFileFromRemote:downloadCompletionBlock object:object checkVersion:checkVersion];
        }
    };
 
@@ -61,8 +62,8 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)checkAndFetchSqliteFileFromRemote:(SqliteResponseBlock)downloadCompletionBlock object:(OnlineServerInfo *)object {
-   if ([self checkValidateLocalSqlite:object.version] == NO) {
+- (void)checkAndFetchSqliteFileFromRemote:(SqliteResponseBlock)downloadCompletionBlock object:(OnlineServerInfo *)object checkVersion:(BOOL)checkVersion {
+   if (checkVersion || [self checkValidateLocalSqlite:object.version] == NO) {
       [self fetchSqliteFileFromRemote:downloadCompletionBlock];
    } else {
       downloadCompletionBlock(nil);

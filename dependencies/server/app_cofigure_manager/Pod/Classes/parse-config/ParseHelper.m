@@ -53,10 +53,6 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
 
        if (error) {
           // 1. Fetching local cache Objects
-//          ParseHelperResultBlock localResultBlock = ^(OnlineServerInfo * object, NSError * error) {
-//              parseHelperResultBlock(object, error);
-//          };
-//          [self readLocalVideoInfo:localResultBlock];
           parseHelperResultBlock(nil, error);
        } else {
           // 1. Fetching Objects to parse Server

@@ -14,7 +14,9 @@ static CGFloat kTextPadding = 100.0f;
 
 @interface FetchingOnlineInfoViewController ()<GYoutubeHelperDelegate> {
    ASTextNode * _fetchingInfo;
-   ASTextNode * _shuffleNode;
+   ASTextNode * _reloadNode;
+   ASTextNode * _offlineNode;
+
 }
 @end
 
@@ -28,7 +30,7 @@ static CGFloat kTextPadding = 100.0f;
       self.delegate = delegate;
       [GYoutubeHelper getInstance].delegate = self;
 
-      [self initOnlineClientInfo];
+      [self initOnlineClientInfo:NO];
 
       [self setupUI];
 
@@ -56,35 +58,51 @@ static CGFloat kTextPadding = 100.0f;
 - (void)setupUI {
    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
        // attribute a string
-       NSDictionary * attrs = @{
-        NSFontAttributeName : [UIFont systemFontOfSize:22.0f],
-        NSForegroundColorAttributeName : [UIColor redColor],
-       };
-       NSAttributedString * string = [[NSAttributedString alloc] initWithString:@"Reload"
-                                                                     attributes:attrs];
+       _reloadNode = [self getButtonWithTitle:@"Reload" isLeft:YES];
+       [_reloadNode addTarget:self
+                       action:@selector(reloadButtonTapped:)
+             forControlEvents:ASControlNodeEventTouchUpInside];
 
-       // create the node
-       _shuffleNode = [[ASTextNode alloc] init];
-       _shuffleNode.attributedString = string;
-
-       // configure the button
-       _shuffleNode.userInteractionEnabled = YES; // opt into touch handling
-       [_shuffleNode addTarget:self
-                        action:@selector(buttonTapped:)
+       _offlineNode = [self getButtonWithTitle:@"Update remote sqlite" isLeft:NO];
+       [_offlineNode addTarget:self
+                        action:@selector(offlineButtonTapped:)
               forControlEvents:ASControlNodeEventTouchUpInside];
-
-       // size all the things
-       CGRect b = self.view.bounds; // convenience
-       CGSize size = [_shuffleNode measure:CGSizeMake(b.size.width, FLT_MAX)];
-       CGPoint origin = CGPointMake(roundf((b.size.width - size.width) / 2.0f), roundf((b.size.height - size.height) / 2.0f));
-       _shuffleNode.frame = (CGRect) { origin, size };
 
        // self.view isn't a node, so we can only use it on the main thread
        dispatch_sync(dispatch_get_main_queue(), ^{
-           [self.view addSubview:_shuffleNode.view];
+           [self.view addSubview:_reloadNode.view];
+           [self.view addSubview:_offlineNode.view];
        });
    });
 
+}
+
+
+- (ASTextNode *)getButtonWithTitle:(NSString *)buttonTitle isLeft:(BOOL)isLeft {
+   ASTextNode * shuffleNode = [[ASTextNode alloc] init];
+   shuffleNode.attributedString = [[NSAttributedString alloc] initWithString:buttonTitle
+                                                                  attributes:@{
+                                                                   NSFontAttributeName : [UIFont systemFontOfSize:26.0f],
+                                                                   NSForegroundColorAttributeName : [UIColor redColor],
+                                                                  }];
+
+   // configure the button
+   shuffleNode.userInteractionEnabled = YES; // opt into touch handling
+
+   // size all the things
+   CGRect b = self.view.bounds; // convenience
+   CGSize size = [shuffleNode measure:CGSizeMake(b.size.width, FLT_MAX)];
+
+
+   CGFloat dX = b.size.width / 2.0f - size.width * 2;
+   if (isLeft) {
+      dX = b.size.width / 2.0f + size.width;
+   }
+
+   CGPoint origin = CGPointMake(roundf(dX), roundf((b.size.height - size.height) / 2.0f));
+   shuffleNode.frame = (CGRect) { origin, size };
+
+   return shuffleNode;
 }
 
 
@@ -115,8 +133,13 @@ static CGFloat kTextPadding = 100.0f;
 }
 
 
-- (void)buttonTapped:(id)sender {
-   [self initOnlineClientInfo];
+- (void)reloadButtonTapped:(id)sender {
+   [self initOnlineClientInfo:NO];
+}
+
+
+- (void)offlineButtonTapped:(id)sender {
+   [self initOnlineClientInfo:YES];
 }
 
 
@@ -135,7 +158,7 @@ static CGFloat kTextPadding = 100.0f;
 }
 
 
-- (void)initOnlineClientInfo {
+- (void)initOnlineClientInfo:(BOOL)checkVersion {
 
    SqliteResponseBlock sqliteResponseBlock = ^(NSObject * respObject) {
        [self.delegate fetchingOnlineClientCompletion];
@@ -144,7 +167,7 @@ static CGFloat kTextPadding = 100.0f;
        [[MxTabBarManager sharedTabBarManager] callbackUpdateYoutubeChannelCompletion:0];
    };
 
-   [[GYoutubeHelper getInstance] initOnlineClient:sqliteResponseBlock];
+   [[GYoutubeHelper getInstance] initOnlineClient:sqliteResponseBlock checkVersion:checkVersion];
 }
 
 

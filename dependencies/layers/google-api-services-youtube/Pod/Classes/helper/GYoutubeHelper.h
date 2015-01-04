@@ -11,6 +11,7 @@
 
 #import "YoutubeConstants.h"
 #import "GYoutubeRequestInfo.h"
+#import "GYoutubeHelper.h"
 
 
 @class GYoutubeRequestInfo;
@@ -44,6 +45,6 @@ typedef void (^SqliteResponseBlock)(NSObject * respObject);
 - (NSString *)getServerCacheDirectory;
 @property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;
 
-- (void)initOnlineClient:(SqliteResponseBlock)downloadCompletionBlock;
+- (void)initOnlineClient:(SqliteResponseBlock)downloadCompletionBlock checkVersion:(BOOL)version;
 
 @end
