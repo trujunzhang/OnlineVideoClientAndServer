@@ -63,11 +63,11 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)checkAndFetchSqliteFileFromRemote:(SqliteResponseBlock)downloadCompletionBlock object:(OnlineServerInfo *)object checkVersion:(BOOL)checkVersion {
-   if (checkVersion || [self checkValidateLocalSqlite:object.version] == NO) {
-      [self fetchSqliteFileFromRemote:downloadCompletionBlock];
-   } else {
-      downloadCompletionBlock(nil);
-   }
+//   if (checkVersion || [self checkValidateLocalSqlite:object.version] == NO) {
+   [self fetchSqliteFileFromRemote:downloadCompletionBlock];
+//   } else {
+//      downloadCompletionBlock(nil);
+//   }
 }
 
 
