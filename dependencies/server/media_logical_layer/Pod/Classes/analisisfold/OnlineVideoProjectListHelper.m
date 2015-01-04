@@ -133,6 +133,7 @@
 - (BOOL)checkIsMovieFile:(NSString *)path {
    NSArray * movieSupportedType = @[ @".mp4", @".mov" ];
 
+   path = [path lowercaseString];
    for (NSString * type in movieSupportedType) {
       if ([path containsString:type]) {
          return YES;
