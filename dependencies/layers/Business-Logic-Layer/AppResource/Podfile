@@ -1,0 +1,67 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, 7.0
+
+
+target 'OnlineVideoClient', :exclusive => true do
+
+  pod 'AsyncDisplayKit', :git => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/AsyncDisplayKit'
+
+  pod 'Reveal-iOS-SDK', '~> 111.1.1'
+  pod 'pop', '~> 111.1.1'
+  pod 'SDWebImage', '~> 111.1.1'
+  pod 'parse', '~> 111.1.1'
+
+  #pod 'NSLogger', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/NSLogger'
+
+  pod 'Regexer', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/Regexer'
+
+  # ________________open projects___________________
+  pod "GGTabBar", :path => "../dependencies/lib/GGTabBar"
+  pod "YKMediaPlayerKit", :path => "../dependencies/lib/YKMediaPlayerKit"
+  #pod "MPMoviePlayerController-Subtitles", :path => "../dependencies/lib/MPMoviePlayerController-Subtitles"
+  pod 'SWRevealViewController', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/SWRevealViewController'
+
+  pod 'AFNetworking', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/AFNetworking'
+  pod "KRLCollectionViewGridLayout", :path => "../dependencies/lib/KRLCollectionViewGridLayout"
+
+  pod 'ISMemoryCache', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/ISMemoryCache'
+
+  pod 'EGOCache', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/EGOCache'
+
+  pod 'ASImageResize', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/ASImageResize'
+
+  pod 'XMLDictionary', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/XMLDictionary'
+
+  # ________________collect common library___________________
+  pod "IOS_Collection_Code", :path => "../dependencies/collect/IOS_Collection_Code"
+
+  # ________________Project layers___________________
+  pod "Business-Logic-Layer", :path => "../dependencies/layers/Business-Logic-Layer"
+  pod "google-api-services-youtube", :path => "../dependencies/layers/google-api-services-youtube"
+
+  # ________________Projects for iPad___________________
+  # ________________module Projects___________________
+  pod "VideoWatchDetailViewControlleriPad", :path => "../dependencies/ipad/VideoWatchDetailViewControlleriPad"
+  pod "Youtube_ChannelPage_Controller", :path => "../dependencies/ipad/Youtube_ChannelPage_Controller"
+  pod "youtube_slide_menu", :path => "../dependencies/ipad/youtube_slide_menu"
+  pod "YoutubeCollectionView", :path => "../dependencies/ipad/YoutubeCollectionView"
+
+  pod 'ABSQLite', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/ABSQLite'
+  pod 'media_sqlite_manager', :path => '../dependencies/server/media_sqlite_manager'
+  pod 'app_cofigure_manager', :path => '../dependencies/server/app_cofigure_manager'
+
+  pod 'Shimmer', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/Shimmer'
+
+end
+
+target 'OnlineVideoClientTests', :exclusive => true do
+
+  # pod 'OCMockito', '~> 1.0'
+
+  #pod 'OCHamcrest', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/OCHamcrest'
+  #pod 'OCMockito', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/OCMockito'
+
+  pod 'media_sqlite_manager', :path => '../dependencies/server/media_sqlite_manager'
+
+end

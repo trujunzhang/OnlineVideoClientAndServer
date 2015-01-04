@@ -1,0 +1,14 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'OnlineVideoClientConsole', :exclusive => true do
+
+  pod 'ABSQLite', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/ABSQLite'
+
+  pod 'media_sqlite_manager', :path => '../dependencies/server/media_sqlite_manager'
+  pod 'osx_collection_code', :path => '../dependencies/server/osx_collection_code'
+  pod 'media_logical_layer', :path => '../dependencies/server/media_logical_layer'
+
+
+  pod 'online_video_manager_config', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/OnlineVideoManagerClient/online_video_manager_config'
+
+end

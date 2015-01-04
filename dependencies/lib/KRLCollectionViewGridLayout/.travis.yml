@@ -1,0 +1,12 @@
+language: objective-c
+xcode_workspace: Example/KRLCollectionViewGridLayoutDemo.xcworkspace
+xcode_scheme: KRLCollectionViewGridLayoutDemo
+xcode_sdk: iphonesimulator7.1
+before_install:
+  - gem update cocoapods -N
+  - brew update
+  - brew upgrade xctool
+install:
+  - cd Example
+  - pod install
+  - cd ..

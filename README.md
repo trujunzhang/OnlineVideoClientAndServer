@@ -1,2 +1,2 @@
-OnlineVideoClientAndServer
-==========================
+OnlineVideoManagerClient
+========================
