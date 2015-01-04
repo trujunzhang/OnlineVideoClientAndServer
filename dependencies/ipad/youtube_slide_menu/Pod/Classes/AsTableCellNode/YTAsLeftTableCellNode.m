@@ -78,6 +78,10 @@ static CGFloat ASROW_TITLE_FONT_SIZE = 16;
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
 
+//   CGSize measuredSize = [_channelTitleTextNode measure:CGSizeMake(constrainedSize.width - 40,
+//    constrainedSize.height)];
+//   return CGSizeMake(constrainedSize.width, measuredSize.height);
+
    return _nodeCellSize;
 }
 
@@ -91,6 +95,8 @@ static CGFloat ASROW_TITLE_FONT_SIZE = 16;
                                              leftNodeFrame:_videoChannelThumbnailsNode.frame
                                             withFontHeight:ASROW_TITLE_FONT_SIZE];
 
+//   CGSize textSize = _channelTitleTextNode.calculatedSize;
+//   _channelTitleTextNode.frame = CGRectMake(40.0f, 2.0f, textSize.width, textSize.height);
 }
 
 

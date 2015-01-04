@@ -12,7 +12,7 @@
 @class LeftMenuItemTree;
 
 //static CGFloat ROW_HEIGHT = 42;
-static CGFloat ROW_HEIGHT = 48;
+static CGFloat ROW_HEIGHT = 70;
 static const int TABLE_WIDTH = 258;
 
 
