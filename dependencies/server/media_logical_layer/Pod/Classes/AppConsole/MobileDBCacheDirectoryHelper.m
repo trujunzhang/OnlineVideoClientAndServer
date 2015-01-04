@@ -3,9 +3,9 @@
 // Copyright (c) 2015 djzhang. All rights reserved.
 //
 
-#import <media_logical_layer/UserCacheFolderHelper.h>
 #import "MobileDBCacheDirectoryHelper.h"
 #import "MobileDB.h"
+#import "UserCacheFolderHelper.h"
 
 
 @implementation MobileDBCacheDirectoryHelper {
@@ -21,6 +21,9 @@
 
 
 + (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath {
+   if ([MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]] == NO)
+      return NO;
+
    return [[MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]] checkFileInfoExist:fileAbstractPath];
 }
 @end

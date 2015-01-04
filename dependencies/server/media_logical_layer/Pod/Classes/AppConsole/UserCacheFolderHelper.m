@@ -34,7 +34,19 @@
 }
 
 
-+ (NSString *)getThumbnailDictory:(NSString *)dbDirectory {
++ (NSString *)getSqliteFilePath {
+   return [[UserCacheFolderHelper RealProjectCacheDirectory] stringByAppendingPathComponent:dataBaseName];
+}
+
+
++ (NSString *)getThumbnailDirectory {
+   return [NSString stringWithFormat:@"%@/%@",
+                                     [UserCacheFolderHelper RealProjectCacheDirectory],
+                                     thumbnailFolder];
+}
+
+
++ (NSString *)getThumbnailDirectory:(NSString *)dbDirectory {
    return [NSString stringWithFormat:@"%@/%@",
                                      dbDirectory,
                                      thumbnailFolder];
@@ -93,7 +105,7 @@
 
    NSString * dbFilePath = [cacheDirectory stringByAppendingPathComponent:dataBaseName];
 
-   NSString * thumbnailDirectory = [self getThumbnailDictory:cacheDirectory];
+   NSString * thumbnailDirectory = [self getThumbnailDirectory:cacheDirectory];
 
    BOOL fileExists = [MobileBaseDatabase checkDBFileExist:dbFilePath];
    if (fileExists == NO) {
@@ -121,15 +133,13 @@
 
 
 + (BOOL)checkUserCacheFolderExistAndMake {
-   NSString * dbDirectory = [UserCacheFolderHelper RealProjectCacheDirectory];
 
-   NSString * dbFilePath = [dbDirectory stringByAppendingPathComponent:dataBaseName];
-   BOOL fileExists = [MobileBaseDatabase checkDBFileExist:dbFilePath];
+   BOOL fileExists = [MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]];
 
    if (fileExists == NO) {
       [UserCacheFolderHelper createDirectoryForCache:[NSFileManager defaultManager]
-                                  withCacheDirectory:dbDirectory
-                              withThumbnailDirectory:[self getThumbnailDictory:dbDirectory]];
+                                  withCacheDirectory:[UserCacheFolderHelper RealProjectCacheDirectory]
+                              withThumbnailDirectory:[self getThumbnailDirectory]];
       return YES;
    }
 

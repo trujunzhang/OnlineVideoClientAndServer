@@ -9,6 +9,7 @@
 @interface UserCacheFolderHelper : NSObject
 
 + (NSString *)RealProjectCacheDirectory;
++ (NSString *)getSqliteFilePath;
 + (BOOL)cleanupCache:(NSString *)cacheDirectory;
 + (BOOL)checkUserCacheFolderExistAndMake;
 + (BOOL)cleanupCache;
