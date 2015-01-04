@@ -7,6 +7,7 @@
 
 
 @interface MobileDBCacheDirectoryHelper : NSObject
-- (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath;
++ (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath;
++ (BOOL)checkFileInfoExist:(NSString *)path;
 
 @end

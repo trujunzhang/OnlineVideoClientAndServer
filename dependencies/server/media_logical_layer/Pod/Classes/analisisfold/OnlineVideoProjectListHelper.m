@@ -11,6 +11,7 @@
 #import "ABProjectFileInfo.h"
 #import "MobileBaseDatabase.h"
 #import "GenerateThumbnailTask.h"
+#import "MobileDBCacheDirectoryHelper.h"
 
 
 @implementation OnlineVideoProjectListHelper {
@@ -94,13 +95,15 @@
                //http://192.168.1.200:8040/Adobe.com/01-Welcome.mp4
                //http://192.168.1.200:8040/Adobe.com/@Muse/#Muse Essential Training by Justin Seeley/01-Welcome.mp4
 
-               ABProjectFileInfo * projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath
-                                                                                     abstractFilePath:fileAbstractPath];
-//               NSLog(@"http://192.168.1.200:8040%@", fileAbstractPath);
-               [projectList appendFileInfo:projectFileInfo];
+               if ([MobileDBCacheDirectoryHelper checkFileInfoExist:fileAbstractPath] == NO) {
+                  NSLog(@"fileAbstractPath = %@", fileAbstractPath);
 
-               [self generateThumbnail:projectFileInfo.fileInfoID
-                               forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
+                  ABProjectFileInfo * projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath
+                                                                                        abstractFilePath:fileAbstractPath];
+                  [projectList appendFileInfo:projectFileInfo];
+                  [self generateThumbnail:projectFileInfo.fileInfoID
+                                  forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
+               }
             }
          }
       }

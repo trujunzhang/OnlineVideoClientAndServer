@@ -569,6 +569,19 @@ static MobileDB * _dbInstance;
 }
 
 
+- (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath {
+   NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where abstractFilePath='%@'",
+                                               fileAbstractPath];
+
+   id<ABRecordset> results = [db sqlSelect:sql];
+   if (![results eof]) {
+      return YES;
+   }
+
+   return NO;
+}
+
+
 - (void)readProjectFileInfoListWithResults:(LocationResultsBlock)locationsBlock withFileInfoID:(int)fileInfoID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
    NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where fileInfoID=%i", fileInfoID];

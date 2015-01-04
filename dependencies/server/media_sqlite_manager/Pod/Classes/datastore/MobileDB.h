@@ -33,6 +33,7 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 - (void)allReportsWithLocations:(ReportResultsBlock)reportsBlock;
 
 #pragma mark - Preferences
+- (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath;
 - (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(int)fileInfoID;
 - (NSString *)preferenceForKey:(NSString *)key;
 - (void)setPreference:(NSString *)value forKey:(NSString *)key;

@@ -12,12 +12,15 @@
 
 }
 
-- (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
-   // 2
-
++ (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
    [[MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]] saveForOnlineVideoTypeDictionary:dictionary
                                                                                                     withName:onlineTypeName
                                                                                     whithOnlineVideoTypePath:onlineVideoTypePath
    ];
+}
+
+
++ (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath {
+   return [[MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]] checkFileInfoExist:fileAbstractPath];
 }
 @end
