@@ -35,3 +35,4 @@ Podfile.lock
 *.idea/
 
 OnlineVideoClient/
+OnlineVideoClientConsole/

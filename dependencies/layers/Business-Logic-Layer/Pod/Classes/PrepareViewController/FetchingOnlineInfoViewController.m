@@ -94,7 +94,7 @@ static CGFloat kTextPadding = 100.0f;
    CGSize size = [shuffleNode measure:CGSizeMake(b.size.width, FLT_MAX)];
 
 
-   CGFloat dX = b.size.width / 2.0f - size.width * 2;
+   CGFloat dX = b.size.width / 2.0f - size.width;
    if (isLeft) {
       dX = b.size.width / 2.0f + size.width;
    }
