@@ -16,6 +16,9 @@
 
 }
 
+#pragma mark -
+#pragma mark
+
 
 + (NSString *)RealHomeDirectory {
    struct passwd * pw = getpwuid(getuid());
@@ -29,6 +32,17 @@
 
    return [NSString stringWithFormat:@"%@/%@/%@", homeDirectory, appProfile, appCacheDirectory];
 }
+
+
++ (NSString *)getThumbnailDictory:(NSString *)dbDirectory {
+   return [NSString stringWithFormat:@"%@/%@",
+                                     dbDirectory,
+                                     thumbnailFolder];
+}
+
+
+#pragma mark -
+#pragma mark
 
 
 + (void)createDirectoryForCache:(NSFileManager *)filemgr withCacheDirectory:(NSString *)cacheDirectory withThumbnailDirectory:(NSString *)thumbnailDirectory {
@@ -47,6 +61,10 @@
       NSLog(@"Failed to create directory \"%@\". Error: %@", thumbnailDirectory, error);
    }
 }
+
+
+#pragma mark -
+#pragma mark
 
 
 + (void)emptyCacheThumbnailDirectory:(NSFileManager *)filemgr forDir:(NSString *)dirToEmpty {
@@ -75,9 +93,7 @@
 
    NSString * dbFilePath = [cacheDirectory stringByAppendingPathComponent:dataBaseName];
 
-   NSString * thumbnailDirectory = [NSString stringWithFormat:@"%@/%@",
-                                                              cacheDirectory,
-                                                              thumbnailFolder];
+   NSString * thumbnailDirectory = [self getThumbnailDictory:cacheDirectory];
 
    BOOL fileExists = [MobileBaseDatabase checkDBFileExist:dbFilePath];
    if (fileExists == NO) {
@@ -97,6 +113,27 @@
    }
 
    return NO;
+}
+
+
+#pragma mark -
+#pragma mark
+
+
++ (BOOL)checkUserCacheFolderExistAndMake {
+   NSString * dbDirectory = [UserCacheFolderHelper RealProjectCacheDirectory];
+
+   NSString * dbFilePath = [dbDirectory stringByAppendingPathComponent:dataBaseName];
+   BOOL fileExists = [MobileBaseDatabase checkDBFileExist:dbFilePath];
+
+   if (fileExists == NO) {
+      [UserCacheFolderHelper createDirectoryForCache:[NSFileManager defaultManager]
+                                  withCacheDirectory:dbDirectory
+                              withThumbnailDirectory:[self getThumbnailDictory:dbDirectory]];
+      return YES;
+   }
+
+   return YES;
 }
 
 

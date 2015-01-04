@@ -10,5 +10,6 @@
 
 + (NSString *)RealProjectCacheDirectory;
 + (BOOL)cleanupCache:(NSString *)cacheDirectory;
++ (BOOL)checkUserCacheFolderExistAndMake;
 + (BOOL)cleanupCache;
 @end

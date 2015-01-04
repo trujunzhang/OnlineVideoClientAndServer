@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
    @autoreleasepool {
       // insert code here...
 
-      if ([UserCacheFolderHelper cleanupCache] == NO) {
+      if ([UserCacheFolderHelper checkUserCacheFolderExistAndMake] == NO) {
          NSLog(@"Remove failed");
          return 0;
       }

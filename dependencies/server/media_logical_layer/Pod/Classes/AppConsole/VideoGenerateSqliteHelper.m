@@ -8,6 +8,7 @@
 #import <online_video_manager_config/ServerVideoConfigure.h>
 #import <media_logical_layer/UserCacheFolderHelper.h>
 #import "VideoGenerateSqliteHelper.h"
+#import "MobileDBCacheDirectoryHelper.h"
 
 
 @implementation VideoGenerateSqliteHelper {
@@ -20,7 +21,7 @@
                                                                                                     withCacheDirectory:dbDirectory];
 
    // 2
-   [[MobileDB dbInstance:dbDirectory] saveForOnlineVideoTypeDictionary:onlineVideoStatisticsHelper.projectTypesDictionary
+   [MobileDBCacheDirectoryHelper saveForOnlineVideoTypeDictionary:onlineVideoStatisticsHelper.projectTypesDictionary
                                                               withName:onlineTypeName
                                               whithOnlineVideoTypePath:onlineVideoTypePath
    ];
