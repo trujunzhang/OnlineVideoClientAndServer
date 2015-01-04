@@ -8,6 +8,7 @@
 #import "LeftRevealHelper.h"
 #import "MxTabBarManager.h"
 #import "FBShimmeringView.h"
+#import "MobileDB.h"
 
 static CGFloat kTextPadding = 100.0f;
 
@@ -58,15 +59,15 @@ static CGFloat kTextPadding = 100.0f;
 - (void)setupUI {
    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
        // attribute a string
-       _reloadNode = [self getButtonWithTitle:@"Reload" isLeft:YES];
+       _reloadNode = [self getButtonWithTitle:@"Reload" isLeft:NO];
        [_reloadNode addTarget:self
                        action:@selector(reloadButtonTapped:)
              forControlEvents:ASControlNodeEventTouchUpInside];
 
-       _offlineNode = [self getButtonWithTitle:@"Update remote sqlite" isLeft:NO];
-       [_offlineNode addTarget:self
-                        action:@selector(offlineButtonTapped:)
-              forControlEvents:ASControlNodeEventTouchUpInside];
+//       _offlineNode = [self getButtonWithTitle:@"Update remote sqlite" isLeft:NO];
+//       [_offlineNode addTarget:self
+//                        action:@selector(offlineButtonTapped:)
+//              forControlEvents:ASControlNodeEventTouchUpInside];
 
        // self.view isn't a node, so we can only use it on the main thread
        dispatch_sync(dispatch_get_main_queue(), ^{
@@ -159,15 +160,32 @@ static CGFloat kTextPadding = 100.0f;
 
 
 - (void)initOnlineClientInfo:(BOOL)checkVersion {
+   NSString * sqliteFilePath = [self removeSqliteFile];
 
    SqliteResponseBlock sqliteResponseBlock = ^(NSObject * respObject) {
-       [self.delegate fetchingOnlineClientCompletion];
+       if ([MobileBaseDatabase checkDBFileExist:sqliteFilePath] == NO) {
+          [self showStepInfo:[NSString stringWithFormat:@"not found %@", sqliteFilePath]];
+       } else {
+          [self.delegate fetchingOnlineClientCompletion];
 
-       [[LeftRevealHelper sharedLeftRevealHelper] openLeftMenuAndRearOpen];
-       [[MxTabBarManager sharedTabBarManager] callbackUpdateYoutubeChannelCompletion:0];
+          [[LeftRevealHelper sharedLeftRevealHelper] openLeftMenuAndRearOpen];
+          [[MxTabBarManager sharedTabBarManager] callbackUpdateYoutubeChannelCompletion:0];
+       }
    };
 
    [[GYoutubeHelper getInstance] initOnlineClient:sqliteResponseBlock checkVersion:checkVersion];
+}
+
+
+- (NSString *)removeSqliteFile {
+   NSString * dbFilePathForiOS = [MobileDB getDBFilePathForiOS];
+
+   NSFileManager * fileMngr = [NSFileManager defaultManager];
+   [fileMngr removeItemAtPath:dbFilePathForiOS error:nil];
+
+   NSString * debug = @"debug";
+
+   return dbFilePathForiOS;
 }
 
 

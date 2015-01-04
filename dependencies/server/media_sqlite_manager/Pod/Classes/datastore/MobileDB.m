@@ -72,10 +72,20 @@ static MobileDB * _dbInstance;
 
 
 + (MobileDB *)dbInstance {
-   NSArray * searchPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-   NSString * path = searchPaths[0];
+   NSString * path = [self getSqliteFolder];
 
    return [MobileDB dbInstance:path];
+}
+
+
++ (NSString *)getSqliteFolder {
+   NSArray * searchPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+   return searchPaths[0];
+}
+
+
++ (NSString *)getDBFilePathForiOS {
+   return [[MobileDB getSqliteFolder] stringByAppendingPathComponent:dataBaseName];
 }
 
 

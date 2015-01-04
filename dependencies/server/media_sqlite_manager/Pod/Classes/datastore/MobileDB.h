@@ -15,6 +15,7 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 #pragma mark - Base
 
 + (MobileDB *)dbInstance;
++ (NSString *)getDBFilePathForiOS;
 + (MobileDB *)dbInstance:(NSString *)path;
 
 - (id)initWithFile:(NSString *)filePathName;
