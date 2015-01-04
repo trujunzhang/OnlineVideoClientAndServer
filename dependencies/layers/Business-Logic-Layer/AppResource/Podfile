@@ -19,7 +19,7 @@ target 'OnlineVideoClient', :exclusive => true do
   # ________________open projects___________________
   pod "GGTabBar", :path => "../dependencies/lib/GGTabBar"
   pod "YKMediaPlayerKit", :path => "../dependencies/lib/YKMediaPlayerKit"
-  #pod "MPMoviePlayerController-Subtitles", :path => "../dependencies/lib/MPMoviePlayerController-Subtitles"
+  pod "MPMoviePlayerController-Subtitles", :path => "../dependencies/lib/MPMoviePlayerController-Subtitles"
   pod 'SWRevealViewController', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/SWRevealViewController'
 
   pod 'AFNetworking', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/AFNetworking'
@@ -46,6 +46,7 @@ target 'OnlineVideoClient', :exclusive => true do
   pod "Youtube_ChannelPage_Controller", :path => "../dependencies/ipad/Youtube_ChannelPage_Controller"
   pod "youtube_slide_menu", :path => "../dependencies/ipad/youtube_slide_menu"
   pod "YoutubeCollectionView", :path => "../dependencies/ipad/YoutubeCollectionView"
+  pod "Movie_subtitle_manager", :path => "../dependencies/ipad/Movie_subtitle_manager"
 
   pod 'ABSQLite', :path => '/Volumes/Home/Developing/wanghaogithub720/cocoapods/Cocoapods_Libraries/ABSQLite'
   pod 'media_sqlite_manager', :path => '../dependencies/server/media_sqlite_manager'

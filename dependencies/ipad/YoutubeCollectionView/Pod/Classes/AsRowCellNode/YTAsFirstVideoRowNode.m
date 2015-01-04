@@ -8,6 +8,7 @@
 #import "AsyncDisplayKitStatic.h"
 #import "MxTabBarManager.h"
 #import "YKDirectVideo.h"
+#import "FetchingSubtitleManager.h"
 
 
 @interface YTAsFirstVideoRowNode () {
@@ -68,6 +69,8 @@
    NSInteger navigationIndex = [[MxTabBarManager sharedTabBarManager] getCurrentNavigationIndex];
 
    NSString * videoThumbnails = [YoutubeParser getVideoOnlineUrl:self.nodeInfo withNavigationIndex:navigationIndex];
+
+   [FetchingSubtitleManager fetchSubtitleForVideoUrl:videoThumbnails];
 
    NSLog(@"videoThumbnails = %@", videoThumbnails);
    //http://192.168.1.200:8040/macshare/MacPE/Lynda.com/Adobe.com/@Muse/serials/@@Muse%20Essential%20Training%20by%20Justin%20Seeley/15.%20Publishing%20Your%20Website/01-Exporting%20to%20HTML%20and%20CSS.mp4
