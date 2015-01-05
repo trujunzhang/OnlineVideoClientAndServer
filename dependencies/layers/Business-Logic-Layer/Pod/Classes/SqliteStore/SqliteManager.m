@@ -77,13 +77,13 @@ NSMutableArray * _onlineVideoTypeArray;
 * @return The object `ABProjectList` array
 *
 */
-- (NSMutableArray *)getProjectListArray:(NSString *)projectNameId {
-
+- (NSMutableArray *)getProjectListArray:(NSString *)projectNameId projectFullPath:(NSString *)projectFullPath {
    NSMutableArray * projectLists = [[NSMutableArray alloc] init];
+
    [[MobileDB dbInstance] readProjectNameLists:[projectNameId intValue] withArray:projectLists isReadArray:YES];
 
-   projectLists = [SqliteArraySortHelper sortForABProjectList:projectLists];
-   return projectLists;
+
+   return [SqliteArraySortHelper sortForABProjectList:projectLists];
 }
 
 

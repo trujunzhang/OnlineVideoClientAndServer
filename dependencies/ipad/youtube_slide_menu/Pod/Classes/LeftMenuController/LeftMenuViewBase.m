@@ -89,10 +89,9 @@
    LeftMenuItemTree * menuItemTree = self.tableSectionArray[sectionIndex];
    YTYouTubeChannel * line = menuItemTree.rowsArray[rowIndex];
 
-   [[MxTabBarManager sharedTabBarManager] setCurrentOnlineVideoTypeID:menuItemTree.onlineVideoTypeID];
-
    [self.delegate endToggleLeftMenuEventForChannelPageWithChannelId:[YoutubeParser getChannelSnippetId:line]
-                                                          withTitle:[LeftMenuItemTree getTitleInRow:line]];
+                                                          withTitle:[YoutubeParser getChannelSnippetTitle:line]
+                                                    projectFullPath:[YoutubeParser getChannelProjectFullPath:line]];
 }
 
 

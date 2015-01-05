@@ -32,6 +32,7 @@
 + (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel;
 + (NSArray *)getChannelBannerImageUrlArray:(YTYouTubeChannel *)channel;
 + (NSString *)getChannelSnippetId:(YTYouTubeChannel *)channel;
++ (NSString *)getChannelProjectFullPath:(YTYouTubeChannel *)channel;
 + (NSString *)getChannelSnippetTitle:(YTYouTubeChannel *)channel;
 + (NSString *)getChannelSnippetThumbnail:(YTYouTubeChannel *)channel;
 

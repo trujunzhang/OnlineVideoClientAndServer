@@ -62,7 +62,7 @@
     [[YTAsLeftTableCellNode alloc]
      initWithNodeCellSize:CGSizeMake(250, ROW_HEIGHT)
                 lineTitle:[LeftMenuItemTree getTitleInRow:line]
-              lineIconUrl:@"Autos"
+              lineIconUrl:@"Education"
             isRemoteImage:menuItemTree.isRemoteImage];
 
    return node;

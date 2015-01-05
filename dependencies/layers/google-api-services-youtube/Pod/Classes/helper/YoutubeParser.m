@@ -143,6 +143,11 @@
 }
 
 
++ (NSString *)getChannelProjectFullPath:(YTYouTubeChannel *)channel {
+   return channel.projectFullPath;
+}
+
+
 + (NSString *)getChannelSnippetTitle:(YTYouTubeChannel *)channel {
    return [channel.sqliteObjectName removeSubString:@"@@"];
 }

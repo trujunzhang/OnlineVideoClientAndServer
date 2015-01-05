@@ -37,11 +37,11 @@
 @implementation YoutubeChannelPageViewController
 
 
-- (instancetype)initWithChannelId:(NSString *)channelId withTitle:(NSString *)title {
+- (instancetype)initWithChannelId:(NSString *)channelId withTitle:(NSString *)title projectListArray:(NSMutableArray *)projectListArray {
    self = [super init];
    if (self) {
       self.channelId = channelId;
-      _projectListArray = [[SqliteManager sharedSqliteManager] getProjectListArray:channelId];
+      _projectListArray = projectListArray;
       self.title = title;
 
       [self makeTopBanner:self.topBannerContainer];

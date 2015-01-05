@@ -19,7 +19,7 @@ static const int TABLE_WIDTH = 258;
 @protocol LeftMenuViewBaseDelegate<NSObject>
 @optional
 - (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(YTPlaylistItemsType)playlistItemsType;
-- (void)endToggleLeftMenuEventForChannelPageWithChannelId:(NSString *)channelId withTitle:(NSString *)title;
+- (void)endToggleLeftMenuEventForChannelPageWithChannelId:(NSString *)channelId withTitle:(NSString *)title projectFullPath:(NSString *)projectFullPath;
 @end
 
 

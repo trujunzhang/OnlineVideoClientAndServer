@@ -11,6 +11,7 @@
 
 #import "MxTabBarManager.h"
 #import "LeftMenuViewBase.h"
+#import "SqliteManager.h"
 
 
 @interface OnlineTypeViewController ()<YoutubeCollectionNextPageDelegate, LeftMenuViewBaseDelegate> {
@@ -72,10 +73,13 @@
 }
 
 
-- (void)endToggleLeftMenuEventForChannelPageWithChannelId:(NSString *)channelId withTitle:(NSString *)title {
-   // 1
-   YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] initWithChannelId:channelId
-                                                                                                     withTitle:title];
+- (void)endToggleLeftMenuEventForChannelPageWithChannelId:(NSString *)channelId withTitle:(NSString *)title projectFullPath:(NSString *)projectFullPath {
+   // *** readRows{ABProjectList+ABProjectFileInfo} with projectList.fullPath ***
+   YoutubeChannelPageViewController * controller =
+    [[YoutubeChannelPageViewController alloc] initWithChannelId:channelId
+                                                      withTitle:title
+                                               projectListArray:[[SqliteManager sharedSqliteManager] getProjectListArray:channelId
+                                                                                                         projectFullPath:projectFullPath]];
 
    controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
                                                                                   style:UIBarButtonItemStyleBordered

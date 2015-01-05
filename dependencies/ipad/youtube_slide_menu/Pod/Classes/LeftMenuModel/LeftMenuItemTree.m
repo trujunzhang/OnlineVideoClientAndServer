@@ -21,13 +21,12 @@
 @implementation LeftMenuItemTree
 
 
-- (instancetype)initWithTitle:(NSString *)title itemType:(LeftMenuItemTreeType)type rowsArray:(NSMutableArray *)rowsArray onlineVideoTypeID:(int)onlineVideoTypeID hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage {
+- (instancetype)initWithTitle:(NSString *)title itemType:(LeftMenuItemTreeType)type rowsArray:(NSMutableArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage {
    self = [super init];
    if (self) {
       self.title = title;
       self.itemType = type;
       self.rowsArray = rowsArray;
-      self.onlineVideoTypeID = onlineVideoTypeID;
       self.hideTitle = hideTitle;
       self.isRemoteImage = remoteImage;
       self.cellIdentifier = [LeftMenuItemTree cellIdentifierArray][type];
@@ -41,17 +40,16 @@
    NSMutableArray * menuItemTreeArray = [[NSMutableArray alloc] init];
 
    NSInteger currentNavigationIndex = [[MxTabBarManager sharedTabBarManager] getCurrentNavigationIndex];
+   // *** readRows{ABOnlineVideoType} ***
    NSArray * projectTypeArray = [[SqliteManager sharedSqliteManager] getCurrentOnlineVideoDictionary:currentNavigationIndex];
 
    for (YTYouTubeType * projectType in projectTypeArray) {
       NSString * projectTypeTitle = [YoutubeParser getYoutubeTypeTitle:projectType];
-      int onlineVideoTypeID = projectType.onlineVideoTypeID;
 
       LeftMenuItemTree * leftMenuItemTree =
        [[self alloc] initWithTitle:projectTypeTitle
                           itemType:LMenuTreeSubscriptions
                          rowsArray:projectType.ProjectNameArray
-                 onlineVideoTypeID:onlineVideoTypeID
                          hideTitle:NO
                        remoteImage:NO];
 

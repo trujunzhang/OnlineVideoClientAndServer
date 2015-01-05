@@ -15,7 +15,7 @@
    NSArray * _tabBarViewControllerArray;
    YTLeftMenuViewController * _leftViewController;
 
-   int * _onlineVideoTypeID;
+   NSMutableDictionary * _tabbarYouTubeChannelDictionary;
    NSInteger _tabBarSelectedIndex;
 }
 
@@ -25,12 +25,22 @@
 
 @implementation MxTabBarManager
 
+- (instancetype)init {
+   self = [super init];
+   if (self) {
+      _tabbarYouTubeChannelDictionary = [[NSMutableDictionary alloc] init];
+      [GYoutubeHelper getInstance].delegate = self;
+   }
+
+   return self;
+}
+
+
 + (MxTabBarManager *)sharedTabBarManager {
    static MxTabBarManager * cache;
    static dispatch_once_t onceToken;
    dispatch_once(&onceToken, ^{
        cache = [[MxTabBarManager alloc] init];
-       [GYoutubeHelper getInstance].delegate = cache;
    });
 
    return cache;
@@ -74,7 +84,7 @@
 
 
 - (NSString *)getCurrentProjectNameIDString {
-   return [NSString stringWithFormat:@"%i", _onlineVideoTypeID];
+   return [NSString stringWithFormat:@"%i", 0]; // Todo djzhang
 }
 
 
@@ -131,6 +141,6 @@
 
 
 - (void)setCurrentOnlineVideoTypeID:(int)onlineVideoTypeID {
-   _onlineVideoTypeID = onlineVideoTypeID;
+
 }
 @end

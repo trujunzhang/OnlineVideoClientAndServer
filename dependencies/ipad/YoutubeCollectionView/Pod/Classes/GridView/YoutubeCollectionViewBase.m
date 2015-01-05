@@ -40,6 +40,7 @@
       self.nextPageDelegate = nextPageDelegate;
       self.title = title;
       _projectListArray = projectListArray;
+      // *** readRows{ABProjectList+ABProjectFileInfo} ***
    }
 
    return self;
