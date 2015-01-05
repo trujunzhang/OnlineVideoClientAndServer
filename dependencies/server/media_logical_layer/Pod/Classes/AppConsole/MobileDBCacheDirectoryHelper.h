@@ -12,4 +12,5 @@
 + (MobileDB *)getServerConsoleDBInstance;
 + (BOOL)checkFileInfoExist:(NSString *)path;
 
++ (ABProjectType *)checkExistForProjectTypeWithProjectName:(NSString *)path projectFullPath:(NSString *)path1;
 @end

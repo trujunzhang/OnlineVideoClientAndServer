@@ -32,7 +32,7 @@
 }
 
 
-- (instancetype)initWithProjectType:(NSString *)projectName projectFullPath:(NSString *)projectFullPath {
+- (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath {
    self = [self init];
    if (self) {
       self.sqliteObjectName = projectName;

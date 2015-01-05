@@ -298,6 +298,37 @@ static MobileDB * _dbInstance;
 }
 
 
+- (ABProjectType *)checkExistForProjectTypeWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
+   NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
+
+   NSString * sql = [NSString stringWithFormat:@"select * from ProjectType where %@",
+                                               [ABSqliteObject getSqlStringSerializationForFilter:
+                                                @{
+                                                 @"projectTypeName" : sqliteObjectName,
+                                                 @"projectFullPath" : projectFullPath,
+                                                }]];
+
+   id<ABRecordset> results = [db sqlSelect:sql];
+   while (![results eof]) {
+      ABProjectType * sqliteObject = [[ABProjectType alloc] init];
+
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectTypeID"] intValue];
+      sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectTypeName"] stringValue];
+      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+
+      [mutableArray addObject:sqliteObject];
+
+      [results moveNext];
+   }
+
+   if (mutableArray.count == 1) {
+      return mutableArray[0];
+   }
+
+   return nil;
+}
+
+
 - (void)readProjectTypeListWithResults:(LocationResultsBlock)locationsBlock WithProjectTypeId:(int)projectTypeId hasAllList:(BOOL)isAllList {
    NSMutableArray * projectTypeArray = [[NSMutableArray alloc] init];
    NSString * sql = @"select * from ProjectType";
@@ -629,6 +660,7 @@ static MobileDB * _dbInstance;
 
 
 - (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
+   // *** online-step-{ABOnlineVideoType} ***
    ABOnlineVideoType * onlineVideoType = [[ABOnlineVideoType alloc] initWithOnlineTypeName:onlineTypeName
                                                                            projectFullPath:onlineVideoTypePath
                                                                             withDictionary:dictionary];

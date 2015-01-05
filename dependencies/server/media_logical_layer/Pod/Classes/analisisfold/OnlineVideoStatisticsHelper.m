@@ -8,6 +8,7 @@
 #import "ABProjectType.h"
 #import "OnlineVideoProjectListHelper.h"
 #import "OnlineVideoConstant.h"
+#import "MobileDBCacheDirectoryHelper.h"
 
 
 @implementation OnlineVideoStatisticsHelper {
@@ -43,8 +44,14 @@
             TFOLD_TYPE type = [self checkDirType:aPath];
             switch (type) {
                case TFOLD_CATELOGY: {
-                  ABProjectType * projectType = [[ABProjectType alloc] initWithProjectType:aPath
-                                                                           projectFullPath:fullPath];
+                  // *** online-step-{ABProjectType} ***
+                  ABProjectType * projectType = [MobileDBCacheDirectoryHelper checkExistForProjectTypeWithProjectName:aPath
+                                                                                                      projectFullPath:fullPath];
+                  if (projectType == nil) {
+                     projectType = [[ABProjectType alloc] initWithProjectName:aPath
+                                                              projectFullPath:fullPath];
+                  }
+
                   [self.projectTypesDictionary setObject:projectType forKey:aPath];
                   [self searchProjectNameListInProjectType:fullPath to:projectType];
                };

@@ -19,6 +19,18 @@
 }
 
 
+- (instancetype)initWithSqliteObjectID:(int)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
+   self = [super init];
+   if (self) {
+      self.sqliteObjectID = sqliteObjectID;
+      self.sqliteObjectName = sqliteObjectName;
+      self.projectFullPath = projectFullPath;
+   }
+
+   return self;
+}
+
+
 - (NSString *)sqlStringSerializationForUpdate {
    NSMutableDictionary * dictionary = [self appendCommonDictionary:[self getUpdateDictionary]];
 

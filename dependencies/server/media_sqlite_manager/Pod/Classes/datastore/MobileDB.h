@@ -47,6 +47,7 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 
 - (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary isReadArray:(BOOL)isReadArray;
 - (NSMutableArray *)readOnlineVideoTypes;
+- (ABProjectType *)checkExistForProjectTypeWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 @end
 
 

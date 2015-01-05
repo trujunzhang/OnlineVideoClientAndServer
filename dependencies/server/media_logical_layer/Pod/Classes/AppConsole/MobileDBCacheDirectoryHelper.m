@@ -6,6 +6,7 @@
 #import "MobileDBCacheDirectoryHelper.h"
 #import "MobileDB.h"
 #import "UserCacheFolderHelper.h"
+#import "ABProjectType.h"
 
 
 @implementation MobileDBCacheDirectoryHelper {
@@ -31,5 +32,13 @@
       return NO;
 
    return [[self getServerConsoleDBInstance] checkFileInfoExist:fileAbstractPath];
+}
+
+
++ (ABProjectType *)checkExistForProjectTypeWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
+   return [[self getServerConsoleDBInstance] checkExistForProjectTypeWithProjectName:sqliteObjectName
+                                                                     projectFullPath:projectFullPath];
+
+
 }
 @end
