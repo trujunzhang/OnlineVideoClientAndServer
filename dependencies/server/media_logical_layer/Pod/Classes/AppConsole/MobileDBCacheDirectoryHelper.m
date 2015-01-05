@@ -13,9 +13,10 @@
 }
 
 + (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
-   [[MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]] saveForOnlineVideoTypeDictionary:dictionary
-                                                                                                    withName:onlineTypeName
-                                                                                    whithOnlineVideoTypePath:onlineVideoTypePath
+   [[MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]]
+    saveForOnlineVideoTypeDictionary:dictionary
+                            withName:onlineTypeName
+            whithOnlineVideoTypePath:onlineVideoTypePath
    ];
 }
 

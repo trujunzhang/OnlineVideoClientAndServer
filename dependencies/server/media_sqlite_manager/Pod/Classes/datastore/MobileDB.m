@@ -112,12 +112,12 @@ static MobileDB * _dbInstance;
    NSString * sql;
    BOOL exists = NO;
 
-   //select projectTypeName from ProjectType where projectTypeName ='@Muse'
-   sql = [NSString stringWithFormat:@"select onlineVideoTypeName from OnlineVideoType where onlineVideoTypeName ='%@'",
+   sql = [NSString stringWithFormat:@"select onlineVideoTypeID from OnlineVideoType where onlineVideoTypeName ='%@'",
                                     onlineVideoType.sqliteObjectName];
+
    id<ABRecordset> results = [db sqlSelect:sql];
-//   if (![results eof])
-//      exists = YES;
+   if (![results eof])
+      exists = YES;
 
    if (exists) {
       NSString * sqlStringSerializationForUpdate = [onlineVideoType sqlStringSerializationForUpdate];
@@ -164,10 +164,14 @@ static MobileDB * _dbInstance;
 }
 
 
-- (NSMutableArray *)readOnlineVideoTypes {
+- (NSMutableArray *)readOnlineVideoTypes:(ABOnlineVideoType *)onlineVideoType {
    NSMutableArray * onlineVideoTypeArray = [[NSMutableArray alloc] init];
 
    NSString * sql = @"select * from OnlineVideoType";
+   if (onlineVideoType) {
+      sql = [NSString stringWithFormat:@"select * from OnlineVideoType where onlineVideoTypeName ='%@'",
+                                       onlineVideoType.sqliteObjectName];
+   }
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
@@ -189,6 +193,11 @@ static MobileDB * _dbInstance;
 
    return onlineVideoTypeArray;
 
+}
+
+
+- (NSMutableArray *)readOnlineVideoTypes {
+   return [self readOnlineVideoTypes:nil];
 }
 
 
@@ -635,15 +644,12 @@ static MobileDB * _dbInstance;
 
 
 - (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
-   // 01
    ABOnlineVideoType * onlineVideoType = [[ABOnlineVideoType alloc] initWithOnlineTypeName:onlineTypeName
-                                                                       OnlineVideoTypePath:onlineVideoTypePath];
-
-   [onlineVideoType appendProjectTypeDictionary:dictionary];
+                                                                       onlineVideoTypePath:onlineVideoTypePath
+                                                                            withDictionary:dictionary];
 
    [self saveOnlineVideoType:onlineVideoType];
 
-   // 02
    [self saveForOnlineTypeArray:onlineVideoType];
 }
 

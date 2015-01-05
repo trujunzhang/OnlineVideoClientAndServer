@@ -15,7 +15,7 @@
 
 @property(strong) NSMutableDictionary * onlineTypeDictionary;
 
-- (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName OnlineVideoTypePath:(NSString *)OnlineVideoTypePath;
+- (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName onlineVideoTypePath:(NSString *)OnlineVideoTypePath withDictionary:(NSMutableDictionary *)dictionary;
 
 - (void)appendProjectTypeDictionary:(NSMutableDictionary *)dictionary;
 - (void)appendProjectType:(ABProjectType *)projectType;

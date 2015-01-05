@@ -25,11 +25,13 @@
 }
 
 
-- (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName OnlineVideoTypePath:(NSString *)OnlineVideoTypePath {
+- (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName onlineVideoTypePath:(NSString *)OnlineVideoTypePath withDictionary:(NSMutableDictionary *)dictionary {
    self = [self init];
    if (self) {
       self.sqliteObjectName = onlineTypeName;
       self.onlineVideoTypePath = OnlineVideoTypePath;
+
+      [self appendProjectTypeDictionary:dictionary];
    }
 
    return self;
