@@ -41,10 +41,11 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 
 #pragma mark - Utilities
 - (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath;
+- (void)readDictionaryForProjectTypeWithProjectTypeId:(int)projectTypeId toDictionary:(NSMutableDictionary *)dictionary hasAllList:(BOOL)isAllList;
 - (NSMutableDictionary *)readDictionaryForProjectTypeWithProjectTypeId:(int)projectTypeId hasAllList:(BOOL)isAllList;
 
 
-- (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary;
+- (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary isReadArray:(BOOL)isReadArray;
 - (NSMutableArray *)readOnlineVideoTypes;
 @end
 

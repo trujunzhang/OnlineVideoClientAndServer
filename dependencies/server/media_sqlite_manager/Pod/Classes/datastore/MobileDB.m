@@ -110,7 +110,8 @@ static MobileDB * _dbInstance;
 
 - (void)saveOnlineVideoType:(ABOnlineVideoType *)onlineVideoType {
 
-   NSMutableArray * mutableArray = [self readOnlineVideoTypes:@{ @"onlineVideoTypeName" : onlineVideoType.sqliteObjectName }];
+   NSMutableArray * mutableArray = [self readOnlineVideoTypes:@{ @"onlineVideoTypeName" : onlineVideoType.sqliteObjectName }
+                                                  isReadArray:NO];
    if (mutableArray.count == 1) {
       ABOnlineVideoType * lastOnlineVideoType = mutableArray[0];
       [onlineVideoType updateSqliteObject:lastOnlineVideoType];
@@ -151,10 +152,10 @@ static MobileDB * _dbInstance;
 }
 
 
-- (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary {
+- (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary isReadArray:(BOOL)isReadArray {
    NSMutableArray * onlineVideoTypeArray = [[NSMutableArray alloc] init];
 
-   NSString * sql = [NSString stringWithFormat:@"select * from OnlineVideoType where '%@'",
+   NSString * sql = [NSString stringWithFormat:@"select * from OnlineVideoType where %@",
                                                [ABSqliteObject getSqlStringSerializationForFilter:filterDictionary]];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -169,7 +170,7 @@ static MobileDB * _dbInstance;
 
       [self readOnlineTypeArray:abSqliteObject.sqliteObjectID
                       withArray:abSqliteObject.onlineTypeDictionary
-                    isReadArray:NO];
+                    isReadArray:isReadArray];
 
       [results moveNext];
    }
@@ -181,7 +182,7 @@ static MobileDB * _dbInstance;
 
 
 - (NSMutableArray *)readOnlineVideoTypes {
-   return [self readOnlineVideoTypes:[[NSMutableDictionary alloc] init]];
+   return [self readOnlineVideoTypes:[[NSMutableDictionary alloc] init] isReadArray:NO];
 }
 
 
@@ -194,7 +195,7 @@ static MobileDB * _dbInstance;
    while (![results eof]) {
       int ProjectTypeID = [[results fieldWithName:@"ProjectTypeID"] intValue];
 
-      [self readDictionaryForProjectTypeWithProjectTypeId:ProjectTypeID toDictionary:dictionary hasAllList:NO];
+      [self readDictionaryForProjectTypeWithProjectTypeId:ProjectTypeID toDictionary:dictionary hasAllList:isReadArray];
 
       [self addOnlineVideoInfo:onlineVideoTypeID toProjectTypeDictionary:dictionary];
 
@@ -286,7 +287,7 @@ static MobileDB * _dbInstance;
              if (isReadArray)
                 [self readProjectNameLists:projectName.sqliteObjectID
                                  withArray:projectName.projectLists
-                               isReadArray:YES];
+                               isReadArray:isReadArray];
           }
       };
       [self readProjectNameListWithResults:locationsBlock withprojectNameID:projectNameID];
@@ -692,7 +693,9 @@ static MobileDB * _dbInstance;
        for (ABProjectType * projectType in locations) {
           [dictionary setObject:projectType forKey:projectType.sqliteObjectName];
 
-          [self readProjectTypeNames:projectType.sqliteObjectID withArray:projectType.ProjectNameArray isReadArray:NO];
+          [self readProjectTypeNames:projectType.sqliteObjectID
+                           withArray:projectType.ProjectNameArray
+                         isReadArray:isAllList];
        }
    };
    [self readProjectTypeListWithResults:LocationResultsBlock WithProjectTypeId:projectTypeId hasAllList:isAllList];

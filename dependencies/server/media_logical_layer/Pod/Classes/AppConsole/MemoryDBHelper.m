@@ -6,6 +6,7 @@
 #import "MemoryDBHelper.h"
 #import "MobileDB.h"
 #import "MobileDBCacheDirectoryHelper.h"
+#import "ABOnlineVideoType.h"
 
 static MemoryDBHelper * _dbInstance;
 static NSString * _onlineVideoTypePath;
@@ -19,9 +20,15 @@ static NSString * _onlineVideoTypePath;
    self = [super init];
    if (self) {
       NSMutableArray * mutableArray =
-       [[MobileDBCacheDirectoryHelper getServerConsoleDBInstance] readOnlineVideoTypes:
-        @{ @"onlineVideoTypePath" : _onlineVideoTypePath }];
-      int projectTypeId = 0;
+       [[MobileDBCacheDirectoryHelper getServerConsoleDBInstance] readOnlineVideoTypes:@{ @"onlineVideoTypePath" : _onlineVideoTypePath }
+                                                                           isReadArray:YES];
+
+      if (mutableArray.count == 1) {
+         ABOnlineVideoType * onlineVideoType = mutableArray[0];
+         NSString * debug = @"debug";
+      }
+
+
 //      NSMutableDictionary * dictionary = [[MobileDBCacheDirectoryHelper getServerConsoleDBInstance]
 //       readDictionaryForProjectTypeWithProjectTypeId:projectTypeId
 //                                          hasAllList:YES];
