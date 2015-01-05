@@ -124,21 +124,21 @@ static MobileDB * _dbInstance;
       sql = [NSString stringWithFormat:
        @"update OnlineVideoType set %@ where onlineVideoTypeID = %i",
        sqlStringSerializationForUpdate,
-       onlineVideoType.onlineVideoTypeID];
+       onlineVideoType.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [onlineVideoType sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
        @"insert into OnlineVideoType(onlineVideoTypeID,%@) values(%i,%@)",
        sqlStringSerializationForInsert[0],
-       onlineVideoType.onlineVideoTypeID,
+       onlineVideoType.sqliteObjectID,
        sqlStringSerializationForInsert[1]
       ];
    }
 
    [db sqlExecute:sql];
 
-   [self saveOnlineVideoTypeProjectTypesArray:onlineVideoType.onlineVideoTypeID
+   [self saveOnlineVideoTypeProjectTypesArray:onlineVideoType.sqliteObjectID
                                withDictionary:onlineVideoType.onlineTypeDictionary];
 }
 
@@ -149,13 +149,13 @@ static MobileDB * _dbInstance;
       for (ABProjectType * abProjectType in mutableArray.allValues) {
          sql = [NSString stringWithFormat:@"select projectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = %i and projectTypeID = %i",
                                           onlineVideoTypeID,
-                                          abProjectType.projectTypeID];
+                                          abProjectType.sqliteObjectID];
          id<ABRecordset> results = [db sqlSelect:sql];
 
          if ([results eof]) {
             sql = [NSString stringWithFormat:@"insert into OnlineVideoTypeProjectTypes(onlineVideoTypeID,projectTypeID) values(%i,%i);",
                                              onlineVideoTypeID,
-                                             abProjectType.projectTypeID];
+                                             abProjectType.sqliteObjectID];
             [db sqlExecute:sql];
          }
       }
@@ -176,13 +176,13 @@ static MobileDB * _dbInstance;
    while (![results eof]) {
       ABOnlineVideoType * onlineVideoType = [[ABOnlineVideoType alloc] init];
 
-      onlineVideoType.onlineVideoTypeID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
+      onlineVideoType.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
       onlineVideoType.sqliteObjectName = [[results fieldWithName:@"onlineVideoTypeName"] stringValue];
       onlineVideoType.onlineVideoTypePath = [[results fieldWithName:@"onlineVideoTypePath"] stringValue];
 
       [onlineVideoTypeArray addObject:onlineVideoType];
 
-      [self readOnlineTypeArray:onlineVideoType.onlineVideoTypeID
+      [self readOnlineTypeArray:onlineVideoType.sqliteObjectID
                       withArray:onlineVideoType.onlineTypeDictionary
                     isReadArray:NO];
 
@@ -246,21 +246,21 @@ static MobileDB * _dbInstance;
       sql = [NSString stringWithFormat:
        @"update ProjectType set %@ where projectTypeID = %i",
        sqlStringSerializationForUpdate,
-       projectType.projectTypeID];
+       projectType.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [projectType sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
        @"insert into ProjectType(projectTypeID,%@) values(%i,%@)",
        sqlStringSerializationForInsert[0],
-       projectType.projectTypeID,
+       projectType.sqliteObjectID,
        sqlStringSerializationForInsert[1]
       ];
    }
 
    [db sqlExecute:sql];
 
-   [self saveProjectTypeNamesArray:projectType.projectTypeID withArray:projectType.ProjectNameArray];
+   [self saveProjectTypeNamesArray:projectType.sqliteObjectID withArray:projectType.ProjectNameArray];
 }
 
 
@@ -270,13 +270,13 @@ static MobileDB * _dbInstance;
       for (ABProjectName * projectName in mutableArray) {
          sql = [NSString stringWithFormat:@"select projectNameID from ProjectTypeNames where projectTypeID = %i and projectNameID = %i",
                                           projectTypeID,
-                                          projectName.projectNameID];
+                                          projectName.sqliteObjectID];
          id<ABRecordset> results = [db sqlSelect:sql];
 
          if ([results eof]) {
             sql = [NSString stringWithFormat:@"insert into ProjectTypeNames(projectTypeID,projectNameID) values(%i,%i);",
                                              projectTypeID,
-                                             projectName.projectNameID];
+                                             projectName.sqliteObjectID];
             [db sqlExecute:sql];
          }
       }
@@ -299,7 +299,7 @@ static MobileDB * _dbInstance;
              [mutableArray addObject:projectName];
 
              if (isReadArray)
-                [self readProjectNameLists:projectName.projectNameID
+                [self readProjectNameLists:projectName.sqliteObjectID
                                  withArray:projectName.projectLists
                                isReadArray:YES];
           }
@@ -354,14 +354,14 @@ static MobileDB * _dbInstance;
       sql = [NSString stringWithFormat:
        @"update ProjectName set %@ where projectNameID = %i",
        sqlStringSerializationForUpdate,
-       projectName.projectNameID];
+       projectName.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [projectName sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
        @"insert into ProjectName(projectNameID,%@) values(%i,%@)",
        sqlStringSerializationForInsert[0],
-       projectName.projectNameID,
+       projectName.sqliteObjectID,
        sqlStringSerializationForInsert[1]
       ];
    }
@@ -369,7 +369,7 @@ static MobileDB * _dbInstance;
    [db sqlExecute:sql];
 
 
-   [self saveProjectNameListsArray:projectName.projectNameID withArray:projectName.projectLists];
+   [self saveProjectNameListsArray:projectName.sqliteObjectID withArray:projectName.projectLists];
 }
 
 
@@ -379,13 +379,13 @@ static MobileDB * _dbInstance;
       for (ABProjectList * projectList in mutableArray) {
          sql = [NSString stringWithFormat:@"select projectListID from ProjectNameLists where projectNameID = %i and projectListID = %i",
                                           projectNameID,
-                                          projectList.projectListID];
+                                          projectList.sqliteObjectID];
          id<ABRecordset> results = [db sqlSelect:sql];
 
          if ([results eof]) {
             sql = [NSString stringWithFormat:@"insert into ProjectNameLists(projectNameID,projectListID) values(%i,%i);",
                                              projectNameID,
-                                             projectList.projectListID];
+                                             projectList.sqliteObjectID];
             [db sqlExecute:sql];
          }
       }
@@ -414,7 +414,7 @@ static MobileDB * _dbInstance;
              [mutableArray addObject:projectList];
 
              if (isReadArray)
-                [self readProjectListFileInfos:projectList.projectListID withArray:projectList.projectFileInfos];
+                [self readProjectListFileInfos:projectList.sqliteObjectID withArray:projectList.projectFileInfos];
           }
       };
       [self readProjectListsWithResults:locationsBlock withProjectListID:projectListID];
@@ -436,7 +436,7 @@ static MobileDB * _dbInstance;
    while (![results eof]) {
       ABProjectName * projectName = [[ABProjectName alloc] init];
 
-      projectName.projectNameID = [[results fieldWithName:@"projectNameID"] intValue];
+      projectName.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
       projectName.sqliteObjectName = [[results fieldWithName:@"projectName"] stringValue];
       projectName.projectDownloadUrl = [[results fieldWithName:@"projectDownloadUrl"] stringValue];
       projectName.projectAbstractPath = [[results fieldWithName:@"projectAbstractPath"] stringValue];
@@ -458,7 +458,7 @@ static MobileDB * _dbInstance;
    BOOL exists = NO;
 
    sql = [NSString stringWithFormat:@"select projectListID from ProjectList where projectListID = %i",
-                                    projectList.projectListID];
+                                    projectList.sqliteObjectID];
    id<ABRecordset> results = [db sqlSelect:sql];
    if (![results eof])
       exists = YES;
@@ -469,14 +469,14 @@ static MobileDB * _dbInstance;
       sql = [NSString stringWithFormat:
        @"update ProjectList set %@ where projectListID = %i",
        sqlStringSerializationForUpdate,
-       projectList.projectListID];
+       projectList.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [projectList sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
        @"insert into ProjectList(projectListID,%@) values(%i,%@)",
        sqlStringSerializationForInsert[0],
-       projectList.projectListID,
+       projectList.sqliteObjectID,
        sqlStringSerializationForInsert[1]
       ];
    }
@@ -484,7 +484,7 @@ static MobileDB * _dbInstance;
    [db sqlExecute:sql];
 
 
-   [self saveProjectListFileInfosArray:projectList.projectListID withArray:projectList.projectFileInfos];
+   [self saveProjectListFileInfosArray:projectList.sqliteObjectID withArray:projectList.projectFileInfos];
 }
 
 
@@ -494,13 +494,13 @@ static MobileDB * _dbInstance;
       for (ABProjectFileInfo * projectFileInfo in mutableArray) {
          sql = [NSString stringWithFormat:@"select fileInfoID from ProjectListFileInfos where projectListID = %i and fileInfoID = %i",
                                           projectListID,
-                                          projectFileInfo.fileInfoID];
+                                          projectFileInfo.sqliteObjectID];
          id<ABRecordset> results = [db sqlSelect:sql];
 
          if ([results eof]) {
             sql = [NSString stringWithFormat:@"insert into ProjectListFileInfos(projectListID,fileInfoID) values(%i,%i);",
                                              projectListID,
-                                             projectFileInfo.fileInfoID];
+                                             projectFileInfo.sqliteObjectID];
             [db sqlExecute:sql];
          }
       }
@@ -540,7 +540,7 @@ static MobileDB * _dbInstance;
    while (![results eof]) {
       ABProjectList * projectName = [[ABProjectList alloc] init];
 
-      projectName.projectListID = [[results fieldWithName:@"projectListID"] intValue];
+      projectName.sqliteObjectID = [[results fieldWithName:@"projectListID"] intValue];
       projectName.sqliteObjectName = [[results fieldWithName:@"projectListName"] stringValue];
 
       [projectNameArray addObject:projectName];
@@ -560,7 +560,7 @@ static MobileDB * _dbInstance;
    BOOL exists = NO;
 
    sql = [NSString stringWithFormat:@"select fileInfoID from ProjectFileInfo where fileInfoID = %i",
-                                    fileInfo.fileInfoID];
+                                    fileInfo.sqliteObjectID];
    id<ABRecordset> results = [db sqlSelect:sql];
    if (![results eof])
       exists = YES;
@@ -571,14 +571,14 @@ static MobileDB * _dbInstance;
       sql = [NSString stringWithFormat:
        @"update ProjectFileInfo set %@ where fileInfoID = %i",
        sqlStringSerializationForUpdate,
-       fileInfo.fileInfoID];
+       fileInfo.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [fileInfo sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
        @"insert into ProjectFileInfo(fileInfoID,%@) values(%i,%@)",
        sqlStringSerializationForInsert[0],
-       fileInfo.fileInfoID,
+       fileInfo.sqliteObjectID,
        sqlStringSerializationForInsert[1]
       ];
    }
@@ -608,7 +608,7 @@ static MobileDB * _dbInstance;
    while (![results eof]) {
       ABProjectFileInfo * projectName = [[ABProjectFileInfo alloc] init];
 
-      projectName.fileInfoID = [[results fieldWithName:@"fileInfoID"] intValue];
+      projectName.sqliteObjectID = [[results fieldWithName:@"fileInfoID"] intValue];
       projectName.sqliteObjectName = [[results fieldWithName:@"fileInforName"] stringValue];
       projectName.subtitleName = [[results fieldWithName:@"subtitleName"] stringValue];
       projectName.abstractFilePath = [[results fieldWithName:@"abstractFilePath"] stringValue];
@@ -707,7 +707,7 @@ static MobileDB * _dbInstance;
        for (ABProjectType * projectType in locations) {
           [dictionary setObject:projectType forKey:projectType.sqliteObjectName];
 
-          [self readProjectTypeNames:projectType.projectTypeID withArray:projectType.ProjectNameArray isReadArray:NO];
+          [self readProjectTypeNames:projectType.sqliteObjectID withArray:projectType.ProjectNameArray isReadArray:NO];
        }
    };
    [self readProjectTypeListWithResults:LocationResultsBlock WithProjectTypeId:projectTypeId hasAllList:isAllList];

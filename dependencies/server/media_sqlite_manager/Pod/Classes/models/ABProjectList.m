@@ -21,7 +21,7 @@
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.projectListID = [MobileDB uniqueID];
+      self.sqliteObjectID = [MobileDB uniqueID];
 
       self.sqliteObjectName = @"";
       self.projectFileInfos = [[NSMutableArray alloc] init];
@@ -44,7 +44,7 @@
 - (BOOL)isEqual:(id)object {
    ABProjectList * compareReport = object;
 
-   return self.projectListID == compareReport.projectListID;
+   return self.sqliteObjectID == compareReport.sqliteObjectID;
 }
 
 

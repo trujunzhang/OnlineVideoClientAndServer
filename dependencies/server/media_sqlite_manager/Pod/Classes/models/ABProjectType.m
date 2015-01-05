@@ -13,7 +13,7 @@
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.projectTypeID = [MobileDB uniqueID];
+      self.sqliteObjectID = [MobileDB uniqueID];
       self.ProjectNameArray = [[NSMutableArray alloc] init];
    }
 
@@ -24,7 +24,7 @@
 - (instancetype)initWithProjectTypeID:(int)projectTypeID projectTypeName:(NSString *)projectTypeName {
    self = [self init];
    if (self) {
-      self.projectTypeID = projectTypeID;
+      self.sqliteObjectID = projectTypeID;
       self.sqliteObjectName = projectTypeName;
    }
 
@@ -45,7 +45,7 @@
 - (BOOL)isEqual:(id)object {
    ABProjectType * compareLocation = object;
 
-   return self.projectTypeID == compareLocation.projectTypeID;
+   return self.sqliteObjectID == compareLocation.sqliteObjectID;
 }
 
 

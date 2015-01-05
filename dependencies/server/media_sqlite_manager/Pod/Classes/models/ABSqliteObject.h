@@ -9,6 +9,7 @@
 
 @interface ABSqliteObject : NSObject
 
+@property(assign) int sqliteObjectID;
 @property(copy) NSString * sqliteObjectName;
 
 @property(copy) NSString * objectName;

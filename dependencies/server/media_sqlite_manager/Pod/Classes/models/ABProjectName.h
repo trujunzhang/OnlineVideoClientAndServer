@@ -13,7 +13,7 @@
 
 @interface ABProjectName : ABSqliteObject
 
-@property(assign) int projectNameID;
+@property(assign) int sqliteObjectID;
 
 
 // http://kickass.so/lynda-muse-essential-training-by-justin-seeley-t9250299.html

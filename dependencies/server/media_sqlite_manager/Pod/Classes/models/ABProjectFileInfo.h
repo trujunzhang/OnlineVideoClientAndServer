@@ -4,8 +4,6 @@
 
 @interface ABProjectFileInfo : ABSqliteObject<MKAnnotation>
 
-@property(assign) int fileInfoID;
-
 @property(copy) NSString * subtitleName;
 @property(copy) NSString * abstractFilePath;
 

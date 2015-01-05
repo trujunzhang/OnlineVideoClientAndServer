@@ -15,7 +15,6 @@
 
 
 @property(assign) int onlineVideoTypeID;
-@property(assign) int projectTypeID;
 
 @property(strong) NSMutableArray * ProjectNameArray;
 

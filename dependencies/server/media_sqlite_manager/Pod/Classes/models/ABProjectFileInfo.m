@@ -21,7 +21,7 @@
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.fileInfoID = [MobileDB uniqueID];
+      self.sqliteObjectID = [MobileDB uniqueID];
 
       self.sqliteObjectName = @"";
       self.subtitleName = @"";

@@ -15,7 +15,7 @@
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.projectNameID = [MobileDB uniqueID];
+      self.sqliteObjectID = [MobileDB uniqueID];
 
       self.projectDownloadUrl = @"";
       self.projectAbstractPath = @"";
@@ -40,7 +40,7 @@
 - (BOOL)isEqual:(id)object {
    ABProjectName * compareLocation = object;
 
-   return self.projectNameID == compareLocation.projectNameID;
+   return self.sqliteObjectID == compareLocation.sqliteObjectID;
 }
 
 

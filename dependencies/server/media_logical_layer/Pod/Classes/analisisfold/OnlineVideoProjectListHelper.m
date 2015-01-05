@@ -101,7 +101,7 @@
                   ABProjectFileInfo * projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath
                                                                                         abstractFilePath:fileAbstractPath];
                   [projectList appendFileInfo:projectFileInfo];
-                  [self generateThumbnail:projectFileInfo.fileInfoID
+                  [self generateThumbnail:projectFileInfo.sqliteObjectID
                                   forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
                }
             }
