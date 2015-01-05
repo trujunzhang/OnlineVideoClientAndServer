@@ -22,9 +22,6 @@ static MemoryDBHelper * _currentMemoryDBHelper;
    _currentMemoryDBHelper = [MemoryDBHelper sharedInstanceWithTypeName:onlineTypeName
                                                          withLocalPath:onlineVideoTypePath];
 
-   [_currentMemoryDBHelper cleanup];
-
-
    // 1
    OnlineVideoStatisticsHelper * onlineVideoStatisticsHelper = [[OnlineVideoStatisticsHelper alloc] initWithOnlinePath:videoScanFold
                                                                                                     withCacheDirectory:dbDirectory];
