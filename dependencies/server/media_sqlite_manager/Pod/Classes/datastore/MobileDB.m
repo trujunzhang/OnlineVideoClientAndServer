@@ -286,7 +286,7 @@ static MobileDB * _dbInstance;
 
              if (isReadArray)
                 [self readProjectNameLists:projectName.sqliteObjectID
-                                 withArray:projectName.projectLists
+                                 withArray:projectName.projectListsArray
                                isReadArray:isReadArray];
           }
       };
@@ -386,7 +386,7 @@ static MobileDB * _dbInstance;
    [db sqlExecute:sql];
 
 
-   [self saveProjectNameListsArray:projectName.sqliteObjectID withArray:projectName.projectLists];
+   [self saveProjectNameListsArray:projectName.sqliteObjectID withArray:projectName.projectListsArray];
 }
 
 
@@ -466,7 +466,11 @@ static MobileDB * _dbInstance;
    }
 
    if (mutableArray.count == 1) {
-      return mutableArray[0];
+      ABProjectName * sqliteObject = mutableArray[0];
+      [self readProjectNameLists:sqliteObject.sqliteObjectID
+                       withArray:sqliteObject.lastsubDirectoryListsArray
+                     isReadArray:NO];
+      return sqliteObject;
    }
 
    return nil;
@@ -736,7 +740,7 @@ static MobileDB * _dbInstance;
       [self saveProjectName:projectName];
 
       // step03: save ABProjectList
-      NSMutableArray * projectLists = projectName.projectLists;
+      NSMutableArray * projectLists = projectName.projectListsArray;
       for (ABProjectList * projectList in projectLists) {
          [self saveProjectList:projectList];
 

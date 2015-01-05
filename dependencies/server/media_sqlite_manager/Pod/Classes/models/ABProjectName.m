@@ -20,7 +20,8 @@
       self.projectDownloadUrl = @"";
       self.projectFullPath = @"";
 
-      self.projectLists = [[NSMutableArray alloc] init];
+      self.lastsubDirectoryListsArray = [[NSMutableArray alloc] init];
+      self.projectListsArray = [[NSMutableArray alloc] init];
    }
 
    return self;
@@ -66,6 +67,6 @@
 
 
 - (void)appendProjectList:(ABProjectList *)projectList {
-   [self.projectLists addObject:projectList];
+   [self.projectListsArray addObject:projectList];
 }
 @end

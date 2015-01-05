@@ -16,7 +16,8 @@
 // http://kickass.so/lynda-muse-essential-training-by-justin-seeley-t9250299.html
 @property(copy) NSString * projectDownloadUrl;
 
-@property(strong) NSMutableArray * projectLists;
+@property(strong) NSMutableArray * projectListsArray;
+@property(strong) NSMutableArray * lastsubDirectoryListsArray;
 
 - (instancetype)initWithProjectName:(NSString *)projectName withProjectFullPath:(NSString *)projectFullPath;
 

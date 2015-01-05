@@ -33,9 +33,8 @@
    // *** online-step-{ABProjectName} ***
    ABProjectName * projectName = [MobileDBCacheDirectoryHelper checkExistForProjectNameWithProjectName:aPath
                                                                                        projectFullPath:fullPath];
-   if (projectName == nil) {
+   if (projectName == nil)
       projectName = [[ABProjectName alloc] initWithProjectName:aPath withProjectFullPath:fullPath];
-   }
 
    [projectType appendProjectName:projectName];
 
