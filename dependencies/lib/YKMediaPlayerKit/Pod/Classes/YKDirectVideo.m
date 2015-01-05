@@ -7,6 +7,7 @@
 //
 
 #import "YKDirectVideo.h"
+#import "MPMoviePlayerController+Subtitles.h"
 
 CGFloat const kDirectThumbnailLocation = 1.0;
 
@@ -95,11 +96,32 @@ CGFloat const kDirectThumbnailLocation = 1.0;
 }
 
 
-- (void)play:(YKQualityOptions)quality {
+- (void)play123:(YKQualityOptions)quality {
    if (!self.player) [self movieViewController:quality];
 
    [[UIApplication sharedApplication].keyWindow.rootViewController presentMoviePlayerViewControllerAnimated:self.player];
    [self.player.moviePlayer play];
+}
+
+
+- (void)play:(YKQualityOptions)quality subtitlesPathStr:(NSString *)subtitlesPathStr {
+   if (!self.player) [self movieViewController:quality];
+
+   // Create MoviePlayer
+   [self.player.moviePlayer openSRTFileAtPath:subtitlesPathStr
+                                   completion:^(BOOL finished) {
+
+                                       // Activate subtitles
+                                       [self.player.moviePlayer showSubtitles];
+
+                                       // Show video
+                                       [[UIApplication sharedApplication].keyWindow.rootViewController presentMoviePlayerViewControllerAnimated:self.player];
+                                       [self.player.moviePlayer play];
+
+                                   } failure:^(NSError * error) {
+        NSLog(@"Error: %@", error.description);
+    }];
+
 }
 
 @end

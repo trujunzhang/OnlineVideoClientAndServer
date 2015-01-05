@@ -81,7 +81,7 @@ NSString *const kVideoNotSupported = @"Video not supported";
 
 - (void)playWithCompletion:(void(^)(YKVideoTypeOptions, id<YKVideo>, NSError *))callback {
     [self parseWithCompletion:^(YKVideoTypeOptions videoType, id<YKVideo> video, NSError *error) {
-        [self.video play:self.videoQuality];
+        [self.video play:self.videoQuality subtitlesPathStr:nil];
     }];
 }
 
