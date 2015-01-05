@@ -72,7 +72,8 @@
 
    NSLog(@"videoUrl = %@", videoUrl);
 
-   NSURL * urlWithString = [NSURL URLWithString:[videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+   NSString * usingEncoding = [videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+   NSURL * urlWithString = [NSURL URLWithString:usingEncoding];
 
    YKDirectVideo * _directVideo = [[YKDirectVideo alloc] initWithContent:urlWithString];
 
