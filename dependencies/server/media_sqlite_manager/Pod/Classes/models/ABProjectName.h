@@ -21,9 +21,7 @@
 
 - (instancetype)initWithProjectName:(NSString *)projectName withProjectFullPath:(NSString *)projectFullPath;
 
-+ (ABProjectName *)locationFromJSON:(NSString *)json;
-+ (NSArray *)locationsFromJSON:(NSString *)json;
-- (NSString *)JSONValue;
 
 - (void)appendProjectList:(id)list;
+- (id)checkExistForProjecListWithProjectListName:(NSString *)sqliteObjectName;
 @end

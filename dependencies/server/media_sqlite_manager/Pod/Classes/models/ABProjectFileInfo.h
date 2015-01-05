@@ -11,9 +11,7 @@
 
 
 - (NSString *)getOnlineVideoPlayUrl:(NSString *)domain;
-+ (ABProjectFileInfo *)reportFromJSON:(NSString *)json;
-+ (NSArray *)reportsFromJSON:(NSString *)json;
-- (NSString *)JSONValue;
+
 
 - (NSString *)encodeAbstractFilePath;
 //- (NSString *)getCacheFileInfoThumbnail;

@@ -9,9 +9,6 @@
 
 - (instancetype)initWithProjectListName:(NSString *)projectListName;
 
-+ (ABProjectList *)reportFromJSON:(NSString *)json;
-+ (NSArray *)reportsFromJSON:(NSString *)json;
-- (NSString *)JSONValue;
 
 - (void)appendFileInfo:(id)fileInfo;
 - (ABProjectFileInfo *)getFirstABProjectFileInfo;
