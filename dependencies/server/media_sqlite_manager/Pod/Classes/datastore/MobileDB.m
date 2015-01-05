@@ -164,7 +164,6 @@ static MobileDB * _dbInstance;
 
       sqliteObject.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"onlineVideoTypeName"] stringValue];
-      sqliteObject.onlineVideoTypePath = [[results fieldWithName:@"onlineVideoTypePath"] stringValue];
       sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
 
       [onlineVideoTypeArray addObject:sqliteObject];
@@ -631,7 +630,7 @@ static MobileDB * _dbInstance;
 
 - (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
    ABOnlineVideoType * onlineVideoType = [[ABOnlineVideoType alloc] initWithOnlineTypeName:onlineTypeName
-                                                                       onlineVideoTypePath:onlineVideoTypePath
+                                                                           projectFullPath:onlineVideoTypePath
                                                                             withDictionary:dictionary];
 
    [self saveOnlineVideoType:onlineVideoType];

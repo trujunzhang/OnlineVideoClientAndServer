@@ -24,11 +24,11 @@
 }
 
 
-- (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName onlineVideoTypePath:(NSString *)OnlineVideoTypePath withDictionary:(NSMutableDictionary *)dictionary {
+- (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName projectFullPath:(NSString *)projectFullPath withDictionary:(NSMutableDictionary *)dictionary {
    self = [self init];
    if (self) {
       self.sqliteObjectName = onlineTypeName;
-      self.onlineVideoTypePath = OnlineVideoTypePath;
+      self.projectFullPath = projectFullPath;
 
       [self appendProjectTypeDictionary:dictionary];
    }
@@ -56,7 +56,6 @@
 - (NSMutableDictionary *)getUpdateDictionary {
    NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
    [dictionary setObject:self.sqliteObjectName forKey:@"onlineVideoTypeName"];
-   [dictionary setObject:self.onlineVideoTypePath forKey:@"onlineVideoTypePath"];
 
    return dictionary;
 }

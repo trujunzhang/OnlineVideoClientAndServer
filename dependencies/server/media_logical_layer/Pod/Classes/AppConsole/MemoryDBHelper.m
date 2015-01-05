@@ -41,7 +41,7 @@ static NSString * _onlineVideoTypePath;
          _onlineVideoType = mutableArray[0];
       } else {
          _onlineVideoType = [[ABOnlineVideoType alloc] initWithOnlineTypeName:_onlineTypeName
-                                                          onlineVideoTypePath:_onlineVideoTypePath
+                                                              projectFullPath:_onlineVideoTypePath
                                                                withDictionary:[[NSMutableDictionary alloc] init]];
       }
    }
