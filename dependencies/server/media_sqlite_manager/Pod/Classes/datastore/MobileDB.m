@@ -160,16 +160,17 @@ static MobileDB * _dbInstance;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      ABOnlineVideoType * abSqliteObject = [[ABOnlineVideoType alloc] init];
+      ABOnlineVideoType * sqliteObject = [[ABOnlineVideoType alloc] init];
 
-      abSqliteObject.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
-      abSqliteObject.sqliteObjectName = [[results fieldWithName:@"onlineVideoTypeName"] stringValue];
-      abSqliteObject.onlineVideoTypePath = [[results fieldWithName:@"onlineVideoTypePath"] stringValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
+      sqliteObject.sqliteObjectName = [[results fieldWithName:@"onlineVideoTypeName"] stringValue];
+      sqliteObject.onlineVideoTypePath = [[results fieldWithName:@"onlineVideoTypePath"] stringValue];
+      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
 
-      [onlineVideoTypeArray addObject:abSqliteObject];
+      [onlineVideoTypeArray addObject:sqliteObject];
 
-      [self readOnlineTypeArray:abSqliteObject.sqliteObjectID
-                      withArray:abSqliteObject.onlineTypeDictionary
+      [self readOnlineTypeArray:sqliteObject.sqliteObjectID
+                      withArray:sqliteObject.onlineTypeDictionary
                     isReadArray:isReadArray];
 
       [results moveNext];
@@ -420,14 +421,14 @@ static MobileDB * _dbInstance;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      ABProjectName * projectName = [[ABProjectName alloc] init];
+      ABProjectName * sqliteObject = [[ABProjectName alloc] init];
 
-      projectName.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
-      projectName.sqliteObjectName = [[results fieldWithName:@"projectName"] stringValue];
-      projectName.projectDownloadUrl = [[results fieldWithName:@"projectDownloadUrl"] stringValue];
-      projectName.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
+      sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectName"] stringValue];
+      sqliteObject.projectDownloadUrl = [[results fieldWithName:@"projectDownloadUrl"] stringValue];
+      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
 
-      [projectNameArray addObject:projectName];
+      [projectNameArray addObject:sqliteObject];
 
       [results moveNext];
    }
@@ -524,12 +525,12 @@ static MobileDB * _dbInstance;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      ABProjectList * projectName = [[ABProjectList alloc] init];
+      ABProjectList * sqliteObject = [[ABProjectList alloc] init];
 
-      projectName.sqliteObjectID = [[results fieldWithName:@"projectListID"] intValue];
-      projectName.sqliteObjectName = [[results fieldWithName:@"projectListName"] stringValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectListID"] intValue];
+      sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectListName"] stringValue];
 
-      [projectNameArray addObject:projectName];
+      [projectNameArray addObject:sqliteObject];
 
       [results moveNext];
    }
@@ -574,7 +575,7 @@ static MobileDB * _dbInstance;
 
 
 - (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath {
-   NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where abstractFilePath='%@'",
+   NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where projectFullPath='%@'",
                                                fileAbstractPath];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -592,14 +593,14 @@ static MobileDB * _dbInstance;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      ABProjectFileInfo * projectName = [[ABProjectFileInfo alloc] init];
+      ABProjectFileInfo * sqliteObject = [[ABProjectFileInfo alloc] init];
 
-      projectName.sqliteObjectID = [[results fieldWithName:@"fileInfoID"] intValue];
-      projectName.sqliteObjectName = [[results fieldWithName:@"fileInforName"] stringValue];
-      projectName.subtitleName = [[results fieldWithName:@"subtitleName"] stringValue];
-      projectName.abstractFilePath = [[results fieldWithName:@"abstractFilePath"] stringValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"fileInfoID"] intValue];
+      sqliteObject.sqliteObjectName = [[results fieldWithName:@"fileInforName"] stringValue];
+      sqliteObject.subtitleName = [[results fieldWithName:@"subtitleName"] stringValue];
+      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
 
-      [projectNameArray addObject:projectName];
+      [projectNameArray addObject:sqliteObject];
 
       [results moveNext];
    }
@@ -610,16 +611,16 @@ static MobileDB * _dbInstance;
 
 - (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(int)fileInfoID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
-   NSString * sql = [NSString stringWithFormat:@"select abstractFilePath from ProjectFileInfo where fileInfoID=%i",
+   NSString * sql = [NSString stringWithFormat:@"select projectFullPath from ProjectFileInfo where fileInfoID=%i",
                                                fileInfoID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      ABProjectFileInfo * projectName = [[ABProjectFileInfo alloc] init];
+      ABProjectFileInfo * sqliteObject = [[ABProjectFileInfo alloc] init];
 
-      projectName.abstractFilePath = [[results fieldWithName:@"abstractFilePath"] stringValue];
+      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
 
-      [projectNameArray addObject:projectName];
+      [projectNameArray addObject:sqliteObject];
 
       [results moveNext];
    }

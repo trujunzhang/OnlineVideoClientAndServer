@@ -5,7 +5,6 @@
 @interface ABProjectFileInfo : ABSqliteObject<MKAnnotation>
 
 @property(copy) NSString * subtitleName;
-@property(copy) NSString * abstractFilePath;
 
 @property(assign) BOOL canDelete;
 - (instancetype)initWithFileInforName:(NSString *)fileInforName;

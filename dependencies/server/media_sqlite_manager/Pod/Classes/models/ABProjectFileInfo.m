@@ -25,7 +25,7 @@
 
       self.sqliteObjectName = @"";
       self.subtitleName = @"";
-      self.abstractFilePath = @"";
+      self.projectFullPath = @"";
    }
 
    return self;
@@ -51,7 +51,7 @@
 
    [dictionary setObject:self.sqliteObjectName forKey:@"fileInforName"];
    [dictionary setObject:self.subtitleName forKey:@"subtitleName"];
-   [dictionary setObject:self.abstractFilePath forKey:@"abstractFilePath"];
+   [dictionary setObject:self.projectFullPath forKey:@"projectFullPath"];
 
    return dictionary;
 }
@@ -69,7 +69,7 @@
 
 
 - (NSString *)encodeAbstractFilePath {
-   return [self.abstractFilePath replaceCharcter:@" " withCharcter:@"%20"];
+   return [self.projectFullPath replaceCharcter:@" " withCharcter:@"%20"];
 }
 
 

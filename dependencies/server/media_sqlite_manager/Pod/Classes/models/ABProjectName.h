@@ -13,14 +13,8 @@
 
 @interface ABProjectName : ABSqliteObject
 
-@property(assign) int sqliteObjectID;
-
-
 // http://kickass.so/lynda-muse-essential-training-by-justin-seeley-t9250299.html
 @property(copy) NSString * projectDownloadUrl;
-
-// Lynda.com/Adobe.com/Muse
-@property(copy) NSString * projectFullPath;
 
 @property(strong) NSMutableArray * projectLists;
 

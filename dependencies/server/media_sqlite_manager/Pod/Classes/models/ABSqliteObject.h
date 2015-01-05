@@ -11,7 +11,7 @@
 
 @property(assign) int sqliteObjectID;
 @property(copy) NSString * sqliteObjectName;
-
+@property(copy) NSString * projectFullPath;
 
 - (NSMutableDictionary *)getUpdateDictionary;
 - (NSMutableDictionary *)getInsertDictionary;
