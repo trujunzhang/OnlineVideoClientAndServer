@@ -51,7 +51,6 @@
 
    [dictionary setObject:self.sqliteObjectName forKey:@"fileInforName"];
    [dictionary setObject:self.subtitleName forKey:@"subtitleName"];
-   [dictionary setObject:self.projectFullPath forKey:@"projectFullPath"];
 
    return dictionary;
 }

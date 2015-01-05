@@ -35,18 +35,16 @@
 
 - (void)searchProjectTypesInFolder:(NSString *)appDocDir withDictionaryKey:(NSString *)key {
    NSArray * contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
-   int count = 1;
    for (NSString * aPath in contentOfFolder) {
       NSString * fullPath = [appDocDir stringByAppendingPathComponent:aPath];
       BOOL isDir = NO;
       if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir]) {
          if (isDir == YES) {
-//            NSLog(@"dir-%d: %@", count, fullPath);
-            count++;
             TFOLD_TYPE type = [self checkDirType:aPath];
             switch (type) {
                case TFOLD_CATELOGY: {
-                  ABProjectType * projectType = [[ABProjectType alloc] initWithProjectType:aPath];
+                  ABProjectType * projectType = [[ABProjectType alloc] initWithProjectType:aPath
+                                                                           projectFullPath:fullPath];
                   [self.projectTypesDictionary setObject:projectType forKey:aPath];
                   [self searchProjectNameListInProjectType:fullPath to:projectType];
                };
@@ -98,8 +96,6 @@
 
    [onlineVideoProjectListHelper makeProjectList:aPath withFullPath:fullPath to:projectType];
 }
-
-
 
 
 - (TFOLD_TYPE)checkDirType:(NSString *)path {

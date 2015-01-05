@@ -11,14 +11,14 @@
 #import "ABSqliteObject.h"
 
 
-@interface ABProjectType : ABSqliteObject<MKAnnotation>
+@interface ABProjectType : ABSqliteObject
 
 
 @property(assign) int onlineVideoTypeID;
 
 @property(strong) NSMutableArray * ProjectNameArray;
 
-- (instancetype)initWithProjectType:(NSString *)projectName;
+- (instancetype)initWithProjectType:(NSString *)projectName projectFullPath:(NSString *)projectFullPath;
 - (instancetype)initWithProjectTypeID:(int)projectTypeID projectTypeName:(NSString *)projectTypeName;
 
 

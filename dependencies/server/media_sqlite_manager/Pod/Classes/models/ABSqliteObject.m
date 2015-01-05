@@ -12,6 +12,7 @@
 - (instancetype)init {
    self = [super init];
    if (self) {
+      self.projectFullPath = @"";
    }
 
    return self;
@@ -19,7 +20,7 @@
 
 
 - (NSString *)sqlStringSerializationForUpdate {
-   NSMutableDictionary * dictionary = [self getUpdateDictionary];
+   NSMutableDictionary * dictionary = [self appendCommonDictionary:[self getUpdateDictionary]];
 
    NSMutableArray * videoIds = [[NSMutableArray alloc] init];
 
@@ -31,13 +32,12 @@
       [videoIds addObject:data];
    }
 
-
    return [videoIds componentsJoinedByString:@","];
 }
 
 
 - (NSArray *)sqlStringSerializationForInsert {
-   NSMutableDictionary * dictionary = [self getInsertDictionary];
+   NSMutableDictionary * dictionary = [self appendCommonDictionary:[self getInsertDictionary]];
 
    NSArray * allKeys = dictionary.allKeys;
    NSString * tableFieldString = [allKeys componentsJoinedByString:@","];
@@ -52,6 +52,13 @@
 
 
    return @[ tableFieldString, tableValueString ];
+}
+
+
+- (NSMutableDictionary *)appendCommonDictionary:(NSMutableDictionary *)dictionary {
+   [dictionary setObject:self.projectFullPath forKey:@"projectFullPath"];
+
+   return dictionary;
 }
 
 
