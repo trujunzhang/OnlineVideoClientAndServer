@@ -74,20 +74,14 @@
 }
 
 
-+ (NSString *)getVideoOnlineUrl:(YTYouTubeVideoCache *)fileInfo withNavigationIndex:(NSInteger)navigationIndex {
-   NSString * playListThumbnail = @"";//fileInfo.abstractFilePath;// TODO djzhang(sqlite)
-
-
-   NSString * projectNameIDString = [[MxTabBarManager sharedTabBarManager] getCurrentProjectNameIDString];
-   NSString * onlineVideoTypePath = [SqliteManager getCurrentOnlineVideoTypePath:projectNameIDString];
-
++ (NSString *)getVideoOnlineUrl:(YTYouTubeVideoCache *)fileInfo {
    NSObject * domain = [[GYoutubeHelper getInstance] getCurrentDomainUrl];
+   NSObject * htdocs = [[GYoutubeHelper getInstance] getHtdocs];
 
-   NSString * encodeAbstractPath = [YoutubeParser encodeAbstractPath:[NSString stringWithFormat:@"%@%@",
-                                                                                                onlineVideoTypePath,
-                                                                                                playListThumbnail]];
+   NSString * relativePath = [fileInfo.objectFullPath replaceCharcter:htdocs
+                                                         withCharcter:@""];
 
-   return [NSString stringWithFormat:@"%@%@", domain, encodeAbstractPath];
+   return [NSString stringWithFormat:@"%@%@", domain, relativePath];
 }
 
 
@@ -144,7 +138,7 @@
 
 
 + (NSString *)getChannelProjectFullPath:(YTYouTubeChannel *)channel {
-   return channel.projectFullPath;
+   return channel.objectFullPath;
 }
 
 

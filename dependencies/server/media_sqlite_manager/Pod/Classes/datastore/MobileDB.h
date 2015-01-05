@@ -53,6 +53,7 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 - (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 - (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 - (void)getFileInfoArrayForProjectList:(ABProjectList *)projectList;
+- (void)makeObjectFullPathForProjectListArray:(NSMutableArray *)projectListArray projectFullPath:(NSString *)projectFullPath;
 @end
 
 

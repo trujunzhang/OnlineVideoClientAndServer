@@ -42,6 +42,7 @@ typedef void (^SqliteResponseBlock)(NSObject * respObject);
 - (NSString *)getCurrentDomainUrl;
 
 
+- (NSString *)getHtdocs;
 - (NSString *)getServerCacheDirectory;
 @property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;
 

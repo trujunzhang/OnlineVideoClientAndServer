@@ -775,4 +775,12 @@ static MobileDB * _dbInstance;
 }
 
 
+- (void)makeObjectFullPathForProjectListArray:(NSMutableArray *)projectListArray projectFullPath:(NSString *)projectFullPath {
+   for (ABProjectList * projectList in projectListArray) {
+      NSString * objectFullPath = [projectList makeObjectFullPath:projectFullPath];
+      for (ABProjectFileInfo * fileInfo in projectList.projectFileInfoArray) {
+         [fileInfo makeObjectFullPath:objectFullPath];
+      }
+   }
+}
 @end

@@ -101,4 +101,9 @@
 }
 
 
+- (NSString *)makeObjectFullPath:(NSString *)parentFullPath {
+   self.objectFullPath = [NSString stringWithFormat:@"%@/%@", parentFullPath, self.sqliteObjectName];
+   return self.objectFullPath;
+}
+
 @end

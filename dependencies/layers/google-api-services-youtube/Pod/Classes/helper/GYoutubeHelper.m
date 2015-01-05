@@ -140,6 +140,10 @@ static GYoutubeHelper * instance = nil;
    return [self.onlineServerInfo getCurrentDomainUrl];
 }
 
+- (NSString *)getHtdocs {
+   return [self.onlineServerInfo htdocs];
+}
+
 
 - (NSString *)getServerCacheDirectory {
    return [self.onlineServerInfo cacheThumbmail];
