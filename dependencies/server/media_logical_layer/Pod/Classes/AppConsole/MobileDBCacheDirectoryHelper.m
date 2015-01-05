@@ -21,6 +21,7 @@
 }
 
 
+
 + (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath {
    if ([MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]] == NO)
       return NO;

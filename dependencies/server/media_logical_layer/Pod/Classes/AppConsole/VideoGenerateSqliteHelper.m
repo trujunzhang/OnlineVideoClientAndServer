@@ -16,14 +16,15 @@
 }
 + (void)generateSqliteFromSourceWithTypeName:(NSString *)onlineTypeName withLocalPath:(NSString *)onlineVideoTypePath withScanFolder:(NSString *)videoScanFold saveSqlitTo:(NSString *)dbDirectory {
 
+
    // 1
    OnlineVideoStatisticsHelper * onlineVideoStatisticsHelper = [[OnlineVideoStatisticsHelper alloc] initWithOnlinePath:videoScanFold
                                                                                                     withCacheDirectory:dbDirectory];
 
    // 2
    [MobileDBCacheDirectoryHelper saveForOnlineVideoTypeDictionary:onlineVideoStatisticsHelper.projectTypesDictionary
-                                                              withName:onlineTypeName
-                                              whithOnlineVideoTypePath:onlineVideoTypePath
+                                                         withName:onlineTypeName
+                                         whithOnlineVideoTypePath:onlineVideoTypePath
    ];
 }
 
