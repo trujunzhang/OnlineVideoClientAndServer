@@ -23,7 +23,7 @@
 - (NSString *)sqlStringSerializationForUpdate;
 - (NSString *)sqlStringSerializationForInsert;
 
-- (void)updateObject:(ABSqliteObject *)object;
+- (void)updateSqliteObject:(ABSqliteObject *)object;
 
 - (NSNumber *)getSortNumber;
 

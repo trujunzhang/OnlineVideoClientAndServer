@@ -55,5 +55,10 @@
 }
 
 
+- (void)updateSqliteObject:(ABSqliteObject *)object {
+   self.sqliteObjectID = object.sqliteObjectID;
+   self.sqliteObjectName = object.sqliteObjectName;
+}
+
 
 @end

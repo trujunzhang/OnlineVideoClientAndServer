@@ -111,20 +111,11 @@ static MobileDB * _dbInstance;
 - (void)saveOnlineVideoType:(ABOnlineVideoType *)onlineVideoType {
    NSString * sql;
    BOOL exists = NO;
-   ABOnlineVideoType * lastOnlineVideoType;
 
    NSMutableArray * mutableArray = [self readOnlineVideoTypes:onlineVideoType];
    if (mutableArray.count == 1) {
-      lastOnlineVideoType = mutableArray[0];
-   }
-
-   if (exists) {
-      NSString * sqlStringSerializationForUpdate = [onlineVideoType sqlStringSerializationForUpdate];
-
-      sql = [NSString stringWithFormat:
-       @"update OnlineVideoType set %@ where onlineVideoTypeID = %i",
-       sqlStringSerializationForUpdate,
-       onlineVideoType.sqliteObjectID];
+      ABOnlineVideoType * lastOnlineVideoType = mutableArray[0];
+      [onlineVideoType updateSqliteObject:lastOnlineVideoType];
    } else {
       NSArray * sqlStringSerializationForInsert = [onlineVideoType sqlStringSerializationForInsert];
 
