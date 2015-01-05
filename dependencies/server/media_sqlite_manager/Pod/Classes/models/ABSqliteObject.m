@@ -55,6 +55,26 @@
 }
 
 
++ (NSString *)getSqlStringSerializationForFilter:(NSMutableDictionary *)filterDictionary {
+   if (filterDictionary.count == 0) {
+      return @"0 = 0";
+   }
+
+   NSMutableArray * videoIds = [[NSMutableArray alloc] init];
+
+   NSArray * allKeys = filterDictionary.allKeys;
+   for (NSString * key in allKeys) {
+      NSString * value = [filterDictionary valueForKey:key];
+
+      NSString * data = [NSString stringWithFormat:@"%@ = '%@'", key, value];
+      [videoIds addObject:data];
+   }
+
+
+   return [videoIds componentsJoinedByString:@","];
+}
+
+
 - (void)updateSqliteObject:(ABSqliteObject *)object {
    self.sqliteObjectID = object.sqliteObjectID;
    self.sqliteObjectName = object.sqliteObjectName;

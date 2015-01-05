@@ -110,8 +110,7 @@ static MobileDB * _dbInstance;
 
 - (void)saveOnlineVideoType:(ABOnlineVideoType *)onlineVideoType {
 
-
-   NSMutableArray * mutableArray = [self readOnlineVideoTypes:onlineVideoType];
+   NSMutableArray * mutableArray = [self readOnlineVideoTypes:@{ @"onlineVideoTypeName" : onlineVideoType.sqliteObjectName }];
    if (mutableArray.count == 1) {
       ABOnlineVideoType * lastOnlineVideoType = mutableArray[0];
       [onlineVideoType updateSqliteObject:lastOnlineVideoType];
@@ -152,27 +151,24 @@ static MobileDB * _dbInstance;
 }
 
 
-- (NSMutableArray *)readOnlineVideoTypes:(ABOnlineVideoType *)onlineVideoType {
+- (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary {
    NSMutableArray * onlineVideoTypeArray = [[NSMutableArray alloc] init];
 
-   NSString * sql = @"select * from OnlineVideoType";
-   if (onlineVideoType) {
-      sql = [NSString stringWithFormat:@"select * from OnlineVideoType where onlineVideoTypeName ='%@'",
-                                       onlineVideoType.sqliteObjectName];
-   }
+   NSString * sql = [NSString stringWithFormat:@"select * from OnlineVideoType where '%@'",
+                                               [ABSqliteObject getSqlStringSerializationForFilter:filterDictionary]];
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      ABOnlineVideoType * onlineVideoType = [[ABOnlineVideoType alloc] init];
+      ABOnlineVideoType * abSqliteObject = [[ABOnlineVideoType alloc] init];
 
-      onlineVideoType.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
-      onlineVideoType.sqliteObjectName = [[results fieldWithName:@"onlineVideoTypeName"] stringValue];
-      onlineVideoType.onlineVideoTypePath = [[results fieldWithName:@"onlineVideoTypePath"] stringValue];
+      abSqliteObject.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
+      abSqliteObject.sqliteObjectName = [[results fieldWithName:@"onlineVideoTypeName"] stringValue];
+      abSqliteObject.onlineVideoTypePath = [[results fieldWithName:@"onlineVideoTypePath"] stringValue];
 
-      [onlineVideoTypeArray addObject:onlineVideoType];
+      [onlineVideoTypeArray addObject:abSqliteObject];
 
-      [self readOnlineTypeArray:onlineVideoType.sqliteObjectID
-                      withArray:onlineVideoType.onlineTypeDictionary
+      [self readOnlineTypeArray:abSqliteObject.sqliteObjectID
+                      withArray:abSqliteObject.onlineTypeDictionary
                     isReadArray:NO];
 
       [results moveNext];
@@ -185,7 +181,7 @@ static MobileDB * _dbInstance;
 
 
 - (NSMutableArray *)readOnlineVideoTypes {
-   return [self readOnlineVideoTypes:nil];
+   return [self readOnlineVideoTypes:[[NSMutableDictionary alloc] init]];
 }
 
 

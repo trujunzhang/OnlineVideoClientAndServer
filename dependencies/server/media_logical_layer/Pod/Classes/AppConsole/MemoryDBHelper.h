@@ -8,4 +8,6 @@
 
 @interface MemoryDBHelper : NSObject
 
++ (MemoryDBHelper *)sharedInstance:(NSString *)onlineVideoTypePath;
+- (void)cleanup;
 @end

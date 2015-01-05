@@ -9,13 +9,14 @@
 #import <media_logical_layer/UserCacheFolderHelper.h>
 #import "VideoGenerateSqliteHelper.h"
 #import "MobileDBCacheDirectoryHelper.h"
+#import "MemoryDBHelper.h"
 
 
 @implementation VideoGenerateSqliteHelper {
 
 }
 + (void)generateSqliteFromSourceWithTypeName:(NSString *)onlineTypeName withLocalPath:(NSString *)onlineVideoTypePath withScanFolder:(NSString *)videoScanFold saveSqlitTo:(NSString *)dbDirectory {
-
+   [[MemoryDBHelper sharedInstance:onlineVideoTypePath] cleanup];
 
    // 1
    OnlineVideoStatisticsHelper * onlineVideoStatisticsHelper = [[OnlineVideoStatisticsHelper alloc] initWithOnlinePath:videoScanFold

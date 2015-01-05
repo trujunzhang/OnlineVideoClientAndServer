@@ -12,16 +12,14 @@
 @property(assign) int sqliteObjectID;
 @property(copy) NSString * sqliteObjectName;
 
-@property(copy) NSString * objectName;
-@property(nonatomic, strong) id parentObject;
-@property(nonatomic) BOOL hasParent;
-
 
 - (NSMutableDictionary *)getUpdateDictionary;
 - (NSMutableDictionary *)getInsertDictionary;
 
 - (NSString *)sqlStringSerializationForUpdate;
 - (NSString *)sqlStringSerializationForInsert;
+
++ (NSString *)getSqlStringSerializationForFilter:(NSMutableDictionary *)filterDictionary;
 
 - (void)updateSqliteObject:(ABSqliteObject *)object;
 

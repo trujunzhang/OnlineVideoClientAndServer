@@ -44,6 +44,7 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 - (NSMutableDictionary *)readDictionaryForProjectTypeWithProjectTypeId:(int)projectTypeId hasAllList:(BOOL)isAllList;
 
 
+- (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary;
 - (NSMutableArray *)readOnlineVideoTypes;
 @end
 

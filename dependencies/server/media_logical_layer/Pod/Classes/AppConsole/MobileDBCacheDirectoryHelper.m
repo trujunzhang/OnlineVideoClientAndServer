@@ -13,7 +13,7 @@
 }
 
 + (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
-   [[MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]]
+   [[self getServerConsoleDBInstance]
     saveForOnlineVideoTypeDictionary:dictionary
                             withName:onlineTypeName
             whithOnlineVideoTypePath:onlineVideoTypePath
@@ -21,11 +21,15 @@
 }
 
 
++ (MobileDB *)getServerConsoleDBInstance {
+   return [MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]];
+}
+
 
 + (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath {
    if ([MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]] == NO)
       return NO;
 
-   return [[MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]] checkFileInfoExist:fileAbstractPath];
+   return [[self getServerConsoleDBInstance] checkFileInfoExist:fileAbstractPath];
 }
 @end

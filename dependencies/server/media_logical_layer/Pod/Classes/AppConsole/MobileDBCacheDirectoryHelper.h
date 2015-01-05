@@ -4,10 +4,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class MobileDB;
 
 
 @interface MobileDBCacheDirectoryHelper : NSObject
 + (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath;
++ (MobileDB *)getServerConsoleDBInstance;
 + (BOOL)checkFileInfoExist:(NSString *)path;
 
 @end
