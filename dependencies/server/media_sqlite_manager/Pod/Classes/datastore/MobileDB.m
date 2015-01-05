@@ -164,7 +164,7 @@ static MobileDB * _dbInstance;
 
       sqliteObject.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"onlineVideoTypeName"] stringValue];
-      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+      sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
       [onlineVideoTypeArray addObject:sqliteObject];
 
@@ -305,7 +305,7 @@ static MobileDB * _dbInstance;
                                                [ABSqliteObject getSqlStringSerializationForFilter:
                                                 @{
                                                  @"projectTypeName" : sqliteObjectName,
-                                                 @"projectFullPath" : projectFullPath,
+                                                 @"objectFullPath" : projectFullPath,
                                                 }]];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -314,7 +314,7 @@ static MobileDB * _dbInstance;
 
       sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectTypeID"] intValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectTypeName"] stringValue];
-      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+      sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
       [mutableArray addObject:sqliteObject];
 
@@ -449,7 +449,7 @@ static MobileDB * _dbInstance;
                                                [ABSqliteObject getSqlStringSerializationForFilter:
                                                 @{
                                                  @"ProjectName" : sqliteObjectName,
-                                                 @"projectFullPath" : projectFullPath,
+                                                 @"objectFullPath" : projectFullPath,
                                                 }]];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -458,7 +458,7 @@ static MobileDB * _dbInstance;
 
       sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"ProjectName"] stringValue];
-      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+      sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
       [mutableArray addObject:sqliteObject];
 
@@ -491,7 +491,7 @@ static MobileDB * _dbInstance;
       sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectName"] stringValue];
       sqliteObject.projectDownloadUrl = [[results fieldWithName:@"projectDownloadUrl"] stringValue];
-      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+      sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
       [projectNameArray addObject:sqliteObject];
 
@@ -645,7 +645,7 @@ static MobileDB * _dbInstance;
 
 
 - (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath {
-   NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where projectFullPath='%@'",
+   NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where objectFullPath='%@'",
                                                fileAbstractPath];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -668,7 +668,7 @@ static MobileDB * _dbInstance;
       sqliteObject.sqliteObjectID = [[results fieldWithName:@"fileInfoID"] intValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"fileInforName"] stringValue];
       sqliteObject.subtitleName = [[results fieldWithName:@"subtitleName"] stringValue];
-      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+      sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
       [projectNameArray addObject:sqliteObject];
 
@@ -681,14 +681,14 @@ static MobileDB * _dbInstance;
 
 - (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(int)fileInfoID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
-   NSString * sql = [NSString stringWithFormat:@"select projectFullPath from ProjectFileInfo where fileInfoID=%i",
+   NSString * sql = [NSString stringWithFormat:@"select objectFullPath from ProjectFileInfo where fileInfoID=%i",
                                                fileInfoID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
       ABProjectFileInfo * sqliteObject = [[ABProjectFileInfo alloc] init];
 
-      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+      sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
       [projectNameArray addObject:sqliteObject];
 

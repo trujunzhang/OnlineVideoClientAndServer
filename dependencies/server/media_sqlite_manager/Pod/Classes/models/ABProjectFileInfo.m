@@ -25,7 +25,7 @@
 
       self.sqliteObjectName = @"";
       self.subtitleName = @"";
-      self.projectFullPath = @"";
+      self.objectFullPath = @"";
    }
 
    return self;
@@ -68,7 +68,7 @@
 
 
 - (NSString *)encodeAbstractFilePath {
-   return [self.projectFullPath replaceCharcter:@" " withCharcter:@"%20"];
+   return [self.objectFullPath replaceCharcter:@" " withCharcter:@"%20"];
 }
 
 

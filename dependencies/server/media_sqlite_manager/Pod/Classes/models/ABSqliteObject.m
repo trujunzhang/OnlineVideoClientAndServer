@@ -12,7 +12,7 @@
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.projectFullPath = @"";
+      self.objectFullPath = @"";
       self.lastsubDirectoryListsArray = [[NSMutableArray alloc] init];
    }
 
@@ -25,7 +25,7 @@
    if (self) {
       self.sqliteObjectID = sqliteObjectID;
       self.sqliteObjectName = sqliteObjectName;
-      self.projectFullPath = projectFullPath;
+      self.objectFullPath = projectFullPath;
    }
 
    return self;
@@ -69,7 +69,7 @@
 
 
 - (NSMutableDictionary *)appendCommonDictionary:(NSMutableDictionary *)dictionary {
-   [dictionary setObject:self.projectFullPath forKey:@"projectFullPath"];
+   [dictionary setObject:self.objectFullPath forKey:@"objectFullPath"];
 
    return dictionary;
 }

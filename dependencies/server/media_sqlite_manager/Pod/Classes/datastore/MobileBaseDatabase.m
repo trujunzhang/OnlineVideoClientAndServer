@@ -17,21 +17,21 @@
 
 - (void)makeDB {
    // OnlineVideoType
-   [db sqlExecute:@"create table OnlineVideoType(onlineVideoTypeID int, onlineVideoTypeName text, projectFullPath text, primary key(onlineVideoTypeID));"];
+   [db sqlExecute:@"create table OnlineVideoType(onlineVideoTypeID int, onlineVideoTypeName text, objectFullPath text, primary key(onlineVideoTypeID));"];
    [db sqlExecute:@"create table OnlineVideoTypeProjectTypes(onlineVideoTypeID int, projectTypeID int, primary key (onlineVideoTypeID,projectTypeID));"];
 
 
    // ProjectType
-   [db sqlExecute:@"create table ProjectType(projectTypeID int, projectTypeName text, projectFullPath text, primary key(projectTypeID));"];
+   [db sqlExecute:@"create table ProjectType(projectTypeID int, projectTypeName text, objectFullPath text, primary key(projectTypeID));"];
    [db sqlExecute:@"create table ProjectTypeNames(projectTypeID int, projectNameID int, primary key (projectTypeID,projectNameID));"];
 
    // ProjectName+ProjectList
-   [db sqlExecute:@"create table ProjectName(projectNameID int, projectName text, projectDownloadUrl text, projectFullPath text, primary key(projectNameID));"];
-   [db sqlExecute:@"create table ProjectList(projectListID int, projectListName text, projectFullPath text, primary key(projectListID));"];
+   [db sqlExecute:@"create table ProjectName(projectNameID int, projectName text, projectDownloadUrl text, objectFullPath text, primary key(projectNameID));"];
+   [db sqlExecute:@"create table ProjectList(projectListID int, projectListName text, objectFullPath text, primary key(projectListID));"];
    [db sqlExecute:@"create table ProjectNameLists(projectNameID int, projectListID int, primary key (projectNameID,projectListID));"];
 
    // ProjectFileInfo+ProjectList
-   [db sqlExecute:@"create table ProjectFileInfo(fileInfoID int, fileInforName text, subtitleName text, projectFullPath text, primary key(fileInfoID));"];
+   [db sqlExecute:@"create table ProjectFileInfo(fileInfoID int, fileInforName text, subtitleName text, objectFullPath text, primary key(fileInfoID));"];
    [db sqlExecute:@"create table ProjectListFileInfos(projectListID int, fileInfoID int, primary key (projectListID,fileInfoID));"];
 
    // Internal

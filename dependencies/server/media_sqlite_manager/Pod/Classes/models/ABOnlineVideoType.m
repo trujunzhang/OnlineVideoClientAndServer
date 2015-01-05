@@ -28,7 +28,7 @@
    self = [self init];
    if (self) {
       self.sqliteObjectName = onlineTypeName;
-      self.projectFullPath = projectFullPath;
+      self.objectFullPath = projectFullPath;
 
       [self appendProjectTypeDictionary:dictionary];
    }

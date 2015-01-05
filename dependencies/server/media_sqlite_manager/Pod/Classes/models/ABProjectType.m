@@ -36,7 +36,7 @@
    self = [self init];
    if (self) {
       self.sqliteObjectName = projectName;
-      self.projectFullPath = projectFullPath;
+      self.objectFullPath = projectFullPath;
    }
 
    return self;
