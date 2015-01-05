@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 @class MobileDB;
 @class ABProjectType;
+@class ABProjectName;
 
 
 @interface MobileDBCacheDirectoryHelper : NSObject
@@ -13,5 +14,6 @@
 + (MobileDB *)getServerConsoleDBInstance;
 + (BOOL)checkFileInfoExist:(NSString *)path;
 
-+ (ABProjectType *)checkExistForProjectTypeWithProjectName:(NSString *)path projectFullPath:(NSString *)path1;
++ (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)path projectFullPath:(NSString *)path1;
++ (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 @end

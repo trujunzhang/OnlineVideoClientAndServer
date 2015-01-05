@@ -30,7 +30,12 @@
 
 
 - (void)makeProjectList:(NSString *)aPath withFullPath:(NSString *)fullPath to:(ABProjectType *)projectType {
-   ABProjectName * projectName = [[ABProjectName alloc] initWithProjectName:aPath withProjectFullPath:fullPath];
+   // *** online-step-{ABProjectName} ***
+   ABProjectName * projectName = [MobileDBCacheDirectoryHelper checkExistForProjectNameWithProjectName:aPath
+                                                                                       projectFullPath:fullPath];
+   if (projectName == nil) {
+      projectName = [[ABProjectName alloc] initWithProjectName:aPath withProjectFullPath:fullPath];
+   }
 
    [projectType appendProjectName:projectName];
 

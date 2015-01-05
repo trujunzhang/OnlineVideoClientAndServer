@@ -4,7 +4,6 @@
 #import "ABProjectList.h"
 #import "MobileBaseDatabase.h"
 #import "MobileDB.h"
-@class ABProjectType;
 
 typedef void(^ReportResultsBlock)(NSArray * reports);
 typedef void(^LocationResultsBlock)(NSArray * locations);
@@ -48,7 +47,10 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 
 - (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary isReadArray:(BOOL)isReadArray;
 - (NSMutableArray *)readOnlineVideoTypes;
-- (ABProjectType *)checkExistForProjectTypeWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
+
+#pragma mark - Check Row Exist
+- (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
+- (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 @end
 
 

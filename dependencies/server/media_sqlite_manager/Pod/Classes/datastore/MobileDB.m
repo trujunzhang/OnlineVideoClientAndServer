@@ -290,7 +290,7 @@ static MobileDB * _dbInstance;
                                isReadArray:isReadArray];
           }
       };
-      [self readProjectNameListWithResults:locationsBlock withprojectNameID:projectNameID];
+      [self readProjectNameListWithResults:locationsBlock withProjectNameID:projectNameID];
 
       [results moveNext];
    }
@@ -298,7 +298,7 @@ static MobileDB * _dbInstance;
 }
 
 
-- (ABProjectType *)checkExistForProjectTypeWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
+- (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
    NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
 
    NSString * sql = [NSString stringWithFormat:@"select * from ProjectType where %@",
@@ -442,7 +442,38 @@ static MobileDB * _dbInstance;
 }
 
 
-- (void)readProjectNameListWithResults:(LocationResultsBlock)locationsBlock withprojectNameID:(int)projectNameID {
+- (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
+   NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
+
+   NSString * sql = [NSString stringWithFormat:@"select * from ProjectName where %@",
+                                               [ABSqliteObject getSqlStringSerializationForFilter:
+                                                @{
+                                                 @"ProjectName" : sqliteObjectName,
+                                                 @"projectFullPath" : projectFullPath,
+                                                }]];
+
+   id<ABRecordset> results = [db sqlSelect:sql];
+   while (![results eof]) {
+      ABProjectName * sqliteObject = [[ABProjectName alloc] init];
+
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
+      sqliteObject.sqliteObjectName = [[results fieldWithName:@"ProjectName"] stringValue];
+      sqliteObject.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
+
+      [mutableArray addObject:sqliteObject];
+
+      [results moveNext];
+   }
+
+   if (mutableArray.count == 1) {
+      return mutableArray[0];
+   }
+
+   return nil;
+}
+
+
+- (void)readProjectNameListWithResults:(LocationResultsBlock)locationsBlock withProjectNameID:(int)projectNameID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
    NSString * sql;
 

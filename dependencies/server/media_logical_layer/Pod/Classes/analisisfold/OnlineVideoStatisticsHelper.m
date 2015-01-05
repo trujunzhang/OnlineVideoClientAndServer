@@ -45,8 +45,8 @@
             switch (type) {
                case TFOLD_CATELOGY: {
                   // *** online-step-{ABProjectType} ***
-                  ABProjectType * projectType = [MobileDBCacheDirectoryHelper checkExistForProjectTypeWithProjectName:aPath
-                                                                                                      projectFullPath:fullPath];
+                  ABProjectType * projectType = [MobileDBCacheDirectoryHelper checkExistForProjectTypeWithProjectTypeName:aPath
+                                                                                                          projectFullPath:fullPath];
                   if (projectType == nil) {
                      projectType = [[ABProjectType alloc] initWithProjectName:aPath
                                                               projectFullPath:fullPath];
@@ -68,14 +68,11 @@
 
 - (void)searchProjectNameListInProjectType:(NSString *)appDocDir to:(ABProjectType *)projectType {
    NSArray * contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
-   int count = 1;
    for (NSString * aPath in contentOfFolder) {
       NSString * fullPath = [appDocDir stringByAppendingPathComponent:aPath];
       BOOL isDir = NO;
       if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir]) {
          if (isDir == YES) {
-//            NSLog(@"dir-%d: %@", count, fullPath);
-            count++;
             TFOLD_TYPE type = [self checkDirType:aPath];
             switch (type) {
                case TFOLD_PROJECT: {
