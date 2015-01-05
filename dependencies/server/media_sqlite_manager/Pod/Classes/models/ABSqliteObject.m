@@ -71,7 +71,7 @@
    }
 
 
-   return [videoIds componentsJoinedByString:@","];
+   return [videoIds componentsJoinedByString:@" and "];
 }
 
 

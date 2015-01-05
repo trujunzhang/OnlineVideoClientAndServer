@@ -16,7 +16,7 @@
 
 }
 + (void)generateSqliteFromSourceWithTypeName:(NSString *)onlineTypeName withLocalPath:(NSString *)onlineVideoTypePath withScanFolder:(NSString *)videoScanFold saveSqlitTo:(NSString *)dbDirectory {
-   [[MemoryDBHelper sharedInstance:onlineVideoTypePath] cleanup];
+   [[MemoryDBHelper sharedInstanceWithTypeName:onlineTypeName withLocalPath:onlineVideoTypePath] cleanup];
 
    // 1
    OnlineVideoStatisticsHelper * onlineVideoStatisticsHelper = [[OnlineVideoStatisticsHelper alloc] initWithOnlinePath:videoScanFold

@@ -9,7 +9,15 @@
 #import "ABOnlineVideoType.h"
 
 static MemoryDBHelper * _dbInstance;
+
+static NSString * _onlineTypeName;
 static NSString * _onlineVideoTypePath;
+
+
+@interface MemoryDBHelper () {
+   ABOnlineVideoType * _onlineVideoType;
+}
+@end
 
 
 @implementation MemoryDBHelper {
@@ -19,34 +27,41 @@ static NSString * _onlineVideoTypePath;
 - (instancetype)init {
    self = [super init];
    if (self) {
+
+      NSDictionary * dictionary = @{
+       @"onlineVideoTypeName" : _onlineTypeName,
+       @"onlineVideoTypePath" : _onlineVideoTypePath,
+      };
+
       NSMutableArray * mutableArray =
-       [[MobileDBCacheDirectoryHelper getServerConsoleDBInstance] readOnlineVideoTypes:@{ @"onlineVideoTypePath" : _onlineVideoTypePath }
+       [[MobileDBCacheDirectoryHelper getServerConsoleDBInstance] readOnlineVideoTypes:dictionary
                                                                            isReadArray:YES];
 
       if (mutableArray.count == 1) {
-         ABOnlineVideoType * onlineVideoType = mutableArray[0];
-         NSString * debug = @"debug";
+         _onlineVideoType = mutableArray[0];
+      } else {
+         _onlineVideoType = [[ABOnlineVideoType alloc] initWithOnlineTypeName:_onlineTypeName
+                                                          onlineVideoTypePath:_onlineVideoTypePath
+                                                               withDictionary:[[NSMutableDictionary alloc] init]];
       }
-
-
-//      NSMutableDictionary * dictionary = [[MobileDBCacheDirectoryHelper getServerConsoleDBInstance]
-//       readDictionaryForProjectTypeWithProjectTypeId:projectTypeId
-//                                          hasAllList:YES];
    }
 
    return self;
 }
 
 
-+ (MemoryDBHelper *)sharedInstance:(NSString *)onlineVideoTypePath {
-   if ([_onlineVideoTypePath isEqualToString:onlineVideoTypePath] == NO) {
++ (MemoryDBHelper *)sharedInstanceWithTypeName:(NSString *)onlineTypeName withLocalPath:(NSString *)onlineVideoTypePath {
+   if (
+    (![_onlineVideoTypePath isEqualToString:onlineVideoTypePath]) ||
+     (![_onlineTypeName isEqualToString:onlineTypeName])
+    ) {
+      _onlineTypeName = onlineTypeName;
       _onlineVideoTypePath = onlineVideoTypePath;
       _dbInstance = nil;
    }
 
    if (!_dbInstance) {
       _dbInstance = [[MemoryDBHelper alloc] init];
-
    }
 
    return _dbInstance;
