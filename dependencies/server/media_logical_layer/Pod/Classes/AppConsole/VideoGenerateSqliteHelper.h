@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class MemoryDBHelper;
 
 
 @interface VideoGenerateSqliteHelper : NSObject
