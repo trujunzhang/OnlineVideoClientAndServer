@@ -70,10 +70,10 @@
 }
 
 
-- (ABProjectList *)checkExistForProjecListWithProjectListName:(NSString *)sqliteObjectName {
-   for (ABProjectList * projectList in self.lastsubDirectoryListsArray) {
-      if ([projectList.sqliteObjectName isEqualToString:sqliteObjectName]) {
-         return projectList;
+- (ABProjectList *)checkExistInSubDirectoryWithObjectName:(NSString *)sqliteObjectName {
+   for (ABProjectList * sqliteObject in self.lastsubDirectoryListsArray) {
+      if ([sqliteObject.sqliteObjectName isEqualToString:sqliteObjectName]) {
+         return sqliteObject;
       }
    }
    return nil;

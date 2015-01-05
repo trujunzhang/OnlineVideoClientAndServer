@@ -51,7 +51,7 @@
          if (isDir == YES) {
             if ([self checkIgnoureProjectType:aPath] == NO) {
                // *** online-step-{ABProjectList} ***
-               ABProjectList * projectList = [projectName checkExistForProjecListWithProjectListName:aPath];
+               ABProjectList * projectList = [projectName checkExistInSubDirectoryWithObjectName:aPath];
                if (projectList) {
                   [MobileDBCacheDirectoryHelper getFileInfoArrayForProjectList:projectList];
                } else {
@@ -92,11 +92,8 @@
          if (isDir == YES) {
          } else {
             if ([self checkIsMovieFile:aPath]) {
-
-               NSString * fileAbstractPath = [self getFileAbstractPath:appDocDir withPath:aPath];
-
-               if ([MobileDBCacheDirectoryHelper checkFileInfoExist:fileAbstractPath] == NO) {
-                  NSLog(@"fileAbstractPath = %@", fileAbstractPath);
+               ABProjectFileInfo * fileInfo = [projectList checkExistInSubDirectoryWithObjectName:aPath];
+               if (fileInfo == nil) {
                   // *** online-step-{ABProjectFileInfo} ***
                   ABProjectFileInfo * projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
                   [projectList appendFileInfo:projectFileInfo];

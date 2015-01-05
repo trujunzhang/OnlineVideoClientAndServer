@@ -75,4 +75,11 @@
 //- (NSString *)getCacheFileInfoThumbnail {
 //   return [NSString stringWithFormat:@"%@%@.jpg", @"/.cache/thumbnail/", [self encodeAbstractFilePath]];
 //}
+- (ABProjectFileInfo *)checkExistForFileInfoWithFileInfoName:(NSString *)sqliteObjectName {
+
+
+   return nil;
+}
+
+
 @end

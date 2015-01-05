@@ -23,5 +23,4 @@
 
 
 - (void)appendProjectList:(id)list;
-- (id)checkExistForProjecListWithProjectListName:(NSString *)sqliteObjectName;
 @end

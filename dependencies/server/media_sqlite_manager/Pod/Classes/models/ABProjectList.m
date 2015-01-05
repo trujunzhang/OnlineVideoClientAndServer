@@ -82,8 +82,14 @@
 }
 
 
-- (NSNumber *)getSortNumber {
+- (ABProjectFileInfo *)checkExistInSubDirectoryWithObjectName:(NSString *)sqliteObjectName {
+   for (ABProjectFileInfo * sqliteObject in self.lastsubDirectoryListsArray) {
+      if ([sqliteObject.sqliteObjectName isEqualToString:sqliteObjectName]) {
+         return sqliteObject;
+      }
+   }
    return nil;
 }
+
 
 @end

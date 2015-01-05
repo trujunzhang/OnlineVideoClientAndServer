@@ -26,6 +26,7 @@
 
 - (void)updateSqliteObject:(ABSqliteObject *)object;
 
-- (NSNumber *)getSortNumber;
+
+- (id)checkExistInSubDirectoryWithObjectName:(NSString *)sqliteObjectName;
 
 @end

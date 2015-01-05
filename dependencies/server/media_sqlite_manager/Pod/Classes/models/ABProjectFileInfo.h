@@ -2,17 +2,16 @@
 #import "ABProjectName.h"
 
 
-@interface ABProjectFileInfo : ABSqliteObject<MKAnnotation>
+@interface ABProjectFileInfo : ABSqliteObject
 
 @property(copy) NSString * subtitleName;
 
 @property(assign) BOOL canDelete;
 - (instancetype)initWithFileInforName:(NSString *)fileInforName;
 
-
 - (NSString *)getOnlineVideoPlayUrl:(NSString *)domain;
 
-
 - (NSString *)encodeAbstractFilePath;
-//- (NSString *)getCacheFileInfoThumbnail;
+
+
 @end

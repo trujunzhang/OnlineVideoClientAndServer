@@ -8,6 +8,7 @@
 #import "UserCacheFolderHelper.h"
 #import "ABProjectType.h"
 #import "ABProjectName.h"
+#import "ABProjectList.h"
 
 
 @implementation MobileDBCacheDirectoryHelper {
