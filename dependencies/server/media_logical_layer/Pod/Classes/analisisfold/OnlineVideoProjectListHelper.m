@@ -115,9 +115,10 @@
 
    NSObject * thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfoID];
    NSObject * cacheDirectory = [NSString stringWithFormat:@"%@/%@", self.cacheDirectory, thumbnailFolder];
-   NSString * destinateFilePath = [NSString stringWithFormat:@"%@/%@", cacheDirectory, thumbnailName];
+   NSString * destinateThumbnailPath = [NSString stringWithFormat:@"%@/%@", cacheDirectory, thumbnailName];
+   [MobileDBCacheDirectoryHelper checkExistForFileInfoWithAbstractPath:destinateThumbnailPath];
 
-   [GenerateThumbnailTask executeGenerateThumbnailTaskFrom:fileAbstractPath to:destinateFilePath];
+   [GenerateThumbnailTask executeGenerateThumbnailTaskFrom:fileAbstractPath to:destinateThumbnailPath];
 }
 
 
