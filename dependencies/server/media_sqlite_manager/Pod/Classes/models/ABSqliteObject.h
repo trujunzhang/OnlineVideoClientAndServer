@@ -26,6 +26,7 @@
 
 - (void)updateSqliteObject:(ABSqliteObject *)object;
 
+- (void)makeObjectFullPath:(NSString *)parentFullPath;
 
 - (id)checkExistInSubDirectoryWithObjectName:(NSString *)sqliteObjectName;
 
