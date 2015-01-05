@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 @class MobileDB;
+@class ABProjectType;
 
 
 @interface MobileDBCacheDirectoryHelper : NSObject

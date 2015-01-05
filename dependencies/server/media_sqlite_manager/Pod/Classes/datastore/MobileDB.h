@@ -4,6 +4,7 @@
 #import "ABProjectList.h"
 #import "MobileBaseDatabase.h"
 #import "MobileDB.h"
+@class ABProjectType;
 
 typedef void(^ReportResultsBlock)(NSArray * reports);
 typedef void(^LocationResultsBlock)(NSArray * locations);
