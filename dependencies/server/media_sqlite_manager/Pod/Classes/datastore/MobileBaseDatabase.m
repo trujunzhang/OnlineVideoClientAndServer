@@ -144,8 +144,8 @@
 }
 
 
-+ (NSString *)getThumbnailName:(int)fileInfoID {
-   return [NSString stringWithFormat:@"%@%i.jpg", thumbnailPrefix, fileInfoID];
++ (NSString *)getThumbnailName:(int)sqliteObjectID {
+   return [NSString stringWithFormat:@"%@%i.jpg", thumbnailPrefix, sqliteObjectID];
 }
 
 

@@ -20,5 +20,5 @@ static NSString * const thumbnailFolder = @"thumbnail";
 - (void)makeDB;
 - (void)checkSchema;
 + (BOOL)checkDBFileExist:(NSString *)filePathName;
-+ (NSString *)getThumbnailName:(int)fileInfoID;
++ (NSString *)getThumbnailName:(int)sqliteObjectID;
 @end

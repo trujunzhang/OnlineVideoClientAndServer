@@ -26,6 +26,7 @@
    serverInfo.domainPort = @"8040";
    serverInfo.cacheThumbmail = @"Home/djzhang/.AOnlineTutorial/.cache";
    serverInfo.version = @"1.0";
+   serverInfo.htdocs = @"/Volumes";
 
    return serverInfo;
 }
@@ -38,6 +39,7 @@
    serverInfo.domainPort = @"8040";
    serverInfo.cacheThumbmail = @"Home/djzhang/.AOnlineTutorial/.cache";
    serverInfo.version = @"1.0";
+   serverInfo.htdocs = @"/Volumes";
 
    return serverInfo;
 }

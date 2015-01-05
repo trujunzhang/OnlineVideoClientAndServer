@@ -75,7 +75,7 @@
 
 
 + (NSString *)getVideoOnlineUrl:(YTYouTubeVideoCache *)fileInfo withNavigationIndex:(NSInteger)navigationIndex {
-   NSString * playListThumbnail = fileInfo.abstractFilePath;
+   NSString * playListThumbnail = @"";//fileInfo.abstractFilePath;// TODO djzhang(sqlite)
 
 
    NSString * projectNameIDString = [[MxTabBarManager sharedTabBarManager] getCurrentProjectNameIDString];
@@ -93,7 +93,7 @@
 
 + (NSString *)getVideoThumbnailsGeneratedFromVideo:(YTYouTubeVideoCache *)fileInfo {
 
-   NSString * thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfo.fileInfoID];
+   NSString * thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfo.sqliteObjectID];
    NSObject * domain = [[GYoutubeHelper getInstance] getCurrentDomainUrl];
    return [NSString stringWithFormat:@"%@/%@/%@/%@",
                                      domain,
@@ -113,7 +113,7 @@
 
 
 + (NSString *)getPlayListThumbnailsGeneratedFromVideo:(YTYouTubePlayList *)playList {
-   if (playList.projectFileInfos.count == 0) {
+   if (playList.projectFileInfoArray.count == 0) {
       return @"";
    }
 
@@ -139,7 +139,7 @@
 
 
 + (NSString *)getChannelSnippetId:(YTYouTubeChannel *)channel {
-   return [NSString stringWithFormat:@"%i", channel.projectNameID];
+   return [NSString stringWithFormat:@"%i", channel.sqliteObjectID];
 }
 
 

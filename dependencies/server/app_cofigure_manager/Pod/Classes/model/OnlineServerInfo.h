@@ -13,6 +13,7 @@
 @property(nonatomic, strong) NSString * domainPort;
 @property(nonatomic, strong) NSString * cacheThumbmail;
 @property(nonatomic, strong) NSString * version;
+@property(nonatomic, copy) NSString * htdocs;
 
 + (OnlineServerInfo *)standardServerInfo;
 + (OnlineServerInfo *)localServerInfo;

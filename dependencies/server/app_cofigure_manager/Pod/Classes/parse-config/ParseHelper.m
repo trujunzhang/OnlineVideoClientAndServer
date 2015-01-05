@@ -38,6 +38,7 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
    gameScore[@"domainPort"] = serverInfo.domainPort;
    gameScore[@"cacheThumbmail"] = serverInfo.cacheThumbmail;
    gameScore[@"version"] = serverInfo.version;
+   gameScore[@"htdocs"] = serverInfo.htdocs;
 
    [gameScore saveInBackground];
 }
@@ -73,6 +74,7 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
    serverInfo.domainPort = gameScore[@"domainPort"];
    serverInfo.cacheThumbmail = gameScore[@"cacheThumbmail"];
    serverInfo.version = gameScore[@"version"];
+   serverInfo.htdocs = gameScore[@"htdocs"];
 
    return serverInfo;
 }
@@ -89,6 +91,7 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
    gameScore[@"domainPort"] = serverInfo.domainPort;
    gameScore[@"cacheThumbmail"] = serverInfo.cacheThumbmail;
    gameScore[@"version"] = serverInfo.version;
+   gameScore[@"htdocs"] = serverInfo.htdocs;
 
    [gameScore pinInBackground];//The Local Datastore
 }
