@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <google-api-services-youtube/GYoutubeHelper.h>
 
 
 #import "YoutubeConstants.h"
@@ -20,6 +21,7 @@
 typedef void (^YoutubeResponseBlock)(NSArray * array, NSObject * respObject);
 typedef void (^ErrorResponseBlock)(NSError * error);
 typedef void (^SqliteResponseBlock)(NSObject * respObject);
+typedef void (^SubtitleResponseBlock)(NSString * responseString);
 
 
 @protocol GYoutubeHelperDelegate<NSObject>
@@ -48,4 +50,5 @@ typedef void (^SqliteResponseBlock)(NSObject * respObject);
 
 - (void)initOnlineClient:(SqliteResponseBlock)downloadCompletionBlock checkVersion:(BOOL)version;
 
+- (void)fetchingSubtitle:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl;
 @end

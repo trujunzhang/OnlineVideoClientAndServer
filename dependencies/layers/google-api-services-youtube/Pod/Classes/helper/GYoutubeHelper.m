@@ -50,7 +50,7 @@ static GYoutubeHelper * instance = nil;
        if (error) {
           [self.delegate showStepInfo:@"Fetching failure?"];
        } else {
-          [self checkAndFetchSqliteFileFromRemote:downloadCompletionBlock object:object checkVersion:checkVersion];
+          [self fetchingSqliteFileFromRemote:downloadCompletionBlock];
        }
    };
 
@@ -62,16 +62,29 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)checkAndFetchSqliteFileFromRemote:(SqliteResponseBlock)downloadCompletionBlock object:(OnlineServerInfo *)object checkVersion:(BOOL)checkVersion {
-//   if (checkVersion || [self checkValidateLocalSqlite:object.version] == NO) {
-   [self fetchSqliteFileFromRemote:downloadCompletionBlock];
-//   } else {
-//      downloadCompletionBlock(nil);
-//   }
+- (void)fetchingSubtitle:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
+   NSURL * documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
+                                                                          inDomain:NSUserDomainMask
+                                                                 appropriateForURL:nil
+                                                                            create:NO
+                                                                             error:nil];
+   NSString * subtitlePath = [[documentsDirectoryURL URLByAppendingPathComponent:subtitleTempName] absoluteString];
+   [[NSFileManager defaultManager] removeItemAtPath:subtitlePath error:nil];
+
+   void (^downloadCompletion)(NSURLResponse *, NSURL *, NSError *) = ^(NSURLResponse * response, NSURL * url, NSError * error) {
+       if (error) {
+          NSString * debug = @"debug";
+       } else {
+          NSString * debug = @"debug";
+//          subtitleResponseBlock(nil);
+       }
+   };
+//   [Online_Request fetchingSubtitle:subtitleUrl downloadCompletionBlock:downloadCompletion];
+
 }
 
 
-- (void)fetchSqliteFileFromRemote:(SqliteResponseBlock)downloadCompletionBlock {
+- (void)fetchingSqliteFileFromRemote:(SqliteResponseBlock)downloadCompletionBlock {
    NSString * remoteSqliteUrl = [self.onlineServerInfo getRemoteSqliteDatabase];
 
    [self.delegate showStepInfo:[NSString stringWithFormat:@"Downloading sqlite file from %@", remoteSqliteUrl]];
@@ -139,6 +152,7 @@ static GYoutubeHelper * instance = nil;
 - (NSString *)getCurrentDomainUrl {
    return [self.onlineServerInfo getCurrentDomainUrl];
 }
+
 
 - (NSString *)getHtdocs {
    return [self.onlineServerInfo htdocs];

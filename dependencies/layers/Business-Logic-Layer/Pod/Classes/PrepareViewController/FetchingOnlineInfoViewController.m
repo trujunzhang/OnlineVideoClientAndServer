@@ -180,10 +180,7 @@ static CGFloat kTextPadding = 100.0f;
 - (NSString *)removeSqliteFile {
    NSString * dbFilePathForiOS = [MobileDB getDBFilePathForiOS];
 
-   NSFileManager * fileMngr = [NSFileManager defaultManager];
-   [fileMngr removeItemAtPath:dbFilePathForiOS error:nil];
-
-   NSString * debug = @"debug";
+   [[NSFileManager defaultManager] removeItemAtPath:dbFilePathForiOS error:nil];
 
    return dbFilePathForiOS;
 }
