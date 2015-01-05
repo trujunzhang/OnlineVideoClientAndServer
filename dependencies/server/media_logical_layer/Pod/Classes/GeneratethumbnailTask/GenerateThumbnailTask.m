@@ -5,17 +5,22 @@
 
 #import "GenerateThumbnailTask.h"
 
+
 @implementation GenerateThumbnailTask {
 
 }
 
-
-+ (void)appendGenerateThumbnailTask:(NSString *)thumbnailName in:(NSString *)fileAbstractPath to:(NSString *)cacheDirectory {
-   NSString * destinateFilePath = [NSString stringWithFormat:@"%@/%@", cacheDirectory, thumbnailName];
++ (void)executeGenerateThumbnailTaskFrom:(NSString *)fileAbstractPath to:(NSString *)destinateFilePath {
    NSString * format = [NSString stringWithFormat:@"ffmpeg -i '%@' -deinterlace -an -ss 1 -t 00:00:01 -s 320x180 -r 1 -y -vcodec mjpeg -f mjpeg '%@'",
                                                   fileAbstractPath,
                                                   destinateFilePath];
    [GenerateThumbnailTask runCommand:format];
+}
+
+
++ (void)executeGenerateThumbnailTask:(NSString *)thumbnailName from:(NSString *)fileAbstractPath to:(NSString *)cacheDirectory {
+
+
 }
 
 

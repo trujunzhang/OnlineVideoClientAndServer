@@ -7,5 +7,6 @@
 
 
 @interface GenerateThumbnailTask : NSObject
-+ (void)appendGenerateThumbnailTask:(NSString *)name in:(NSString *)in to:(NSString *)to;
++ (void)executeGenerateThumbnailTaskFrom:(NSString *)fileAbstractPath to:(NSString *)destinateFilePath;
++ (void)executeGenerateThumbnailTask:(NSString *)name from:(NSString *)in to:(NSString *)to;
 @end

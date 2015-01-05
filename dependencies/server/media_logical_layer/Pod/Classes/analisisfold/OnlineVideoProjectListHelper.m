@@ -92,14 +92,16 @@
          if (isDir == YES) {
          } else {
             if ([self checkIsMovieFile:aPath]) {
-               ABProjectFileInfo * fileInfo = [projectList checkExistInSubDirectoryWithObjectName:aPath];
-               if (fileInfo == nil) {
-                  // *** online-step-{ABProjectFileInfo} ***
-                  ABProjectFileInfo * projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
+               // *** online-step-{ABProjectFileInfo} ***
+               ABProjectFileInfo * projectFileInfo = [projectList checkExistInSubDirectoryWithObjectName:aPath];
+               if (projectFileInfo == nil) {
+                  projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
                   [projectList appendFileInfo:projectFileInfo];
-                  [self generateThumbnail:projectFileInfo.sqliteObjectID
-                                  forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
                }
+
+               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
+                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
+
             }
          }
       }
@@ -107,16 +109,15 @@
 }
 
 
-- (void)generateThumbnail:(int)fileInfoID forFile:(NSString *)fileAbstractPath {
+- (void)checkExistAndGenerateThumbnail:(int)fileInfoID forFile:(NSString *)fileAbstractPath {
    if (needGenerateThumbnail == NO)
       return;
 
-   [GenerateThumbnailTask appendGenerateThumbnailTask:[MobileBaseDatabase getThumbnailName:fileInfoID]
-                                                   in:fileAbstractPath
-                                                   to:[NSString stringWithFormat:@"%@/%@",
-                                                                                 self.cacheDirectory,
-                                                                                 thumbnailFolder]];
+   NSObject * thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfoID];
+   NSObject * cacheDirectory = [NSString stringWithFormat:@"%@/%@", self.cacheDirectory, thumbnailFolder];
+   NSString * destinateFilePath = [NSString stringWithFormat:@"%@/%@", cacheDirectory, thumbnailName];
 
+   [GenerateThumbnailTask executeGenerateThumbnailTaskFrom:fileAbstractPath to:destinateFilePath];
 }
 
 
