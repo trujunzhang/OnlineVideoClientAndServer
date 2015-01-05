@@ -4,11 +4,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GYoutubeHelper.h"
 
 
 @interface FetchingSubtitleManager : NSObject
 
 
-+ (void)fetchSubtitleForVideoUrl:(NSString *)thumbnails;
++ (void)fetchSubtitleForVideoUrl:(NSString *)thumbnails subtitleResponseBlock:(SubtitleResponseBlock)subtitleResponseBlock;
 + (NSString *)convertVideoUrlToSubtitleUrl:(NSString *)url;
 @end

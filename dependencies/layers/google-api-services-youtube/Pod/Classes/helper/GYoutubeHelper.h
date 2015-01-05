@@ -21,7 +21,7 @@
 typedef void (^YoutubeResponseBlock)(NSArray * array, NSObject * respObject);
 typedef void (^ErrorResponseBlock)(NSError * error);
 typedef void (^SqliteResponseBlock)(NSObject * respObject);
-typedef void (^SubtitleResponseBlock)(NSString * responseString);
+typedef void (^SubtitleResponseBlock)(NSURL * responseString);
 
 
 @protocol GYoutubeHelperDelegate<NSObject>

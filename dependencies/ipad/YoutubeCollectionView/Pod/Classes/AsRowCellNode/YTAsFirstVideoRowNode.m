@@ -68,14 +68,12 @@
 - (void)buttonTapped:(id)buttonTapped {
    NSString * videoUrl = [YoutubeParser getVideoOnlineUrl:self.nodeInfo];
 
-   [FetchingSubtitleManager fetchSubtitleForVideoUrl:videoUrl];
+   SubtitleResponseBlock subtitleResponseBlock = ^(NSURL * responseString) {
+       NSString * debug = @"debug";
+   };
+   [FetchingSubtitleManager fetchSubtitleForVideoUrl:videoUrl subtitleResponseBlock:subtitleResponseBlock];
 
-   NSLog(@"videoUrl = %@", videoUrl);
-
-   NSString * usingEncoding = [videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-   NSURL * urlWithString = [NSURL URLWithString:usingEncoding];
-
-   YKDirectVideo * _directVideo = [[YKDirectVideo alloc] initWithContent:urlWithString];
+   YKDirectVideo * _directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:[videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 
    [_directVideo play:YKQualityLow];
 }

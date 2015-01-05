@@ -68,18 +68,13 @@ static GYoutubeHelper * instance = nil;
                                                                  appropriateForURL:nil
                                                                             create:NO
                                                                              error:nil];
-   NSString * subtitlePath = [[documentsDirectoryURL URLByAppendingPathComponent:subtitleTempName] absoluteString];
-   [[NSFileManager defaultManager] removeItemAtPath:subtitlePath error:nil];
+   NSURL * removeUrl = [documentsDirectoryURL URLByAppendingPathComponent:subtitleTempName];
+   [[NSFileManager defaultManager] removeItemAtURL:removeUrl error:nil];
 
    void (^downloadCompletion)(NSURLResponse *, NSURL *, NSError *) = ^(NSURLResponse * response, NSURL * url, NSError * error) {
-       if (error) {
-          NSString * debug = @"debug";
-       } else {
-          NSString * debug = @"debug";
-//          subtitleResponseBlock(nil);
-       }
+       subtitleResponseBlock(removeUrl);
    };
-//   [Online_Request fetchingSubtitle:subtitleUrl downloadCompletionBlock:downloadCompletion];
+   [Online_Request fetchingSubtitle:subtitleUrl downloadCompletionBlock:downloadCompletion];
 
 }
 
