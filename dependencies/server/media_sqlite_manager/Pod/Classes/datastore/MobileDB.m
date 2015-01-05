@@ -109,8 +109,7 @@ static MobileDB * _dbInstance;
 
 
 - (void)saveOnlineVideoType:(ABOnlineVideoType *)onlineVideoType {
-   NSString * sql;
-   BOOL exists = NO;
+
 
    NSMutableArray * mutableArray = [self readOnlineVideoTypes:onlineVideoType];
    if (mutableArray.count == 1) {
@@ -119,15 +118,14 @@ static MobileDB * _dbInstance;
    } else {
       NSArray * sqlStringSerializationForInsert = [onlineVideoType sqlStringSerializationForInsert];
 
-      sql = [NSString stringWithFormat:
+      NSString * sql = [NSString stringWithFormat:
        @"insert into OnlineVideoType(onlineVideoTypeID,%@) values(%i,%@)",
        sqlStringSerializationForInsert[0],
        onlineVideoType.sqliteObjectID,
        sqlStringSerializationForInsert[1]
       ];
+      [db sqlExecute:sql];
    }
-
-   [db sqlExecute:sql];
 
    [self saveOnlineVideoTypeProjectTypesArray:onlineVideoType.sqliteObjectID
                                withDictionary:onlineVideoType.onlineTypeDictionary];
