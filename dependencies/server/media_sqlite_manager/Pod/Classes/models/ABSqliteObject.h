@@ -14,6 +14,7 @@
 @property(copy) NSString * projectFullPath;
 - (instancetype)initWithSqliteObjectID:(int)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 
+@property(strong) NSMutableArray * lastsubDirectoryListsArray;
 
 - (NSMutableDictionary *)getUpdateDictionary;
 - (NSMutableDictionary *)getInsertDictionary;

@@ -52,11 +52,11 @@
             if ([self checkIgnoureProjectType:aPath] == NO) {
                // *** online-step-{ABProjectList} ***
                ABProjectList * projectList = [projectName checkExistForProjecListWithProjectListName:aPath];
-               if (projectList == Nil)
+               if (projectList) {
+                  [MobileDBCacheDirectoryHelper getFileInfoArrayForProjectList:projectList];
+               } else {
                   projectList = [[ABProjectList alloc] initWithProjectListName:aPath];
-
-               NSLog(@"appDocDir = %@", appDocDir);
-               NSLog(@"projectListName = %@", projectList.sqliteObjectName);
+               }
 
                [projectName appendProjectList:projectList];
                [self analysisProjectNames:fullPath to:projectList];
@@ -92,20 +92,12 @@
          if (isDir == YES) {
          } else {
             if ([self checkIsMovieFile:aPath]) {
-               //"/Volumes/macshare/MacPE/Lynda.com/Adobe.com/@Muse/#Muse Essential Training by Justin Seeley/0. Introduction"
-               //"01-Welcome.mp4"
-               // /Volumes/macshare/MacPE/Lynda.com/Adobe.com/@Muse/#Muse Essential Training by Justin Seeley/0. Introduction/01-Welcome.mp4
-               // /Volumes/macshare/MacPE/Lynda.com/Adobe.com/@Muse/#Muse Essential Training by Justin Seeley/0. Introduction/01-Welcome.mp4
 
                NSString * fileAbstractPath = [self getFileAbstractPath:appDocDir withPath:aPath];
-               //"/Adobe.com/@Muse/#Muse Essential Training by Justin Seeley/0. Introduction/01-Welcome.mp4"
-               //http://192.168.1.200:8040/Adobe.com/@Muse/#Muse Essential Training by Justin Seeley/0. Introduction/01-Welcome.mp4
-               //http://192.168.1.200:8040/Adobe.com/01-Welcome.mp4
-               //http://192.168.1.200:8040/Adobe.com/@Muse/#Muse Essential Training by Justin Seeley/01-Welcome.mp4
 
                if ([MobileDBCacheDirectoryHelper checkFileInfoExist:fileAbstractPath] == NO) {
                   NSLog(@"fileAbstractPath = %@", fileAbstractPath);
-
+                  // *** online-step-{ABProjectFileInfo} ***
                   ABProjectFileInfo * projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
                   [projectList appendFileInfo:projectFileInfo];
                   [self generateThumbnail:projectFileInfo.sqliteObjectID

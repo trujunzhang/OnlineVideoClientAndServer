@@ -52,4 +52,8 @@
 }
 
 
++ (void)getFileInfoArrayForProjectList:(ABProjectList *)projectList {
+   [[self getServerConsoleDBInstance] getFileInfoArrayForProjectList:projectList];
+}
+
 @end

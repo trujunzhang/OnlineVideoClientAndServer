@@ -16,4 +16,5 @@
 
 + (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)path projectFullPath:(NSString *)path1;
 + (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
++ (void)getFileInfoArrayForProjectList:(ABProjectList *)projectList;
 @end

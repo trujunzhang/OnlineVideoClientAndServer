@@ -20,7 +20,6 @@
       self.projectDownloadUrl = @"";
       self.projectFullPath = @"";
 
-      self.lastsubDirectoryListsArray = [[NSMutableArray alloc] init];
       self.projectListsArray = [[NSMutableArray alloc] init];
    }
 

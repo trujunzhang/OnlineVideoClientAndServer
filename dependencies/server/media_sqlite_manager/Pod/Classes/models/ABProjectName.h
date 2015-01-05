@@ -17,7 +17,7 @@
 @property(copy) NSString * projectDownloadUrl;
 
 @property(strong) NSMutableArray * projectListsArray;
-@property(strong) NSMutableArray * lastsubDirectoryListsArray;
+
 
 - (instancetype)initWithProjectName:(NSString *)projectName withProjectFullPath:(NSString *)projectFullPath;
 

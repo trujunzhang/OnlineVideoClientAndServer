@@ -5,7 +5,7 @@
 
 @interface ABProjectList : ABSqliteObject
 
-@property(strong) NSMutableArray * projectFileInfos;
+@property(strong) NSMutableArray * projectFileInfoArray;
 
 - (instancetype)initWithProjectListName:(NSString *)projectListName;
 

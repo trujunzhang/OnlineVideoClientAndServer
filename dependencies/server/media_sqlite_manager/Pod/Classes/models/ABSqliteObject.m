@@ -13,6 +13,7 @@
    self = [super init];
    if (self) {
       self.projectFullPath = @"";
+      self.lastsubDirectoryListsArray = [[NSMutableArray alloc] init];
    }
 
    return self;

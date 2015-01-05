@@ -52,6 +52,7 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 #pragma mark - Check Row Exist
 - (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 - (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
+- (void)getFileInfoArrayForProjectList:(ABProjectList *)projectList;
 @end
 
 
