@@ -700,7 +700,7 @@ static MobileDB * _dbInstance;
 
 
 - (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
-   // *** online-step-{ABOnlineVideoType} ***
+   // *** online-step-{ABOnlineVideoType-1} ***
    ABOnlineVideoType * onlineVideoType = [[ABOnlineVideoType alloc] initWithOnlineTypeName:onlineTypeName
                                                                            projectFullPath:onlineVideoTypePath
                                                                             withDictionary:dictionary];

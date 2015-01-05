@@ -30,7 +30,7 @@
 
 
 - (void)makeProjectList:(NSString *)aPath withFullPath:(NSString *)fullPath to:(ABProjectType *)projectType {
-   // *** online-step-{ABProjectName} ***
+   // *** online-step-{ABProjectName-3} ***
    ABProjectName * projectName = [MobileDBCacheDirectoryHelper checkExistForProjectNameWithProjectName:aPath
                                                                                        projectFullPath:fullPath];
    if (projectName == nil)
@@ -50,7 +50,7 @@
       if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir]) {
          if (isDir == YES) {
             if ([self checkIgnoureProjectType:aPath] == NO) {
-               // *** online-step-{ABProjectList} ***
+               // *** online-step-{ABProjectList-4} ***
                ABProjectList * projectList = [projectName checkExistInSubDirectoryWithObjectName:aPath];
                if (projectList) {
                   [MobileDBCacheDirectoryHelper getFileInfoArrayForProjectList:projectList];
@@ -92,7 +92,7 @@
          if (isDir == YES) {
          } else {
             if ([self checkIsMovieFile:aPath]) {
-               // *** online-step-{ABProjectFileInfo} ***
+               // *** online-step-{ABProjectFileInfo-5} ***
                ABProjectFileInfo * projectFileInfo = [projectList checkExistInSubDirectoryWithObjectName:aPath];
                if (projectFileInfo == nil) {
                   projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];

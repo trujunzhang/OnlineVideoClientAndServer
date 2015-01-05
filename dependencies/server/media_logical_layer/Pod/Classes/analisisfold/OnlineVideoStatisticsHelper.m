@@ -44,7 +44,7 @@
             TFOLD_TYPE type = [self checkDirType:aPath];
             switch (type) {
                case TFOLD_CATELOGY: {
-                  // *** online-step-{ABProjectType} ***
+                  // *** online-step-{ABProjectType-2} ***
                   ABProjectType * projectType = [MobileDBCacheDirectoryHelper checkExistForProjectTypeWithProjectTypeName:aPath
                                                                                                           projectFullPath:fullPath];
                   if (projectType == nil) {

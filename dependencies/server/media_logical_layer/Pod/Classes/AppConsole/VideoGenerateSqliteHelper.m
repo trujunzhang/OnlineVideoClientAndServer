@@ -12,16 +12,11 @@
 #import "MobileDBCacheDirectoryHelper.h"
 #import "MemoryDBHelper.h"
 
-static MemoryDBHelper * _currentMemoryDBHelper;
-
 
 @implementation VideoGenerateSqliteHelper {
 
 }
 + (void)generateSqliteFromSourceWithTypeName:(NSString *)onlineTypeName withLocalPath:(NSString *)onlineVideoTypePath withScanFolder:(NSString *)videoScanFold saveSqlitTo:(NSString *)dbDirectory {
-   _currentMemoryDBHelper = [MemoryDBHelper sharedInstanceWithTypeName:onlineTypeName
-                                                         withLocalPath:onlineVideoTypePath];
-
    // 1
    OnlineVideoStatisticsHelper * onlineVideoStatisticsHelper = [[OnlineVideoStatisticsHelper alloc] initWithOnlinePath:videoScanFold
                                                                                                     withCacheDirectory:dbDirectory];
