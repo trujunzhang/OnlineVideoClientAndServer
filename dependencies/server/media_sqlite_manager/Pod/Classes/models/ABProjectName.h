@@ -20,11 +20,11 @@
 @property(copy) NSString * projectDownloadUrl;
 
 // Lynda.com/Adobe.com/Muse
-@property(copy) NSString * projectAbstractPath;
+@property(copy) NSString * projectFullPath;
 
 @property(strong) NSMutableArray * projectLists;
 
-- (instancetype)initWithProjectName:(NSString *)projectName;
+- (instancetype)initWithProjectName:(NSString *)projectName withProjectFullPath:(NSString *)projectFullPath;
 
 + (ABProjectName *)locationFromJSON:(NSString *)json;
 + (NSArray *)locationsFromJSON:(NSString *)json;

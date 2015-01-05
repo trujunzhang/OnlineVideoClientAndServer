@@ -18,7 +18,7 @@
       self.sqliteObjectID = [MobileDB uniqueID];
 
       self.projectDownloadUrl = @"";
-      self.projectAbstractPath = @"";
+      self.projectFullPath = @"";
 
       self.projectLists = [[NSMutableArray alloc] init];
    }
@@ -27,10 +27,11 @@
 }
 
 
-- (instancetype)initWithProjectName:(NSString *)projectName {
+- (instancetype)initWithProjectName:(NSString *)projectName withProjectFullPath:(NSString *)projectFullPath {
    self = [self init];
    if (self) {
       self.sqliteObjectName = projectName;
+      self.projectFullPath = projectFullPath;
    }
 
    return self;
@@ -52,7 +53,7 @@
    NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
    [dictionary setObject:self.sqliteObjectName forKey:@"projectName"];
    [dictionary setObject:self.projectDownloadUrl forKey:@"projectDownloadUrl"];
-   [dictionary setObject:self.projectAbstractPath forKey:@"projectAbstractPath"];
+   [dictionary setObject:self.projectFullPath forKey:@"projectFullPath"];
 
    return dictionary;
 }

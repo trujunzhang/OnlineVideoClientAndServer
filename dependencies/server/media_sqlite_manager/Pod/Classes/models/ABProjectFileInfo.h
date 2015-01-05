@@ -8,7 +8,7 @@
 @property(copy) NSString * abstractFilePath;
 
 @property(assign) BOOL canDelete;
-- (instancetype)initWithFileInforName:(NSString *)fileInforName abstractFilePath:(NSString *)abstractFilePath;
+- (instancetype)initWithFileInforName:(NSString *)fileInforName;
 
 
 - (NSString *)getOnlineVideoPlayUrl:(NSString *)domain;

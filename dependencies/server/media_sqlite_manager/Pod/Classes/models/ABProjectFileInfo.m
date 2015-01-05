@@ -32,11 +32,10 @@
 }
 
 
-- (instancetype)initWithFileInforName:(NSString *)fileInforName abstractFilePath:(NSString *)abstractFilePath {
+- (instancetype)initWithFileInforName:(NSString *)fileInforName {
    self = [self init];
    if (self) {
       self.sqliteObjectName = fileInforName;
-      self.abstractFilePath = abstractFilePath;
    }
 
    return self;

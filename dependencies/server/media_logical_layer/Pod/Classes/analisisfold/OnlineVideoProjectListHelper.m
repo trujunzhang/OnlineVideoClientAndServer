@@ -30,8 +30,10 @@
 
 
 - (void)makeProjectList:(NSString *)aPath withFullPath:(NSString *)fullPath to:(ABProjectType *)projectType {
-   ABProjectName * projectName = [[ABProjectName alloc] initWithProjectName:aPath];
+   ABProjectName * projectName = [[ABProjectName alloc] initWithProjectName:aPath withProjectFullPath:fullPath];
+
    [projectType appendProjectName:projectName];
+
    [self analysisProjectList:fullPath to:projectName];
 }
 
@@ -98,8 +100,7 @@
                if ([MobileDBCacheDirectoryHelper checkFileInfoExist:fileAbstractPath] == NO) {
                   NSLog(@"fileAbstractPath = %@", fileAbstractPath);
 
-                  ABProjectFileInfo * projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath
-                                                                                        abstractFilePath:fileAbstractPath];
+                  ABProjectFileInfo * projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
                   [projectList appendFileInfo:projectFileInfo];
                   [self generateThumbnail:projectFileInfo.sqliteObjectID
                                   forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];

@@ -428,7 +428,7 @@ static MobileDB * _dbInstance;
       projectName.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
       projectName.sqliteObjectName = [[results fieldWithName:@"projectName"] stringValue];
       projectName.projectDownloadUrl = [[results fieldWithName:@"projectDownloadUrl"] stringValue];
-      projectName.projectAbstractPath = [[results fieldWithName:@"projectAbstractPath"] stringValue];
+      projectName.projectFullPath = [[results fieldWithName:@"projectFullPath"] stringValue];
 
       [projectNameArray addObject:projectName];
 
