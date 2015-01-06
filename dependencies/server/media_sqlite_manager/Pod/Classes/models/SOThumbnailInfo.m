@@ -9,4 +9,24 @@
 @implementation SOThumbnailInfo {
 
 }
+
+
+#pragma mark -
+#pragma mark ABSqliteObject
+
+
+- (NSMutableDictionary *)getUpdateDictionary {
+   NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
+   [dictionary setObject:[NSString stringWithFormat:@"%i", self.fileInfoID] forKey:@"fileInfoID"];
+
+   return dictionary;
+}
+
+
+- (NSMutableDictionary *)getInsertDictionary {
+
+   return [self getUpdateDictionary];
+}
+
+
 @end
