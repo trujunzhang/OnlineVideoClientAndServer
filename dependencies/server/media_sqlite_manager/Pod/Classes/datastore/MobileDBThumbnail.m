@@ -132,7 +132,7 @@ id<ABDatabase> thumbnailDataBase;
    NSArray * sqlStringSerializationForInsert = [sqliteObject sqlStringSerializationForInsert];
 
    NSString * sql = [NSString stringWithFormat:
-    @"insert into ThumbnailInfo(thumbnailInfoID,%@) values(%i,%@)",
+    @"insert into ThumbnailInfo(thumbnailInfoID,%@) values(%@,%@)",
     sqlStringSerializationForInsert[0],
     sqliteObject.sqliteObjectID,
     sqlStringSerializationForInsert[1]

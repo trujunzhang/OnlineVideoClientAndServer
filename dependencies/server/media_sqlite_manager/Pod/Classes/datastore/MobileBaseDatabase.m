@@ -17,22 +17,22 @@
 
 - (void)makeForMobileDB:(id<ABDatabase>)db {
    // OnlineVideoType
-   [db sqlExecute:@"create table OnlineVideoType(onlineVideoTypeID int, onlineVideoTypeName text, objectFullPath text, primary key(onlineVideoTypeID));"];
-   [db sqlExecute:@"create table OnlineVideoTypeProjectTypes(onlineVideoTypeID int, projectTypeID int, primary key (onlineVideoTypeID,projectTypeID));"];
+   [db sqlExecute:@"create table OnlineVideoType(onlineVideoTypeID text, onlineVideoTypeName text, objectFullPath text, primary key(onlineVideoTypeID));"];
+   [db sqlExecute:@"create table OnlineVideoTypeProjectTypes(onlineVideoTypeID text, projectTypeID text, primary key (onlineVideoTypeID,projectTypeID));"];
 
 
    // ProjectType
-   [db sqlExecute:@"create table ProjectType(projectTypeID int, projectTypeName text, objectFullPath text, primary key(projectTypeID));"];
-   [db sqlExecute:@"create table ProjectTypeNames(projectTypeID int, projectNameID int, primary key (projectTypeID,projectNameID));"];
+   [db sqlExecute:@"create table ProjectType(projectTypeID text, projectTypeName text, objectFullPath text, primary key(projectTypeID));"];
+   [db sqlExecute:@"create table ProjectTypeNames(projectTypeID text, projectNameID text, primary key (projectTypeID,projectNameID));"];
 
    // ProjectName+ProjectList
-   [db sqlExecute:@"create table ProjectName(projectNameID int, projectName text, projectDownloadUrl text, objectFullPath text, primary key(projectNameID));"];
-   [db sqlExecute:@"create table ProjectList(projectListID int, projectListName text, objectFullPath text, primary key(projectListID));"];
-   [db sqlExecute:@"create table ProjectNameLists(projectNameID int, projectListID int, primary key (projectNameID,projectListID));"];
+   [db sqlExecute:@"create table ProjectName(projectNameID text, projectName text, projectDownloadUrl text, objectFullPath text, primary key(projectNameID));"];
+   [db sqlExecute:@"create table ProjectList(projectListID text, projectListName text, objectFullPath text, primary key(projectListID));"];
+   [db sqlExecute:@"create table ProjectNameLists(projectNameID text, projectListID text, primary key (projectNameID,projectListID));"];
 
    // ProjectFileInfo+ProjectList
-   [db sqlExecute:@"create table ProjectFileInfo(fileInfoID int, fileInforName text, subtitleName text, objectFullPath text, primary key(fileInfoID));"];
-   [db sqlExecute:@"create table ProjectListFileInfos(projectListID int, fileInfoID int, primary key (projectListID,fileInfoID));"];
+   [db sqlExecute:@"create table ProjectFileInfo(fileInfoID text, fileInforName text, subtitleName text, objectFullPath text, primary key(fileInfoID));"];
+   [db sqlExecute:@"create table ProjectListFileInfos(projectListID text, fileInfoID text, primary key (projectListID,fileInfoID));"];
 
    // Internal
    [db sqlExecute:@"create table Preferences(property text, value text, primary key(property));"];
@@ -76,7 +76,7 @@
 
 - (void)makeForMobileDBThumbnail:(id<ABDatabase>)db {
    // OnlineVideoType
-   [db sqlExecute:@"create table ThumbnailInfo(thumbnailInfoID int, fileInfoID int, fileInforName text, objectFullPath text, primary key(thumbnailInfoID));"];
+   [db sqlExecute:@"create table ThumbnailInfo(thumbnailInfoID text, fileInfoID text, fileInforName text, objectFullPath text, primary key(thumbnailInfoID));"];
 
    // Internal
    [db sqlExecute:@"create table _Preferences(property text, value text, primary key(property));"];
@@ -109,6 +109,8 @@
    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
    NSString * uuidString = (__bridge_transfer NSString *) CFUUIDCreateString(kCFAllocatorDefault, uuid);
    CFRelease(uuid);
+
+//   NSLog(@"uuidString = %@", uuidString);
 
    return uuidString;
 }
@@ -178,7 +180,7 @@
 }
 
 
-+ (NSString *)getThumbnailName:(NSString*)sqliteObjectID {
++ (NSString *)getThumbnailName:(NSString *)sqliteObjectID {
    return [NSString stringWithFormat:@"%@%i.jpg", thumbnailPrefix, sqliteObjectID];
 }
 

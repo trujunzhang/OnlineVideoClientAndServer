@@ -116,6 +116,7 @@ id<ABDatabase> db;
      @"objectFullPath" : onlineVideoType.objectFullPath,
     }
                                                   isReadArray:NO];
+
    if (mutableArray.count == 1) {
       ABOnlineVideoType * lastOnlineVideoType = mutableArray[0];
       [onlineVideoType updateSqliteObject:lastOnlineVideoType];
@@ -123,7 +124,7 @@ id<ABDatabase> db;
       NSArray * sqlStringSerializationForInsert = [onlineVideoType sqlStringSerializationForInsert];
 
       NSString * sql = [NSString stringWithFormat:
-       @"insert into OnlineVideoType(onlineVideoTypeID,%@) values(%i,%@)",
+       @"insert into OnlineVideoType(onlineVideoTypeID,%@) values('%@',%@)",
        sqlStringSerializationForInsert[0],
        onlineVideoType.sqliteObjectID,
        sqlStringSerializationForInsert[1]
@@ -140,13 +141,13 @@ id<ABDatabase> db;
    NSString * sql;
    if ([mutableArray count] > 0) {
       for (ABProjectType * abProjectType in mutableArray.allValues) {
-         sql = [NSString stringWithFormat:@"select projectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = %i and projectTypeID = %i",
+         sql = [NSString stringWithFormat:@"select projectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = '%@' and projectTypeID = '%@'",
                                           onlineVideoTypeID,
                                           abProjectType.sqliteObjectID];
          id<ABRecordset> results = [db sqlSelect:sql];
 
          if ([results eof]) {
-            sql = [NSString stringWithFormat:@"insert into OnlineVideoTypeProjectTypes(onlineVideoTypeID,projectTypeID) values(%i,%i);",
+            sql = [NSString stringWithFormat:@"insert into OnlineVideoTypeProjectTypes(onlineVideoTypeID,projectTypeID) values('%@','%@');",
                                              onlineVideoTypeID,
                                              abProjectType.sqliteObjectID];
             [db sqlExecute:sql];
@@ -192,7 +193,7 @@ id<ABDatabase> db;
 
 - (void)readOnlineTypeArray:(int)onlineVideoTypeID withArray:(NSMutableDictionary *)dictionary isReadArray:(BOOL)isReadArray {
    NSString * sql;
-   sql = [NSString stringWithFormat:@"select ProjectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = '%i'",
+   sql = [NSString stringWithFormat:@"select ProjectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = ''%@''",
                                     onlineVideoTypeID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -234,14 +235,14 @@ id<ABDatabase> db;
       NSString * sqlStringSerializationForUpdate = [projectType sqlStringSerializationForUpdate];
 
       sql = [NSString stringWithFormat:
-       @"update ProjectType set %@ where projectTypeID = %i",
+       @"update ProjectType set %@ where projectTypeID = '%@'",
        sqlStringSerializationForUpdate,
        projectType.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [projectType sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
-       @"insert into ProjectType(projectTypeID,%@) values(%i,%@)",
+       @"insert into ProjectType(projectTypeID,%@) values('%@',%@)",
        sqlStringSerializationForInsert[0],
        projectType.sqliteObjectID,
        sqlStringSerializationForInsert[1]
@@ -258,13 +259,13 @@ id<ABDatabase> db;
    NSString * sql;
    if ([mutableArray count] > 0) {
       for (ABProjectName * projectName in mutableArray) {
-         sql = [NSString stringWithFormat:@"select projectNameID from ProjectTypeNames where projectTypeID = %i and projectNameID = %i",
+         sql = [NSString stringWithFormat:@"select projectNameID from ProjectTypeNames where projectTypeID = '%@' and projectNameID = '%@'",
                                           projectTypeID,
                                           projectName.sqliteObjectID];
          id<ABRecordset> results = [db sqlSelect:sql];
 
          if ([results eof]) {
-            sql = [NSString stringWithFormat:@"insert into ProjectTypeNames(projectTypeID,projectNameID) values(%i,%i);",
+            sql = [NSString stringWithFormat:@"insert into ProjectTypeNames(projectTypeID,projectNameID) values('%@','%@');",
                                              projectTypeID,
                                              projectName.sqliteObjectID];
             [db sqlExecute:sql];
@@ -276,7 +277,7 @@ id<ABDatabase> db;
 
 - (void)readProjectTypeNames:(int)projectTypeID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray {
    NSString * sql;
-   sql = [NSString stringWithFormat:@"select projectNameID from ProjectTypeNames where projectTypeID = '%i'",
+   sql = [NSString stringWithFormat:@"select projectNameID from ProjectTypeNames where projectTypeID = ''%@''",
                                     projectTypeID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -337,7 +338,7 @@ id<ABDatabase> db;
    NSMutableArray * projectTypeArray = [[NSMutableArray alloc] init];
    NSString * sql = @"select * from ProjectType";
    if (isAllList == NO) {
-      sql = [NSString stringWithFormat:@"select * from ProjectType where projectTypeId = '%i'",
+      sql = [NSString stringWithFormat:@"select * from ProjectType where projectTypeId = ''%@''",
                                        projectTypeId];
    }
 
@@ -373,14 +374,14 @@ id<ABDatabase> db;
       NSString * sqlStringSerializationForUpdate = [projectName sqlStringSerializationForUpdate];
 
       sql = [NSString stringWithFormat:
-       @"update ProjectName set %@ where projectNameID = %i",
+       @"update ProjectName set %@ where projectNameID = '%@'",
        sqlStringSerializationForUpdate,
        projectName.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [projectName sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
-       @"insert into ProjectName(projectNameID,%@) values(%i,%@)",
+       @"insert into ProjectName(projectNameID,%@) values('%@',%@)",
        sqlStringSerializationForInsert[0],
        projectName.sqliteObjectID,
        sqlStringSerializationForInsert[1]
@@ -398,13 +399,13 @@ id<ABDatabase> db;
    NSString * sql;
    if ([mutableArray count] > 0) {
       for (ABProjectList * projectList in mutableArray) {
-         sql = [NSString stringWithFormat:@"select projectListID from ProjectNameLists where projectNameID = %i and projectListID = %i",
+         sql = [NSString stringWithFormat:@"select projectListID from ProjectNameLists where projectNameID = '%@' and projectListID = '%@'",
                                           projectNameID,
                                           projectList.sqliteObjectID];
          id<ABRecordset> results = [db sqlSelect:sql];
 
          if ([results eof]) {
-            sql = [NSString stringWithFormat:@"insert into ProjectNameLists(projectNameID,projectListID) values(%i,%i);",
+            sql = [NSString stringWithFormat:@"insert into ProjectNameLists(projectNameID,projectListID) values('%@','%@');",
                                              projectNameID,
                                              projectList.sqliteObjectID];
             [db sqlExecute:sql];
@@ -422,7 +423,7 @@ id<ABDatabase> db;
 */
 - (void)readProjectNameLists:(int)projectNameID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray {
    NSString * sql;
-   sql = [NSString stringWithFormat:@"select projectListID from ProjectNameLists where projectNameID = '%i'",
+   sql = [NSString stringWithFormat:@"select projectListID from ProjectNameLists where projectNameID = ''%@''",
                                     projectNameID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -485,7 +486,7 @@ id<ABDatabase> db;
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
    NSString * sql;
 
-   sql = [NSString stringWithFormat:@"select * from ProjectName where projectNameID = '%i'",
+   sql = [NSString stringWithFormat:@"select * from ProjectName where projectNameID = ''%@''",
                                     projectNameID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -513,7 +514,7 @@ id<ABDatabase> db;
    NSString * sql;
    BOOL exists = NO;
 
-   sql = [NSString stringWithFormat:@"select projectListID from ProjectList where projectListID = %i",
+   sql = [NSString stringWithFormat:@"select projectListID from ProjectList where projectListID = '%@'",
                                     projectList.sqliteObjectID];
    id<ABRecordset> results = [db sqlSelect:sql];
    if (![results eof])
@@ -523,14 +524,14 @@ id<ABDatabase> db;
       NSString * sqlStringSerializationForUpdate = [projectList sqlStringSerializationForUpdate];
 
       sql = [NSString stringWithFormat:
-       @"update ProjectList set %@ where projectListID = %i",
+       @"update ProjectList set %@ where projectListID = '%@'",
        sqlStringSerializationForUpdate,
        projectList.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [projectList sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
-       @"insert into ProjectList(projectListID,%@) values(%i,%@)",
+       @"insert into ProjectList(projectListID,%@) values('%@',%@)",
        sqlStringSerializationForInsert[0],
        projectList.sqliteObjectID,
        sqlStringSerializationForInsert[1]
@@ -548,13 +549,13 @@ id<ABDatabase> db;
    NSString * sql;
    if ([mutableArray count] > 0) {
       for (ABProjectFileInfo * projectFileInfo in mutableArray) {
-         sql = [NSString stringWithFormat:@"select fileInfoID from ProjectListFileInfos where projectListID = %i and fileInfoID = %i",
+         sql = [NSString stringWithFormat:@"select fileInfoID from ProjectListFileInfos where projectListID = '%@' and fileInfoID = '%@'",
                                           projectListID,
                                           projectFileInfo.sqliteObjectID];
          id<ABRecordset> results = [db sqlSelect:sql];
 
          if ([results eof]) {
-            sql = [NSString stringWithFormat:@"insert into ProjectListFileInfos(projectListID,fileInfoID) values(%i,%i);",
+            sql = [NSString stringWithFormat:@"insert into ProjectListFileInfos(projectListID,fileInfoID) values('%@','%@');",
                                              projectListID,
                                              projectFileInfo.sqliteObjectID];
             [db sqlExecute:sql];
@@ -566,7 +567,7 @@ id<ABDatabase> db;
 
 - (void)readProjectListFileInfos:(int)projectListID withArray:(NSMutableArray *)mutableArray {
    NSString * sql;
-   sql = [NSString stringWithFormat:@"select fileInfoID from ProjectListFileInfos where projectListID = '%i'",
+   sql = [NSString stringWithFormat:@"select fileInfoID from ProjectListFileInfos where projectListID = ''%@''",
                                     projectListID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -594,7 +595,7 @@ id<ABDatabase> db;
 - (void)readProjectListsWithResults:(LocationResultsBlock)locationsBlock withProjectListID:(int)projectListID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
 
-   NSString * sql = [NSString stringWithFormat:@"select * from ProjectList where projectListID = %i",
+   NSString * sql = [NSString stringWithFormat:@"select * from ProjectList where projectListID = '%@'",
                                                projectListID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -620,7 +621,7 @@ id<ABDatabase> db;
    NSString * sql;
    BOOL exists = NO;
 
-   sql = [NSString stringWithFormat:@"select fileInfoID from ProjectFileInfo where fileInfoID = %i",
+   sql = [NSString stringWithFormat:@"select fileInfoID from ProjectFileInfo where fileInfoID = '%@'",
                                     fileInfo.sqliteObjectID];
    id<ABRecordset> results = [db sqlSelect:sql];
    if (![results eof])
@@ -630,14 +631,14 @@ id<ABDatabase> db;
       NSString * sqlStringSerializationForUpdate = [fileInfo sqlStringSerializationForUpdate];
 
       sql = [NSString stringWithFormat:
-       @"update ProjectFileInfo set %@ where fileInfoID = %i",
+       @"update ProjectFileInfo set %@ where fileInfoID = '%@'",
        sqlStringSerializationForUpdate,
        fileInfo.sqliteObjectID];
    } else {
       NSArray * sqlStringSerializationForInsert = [fileInfo sqlStringSerializationForInsert];
 
       sql = [NSString stringWithFormat:
-       @"insert into ProjectFileInfo(fileInfoID,%@) values(%i,%@)",
+       @"insert into ProjectFileInfo(fileInfoID,%@) values('%@',%@)",
        sqlStringSerializationForInsert[0],
        fileInfo.sqliteObjectID,
        sqlStringSerializationForInsert[1]
@@ -663,7 +664,7 @@ id<ABDatabase> db;
 
 - (void)readProjectFileInfoListWithResults:(LocationResultsBlock)locationsBlock withFileInfoID:(int)fileInfoID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
-   NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where fileInfoID=%i", fileInfoID];
+   NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where fileInfoID='%@'", fileInfoID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
@@ -685,7 +686,7 @@ id<ABDatabase> db;
 
 - (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(int)fileInfoID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
-   NSString * sql = [NSString stringWithFormat:@"select objectFullPath from ProjectFileInfo where fileInfoID=%i",
+   NSString * sql = [NSString stringWithFormat:@"select objectFullPath from ProjectFileInfo where fileInfoID='%@'",
                                                fileInfoID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
