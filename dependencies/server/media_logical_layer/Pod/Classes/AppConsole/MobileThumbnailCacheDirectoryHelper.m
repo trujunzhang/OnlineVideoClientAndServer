@@ -24,6 +24,7 @@
    SOThumbnailInfo * thumbnailInfo = [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoID:sqliteObjectID
                                                                                                      fileInforName:sqliteObjectName
                                                                                                    projectFullPath:fullPath];
+
    if (thumbnailInfo == nil) {
       [[self getMobileThumbnailDBInstance] saveThumbnailInfoWithFileInfoID:sqliteObjectID
                                                              fileInforName:sqliteObjectName
