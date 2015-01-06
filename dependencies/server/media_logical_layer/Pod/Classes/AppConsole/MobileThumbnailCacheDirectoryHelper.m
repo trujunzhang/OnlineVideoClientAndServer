@@ -20,7 +20,7 @@
 }
 
 
-+ (SOThumbnailInfo *)checkExistAndSaveForThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
++ (SOThumbnailInfo *)checkExistAndSaveForThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
    SOThumbnailInfo * thumbnailInfo = [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoID:sqliteObjectID
                                                                                                      fileInforName:sqliteObjectName
                                                                                                    projectFullPath:fullPath];
