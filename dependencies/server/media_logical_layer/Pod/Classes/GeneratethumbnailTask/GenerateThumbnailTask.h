@@ -8,5 +8,4 @@
 
 @interface GenerateThumbnailTask : NSObject
 + (void)executeGenerateThumbnailTaskFrom:(NSString *)fileAbstractPath to:(NSString *)destinateFilePath;
-+ (void)executeGenerateThumbnailTask:(NSString *)name from:(NSString *)in to:(NSString *)to;
 @end
