@@ -8,6 +8,7 @@
 
 #import "YKDirectVideo.h"
 #import "MPMoviePlayerController+Subtitles.h"
+#import "SDSRTParserHelper.h"
 
 CGFloat const kDirectThumbnailLocation = 1.0;
 
@@ -109,6 +110,7 @@ CGFloat const kDirectThumbnailLocation = 1.0;
 
    // Create MoviePlayer
    [self.player.moviePlayer openSRTFileAtPath:subtitlesPathStr
+                                 parserHelper:[[SDSRTParserHelper alloc] init]
                                    completion:^(BOOL finished) {
 
                                        // Activate subtitles
