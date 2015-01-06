@@ -37,7 +37,10 @@
 
 + (void)copyOnlineVideoTypeDictionary:(NSMutableDictionary *)onlineTypeDictionary to:(ABOnlineVideoType *)lastOnlineVideoType {
    for (NSString * key in onlineTypeDictionary.allKeys) {
-      [lastOnlineVideoType.onlineTypeDictionary setObject:[onlineTypeDictionary objectForKey:key] forKey:key];
+      id object = [onlineTypeDictionary objectForKey:key];
+
+
+      [lastOnlineVideoType.onlineTypeDictionary setObject:object forKey:key];
    }
 }
 
