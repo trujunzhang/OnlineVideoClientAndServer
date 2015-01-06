@@ -40,7 +40,7 @@
    NSMutableArray * menuItemTreeArray = [[NSMutableArray alloc] init];
 
    NSInteger currentNavigationIndex = [[MxTabBarManager sharedTabBarManager] getCurrentNavigationIndex];
-   // *** readRows{ABOnlineVideoType} ***
+   // *** readRows{ABOnlineVideoType-c1} ***
    NSArray * projectTypeArray = [[SqliteManager sharedSqliteManager] getCurrentOnlineVideoDictionary:currentNavigationIndex];
 
    for (YTYouTubeType * projectType in projectTypeArray) {

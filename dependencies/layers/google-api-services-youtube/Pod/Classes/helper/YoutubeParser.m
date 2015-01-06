@@ -90,11 +90,12 @@
 
    NSString * thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfo.sqliteObjectID];
    NSObject * domain = [[GYoutubeHelper getInstance] getCurrentDomainUrl];
-   return [NSString stringWithFormat:@"%@/%@/%@/%@",
+   NSString * stringWithFormat = [NSString stringWithFormat:@"%@/%@/%@/%@",
                                      domain,
                                      [[GYoutubeHelper getInstance] getServerCacheDirectory],
                                      thumbnailFolder,
                                      thumbnailName];
+   return stringWithFormat;
 }
 
 
@@ -134,7 +135,7 @@
 
 
 + (NSString *)getChannelSnippetId:(YTYouTubeChannel *)channel {
-   return [NSString stringWithFormat:@"%i", channel.sqliteObjectID];
+   return [NSString stringWithFormat:@"%@", channel.sqliteObjectID];
 }
 
 

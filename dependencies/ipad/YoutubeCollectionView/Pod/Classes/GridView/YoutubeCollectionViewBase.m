@@ -261,7 +261,6 @@
 - (void)fetchPlayListByType:(YTPlaylistItemsType)playlistItemsType {
    [self cleanup];
 
-//   NSLog(@" *** fetchPlayListByType = %d", [[self getYoutubeRequestInfo] hasNextPage]);
    [[self getYoutubeRequestInfo] resetRequestInfoForPlayList:playlistItemsType];
 }
 

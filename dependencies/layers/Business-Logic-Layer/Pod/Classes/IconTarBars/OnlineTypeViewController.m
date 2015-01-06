@@ -74,7 +74,7 @@
 
 
 - (void)endToggleLeftMenuEventForChannelPageWithChannelId:(NSString *)channelId withTitle:(NSString *)title projectFullPath:(NSString *)projectFullPath {
-   // *** readRows{ABProjectList+ABProjectFileInfo} with projectList.fullPath ***
+   // *** readRows{ABProjectList+ABProjectFileInfo-c2} with projectList.fullPath ***
    YoutubeChannelPageViewController * controller =
     [[YoutubeChannelPageViewController alloc] initWithChannelId:channelId
                                                       withTitle:title
