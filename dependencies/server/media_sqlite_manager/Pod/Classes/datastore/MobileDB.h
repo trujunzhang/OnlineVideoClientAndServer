@@ -21,7 +21,7 @@
 - (void)close;
 
 
-- (void)readProjectNameLists:(int)projectNameID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray;
+- (void)readProjectNameLists:(NSString * )projectNameID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray;
 #pragma mark - Locations
 - (void)locationsForReport:(ABProjectList *)report Results:(LocationResultsBlock)locationsBlock;
 - (void)fillDetailsForLocations:(NSArray *)locations;
@@ -34,14 +34,14 @@
 
 #pragma mark - Preferences
 - (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath;
-- (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(int)fileInfoID;
+- (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(NSString * )fileInfoID;
 - (NSString *)preferenceForKey:(NSString *)key forDatabase:(id<ABDatabase>)database;
 - (void)setPreference:(NSString *)value forKey:(NSString *)key forDatabase:(id<ABDatabase>)database;
 
 #pragma mark - Utilities
 - (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath;
-- (void)readDictionaryForProjectTypeWithProjectTypeId:(int)projectTypeId toDictionary:(NSMutableDictionary *)dictionary hasAllList:(BOOL)isAllList;
-- (NSMutableDictionary *)readDictionaryForProjectTypeWithProjectTypeId:(int)projectTypeId hasAllList:(BOOL)isAllList;
+- (void)readDictionaryForProjectTypeWithProjectTypeId:(NSString * )projectTypeId toDictionary:(NSMutableDictionary *)dictionary hasAllList:(BOOL)isAllList;
+- (NSMutableDictionary *)readDictionaryForProjectTypeWithProjectTypeId:(NSString * )projectTypeId hasAllList:(BOOL)isAllList;
 
 
 - (NSMutableArray *)readOnlineVideoTypes:(NSMutableDictionary *)filterDictionary isReadArray:(BOOL)isReadArray;

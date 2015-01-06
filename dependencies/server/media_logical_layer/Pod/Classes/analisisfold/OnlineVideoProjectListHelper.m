@@ -102,7 +102,12 @@
                   if (thumbnailInfo)
                      projectFileInfo.sqliteObjectID = thumbnailInfo.fileInfoID;
                   [projectList appendFileInfo:projectFileInfo];
+               } else if (thumbnailInfo) {
+                  if ([thumbnailInfo.fileInfoID isEqualToString:projectFileInfo.sqliteObjectID] == NO) {
+                     NSLog(@"thumbnailInfo.fileInfoID not equal to projectFileInfo.sqliteObjectID");
+                  }
                }
+
 
                if (thumbnailInfo == nil) {
                   [MobileThumbnailCacheDirectoryHelper saveThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
@@ -110,8 +115,8 @@
                                                                        projectFullPath:fullPath];
                }
 
-//               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
-//                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
+               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
+                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
 
             }
          }
