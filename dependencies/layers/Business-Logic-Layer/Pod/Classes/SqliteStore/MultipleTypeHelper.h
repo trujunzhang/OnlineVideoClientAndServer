@@ -11,6 +11,5 @@
 
 + (NSMutableArray *)getSingleOnlineVideoTypesArray:(NSMutableArray *)array;
 
-+ (NSMutableDictionary *)getOnlineVideoTypePathDictionary:(NSMutableArray *)array;
 + (void)copyOnlineVideoTypeDictionary:(NSMutableArray *)onlineTypeDictionary to:(ABOnlineVideoType *)to;
 @end

@@ -52,15 +52,4 @@
    return nil;
 }
 
-
-+ (NSMutableDictionary *)getOnlineVideoTypePathDictionary:(NSMutableArray *)array {
-   NSMutableDictionary * onlineVideoTypePathDictionary = [[NSMutableDictionary alloc] init];
-   for (ABOnlineVideoType * onlineVideoType in array) {
-
-//      [onlineVideoTypePathDictionary setObject:onlineVideoType.onlineVideoTypePath
-//                                        forKey:[NSString stringWithFormat:@"%i", onlineVideoType.onlineVideoTypeID]];
-   }
-
-   return onlineVideoTypePathDictionary;
-}
 @end

@@ -12,7 +12,6 @@
 #import "SqliteArraySortHelper.h"
 
 NSMutableDictionary * _videoDictionary;
-NSMutableDictionary * _onlineVideoTypePathDictionary;
 NSMutableArray * _onlineVideoTypeArray;
 
 
@@ -37,17 +36,9 @@ NSMutableArray * _onlineVideoTypeArray;
 }
 
 
-+ (NSString *)getCurrentOnlineVideoTypePath:(NSString *)navigationIndex {
-   NSString * onlineVideoTypePath = [_onlineVideoTypePathDictionary objectForKey:navigationIndex];
-
-   return onlineVideoTypePath;
-}
-
-
 - (void)resetOnlineVideoTypeArray {
    NSMutableArray * mutableArray = [[MobileDB dbInstance] readOnlineVideoTypes];
 
-   _onlineVideoTypePathDictionary = [MultipleTypeHelper getOnlineVideoTypePathDictionary:mutableArray];
    _onlineVideoTypeArray = [MultipleTypeHelper getSingleOnlineVideoTypesArray:mutableArray];
 }
 
