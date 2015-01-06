@@ -37,7 +37,7 @@
 
    serverInfo.domainHost = @"http://192.168.1.200";
    serverInfo.domainPort = @"8040";
-   serverInfo.cacheThumbmail = @"Home/djzhang/.AOnlineTutorial/.cache";
+   serverInfo.cacheThumbmail = @"Home/djzhang/.AOnlineTutorial/.server/.cache";
    serverInfo.version = @"1.0";
    serverInfo.htdocs = @"/Volumes";
 
