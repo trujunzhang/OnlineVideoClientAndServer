@@ -17,6 +17,7 @@
 #import "SqliteManager.h"
 #import "MxTabBarManager.h"
 #import "MobileBaseDatabase.h"
+#import "SqliteDatabaseConstant.h"
 
 
 @interface YoutubeParser ()

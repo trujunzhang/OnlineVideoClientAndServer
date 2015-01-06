@@ -71,7 +71,7 @@ NSMutableArray * _onlineVideoTypeArray;
 - (NSMutableArray *)getProjectListArray:(NSString *)projectNameId projectFullPath:(NSString *)projectFullPath {
    NSMutableArray * projectListArray = [[NSMutableArray alloc] init];
 
-   [[MobileDB dbInstance] readProjectNameLists:[projectNameId intValue] withArray:projectListArray isReadArray:YES];
+   [[MobileDB dbInstance] readProjectNameLists:projectNameId withArray:projectListArray isReadArray:YES];
    [[MobileDB dbInstance] makeObjectFullPathForProjectListArray:projectListArray projectFullPath:projectFullPath];
 
    return [SqliteArraySortHelper sortForABProjectList:projectListArray];

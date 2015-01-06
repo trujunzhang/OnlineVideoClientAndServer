@@ -19,8 +19,8 @@
 
 #endif
 
-#define hasLocalSqliteFile NO
-//#define hasLocalSqliteFile YES
+//#define hasLocalSqliteFile NO
+#define hasLocalSqliteFile YES
 
 
 //#define hasShowLeftMenu NO
