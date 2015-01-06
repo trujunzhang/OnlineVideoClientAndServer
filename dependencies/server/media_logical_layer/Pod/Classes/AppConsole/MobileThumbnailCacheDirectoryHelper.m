@@ -5,7 +5,7 @@
 
 #import "MobileThumbnailCacheDirectoryHelper.h"
 #import "UserCacheFolderHelper.h"
-#import "MobileDBThumbnail.h"
+#import "MobileDBImage.h"
 #import "SOThumbnailInfo.h"
 #import "SOThumbnailInfo.h"
 
@@ -15,8 +15,8 @@
 }
 
 
-+ (MobileDBThumbnail *)getMobileThumbnailDBInstance {
-   return [MobileDBThumbnail dbInstance:[UserCacheFolderHelper RealProjectDirectory]];
++ (MobileDBImage *)getMobileThumbnailDBInstance {
+   return [MobileDBImage dbInstance:[UserCacheFolderHelper RealProjectDirectory]];
 }
 
 

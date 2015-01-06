@@ -5,12 +5,12 @@
 @class SOThumbnailInfo;
 
 
-@interface MobileDBThumbnail : NSObject
+@interface MobileDBImage : NSObject
 
 
 #pragma mark - Base
 
-+ (MobileDBThumbnail *)dbInstance:(NSString *)path;
++ (MobileDBImage *)dbInstance:(NSString *)path;
 
 - (id)initWithFile:(NSString *)filePathName;
 - (void)close;

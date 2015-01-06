@@ -8,20 +8,20 @@
 
 
 
-#import "MobileDBThumbnail.h"
+#import "MobileDBImage.h"
 #import "ABSQLiteDB.h"
 #import "SOThumbnailInfo.h"
 
-static MobileDBThumbnail * _dbThumbnailInstance;
+static MobileDBImage * _dbThumbnailInstance;
 id<ABDatabase> thumbnailDataBase;
 
 
-@interface MobileDBThumbnail ()
+@interface MobileDBImage ()
 
 @end
 
 
-@implementation MobileDBThumbnail {
+@implementation MobileDBImage {
 
 }
 
@@ -42,7 +42,7 @@ id<ABDatabase> thumbnailDataBase;
    BOOL fileExists = [MobileBaseDatabase checkDBFileExist:filePathName];
 
    // backupDbPath allows for a pre-made database to be in the app. Good for testing
-   NSString * backupDbPath = [[NSBundle mainBundle] pathForResource:@"MobileDBThumbnail" ofType:@"db"];
+   NSString * backupDbPath = [[NSBundle mainBundle] pathForResource:imageDataBaseName ofType:@"db"];
 
    BOOL copiedBackupDb = NO;
    if (backupDbPath != nil) {
@@ -70,10 +70,10 @@ id<ABDatabase> thumbnailDataBase;
 }
 
 
-+ (MobileDBThumbnail *)dbInstance:(NSString *)path {
++ (MobileDBImage *)dbInstance:(NSString *)path {
    if (!_dbThumbnailInstance) {
-      NSString * dbFilePath = [path stringByAppendingPathComponent:thumbnailDataBaseName];
-      MobileDBThumbnail * mobileThumbnail = [[MobileDBThumbnail alloc] initWithFile:dbFilePath];
+      NSString * dbFilePath = [path stringByAppendingPathComponent:imageDataBaseName];
+      MobileDBImage * mobileThumbnail = [[MobileDBImage alloc] initWithFile:dbFilePath];
    }
 
    return _dbThumbnailInstance;
@@ -139,7 +139,7 @@ id<ABDatabase> thumbnailDataBase;
 
 - (void)makeForMobileDBThumbnail:(id<ABDatabase>)db {
    // OnlineVideoType
-   [db sqlExecute:@"create table ThumbnailInfo(thumbnailInfoID text, fileInfoID text, fileInforName text, objectFullPath text, primary key(thumbnailInfoID));"];
+   [db sqlExecute:@"create table AThumbnailInfo(thumbnailInfoID text, fileInfoID text, fileInforName text, objectFullPath text, primary key(thumbnailInfoID));"];
 
    // Internal
    [db sqlExecute:@"create table Preferences(property text, value text, primary key(property));"];
@@ -151,7 +151,7 @@ id<ABDatabase> thumbnailDataBase;
 
    if ([schemaVersion isEqualToString:@"1"]) {
       // OnlineVideoType
-      [db sqlExecute:@"create index idx_thumbnailinfos_thumbnailinfoid on ThumbnailInfo(thumbnailInfoID);"];
+      [db sqlExecute:@"create index idx_athumbnailinfos_thumbnailinfoid on AThumbnailInfo(thumbnailInfoID);"];
 
       schemaVersion = @"2";
    }
@@ -169,7 +169,7 @@ id<ABDatabase> thumbnailDataBase;
 - (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
    NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
 
-   NSString * sql = [NSString stringWithFormat:@"select * from ThumbnailInfo where %@",
+   NSString * sql = [NSString stringWithFormat:@"select * from AThumbnailInfo where %@",
                                                [ABSqliteObject getSqlStringSerializationForFilter:
                                                 @{
                                                  @"fileInforName" : sqliteObjectName,
@@ -213,7 +213,7 @@ id<ABDatabase> thumbnailDataBase;
    NSArray * sqlStringSerializationForInsert = [sqliteObject sqlStringSerializationForInsert];
 
    NSString * sql = [NSString stringWithFormat:
-    @"insert into ThumbnailInfo(thumbnailInfoID,%@) values('%@',%@)",
+    @"insert into AThumbnailInfo(thumbnailInfoID,%@) values('%@',%@)",
     sqlStringSerializationForInsert[0],
     sqliteObject.sqliteObjectID,
     sqlStringSerializationForInsert[1]
