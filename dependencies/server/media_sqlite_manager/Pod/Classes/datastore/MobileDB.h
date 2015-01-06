@@ -4,6 +4,7 @@
 #import "ABProjectList.h"
 #import "MobileBaseDatabase.h"
 #import "MobileDB.h"
+
 @class ABProjectType;
 
 @interface MobileDB : MobileBaseDatabase

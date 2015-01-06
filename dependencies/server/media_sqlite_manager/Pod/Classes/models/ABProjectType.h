@@ -13,9 +13,6 @@
 
 @interface ABProjectType : ABSqliteObject
 
-
-@property(assign) int onlineVideoTypeID;
-
 @property(strong) NSMutableArray * ProjectNameArray;
 
 - (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath;
