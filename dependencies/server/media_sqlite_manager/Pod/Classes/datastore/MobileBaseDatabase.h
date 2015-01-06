@@ -19,12 +19,12 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 
 }
 
-
-- (void)checkSchemaForMobileDBThumbnail;
 + (NSString *)uniqueID;
-- (void)makeForMobileDB;
-- (void)checkSchemaForMobileDB;
-- (void)makeForMobileDBThumbnail;
+- (void)makeForMobileDB:(id<ABDatabase>)db ;
+- (void)checkSchemaForMobileDB:(id<ABDatabase>)db ;
+- (void)makeForMobileDBThumbnail:(id<ABDatabase>)db;
+- (void)checkSchemaForMobileDBThumbnail:(id<ABDatabase>)db ;
+
 + (BOOL)checkDBFileExist:(NSString *)filePathName;
 + (NSString *)getThumbnailName:(int)sqliteObjectID;
 @end

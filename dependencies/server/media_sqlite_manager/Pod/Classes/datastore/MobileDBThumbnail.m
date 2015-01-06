@@ -15,6 +15,7 @@
 static MobileDBThumbnail * _dbInstance;
 id<ABDatabase> thumbnailDataBase;
 
+
 @interface MobileDBThumbnail ()
 
 @end
@@ -60,10 +61,10 @@ id<ABDatabase> thumbnailDataBase;
 
    if (!fileExists) {
       if (!backupDbPath || !copiedBackupDb)
-         [self makeForMobileDBThumbnail];
+         [self makeForMobileDBThumbnail:thumbnailDataBase];
    }
 
-   [self checkSchemaForMobileDBThumbnail]; // always check schema because updates are done here
+   [self checkSchemaForMobileDBThumbnail:thumbnailDataBase]; // always check schema because updates are done here
 
    return self;
 }

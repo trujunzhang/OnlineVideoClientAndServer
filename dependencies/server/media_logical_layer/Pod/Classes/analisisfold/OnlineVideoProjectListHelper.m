@@ -98,10 +98,8 @@
                }
 
                // *** online-step-{SOThumbnailInfo-6} ***
-
-//               int objectID = projectFileInfo.sqliteObjectID;
                SOThumbnailInfo * thumbnailInfo =
-                [MobileThumbnailCacheDirectoryHelper checkExistAndSaveForThumbnailInfoWithFileInfoID:123
+                [MobileThumbnailCacheDirectoryHelper checkExistAndSaveForThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
                                                                                        fileInforName:aPath
                                                                                      projectFullPath:fullPath];
 

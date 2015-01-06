@@ -63,10 +63,10 @@ id<ABDatabase> db;
 
    if (!fileExists) {
       if (!backupDbPath || !copiedBackupDb)
-         [self makeForMobileDB];
+         [self makeForMobileDB:db];
    }
 
-   [self checkSchemaForMobileDB]; // always check schema because updates are done here
+   [self checkSchemaForMobileDB:db]; // always check schema because updates are done here
 
    return self;
 }

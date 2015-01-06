@@ -15,7 +15,7 @@
 #pragma mark - for MobileDB
 
 
-- (void)makeForMobileDB {
+- (void)makeForMobileDB:(id<ABDatabase>)db {
    // OnlineVideoType
    [db sqlExecute:@"create table OnlineVideoType(onlineVideoTypeID int, onlineVideoTypeName text, objectFullPath text, primary key(onlineVideoTypeID));"];
    [db sqlExecute:@"create table OnlineVideoTypeProjectTypes(onlineVideoTypeID int, projectTypeID int, primary key (onlineVideoTypeID,projectTypeID));"];
@@ -37,12 +37,12 @@
    // Internal
    [db sqlExecute:@"create table Preferences(property text, value text, primary key(property));"];
 
-   [self setPreference:@"1" forKey:@"SchemaVersion"];
+   [self setPreference:@"1" forKey:@"SchemaVersion" forDatabase:db];
 }
 
 
-- (void)checkSchemaForMobileDB {
-   NSString * schemaVersion = [self preferenceForKey:@"SchemaVersion"];
+- (void)checkSchemaForMobileDB:(id<ABDatabase>)db {
+   NSString * schemaVersion = [self preferenceForKey:@"SchemaVersion" forDatabase:db];
 
    if ([schemaVersion isEqualToString:@"1"]) {
       // OnlineVideoType
@@ -67,26 +67,26 @@
 
    [db sqlExecute:@"ANALYZE"];
 
-   [self setPreference:schemaVersion forKey:@"SchemaVersion"];
+   [self setPreference:schemaVersion forKey:@"SchemaVersion" forDatabase:db];
 }
 
 
 #pragma mark - for MobileDBThumbnail
 
 
-- (void)makeForMobileDBThumbnail {
+- (void)makeForMobileDBThumbnail:(id<ABDatabase>)db {
    // OnlineVideoType
    [db sqlExecute:@"create table ThumbnailInfo(thumbnailInfoID int, fileInfoID int, fileInforName text, objectFullPath text, primary key(thumbnailInfoID));"];
 
    // Internal
    [db sqlExecute:@"create table _Preferences(property text, value text, primary key(property));"];
 
-   [self setPreference:@"1" forKey:@"SchemaVersion"];
+   [self setPreference:@"1" forKey:@"SchemaVersion" forDatabase:nil];
 }
 
 
-- (void)checkSchemaForMobileDBThumbnail {
-   NSString * schemaVersion = [self preferenceForKey:@"SchemaVersion"];
+- (void)checkSchemaForMobileDBThumbnail:(id<ABDatabase>)db {
+   NSString * schemaVersion = [self preferenceForKey:@"SchemaVersion" forDatabase:db];
 
    if ([schemaVersion isEqualToString:@"1"]) {
       // OnlineVideoType
@@ -97,7 +97,7 @@
 
    [db sqlExecute:@"ANALYZE"];
 
-   [self setPreference:schemaVersion forKey:@"SchemaVersion"];
+   [self setPreference:schemaVersion forKey:@"SchemaVersion" forDatabase:nil];
 }
 
 
@@ -131,7 +131,7 @@
 #pragma mark - Preferences
 
 
-- (NSString *)preferenceForKey:(NSString *)key {
+- (NSString *)preferenceForKey:(NSString *)key forDatabase:(id<ABDatabase>)db {
    NSString * preferenceValue = @"";
 
    NSString * sql = [NSString stringWithFormat:@"select value from preferences where property='%@';", key];
@@ -147,7 +147,7 @@
 }
 
 
-- (void)setPreference:(NSString *)value forKey:(NSString *)key {
+- (void)setPreference:(NSString *)value forKey:(NSString *)key forDatabase:(id<ABDatabase>)db {
    if (!value) {
       return;
    }

@@ -34,8 +34,8 @@
 #pragma mark - Preferences
 - (BOOL)checkFileInfoExist:(NSString *)fileAbstractPath;
 - (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(int)fileInfoID;
-- (NSString *)preferenceForKey:(NSString *)key;
-- (void)setPreference:(NSString *)value forKey:(NSString *)key;
+- (NSString *)preferenceForKey:(NSString *)key forDatabase:(id<ABDatabase>)database;
+- (void)setPreference:(NSString *)value forKey:(NSString *)key forDatabase:(id<ABDatabase>)database;
 
 #pragma mark - Utilities
 - (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath;
