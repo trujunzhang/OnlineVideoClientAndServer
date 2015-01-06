@@ -71,7 +71,7 @@ static MobileDBThumbnail * _dbInstance;
 
 + (MobileDBThumbnail *)dbInstance:(NSString *)path {
    if (!_dbInstance) {
-      NSString * dbFilePath = [path stringByAppendingPathComponent:dataBaseName];
+      NSString * dbFilePath = [path stringByAppendingPathComponent:thumbnailDataBaseName];
       MobileDBThumbnail * mobileThumbnail = [[MobileDBThumbnail alloc] initWithFile:dbFilePath];
    }
 

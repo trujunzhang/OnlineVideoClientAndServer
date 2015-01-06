@@ -28,7 +28,7 @@
 
 
 + (NSString *)RealProjectDirectory {
-   return [NSString stringWithFormat:@"%@/%@", [UserCacheFolderHelper RealHomeDirectory], appProfile];
+   return [NSString stringWithFormat:@"%@/%@/.server", [UserCacheFolderHelper RealHomeDirectory], appProfile];
 }
 
 

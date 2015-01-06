@@ -43,13 +43,13 @@
 
 + (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
    return [[self getMobileDBInstance] checkExistForProjectTypeWithProjectTypeName:sqliteObjectName
-                                                                         projectFullPath:projectFullPath];
+                                                                  projectFullPath:projectFullPath];
 }
 
 
 + (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
    return [[self getMobileDBInstance] checkExistForProjectNameWithProjectName:sqliteObjectName
-                                                                     projectFullPath:projectFullPath];
+                                                              projectFullPath:projectFullPath];
 }
 
 
