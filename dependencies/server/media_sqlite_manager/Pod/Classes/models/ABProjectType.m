@@ -47,11 +47,6 @@
 }
 
 
-- (void)appendProjectName:(ABProjectName *)projectName {
-   [self.sqliteObjectArray addObject:projectName];
-}
-
-
 + (NSMutableDictionary *)getAllProjectNames:(NSMutableDictionary *)projectTypesDictionary {
    NSMutableDictionary * projectNamesDictionary = [[NSMutableDictionary alloc] init];
 

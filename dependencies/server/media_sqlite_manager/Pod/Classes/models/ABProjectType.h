@@ -16,5 +16,4 @@
 - (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath;
 
 + (NSMutableDictionary *)getAllProjectNames:(NSMutableDictionary *)projectTypesDictionary;
-- (void)appendProjectName:(id)projectName;
 @end

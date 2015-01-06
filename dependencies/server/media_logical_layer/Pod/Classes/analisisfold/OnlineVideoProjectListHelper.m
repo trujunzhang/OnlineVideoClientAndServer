@@ -40,7 +40,7 @@
    if (projectName == nil)
       projectName = [[ABProjectName alloc] initWithProjectName:aPath withProjectFullPath:fullPath];
 
-   [projectType appendProjectName:projectName];
+   [projectType appendSqliteObjectToArray:projectName];
 
    [self analysisProjectList:fullPath to:projectName];
 }
@@ -62,7 +62,7 @@
                   projectList = [[ABProjectList alloc] initWithProjectListName:aPath];
                }
 
-               [projectName appendProjectList:projectList];
+               [projectName appendSqliteObjectToArray:projectList];
                [self analysisProjectNames:fullPath to:projectList];
             }
          }
@@ -101,7 +101,7 @@
                   // if movie path exist in image database, but movie database not exist, then give old id to ProjectFileInfo.
                   if (thumbnailInfo)
                      projectFileInfo.sqliteObjectID = thumbnailInfo.fileInfoID;
-                  [projectList appendFileInfo:projectFileInfo];
+                  [projectList appendSqliteObjectToArray:projectFileInfo];
                } else if (thumbnailInfo) {
                   if ([thumbnailInfo.fileInfoID isEqualToString:projectFileInfo.sqliteObjectID] == NO) {
                      NSLog(@"thumbnailInfo.fileInfoID not equal to projectFileInfo.sqliteObjectID");

@@ -9,8 +9,6 @@
 
 - (instancetype)initWithProjectListName:(NSString *)projectListName;
 
-
-- (void)appendFileInfo:(id)fileInfo;
 - (ABProjectFileInfo *)getFirstABProjectFileInfo;
 
 @end

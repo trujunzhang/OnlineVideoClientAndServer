@@ -15,5 +15,4 @@
 
 - (instancetype)initWithProjectName:(NSString *)projectName withProjectFullPath:(NSString *)projectFullPath;
 
-- (void)appendProjectList:(id)sqliteObject;
 @end
