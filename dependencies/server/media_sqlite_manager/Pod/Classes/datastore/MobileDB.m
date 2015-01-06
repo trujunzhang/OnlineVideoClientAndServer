@@ -193,7 +193,7 @@ id<ABDatabase> db;
 
 - (void)readOnlineTypeArray:(NSString * )onlineVideoTypeID withArray:(NSMutableDictionary *)dictionary isReadArray:(BOOL)isReadArray {
    NSString * sql;
-   sql = [NSString stringWithFormat:@"select ProjectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = ''%@''",
+   sql = [NSString stringWithFormat:@"select ProjectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = '%@'",
                                     onlineVideoTypeID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -277,7 +277,7 @@ id<ABDatabase> db;
 
 - (void)readProjectTypeNames:(NSString * )projectTypeID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray {
    NSString * sql;
-   sql = [NSString stringWithFormat:@"select projectNameID from ProjectTypeNames where projectTypeID = ''%@''",
+   sql = [NSString stringWithFormat:@"select projectNameID from ProjectTypeNames where projectTypeID = '%@'",
                                     projectTypeID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -338,7 +338,7 @@ id<ABDatabase> db;
    NSMutableArray * projectTypeArray = [[NSMutableArray alloc] init];
    NSString * sql = @"select * from ProjectType";
    if (isAllList == NO) {
-      sql = [NSString stringWithFormat:@"select * from ProjectType where projectTypeId = ''%@''",
+      sql = [NSString stringWithFormat:@"select * from ProjectType where projectTypeId = '%@'",
                                        projectTypeId];
    }
 
@@ -423,7 +423,7 @@ id<ABDatabase> db;
 */
 - (void)readProjectNameLists:(NSString * )projectNameID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray {
    NSString * sql;
-   sql = [NSString stringWithFormat:@"select projectListID from ProjectNameLists where projectNameID = ''%@''",
+   sql = [NSString stringWithFormat:@"select projectListID from ProjectNameLists where projectNameID = '%@'",
                                     projectNameID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -486,7 +486,7 @@ id<ABDatabase> db;
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
    NSString * sql;
 
-   sql = [NSString stringWithFormat:@"select * from ProjectName where projectNameID = ''%@''",
+   sql = [NSString stringWithFormat:@"select * from ProjectName where projectNameID = '%@'",
                                     projectNameID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
@@ -567,7 +567,7 @@ id<ABDatabase> db;
 
 - (void)readProjectListFileInfos:(NSString * )projectListID withArray:(NSMutableArray *)mutableArray {
    NSString * sql;
-   sql = [NSString stringWithFormat:@"select fileInfoID from ProjectListFileInfos where projectListID = ''%@''",
+   sql = [NSString stringWithFormat:@"select fileInfoID from ProjectListFileInfos where projectListID = '%@'",
                                     projectListID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
