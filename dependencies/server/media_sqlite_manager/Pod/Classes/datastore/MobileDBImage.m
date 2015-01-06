@@ -224,7 +224,4 @@ id<ABDatabase> thumbnailDataBase;
 }
 
 
-- (void)test {
-
-}
 @end

@@ -21,24 +21,20 @@
 
 
 + (SOThumbnailInfo *)checkExistAndSaveForThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+   SOThumbnailInfo * thumbnailInfo = [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoID:sqliteObjectID
+                                                                                                     fileInforName:sqliteObjectName
+                                                                                                   projectFullPath:fullPath];
 
-   [[self getMobileThumbnailDBInstance] test];
+   if (thumbnailInfo == nil) {
+      [[self getMobileThumbnailDBInstance] saveThumbnailInfoWithFileInfoID:sqliteObjectID
+                                                             fileInforName:sqliteObjectName
+                                                           projectFullPath:fullPath
 
-//   SOThumbnailInfo * thumbnailInfo = [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoID:sqliteObjectID
-//                                                                                                     fileInforName:sqliteObjectName
-//                                                                                                   projectFullPath:fullPath];
-//
-//   if (thumbnailInfo == nil) {
-//      [[self getMobileThumbnailDBInstance] saveThumbnailInfoWithFileInfoID:sqliteObjectID
-//                                                             fileInforName:sqliteObjectName
-//                                                           projectFullPath:fullPath
-//
-//      ];
-//   }
-//
-//   return thumbnailInfo;
+      ];
+   }
 
+   return thumbnailInfo;
 
-   return nil;
+//   return nil;
 }
 @end
