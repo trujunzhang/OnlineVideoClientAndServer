@@ -99,12 +99,19 @@
                if (projectFileInfo == nil) {
                   projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
                   // if movie path exist in image database, but movie database not exist, then give old id to ProjectFileInfo.
-                  projectFileInfo.sqliteObjectID = thumbnailInfo.fileInfoID;
+                  if (thumbnailInfo)
+                     projectFileInfo.sqliteObjectID = thumbnailInfo.fileInfoID;
                   [projectList appendFileInfo:projectFileInfo];
                }
 
-               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
-                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
+               if (thumbnailInfo == nil) {
+                  [MobileThumbnailCacheDirectoryHelper saveThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
+                                                                         fileInforName:aPath
+                                                                       projectFullPath:fullPath];
+               }
+
+//               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
+//                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
 
             }
          }
