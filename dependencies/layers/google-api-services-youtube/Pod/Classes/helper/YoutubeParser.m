@@ -108,7 +108,7 @@
 
 
 + (NSString *)getPlayListThumbnailsGeneratedFromVideo:(YTYouTubePlayList *)playList {
-   if (playList.projectFileInfoArray.count == 0) {
+   if (playList.sqliteObjectArray.count == 0) {
       return @"";
    }
 

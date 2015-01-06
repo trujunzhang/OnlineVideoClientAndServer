@@ -49,7 +49,7 @@
       LeftMenuItemTree * leftMenuItemTree =
        [[self alloc] initWithTitle:projectTypeTitle
                           itemType:LMenuTreeSubscriptions
-                         rowsArray:projectType.ProjectNameArray
+                         rowsArray:projectType.sqliteObjectArray
                          hideTitle:NO
                        remoteImage:NO];
 

@@ -85,7 +85,7 @@ NSMutableArray * _onlineVideoTypeArray;
 *
 */
 - (void)sortForFileInfoArrayIn:(ABProjectList *)projectList {
-   projectList.projectFileInfoArray = [SqliteArraySortHelper sortForABProjectList:projectList.projectFileInfoArray];
+   projectList.sqliteObjectArray = [SqliteArraySortHelper sortForABProjectList:projectList.sqliteObjectArray];
 }
 
 
@@ -94,7 +94,7 @@ NSMutableArray * _onlineVideoTypeArray;
    NSMutableArray * allFileInfoArray = [[NSMutableArray alloc] init];
 
    for (YTYouTubePlayList * playList in projectLists) {
-      for (YTYouTubeVideoCache * videoCache in playList.projectFileInfoArray) {
+      for (YTYouTubeVideoCache * videoCache in playList.sqliteObjectArray) {
          [allFileInfoArray addObject:videoCache];
       }
    }
