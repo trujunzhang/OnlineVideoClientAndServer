@@ -166,13 +166,12 @@ id<ABDatabase> thumbnailDataBase;
 #pragma mark
 
 
-- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoIDProjectFullPath:(NSString *)fullPath {
    NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
 
    NSString * sql = [NSString stringWithFormat:@"select * from AThumbnailInfo where %@",
                                                [ABSqliteObject getSqlStringSerializationForFilter:
                                                 @{
-                                                 @"fileInforName" : sqliteObjectName,
                                                  @"objectFullPath" : fullPath,
                                                 }]];
 
