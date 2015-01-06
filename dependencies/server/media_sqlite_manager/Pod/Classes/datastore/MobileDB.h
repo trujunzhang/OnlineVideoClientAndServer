@@ -6,10 +6,6 @@
 #import "MobileDB.h"
 @class ABProjectType;
 
-typedef void(^ReportResultsBlock)(NSArray * reports);
-typedef void(^LocationResultsBlock)(NSArray * locations);
-
-
 @interface MobileDB : MobileBaseDatabase
 
 
