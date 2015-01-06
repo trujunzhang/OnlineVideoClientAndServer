@@ -26,7 +26,7 @@
    [db sqlExecute:@"create table ProjectTypeNames(projectTypeID text, projectNameID text, primary key (projectTypeID,projectNameID));"];
 
    // ProjectName+ProjectList
-   [db sqlExecute:@"create table ProjectName(projectNameID text, projectName text, projectDownloadUrl text, objectFullPath text, primary key(projectNameID));"];
+   [db sqlExecute:@"create table ProjectName(projectNameID text, projectName text, objectFullPath text, primary key(projectNameID));"];
    [db sqlExecute:@"create table ProjectList(projectListID text, projectListName text, objectFullPath text, primary key(projectListID));"];
    [db sqlExecute:@"create table ProjectNameLists(projectNameID text, projectListID text, primary key (projectNameID,projectListID));"];
 

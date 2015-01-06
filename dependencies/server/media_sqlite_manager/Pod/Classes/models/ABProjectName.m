@@ -17,7 +17,6 @@
    if (self) {
       self.sqliteObjectID = [MobileDB uniqueID];
 
-      self.projectDownloadUrl = @"";
       self.objectFullPath = @"";
 
       self.projectListsArray = [[NSMutableArray alloc] init];
@@ -52,7 +51,6 @@
 - (NSMutableDictionary *)getUpdateDictionary {
    NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
    [dictionary setObject:self.sqliteObjectName forKey:@"projectName"];
-   [dictionary setObject:self.projectDownloadUrl forKey:@"projectDownloadUrl"];
    [dictionary setObject:self.objectFullPath forKey:@"objectFullPath"];
 
    return dictionary;

@@ -137,7 +137,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)saveOnlineVideoTypeProjectTypesArray:(NSString * )onlineVideoTypeID withDictionary:(NSMutableDictionary *)mutableArray {
+- (void)saveOnlineVideoTypeProjectTypesArray:(NSString *)onlineVideoTypeID withDictionary:(NSMutableDictionary *)mutableArray {
    NSString * sql;
    if ([mutableArray count] > 0) {
       for (ABProjectType * abProjectType in mutableArray.allValues) {
@@ -191,14 +191,14 @@ id<ABDatabase> db;
 }
 
 
-- (void)readOnlineTypeArray:(NSString * )onlineVideoTypeID withArray:(NSMutableDictionary *)dictionary isReadArray:(BOOL)isReadArray {
+- (void)readOnlineTypeArray:(NSString *)onlineVideoTypeID withArray:(NSMutableDictionary *)dictionary isReadArray:(BOOL)isReadArray {
    NSString * sql;
    sql = [NSString stringWithFormat:@"select ProjectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = '%@'",
                                     onlineVideoTypeID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      NSString *  ProjectTypeID = [[results fieldWithName:@"ProjectTypeID"] stringValue];
+      NSString * ProjectTypeID = [[results fieldWithName:@"ProjectTypeID"] stringValue];
 
       [self readDictionaryForProjectTypeWithProjectTypeId:ProjectTypeID toDictionary:dictionary hasAllList:isReadArray];
 
@@ -255,7 +255,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)saveProjectTypeNamesArray:(NSString * )projectTypeID withArray:(NSMutableArray *)mutableArray {
+- (void)saveProjectTypeNamesArray:(NSString *)projectTypeID withArray:(NSMutableArray *)mutableArray {
    NSString * sql;
    if ([mutableArray count] > 0) {
       for (ABProjectName * projectName in mutableArray) {
@@ -275,14 +275,14 @@ id<ABDatabase> db;
 }
 
 
-- (void)readProjectTypeNames:(NSString * )projectTypeID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray {
+- (void)readProjectTypeNames:(NSString *)projectTypeID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray {
    NSString * sql;
    sql = [NSString stringWithFormat:@"select projectNameID from ProjectTypeNames where projectTypeID = '%@'",
                                     projectTypeID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      NSString *  projectNameID = [[results fieldWithName:@"projectNameID"] stringValue];
+      NSString * projectNameID = [[results fieldWithName:@"projectNameID"] stringValue];
 
       LocationResultsBlock locationsBlock = ^(NSArray * locations) {
           if (locations.count > 0) {
@@ -334,7 +334,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)readProjectTypeListWithResults:(LocationResultsBlock)locationsBlock WithProjectTypeId:(NSString * )projectTypeId hasAllList:(BOOL)isAllList {
+- (void)readProjectTypeListWithResults:(LocationResultsBlock)locationsBlock WithProjectTypeId:(NSString *)projectTypeId hasAllList:(BOOL)isAllList {
    NSMutableArray * projectTypeArray = [[NSMutableArray alloc] init];
    NSString * sql = @"select * from ProjectType";
    if (isAllList == NO) {
@@ -395,7 +395,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)saveProjectNameListsArray:(NSString * )projectNameID withArray:(NSMutableArray *)mutableArray {
+- (void)saveProjectNameListsArray:(NSString *)projectNameID withArray:(NSMutableArray *)mutableArray {
    NSString * sql;
    if ([mutableArray count] > 0) {
       for (ABProjectList * projectList in mutableArray) {
@@ -421,14 +421,14 @@ id<ABDatabase> db;
 * @param mutableArray The current `ABProjectList`
 *
 */
-- (void)readProjectNameLists:(NSString * )projectNameID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray {
+- (void)readProjectNameLists:(NSString *)projectNameID withArray:(NSMutableArray *)mutableArray isReadArray:(BOOL)isReadArray {
    NSString * sql;
    sql = [NSString stringWithFormat:@"select projectListID from ProjectNameLists where projectNameID = '%@'",
                                     projectNameID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      NSString *  projectListID = [[results fieldWithName:@"projectListID"] stringValue];
+      NSString * projectListID = [[results fieldWithName:@"projectListID"] stringValue];
 
       LocationResultsBlock locationsBlock = ^(NSArray * locations) {
           if (locations.count > 0) {
@@ -482,7 +482,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)readProjectNameListWithResults:(LocationResultsBlock)locationsBlock withProjectNameID:(NSString * )projectNameID {
+- (void)readProjectNameListWithResults:(LocationResultsBlock)locationsBlock withProjectNameID:(NSString *)projectNameID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
    NSString * sql;
 
@@ -495,7 +495,6 @@ id<ABDatabase> db;
 
       sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] stringValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectName"] stringValue];
-      sqliteObject.projectDownloadUrl = [[results fieldWithName:@"projectDownloadUrl"] stringValue];
       sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
       [projectNameArray addObject:sqliteObject];
@@ -545,7 +544,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)saveProjectListFileInfosArray:(NSString * )projectListID withArray:(NSMutableArray *)mutableArray {
+- (void)saveProjectListFileInfosArray:(NSString *)projectListID withArray:(NSMutableArray *)mutableArray {
    NSString * sql;
    if ([mutableArray count] > 0) {
       for (ABProjectFileInfo * projectFileInfo in mutableArray) {
@@ -565,14 +564,14 @@ id<ABDatabase> db;
 }
 
 
-- (void)readProjectListFileInfos:(NSString * )projectListID withArray:(NSMutableArray *)mutableArray {
+- (void)readProjectListFileInfos:(NSString *)projectListID withArray:(NSMutableArray *)mutableArray {
    NSString * sql;
    sql = [NSString stringWithFormat:@"select fileInfoID from ProjectListFileInfos where projectListID = '%@'",
                                     projectListID];
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      NSString *  fileInfoID = [[results fieldWithName:@"fileInfoID"] stringValue];
+      NSString * fileInfoID = [[results fieldWithName:@"fileInfoID"] stringValue];
 
       LocationResultsBlock locationsBlock = ^(NSArray * locations) {
           if (locations.count > 0) {
@@ -592,7 +591,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)readProjectListsWithResults:(LocationResultsBlock)locationsBlock withProjectListID:(NSString * )projectListID {
+- (void)readProjectListsWithResults:(LocationResultsBlock)locationsBlock withProjectListID:(NSString *)projectListID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
 
    NSString * sql = [NSString stringWithFormat:@"select * from ProjectList where projectListID = '%@'",
@@ -662,7 +661,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)readProjectFileInfoListWithResults:(LocationResultsBlock)locationsBlock withFileInfoID:(NSString * )fileInfoID {
+- (void)readProjectFileInfoListWithResults:(LocationResultsBlock)locationsBlock withFileInfoID:(NSString *)fileInfoID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
    NSString * sql = [NSString stringWithFormat:@"select * from ProjectFileInfo where fileInfoID='%@'", fileInfoID];
 
@@ -684,7 +683,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(NSString * )fileInfoID {
+- (void)readFileInfoAbstractPath:(LocationResultsBlock)locationsBlock withFileInfoID:(NSString *)fileInfoID {
    NSMutableArray * projectNameArray = [[NSMutableArray alloc] init];
    NSString * sql = [NSString stringWithFormat:@"select objectFullPath from ProjectFileInfo where fileInfoID='%@'",
                                                fileInfoID];
@@ -764,7 +763,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)readDictionaryForProjectTypeWithProjectTypeId:(NSString * )projectTypeId toDictionary:(NSMutableDictionary *)dictionary hasAllList:(BOOL)isAllList {
+- (void)readDictionaryForProjectTypeWithProjectTypeId:(NSString *)projectTypeId toDictionary:(NSMutableDictionary *)dictionary hasAllList:(BOOL)isAllList {
 
    LocationResultsBlock LocationResultsBlock = ^(NSArray * locations) {
        for (ABProjectType * projectType in locations) {

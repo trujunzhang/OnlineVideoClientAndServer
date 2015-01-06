@@ -13,9 +13,6 @@
 
 @interface ABProjectName : ABSqliteObject
 
-// http://kickass.so/lynda-muse-essential-training-by-justin-seeley-t9250299.html
-@property(copy) NSString * projectDownloadUrl;
-
 @property(strong) NSMutableArray * projectListsArray;
 
 
