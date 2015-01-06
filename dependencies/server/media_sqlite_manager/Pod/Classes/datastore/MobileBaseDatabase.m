@@ -71,36 +71,6 @@
 }
 
 
-#pragma mark - for MobileDBThumbnail
-
-
-- (void)makeForMobileDBThumbnail:(id<ABDatabase>)db {
-   // OnlineVideoType
-   [db sqlExecute:@"create table ThumbnailInfo(thumbnailInfoID text, fileInfoID text, fileInforName text, objectFullPath text, primary key(thumbnailInfoID));"];
-
-   // Internal
-   [db sqlExecute:@"create table Preferences(property text, value text, primary key(property));"];
-
-   [self setPreference:@"1" forKey:@"SchemaVersion" forDatabase:nil];
-}
-
-
-- (void)checkSchemaForMobileDBThumbnail:(id<ABDatabase>)db {
-   NSString * schemaVersion = [self preferenceForKey:@"SchemaVersion" forDatabase:db];
-
-   if ([schemaVersion isEqualToString:@"1"]) {
-      // OnlineVideoType
-      [db sqlExecute:@"create index idx_thumbnailinfos_thumbnailinfoid on ThumbnailInfo(thumbnailInfoID);"];
-
-      schemaVersion = @"2";
-   }
-
-   [db sqlExecute:@"ANALYZE"];
-
-   [self setPreference:schemaVersion forKey:@"SchemaVersion" forDatabase:nil];
-}
-
-
 #pragma mark -
 #pragma mark -
 

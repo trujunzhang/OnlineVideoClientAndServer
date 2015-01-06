@@ -85,6 +85,87 @@ id<ABDatabase> thumbnailDataBase;
 }
 
 
+#pragma mark - for MobileDBThumbnail
+
+
+#pragma mark - Preferences
+
+
+- (NSString *)escapeText:(NSString *)text {
+   NSString * newValue = [text stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+   return newValue;
+}
+
+
+- (NSString *)preferenceForKey:(NSString *)key forDatabase:(id<ABDatabase>)db {
+   NSString * preferenceValue = @"";
+
+   NSString * sql = [NSString stringWithFormat:@"select value from preferences where property='%@';", key];
+
+   id<ABRecordset> results;
+   results = [db sqlSelect:sql];
+
+   if (![results eof]) {
+      preferenceValue = [[results fieldWithName:@"value"] stringValue];
+   }
+
+   return preferenceValue;
+}
+
+
+- (void)setPreference:(NSString *)value forKey:(NSString *)key forDatabase:(id<ABDatabase>)db {
+   if (!value) {
+      return;
+   }
+
+   NSString * sql = [NSString stringWithFormat:@"select value from preferences where property='%@';", key];
+
+   id<ABRecordset> results;
+   results = [db sqlSelect:sql];
+   if ([results eof]) {
+      sql = [NSString stringWithFormat:@"insert into preferences(property,value) values('%@','%@');",
+                                       key,
+                                       [self escapeText:value]];
+   }
+   else {
+      sql = [NSString stringWithFormat:@"update preferences set value = '%@' where property = '%@';",
+                                       [self escapeText:value],
+                                       key];
+   }
+
+   [db sqlExecute:sql];
+}
+
+
+- (void)makeForMobileDBThumbnail:(id<ABDatabase>)db {
+   // OnlineVideoType
+   [db sqlExecute:@"create table ThumbnailInfo(thumbnailInfoID text, fileInfoID text, fileInforName text, objectFullPath text, primary key(thumbnailInfoID));"];
+
+   // Internal
+   [db sqlExecute:@"create table Preferences(property text, value text, primary key(property));"];
+}
+
+
+- (void)checkSchemaForMobileDBThumbnail:(id<ABDatabase>)db {
+   NSString * schemaVersion = [self preferenceForKey:@"SchemaVersion" forDatabase:db];
+
+   if ([schemaVersion isEqualToString:@"1"]) {
+      // OnlineVideoType
+      [db sqlExecute:@"create index idx_thumbnailinfos_thumbnailinfoid on ThumbnailInfo(thumbnailInfoID);"];
+
+      schemaVersion = @"2";
+   }
+
+   [db sqlExecute:@"ANALYZE"];
+
+   [self setPreference:schemaVersion forKey:@"SchemaVersion" forDatabase:nil];
+}
+
+
+#pragma mark -
+#pragma mark
+
+
 - (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
    NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
 

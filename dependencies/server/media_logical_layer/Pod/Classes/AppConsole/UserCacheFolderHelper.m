@@ -10,6 +10,7 @@
 #include <pwd.h>
 #include <assert.h>
 #import "ServerVideoConfigure.h"
+#import "SqliteDatabaseConstant.h"
 
 
 @implementation UserCacheFolderHelper {

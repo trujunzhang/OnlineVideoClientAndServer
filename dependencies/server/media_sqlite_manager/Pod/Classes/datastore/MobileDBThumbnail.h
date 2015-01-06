@@ -1,8 +1,11 @@
 #import "MobileBaseDatabase.h"
+
+#import "SqliteDatabaseConstant.h"
+
 @class SOThumbnailInfo;
 
 
-@interface MobileDBThumbnail : MobileBaseDatabase
+@interface MobileDBThumbnail : NSObject
 
 
 #pragma mark - Base
@@ -12,8 +15,8 @@
 - (id)initWithFile:(NSString *)filePathName;
 - (void)close;
 
-- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
-- (void)saveThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
+- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
+- (void)saveThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
 - (void)test;
 @end
 

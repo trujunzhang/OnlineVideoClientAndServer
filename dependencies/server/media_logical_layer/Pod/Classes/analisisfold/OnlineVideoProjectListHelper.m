@@ -15,6 +15,7 @@
 #import "ServerVideoConfigure.h"
 #import "SOThumbnailInfo.h"
 #import "MobileThumbnailCacheDirectoryHelper.h"
+#import "SqliteDatabaseConstant.h"
 
 
 @implementation OnlineVideoProjectListHelper {
