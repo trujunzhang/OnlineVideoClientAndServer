@@ -20,7 +20,18 @@
 }
 
 
-- (instancetype)initWithSqliteObjectID:(int)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
+- (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName {
+   self = [super init];
+   if (self) {
+      self.sqliteObjectID = sqliteObjectID;
+      self.sqliteObjectName = sqliteObjectName;
+   }
+
+   return self;
+}
+
+
+- (instancetype)initWithSqliteObjectID:(NSString*)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
    self = [super init];
    if (self) {
       self.sqliteObjectID = sqliteObjectID;

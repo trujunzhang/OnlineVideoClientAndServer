@@ -85,7 +85,7 @@ id<ABDatabase> thumbnailDataBase;
 }
 
 
-- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
    NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
 
    NSString * sql = [NSString stringWithFormat:@"select * from ThumbnailInfo where %@",
@@ -121,7 +121,7 @@ id<ABDatabase> thumbnailDataBase;
 #pragma mark SOThumbnailInfo
 
 
-- (void)saveThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+- (void)saveThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
    SOThumbnailInfo * sqliteObject = [[SOThumbnailInfo alloc] init];
 
    sqliteObject.sqliteObjectID = [MobileBaseDatabase uniqueID];

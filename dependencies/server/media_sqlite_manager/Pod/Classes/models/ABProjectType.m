@@ -21,17 +21,6 @@
 }
 
 
-- (instancetype)initWithProjectTypeID:(int)projectTypeID projectTypeName:(NSString *)projectTypeName {
-   self = [self init];
-   if (self) {
-      self.sqliteObjectID = projectTypeID;
-      self.sqliteObjectName = projectTypeName;
-   }
-
-   return self;
-}
-
-
 - (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath {
    self = [self init];
    if (self) {

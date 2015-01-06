@@ -166,7 +166,7 @@ id<ABDatabase> db;
    while (![results eof]) {
       ABOnlineVideoType * sqliteObject = [[ABOnlineVideoType alloc] init];
 
-      sqliteObject.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] intValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"onlineVideoTypeID"] stringValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"onlineVideoTypeName"] stringValue];
       sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
@@ -197,7 +197,7 @@ id<ABDatabase> db;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      int ProjectTypeID = [[results fieldWithName:@"ProjectTypeID"] intValue];
+      int ProjectTypeID = [[results fieldWithName:@"ProjectTypeID"] stringValue];
 
       [self readDictionaryForProjectTypeWithProjectTypeId:ProjectTypeID toDictionary:dictionary hasAllList:isReadArray];
 
@@ -281,7 +281,7 @@ id<ABDatabase> db;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      int projectNameID = [[results fieldWithName:@"projectNameID"] intValue];
+      int projectNameID = [[results fieldWithName:@"projectNameID"] stringValue];
 
       LocationResultsBlock locationsBlock = ^(NSArray * locations) {
           if (locations.count > 0) {
@@ -316,7 +316,7 @@ id<ABDatabase> db;
    while (![results eof]) {
       ABProjectType * sqliteObject = [[ABProjectType alloc] init];
 
-      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectTypeID"] intValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectTypeID"] stringValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectTypeName"] stringValue];
       sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
@@ -343,11 +343,11 @@ id<ABDatabase> db;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      int projectTypeID = [[results fieldWithName:@"projectTypeID"] intValue];
+      int projectTypeID = [[results fieldWithName:@"projectTypeID"] stringValue];
       NSString * projectTypeName = [[results fieldWithName:@"projectTypeName"] stringValue];
 
-      [projectTypeArray addObject:[[ABProjectType alloc] initWithProjectTypeID:projectTypeID
-                                                               projectTypeName:projectTypeName]];
+      [projectTypeArray addObject:[[ABProjectType alloc] initWithSqliteObjectID:projectTypeID
+                                                               sqliteObjectName:projectTypeName]];
 
       [results moveNext];
    }
@@ -427,7 +427,7 @@ id<ABDatabase> db;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      int projectListID = [[results fieldWithName:@"projectListID"] intValue];
+      int projectListID = [[results fieldWithName:@"projectListID"] stringValue];
 
       LocationResultsBlock locationsBlock = ^(NSArray * locations) {
           if (locations.count > 0) {
@@ -460,7 +460,7 @@ id<ABDatabase> db;
    while (![results eof]) {
       ABProjectName * sqliteObject = [[ABProjectName alloc] init];
 
-      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] stringValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"ProjectName"] stringValue];
       sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
@@ -492,7 +492,7 @@ id<ABDatabase> db;
    while (![results eof]) {
       ABProjectName * sqliteObject = [[ABProjectName alloc] init];
 
-      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] intValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectNameID"] stringValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectName"] stringValue];
       sqliteObject.projectDownloadUrl = [[results fieldWithName:@"projectDownloadUrl"] stringValue];
       sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
@@ -571,7 +571,7 @@ id<ABDatabase> db;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      int fileInfoID = [[results fieldWithName:@"fileInfoID"] intValue];
+      int fileInfoID = [[results fieldWithName:@"fileInfoID"] stringValue];
 
       LocationResultsBlock locationsBlock = ^(NSArray * locations) {
           if (locations.count > 0) {
@@ -601,7 +601,7 @@ id<ABDatabase> db;
    while (![results eof]) {
       ABProjectList * sqliteObject = [[ABProjectList alloc] init];
 
-      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectListID"] intValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectListID"] stringValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectListName"] stringValue];
 
       [projectNameArray addObject:sqliteObject];
@@ -669,7 +669,7 @@ id<ABDatabase> db;
    while (![results eof]) {
       ABProjectFileInfo * sqliteObject = [[ABProjectFileInfo alloc] init];
 
-      sqliteObject.sqliteObjectID = [[results fieldWithName:@"fileInfoID"] intValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"fileInfoID"] stringValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"fileInforName"] stringValue];
       sqliteObject.subtitleName = [[results fieldWithName:@"subtitleName"] stringValue];
       sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];

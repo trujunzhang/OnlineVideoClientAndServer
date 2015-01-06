@@ -26,5 +26,5 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 - (void)checkSchemaForMobileDBThumbnail:(id<ABDatabase>)db ;
 
 + (BOOL)checkDBFileExist:(NSString *)filePathName;
-+ (NSString *)getThumbnailName:(int)sqliteObjectID;
++ (NSString *)getThumbnailName:(NSString*)sqliteObjectID;
 @end

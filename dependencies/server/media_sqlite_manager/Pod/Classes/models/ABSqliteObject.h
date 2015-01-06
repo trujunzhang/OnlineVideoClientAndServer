@@ -9,11 +9,13 @@
 
 @interface ABSqliteObject : NSObject
 
-@property(assign) int sqliteObjectID;
+@property(copy) NSString * sqliteObjectID;
 @property(copy) NSString * sqliteObjectName;
 @property(copy) NSString * objectFullPath;
 
-- (instancetype)initWithSqliteObjectID:(int)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
+- (instancetype)initWithSqliteObjectID:(NSString*)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
+- (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName;
+
 
 @property(strong) NSMutableArray * lastsubDirectoryListsArray;
 

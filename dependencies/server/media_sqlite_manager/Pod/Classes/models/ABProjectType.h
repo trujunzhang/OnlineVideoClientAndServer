@@ -16,7 +16,6 @@
 @property(strong) NSMutableArray * ProjectNameArray;
 
 - (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath;
-- (instancetype)initWithProjectTypeID:(int)projectTypeID projectTypeName:(NSString *)projectTypeName;
 
 
 + (NSMutableDictionary *)getAllProjectNames:(NSMutableDictionary *)projectTypesDictionary;

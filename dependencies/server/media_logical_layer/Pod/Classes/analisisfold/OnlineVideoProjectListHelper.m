@@ -103,8 +103,8 @@
                                                                                        fileInforName:aPath
                                                                                      projectFullPath:fullPath];
 
-//               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
-//                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
+               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
+                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
 
             }
          }
@@ -113,7 +113,7 @@
 }
 
 
-- (void)checkExistAndGenerateThumbnail:(int)fileInfoID forFile:(NSString *)fileAbstractPath {
+- (void)checkExistAndGenerateThumbnail:(NSString *)fileInfoID forFile:(NSString *)fileAbstractPath {
    if (needGenerateThumbnail == NO)
       return;
 
