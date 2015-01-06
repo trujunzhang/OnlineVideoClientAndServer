@@ -63,12 +63,11 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchingSubtitle:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
-   NSURL * documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
-                                                                          inDomain:NSUserDomainMask
-                                                                 appropriateForURL:nil
-                                                                            create:NO
-                                                                             error:nil];
-   NSURL * removeUrl = [documentsDirectoryURL URLByAppendingPathComponent:subtitleTempName];
+   NSURL * removeUrl = [[[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
+                                                               inDomain:NSUserDomainMask
+                                                      appropriateForURL:nil
+                                                                 create:NO
+                                                                  error:nil] URLByAppendingPathComponent:subtitleTempName];
    [[NSFileManager defaultManager] removeItemAtURL:removeUrl error:nil];
 
    void (^downloadCompletion)(NSURLResponse *, NSURL *, NSError *) = ^(NSURLResponse * response, NSURL * url, NSError * error) {

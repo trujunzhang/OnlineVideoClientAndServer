@@ -70,7 +70,6 @@
    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
    AFURLSessionManager * manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 
-//   NSString * remoteSqliteUrl = @"http://192.168.1.200:8040/macshare/MacPE/Lynda.com/Adobe.com/@Muse/serials/@@123/10. Creating Menus in Muse/wh.srt";
    NSURL * URL = [NSURL URLWithString:[remoteSqliteUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 
    NSURLRequest * request = [NSURLRequest requestWithURL:URL];

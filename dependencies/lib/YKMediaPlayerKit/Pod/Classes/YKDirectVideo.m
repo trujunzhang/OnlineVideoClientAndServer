@@ -108,6 +108,14 @@ CGFloat const kDirectThumbnailLocation = 1.0;
 - (void)play:(YKQualityOptions)quality subtitlesPathStr:(NSString *)subtitlesPathStr {
    if (!self.player) [self movieViewController:quality];
 
+   BOOL myPathIsDir;
+   BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:subtitlesPathStr isDirectory:&myPathIsDir];
+   if (fileExists == NO) {
+      [[UIApplication sharedApplication].keyWindow.rootViewController presentMoviePlayerViewControllerAnimated:self.player];
+      [self.player.moviePlayer play];
+      return;
+   }
+
    // Create MoviePlayer
    [self.player.moviePlayer openSRTFileAtPath:subtitlesPathStr
                                  parserHelper:[[SDSRTParserHelper alloc] init]
