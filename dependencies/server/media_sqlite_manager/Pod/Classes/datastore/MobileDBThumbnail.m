@@ -115,4 +115,30 @@ static MobileDBThumbnail * _dbInstance;
 
    return nil;
 }
+
+
+#pragma mark -
+#pragma mark SOThumbnailInfo
+
+
+- (void)saveThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+   SOThumbnailInfo * sqliteObject = [[SOThumbnailInfo alloc] init];
+
+   sqliteObject.sqliteObjectID = [MobileBaseDatabase uniqueID];
+   sqliteObject.fileInfoID = sqliteObjectID;
+   sqliteObject.sqliteObjectName = sqliteObjectName;
+   sqliteObject.objectFullPath = fullPath;
+
+   NSArray * sqlStringSerializationForInsert = [sqliteObject sqlStringSerializationForInsert];
+
+   NSString * sql = [NSString stringWithFormat:
+    @"insert into OnlineVideoType(onlineVideoTypeID,%@) values(%i,%@)",
+    sqlStringSerializationForInsert[0],
+    sqliteObject.sqliteObjectID,
+    sqlStringSerializationForInsert[1]
+   ];
+   [db sqlExecute:sql];
+
+
+}
 @end

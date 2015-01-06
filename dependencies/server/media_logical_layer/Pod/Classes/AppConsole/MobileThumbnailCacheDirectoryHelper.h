@@ -9,6 +9,6 @@
 
 @interface MobileThumbnailCacheDirectoryHelper : NSObject
 
-+ (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
++ (SOThumbnailInfo *)checkExistAndSaveForThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
 
 @end

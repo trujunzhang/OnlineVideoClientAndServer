@@ -12,7 +12,8 @@
 - (id)initWithFile:(NSString *)filePathName;
 - (void)close;
 
-- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString *)name fileInforName:(NSString *)name1 projectFullPath:(NSString *)path;
+- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
+- (void)saveThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
 @end
 
 

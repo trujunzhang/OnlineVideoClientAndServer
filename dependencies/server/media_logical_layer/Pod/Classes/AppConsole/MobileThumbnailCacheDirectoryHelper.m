@@ -20,11 +20,18 @@
 }
 
 
-+ (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
-   return [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoID:sqliteObjectName
-                                                                          fileInforName:sqliteObjectName
-                                                                        projectFullPath:fullPath];
++ (SOThumbnailInfo *)checkExistAndSaveForThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+   SOThumbnailInfo * thumbnailInfo = [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoID:sqliteObjectID
+                                                                                                     fileInforName:sqliteObjectName
+                                                                                                   projectFullPath:fullPath];
+   if (thumbnailInfo == nil) {
+      [[self getMobileThumbnailDBInstance] saveThumbnailInfoWithFileInfoID:sqliteObjectID
+                                                             fileInforName:sqliteObjectName
+                                                           projectFullPath:fullPath
 
-   return nil;
+      ];
+   }
+
+   return thumbnailInfo;
 }
 @end

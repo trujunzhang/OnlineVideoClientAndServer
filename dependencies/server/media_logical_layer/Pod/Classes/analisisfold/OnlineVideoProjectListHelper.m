@@ -100,9 +100,9 @@
                // *** online-step-{SOThumbnailInfo-6} ***
 
                SOThumbnailInfo * thumbnailInfo =
-                [MobileThumbnailCacheDirectoryHelper checkExistForThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
-                                                                                fileInforName:projectFileInfo.sqliteObjectName
-                                                                              projectFullPath:fullPath];
+                [MobileThumbnailCacheDirectoryHelper checkExistAndSaveForThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
+                                                                                       fileInforName:projectFileInfo.sqliteObjectName
+                                                                                     projectFullPath:fullPath];
 
                [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
                                             forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
