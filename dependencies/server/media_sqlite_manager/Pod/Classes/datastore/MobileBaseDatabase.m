@@ -79,7 +79,7 @@
    [db sqlExecute:@"create table ThumbnailInfo(thumbnailInfoID text, fileInfoID text, fileInforName text, objectFullPath text, primary key(thumbnailInfoID));"];
 
    // Internal
-   [db sqlExecute:@"create table _Preferences(property text, value text, primary key(property));"];
+   [db sqlExecute:@"create table Preferences(property text, value text, primary key(property));"];
 
    [self setPreference:@"1" forKey:@"SchemaVersion" forDatabase:nil];
 }

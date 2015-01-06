@@ -12,7 +12,7 @@
 #import "ABSQLiteDB.h"
 #import "SOThumbnailInfo.h"
 
-static MobileDBThumbnail * _dbInstance;
+static MobileDBThumbnail * _dbThumbnailInstance;
 id<ABDatabase> thumbnailDataBase;
 
 
@@ -37,7 +37,7 @@ id<ABDatabase> thumbnailDataBase;
 - (id)initWithFile:(NSString *)filePathName {
    if (!(self = [super init])) return nil;
 
-   _dbInstance = self;
+   _dbThumbnailInstance = self;
 
    BOOL fileExists = [MobileBaseDatabase checkDBFileExist:filePathName];
 
@@ -71,12 +71,12 @@ id<ABDatabase> thumbnailDataBase;
 
 
 + (MobileDBThumbnail *)dbInstance:(NSString *)path {
-   if (!_dbInstance) {
+   if (!_dbThumbnailInstance) {
       NSString * dbFilePath = [path stringByAppendingPathComponent:thumbnailDataBaseName];
       MobileDBThumbnail * mobileThumbnail = [[MobileDBThumbnail alloc] initWithFile:dbFilePath];
    }
 
-   return _dbInstance;
+   return _dbThumbnailInstance;
 }
 
 
@@ -132,13 +132,18 @@ id<ABDatabase> thumbnailDataBase;
    NSArray * sqlStringSerializationForInsert = [sqliteObject sqlStringSerializationForInsert];
 
    NSString * sql = [NSString stringWithFormat:
-    @"insert into ThumbnailInfo(thumbnailInfoID,%@) values(%@,%@)",
+    @"insert into ThumbnailInfo(thumbnailInfoID,%@) values('%@',%@)",
     sqlStringSerializationForInsert[0],
     sqliteObject.sqliteObjectID,
     sqlStringSerializationForInsert[1]
    ];
    [thumbnailDataBase sqlExecute:sql];
 
+
+}
+
+
+- (void)test {
 
 }
 @end

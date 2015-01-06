@@ -17,7 +17,7 @@
 
 - (NSMutableDictionary *)getUpdateDictionary {
    NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
-   [dictionary setObject:[NSString stringWithFormat:@"%i", self.fileInfoID] forKey:@"fileInfoID"];
+   [dictionary setObject:self.fileInfoID forKey:@"fileInfoID"];
    [dictionary setObject:self.sqliteObjectName forKey:@"fileInforName"];
 
    return dictionary;

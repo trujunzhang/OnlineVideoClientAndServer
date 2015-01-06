@@ -14,6 +14,7 @@
 
 - (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
 - (void)saveThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
+- (void)test;
 @end
 
 
