@@ -200,7 +200,7 @@ static MobileDB * _dbInstance;
 
       [self readDictionaryForProjectTypeWithProjectTypeId:ProjectTypeID toDictionary:dictionary hasAllList:isReadArray];
 
-      [self addOnlineVideoInfo:onlineVideoTypeID toProjectTypeDictionary:dictionary];
+//      [self addOnlineVideoInfo:onlineVideoTypeID toProjectTypeDictionary:dictionary];
 
       [results moveNext];
    }
@@ -208,11 +208,11 @@ static MobileDB * _dbInstance;
 }
 
 
-- (void)addOnlineVideoInfo:(int)onlineVideoTypeID toProjectTypeDictionary:(NSMutableDictionary *)dictionary {
-   for (ABProjectType * projectType in dictionary.allValues) {
-      projectType.onlineVideoTypeID = onlineVideoTypeID;
-   }
-}
+//- (void)addOnlineVideoInfo:(int)onlineVideoTypeID toProjectTypeDictionary:(NSMutableDictionary *)dictionary {
+//   for (ABProjectType * projectType in dictionary.allValues) {
+//      projectType.onlineVideoTypeID = onlineVideoTypeID;
+//   }
+//}
 
 
 #pragma mark - ABProjectType

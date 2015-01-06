@@ -9,8 +9,8 @@
 
 /**
 *   thumbnailInfoID    :sqliteObjectID
-*   fileInfoID:
-*   sqliteObjectName   :fileInforName
+*   fileInfoID:                                 ABProjectFileInfo.sqliteObjectID
+*   sqliteObjectName   :fileInforName           ABProjectFileInfo.fileInforName
 *                      :objectFullPath
 */
 @interface SOThumbnailInfo : ABSqliteObject

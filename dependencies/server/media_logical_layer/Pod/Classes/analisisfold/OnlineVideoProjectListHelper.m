@@ -13,6 +13,8 @@
 #import "GenerateThumbnailTask.h"
 #import "MobileDBCacheDirectoryHelper.h"
 #import "ServerVideoConfigure.h"
+#import "SOThumbnailInfo.h"
+#import "MobileThumbnailCacheDirectoryHelper.h"
 
 
 @implementation OnlineVideoProjectListHelper {
@@ -94,6 +96,13 @@
                   projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
                   [projectList appendFileInfo:projectFileInfo];
                }
+
+               // *** online-step-{SOThumbnailInfo-6} ***
+
+               SOThumbnailInfo * thumbnailInfo =
+                [MobileThumbnailCacheDirectoryHelper checkExistForThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
+                                                                                fileInforName:projectFileInfo.sqliteObjectName
+                                                                              projectFullPath:fullPath];
 
                [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
                                             forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];

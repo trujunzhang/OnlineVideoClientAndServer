@@ -10,6 +10,7 @@
 
 #import "MobileDBThumbnail.h"
 #import "ABSQLiteDB.h"
+#import "SOThumbnailInfo.h"
 
 static MobileDBThumbnail * _dbInstance;
 
@@ -83,4 +84,35 @@ static MobileDBThumbnail * _dbInstance;
 }
 
 
+- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+   NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
+
+   NSString * sql = [NSString stringWithFormat:@"select * from ThumbnailInfo where %@",
+                                               [ABSqliteObject getSqlStringSerializationForFilter:
+                                                @{
+                                                 @"fileInforName" : sqliteObjectName,
+                                                 @"objectFullPath" : fullPath,
+                                                }]];
+
+   id<ABRecordset> results = [db sqlSelect:sql];
+   while (![results eof]) {
+      SOThumbnailInfo * sqliteObject = [[SOThumbnailInfo alloc] init];
+
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectTypeID"] intValue];
+      sqliteObject.fileInfoID = [[results fieldWithName:@"fileInfoID"] intValue];
+      sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectTypeName"] stringValue];
+      sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
+
+
+      [mutableArray addObject:sqliteObject];
+
+      [results moveNext];
+   }
+
+   if (mutableArray.count == 1) {
+      return mutableArray[0];
+   }
+
+   return nil;
+}
 @end

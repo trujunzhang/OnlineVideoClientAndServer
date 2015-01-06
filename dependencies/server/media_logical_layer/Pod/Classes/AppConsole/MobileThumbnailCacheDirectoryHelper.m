@@ -6,6 +6,8 @@
 #import "MobileThumbnailCacheDirectoryHelper.h"
 #import "UserCacheFolderHelper.h"
 #import "MobileDBThumbnail.h"
+#import "SOThumbnailInfo.h"
+#import "SOThumbnailInfo.h"
 
 
 @implementation MobileThumbnailCacheDirectoryHelper {
@@ -18,4 +20,11 @@
 }
 
 
++ (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(int)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+   return [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoID:sqliteObjectName
+                                                                          fileInforName:sqliteObjectName
+                                                                        projectFullPath:fullPath];
+
+   return nil;
+}
 @end

@@ -1,4 +1,5 @@
 #import "MobileBaseDatabase.h"
+@class SOThumbnailInfo;
 
 
 @interface MobileDBThumbnail : MobileBaseDatabase
@@ -11,6 +12,7 @@
 - (id)initWithFile:(NSString *)filePathName;
 - (void)close;
 
+- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString *)name fileInforName:(NSString *)name1 projectFullPath:(NSString *)path;
 @end
 
 
