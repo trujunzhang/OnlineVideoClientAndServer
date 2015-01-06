@@ -140,12 +140,12 @@
 
    BOOL fileExists = [MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]];
 
-   if (fileExists == NO) {
-      [UserCacheFolderHelper createDirectoryForCache:[NSFileManager defaultManager]
-                                  withCacheDirectory:[UserCacheFolderHelper RealProjectCacheDirectory]
-                              withThumbnailDirectory:[self getThumbnailDirectory]];
-      return YES;
-   }
+//   if (fileExists == NO) {
+   [UserCacheFolderHelper createDirectoryForCache:[NSFileManager defaultManager]
+                               withCacheDirectory:[UserCacheFolderHelper RealProjectCacheDirectory]
+                           withThumbnailDirectory:[self getThumbnailDirectory]];
+//      return YES;
+//   }
 
    return YES;
 }
