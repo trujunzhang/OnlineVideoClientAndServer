@@ -41,7 +41,7 @@
    for (NSString * key in allKeys) {
       NSString * value = [dictionary valueForKey:key];
 
-      NSString * data = [NSString stringWithFormat:@"%@ = '%@'", key, [ABSqliteObject adjustSpecialCharactor:value]];
+      NSString * data = [NSString stringWithFormat:@"%@ = \"%@\"", key, [ABSqliteObject adjustSpecialCharactor:value]];
       [videoIds addObject:data];
    }
 
@@ -64,7 +64,7 @@
 
    NSMutableArray * allValues = [[NSMutableArray alloc] init];
    for (NSString * value in dictionary.allValues) {
-      NSString * string = [NSString stringWithFormat:@"'%@'", [ABSqliteObject adjustSpecialCharactor:value]];
+      NSString * string = [NSString stringWithFormat:@"\"%@\"", [ABSqliteObject adjustSpecialCharactor:value]];
       [allValues addObject:string];
    }
    NSString * tableValueString = [allValues componentsJoinedByString:@","];
@@ -92,7 +92,7 @@
    for (NSString * key in allKeys) {
       NSString * value = [filterDictionary valueForKey:key];
 
-      NSString * data = [NSString stringWithFormat:@"%@ = '%@'", key, [ABSqliteObject adjustSpecialCharactor:value]];
+      NSString * data = [NSString stringWithFormat:@"%@ = \"%@\"", key, [ABSqliteObject adjustSpecialCharactor:value]];
       [videoIds addObject:data];
    }
 
