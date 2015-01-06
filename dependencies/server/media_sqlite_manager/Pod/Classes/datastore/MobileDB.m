@@ -343,7 +343,7 @@ id<ABDatabase> db;
 
    id<ABRecordset> results = [db sqlSelect:sql];
    while (![results eof]) {
-      int projectTypeID = [[results fieldWithName:@"projectTypeID"] stringValue];
+      NSString * projectTypeID = [[results fieldWithName:@"projectTypeID"] stringValue];
       NSString * projectTypeName = [[results fieldWithName:@"projectTypeName"] stringValue];
 
       [projectTypeArray addObject:[[ABProjectType alloc] initWithSqliteObjectID:projectTypeID

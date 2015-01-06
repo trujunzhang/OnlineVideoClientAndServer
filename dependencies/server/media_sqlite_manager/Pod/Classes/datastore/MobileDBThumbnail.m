@@ -85,7 +85,7 @@ id<ABDatabase> thumbnailDataBase;
 }
 
 
-- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+- (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
    NSMutableArray * mutableArray = [[NSMutableArray alloc] init];
 
    NSString * sql = [NSString stringWithFormat:@"select * from ThumbnailInfo where %@",
@@ -99,8 +99,8 @@ id<ABDatabase> thumbnailDataBase;
    while (![results eof]) {
       SOThumbnailInfo * sqliteObject = [[SOThumbnailInfo alloc] init];
 
-      sqliteObject.sqliteObjectID = [[results fieldWithName:@"thumbnailInfoID"] intValue];
-      sqliteObject.fileInfoID = [[results fieldWithName:@"fileInfoID"] intValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"thumbnailInfoID"] stringValue];
+      sqliteObject.fileInfoID = [[results fieldWithName:@"fileInfoID"] stringValue];
       sqliteObject.sqliteObjectName = [[results fieldWithName:@"fileInforName"] stringValue];
       sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
 
@@ -121,7 +121,7 @@ id<ABDatabase> thumbnailDataBase;
 #pragma mark SOThumbnailInfo
 
 
-- (void)saveThumbnailInfoWithFileInfoID:(NSString*)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
+- (void)saveThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
    SOThumbnailInfo * sqliteObject = [[SOThumbnailInfo alloc] init];
 
    sqliteObject.sqliteObjectID = [MobileBaseDatabase uniqueID];
