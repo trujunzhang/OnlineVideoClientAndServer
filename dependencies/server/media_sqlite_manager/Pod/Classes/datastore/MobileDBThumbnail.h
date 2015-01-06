@@ -1,12 +1,12 @@
 #import "MobileBaseDatabase.h"
 
 
-@interface MobileThumbnail : MobileBaseDatabase
+@interface MobileDBThumbnail : MobileBaseDatabase
 
 
 #pragma mark - Base
 
-+ (MobileThumbnail *)dbInstance:(NSString *)path;
++ (MobileDBThumbnail *)dbInstance:(NSString *)path;
 
 - (id)initWithFile:(NSString *)filePathName;
 - (void)close;

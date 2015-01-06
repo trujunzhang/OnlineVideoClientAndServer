@@ -8,18 +8,18 @@
 
 
 
-#import "MobileThumbnail.h"
+#import "MobileDBThumbnail.h"
 #import "ABSQLiteDB.h"
 
-static MobileThumbnail * _dbInstance;
+static MobileDBThumbnail * _dbInstance;
 
 
-@interface MobileThumbnail ()
+@interface MobileDBThumbnail ()
 
 @end
 
 
-@implementation MobileThumbnail {
+@implementation MobileDBThumbnail {
 
 }
 
@@ -40,7 +40,7 @@ static MobileThumbnail * _dbInstance;
    BOOL fileExists = [MobileBaseDatabase checkDBFileExist:filePathName];
 
    // backupDbPath allows for a pre-made database to be in the app. Good for testing
-   NSString * backupDbPath = [[NSBundle mainBundle] pathForResource:@"MobileThumbnail" ofType:@"db"];
+   NSString * backupDbPath = [[NSBundle mainBundle] pathForResource:@"MobileDBThumbnail" ofType:@"db"];
 
    BOOL copiedBackupDb = NO;
    if (backupDbPath != nil) {
@@ -68,10 +68,10 @@ static MobileThumbnail * _dbInstance;
 }
 
 
-+ (MobileThumbnail *)dbInstance:(NSString *)path {
++ (MobileDBThumbnail *)dbInstance:(NSString *)path {
    if (!_dbInstance) {
       NSString * dbFilePath = [path stringByAppendingPathComponent:dataBaseName];
-      MobileThumbnail * mobileThumbnail = [[MobileThumbnail alloc] initWithFile:dbFilePath];
+      MobileDBThumbnail * mobileThumbnail = [[MobileDBThumbnail alloc] initWithFile:dbFilePath];
    }
 
    return _dbInstance;
