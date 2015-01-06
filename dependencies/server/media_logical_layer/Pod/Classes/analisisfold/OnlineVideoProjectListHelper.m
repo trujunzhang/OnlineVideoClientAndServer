@@ -12,6 +12,7 @@
 #import "MobileBaseDatabase.h"
 #import "GenerateThumbnailTask.h"
 #import "MobileDBCacheDirectoryHelper.h"
+#import "ServerVideoConfigure.h"
 
 
 @implementation OnlineVideoProjectListHelper {
@@ -68,12 +69,7 @@
 
 
 - (BOOL)checkIgnoureProjectType:(NSString *)sqliteObjectName {
-   NSArray * ignoreProjectTypeNameArray = @[
-    @"Exercise Files",
-    @"Exercise File",
-   ];
-
-   for (NSString * ignoreName in ignoreProjectTypeNameArray) {
+   for (NSString * ignoreName in [ServerVideoConfigure ignoreProjectTypeNameArray]) {
       if ([sqliteObjectName isEqualToString:ignoreName]) {
          return YES;
       }
@@ -128,18 +124,11 @@
 }
 
 
-- (NSString *)getFileAbstractPath:(NSString *)appDocDir withPath:(NSString *)aPath {
-   NSString * string = [NSString stringWithFormat:@"%@/%@", appDocDir, aPath];
-   return [string replaceCharcter:self.onlinePath withCharcter:@""];
-}
-
-
 - (BOOL)checkIsMovieFile:(NSString *)path {
-   NSArray * movieSupportedType = @[ @".mp4", @".mov" ];
+   NSString * extension = [[path pathExtension] lowercaseString];
 
-   path = [path lowercaseString];
-   for (NSString * type in movieSupportedType) {
-      if ([path containsString:type]) {
+   for (NSString * type in [ServerVideoConfigure movieSupportedType]) {
+      if ([extension isEqualToString:type]) {
          return YES;
       }
    }
