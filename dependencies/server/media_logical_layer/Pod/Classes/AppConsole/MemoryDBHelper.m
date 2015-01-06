@@ -34,7 +34,7 @@ static NSString * _onlineVideoTypePath;
       };
 
       NSMutableArray * mutableArray =
-       [[MobileDBCacheDirectoryHelper getServerConsoleDBInstance] readOnlineVideoTypes:dictionary
+       [[MobileDBCacheDirectoryHelper getMobileDBInstance] readOnlineVideoTypes:dictionary
                                                                            isReadArray:YES];
 
       if (mutableArray.count == 1) {

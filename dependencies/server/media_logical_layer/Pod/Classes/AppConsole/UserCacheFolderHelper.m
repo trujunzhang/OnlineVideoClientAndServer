@@ -27,10 +27,13 @@
 }
 
 
-+ (NSString *)RealProjectCacheDirectory {
-   NSString * homeDirectory = [UserCacheFolderHelper RealHomeDirectory];
++ (NSString *)RealProjectDirectory {
+   return [NSString stringWithFormat:@"%@/%@", [UserCacheFolderHelper RealHomeDirectory], appProfile];
+}
 
-   return [NSString stringWithFormat:@"%@/%@/%@", homeDirectory, appProfile, appCacheDirectory];
+
++ (NSString *)RealProjectCacheDirectory {
+   return [NSString stringWithFormat:@"%@/%@", [UserCacheFolderHelper RealProjectDirectory], appCacheDirectory];
 }
 
 

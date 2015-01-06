@@ -16,7 +16,7 @@
 }
 
 + (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
-   [[self getServerConsoleDBInstance]
+   [[self getMobileDBInstance]
     saveForOnlineVideoTypeDictionary:dictionary
                             withName:onlineTypeName
             whithOnlineVideoTypePath:onlineVideoTypePath
@@ -24,7 +24,7 @@
 }
 
 
-+ (MobileDB *)getServerConsoleDBInstance {
++ (MobileDB *)getMobileDBInstance {
    return [MobileDB dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]];
 }
 
@@ -33,7 +33,7 @@
    if ([MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]] == NO)
       return NO;
 
-   return [[self getServerConsoleDBInstance] checkFileInfoExist:fileAbstractPath];
+   return [[self getMobileDBInstance] checkFileInfoExist:fileAbstractPath];
 }
 
 
@@ -42,19 +42,19 @@
 
 
 + (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
-   return [[self getServerConsoleDBInstance] checkExistForProjectTypeWithProjectTypeName:sqliteObjectName
+   return [[self getMobileDBInstance] checkExistForProjectTypeWithProjectTypeName:sqliteObjectName
                                                                          projectFullPath:projectFullPath];
 }
 
 
 + (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
-   return [[self getServerConsoleDBInstance] checkExistForProjectNameWithProjectName:sqliteObjectName
+   return [[self getMobileDBInstance] checkExistForProjectNameWithProjectName:sqliteObjectName
                                                                      projectFullPath:projectFullPath];
 }
 
 
 + (void)getFileInfoArrayForProjectList:(ABProjectList *)projectList {
-   [[self getServerConsoleDBInstance] getFileInfoArrayForProjectList:projectList];
+   [[self getMobileDBInstance] getFileInfoArrayForProjectList:projectList];
 }
 
 @end

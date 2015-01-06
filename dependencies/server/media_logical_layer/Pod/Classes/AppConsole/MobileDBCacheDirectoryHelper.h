@@ -12,7 +12,7 @@
 
 @interface MobileDBCacheDirectoryHelper : NSObject
 + (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath;
-+ (MobileDB *)getServerConsoleDBInstance;
++ (MobileDB *)getMobileDBInstance;
 + (BOOL)checkExistForFileInfoWithAbstractPath:(NSString *)path;
 
 + (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)path projectFullPath:(NSString *)path1;
