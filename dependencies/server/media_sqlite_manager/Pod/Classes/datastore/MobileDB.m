@@ -110,7 +110,10 @@ static MobileDB * _dbInstance;
 
 - (void)saveOnlineVideoType:(ABOnlineVideoType *)onlineVideoType {
 
-   NSMutableArray * mutableArray = [self readOnlineVideoTypes:@{ @"onlineVideoTypeName" : onlineVideoType.sqliteObjectName }
+   NSMutableArray * mutableArray = [self readOnlineVideoTypes:@{
+     @"onlineVideoTypeName" : onlineVideoType.sqliteObjectName,
+     @"objectFullPath" : onlineVideoType.objectFullPath,
+    }
                                                   isReadArray:NO];
    if (mutableArray.count == 1) {
       ABOnlineVideoType * lastOnlineVideoType = mutableArray[0];
