@@ -62,39 +62,6 @@
 }
 
 
-//YTYouTubePlayList
-- (void)buttonTapped234:(id)buttonTapped {
-   NSString * videoUrl = [YoutubeParser getVideoOnlineUrl:self.nodeInfo];
-
-   // Video file
-   NSURL * fileURL = [NSURL URLWithString:[videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-
-   SubtitleResponseBlock subtitleResponseBlock = ^(NSURL * responseString) {
-       // Subtitles file
-       NSString * subtitlesPathStr = [responseString relativePath];
-
-//       // Create MoviePlayer
-//       MPMoviePlayerViewController * player = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
-//       [player.moviePlayer openSRTFileAtPath:subtitlesPathStr
-//                                  completion:^(BOOL finished) {
-//
-//                                      // Activate subtitles
-//                                      [player.moviePlayer showSubtitles];
-//
-//                                      // Show video
-//                                      [[UIApplication sharedApplication].keyWindow.rootViewController presentMoviePlayerViewControllerAnimated:player];
-//
-//                                  } failure:^(NSError * error) {
-//
-//            NSLog(@"Error: %@", error.description);
-//
-//        }];
-
-   };
-   [FetchingSubtitleManager fetchSubtitleForVideoUrl:videoUrl subtitleResponseBlock:subtitleResponseBlock];
-}
-
-
 - (void)buttonTapped:(id)buttonTapped {
    NSString * videoUrl = [YoutubeParser getVideoOnlineUrl:self.nodeInfo];
 
@@ -103,7 +70,10 @@
    SubtitleResponseBlock subtitleResponseBlock = ^(NSURL * responseString) {
        [_directVideo play:YKQualityLow subtitlesPathStr:[responseString relativePath]];
    };
-   [FetchingSubtitleManager fetchSubtitleForVideoUrl:videoUrl subtitleResponseBlock:subtitleResponseBlock];
+   [[GYoutubeHelper getInstance] fetchingSubtitle:subtitleResponseBlock
+                                          withUrl:[NSString stringWithFormat:@"%@.%@",
+                                                                             [videoUrl stringByDeletingPathExtension],
+                                                                             @"srt"]];
 }
 
 @end

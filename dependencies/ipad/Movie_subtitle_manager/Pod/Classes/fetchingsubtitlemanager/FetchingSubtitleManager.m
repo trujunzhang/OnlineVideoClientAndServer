@@ -12,13 +12,8 @@
 }
 
 + (void)fetchSubtitleForVideoUrl:(NSString *)videoUrl subtitleResponseBlock:(SubtitleResponseBlock)subtitleResponseBlock {
-   videoUrl = @"http://192.168.1.200:8040/macshare/MacPE/Lynda.com/Adobe.com/@Muse/serials/@@123/10. Creating Menus in Muse/WebStorm - Node.js Debugging.srt";
-//   videoUrl = @"macshare/MacPE/Lynda.com/Adobe.com/@Muse/serials/@@123/10. Creating Menus in Muse/WebStorm - Node.js Debugging.srt";
 
-//   SubtitleResponseBlock subtitleResponseBlock = ^(NSString * responseString) {
-//       NSString * debug = @"debug";
-//   };
-   [[GYoutubeHelper getInstance] fetchingSubtitle:subtitleResponseBlock withUrl:videoUrl];
+
 
 }
 
