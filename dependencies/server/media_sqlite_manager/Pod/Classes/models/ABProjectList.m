@@ -24,7 +24,7 @@
       self.sqliteObjectID = [MobileDB uniqueID];
 
       self.sqliteObjectName = @"";
-      self.projectFileInfoArray = [[NSMutableArray alloc] init];
+      self.sqliteObjectArray = [[NSMutableArray alloc] init];
    }
 
    return self;
@@ -67,14 +67,10 @@
 }
 
 
-- (void)appendFileInfo:(ABProjectFileInfo *)fileInfo {
-   [self.projectFileInfoArray addObject:fileInfo];
-}
-
 
 - (ABProjectFileInfo *)getFirstABProjectFileInfo {
-   if (self.projectFileInfoArray.count > 0) {
-      ABProjectFileInfo * firstFileInfo = self.projectFileInfoArray[0];
+   if (self.sqliteObjectArray.count > 0) {
+      ABProjectFileInfo * firstFileInfo = self.sqliteObjectArray[0];
 
       return firstFileInfo;
    }

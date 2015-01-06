@@ -18,8 +18,6 @@
       self.sqliteObjectID = [MobileDB uniqueID];
 
       self.objectFullPath = @"";
-
-      self.projectListsArray = [[NSMutableArray alloc] init];
    }
 
    return self;
@@ -63,9 +61,6 @@
 }
 
 
-- (void)appendProjectList:(ABProjectList *)projectList {
-   [self.projectListsArray addObject:projectList];
-}
 
 
 - (ABProjectList *)checkExistInSubDirectoryWithObjectName:(NSString *)sqliteObjectName {

@@ -13,6 +13,8 @@
 @property(copy) NSString * sqliteObjectName;
 @property(copy) NSString * objectFullPath;
 
+@property(strong) NSMutableArray * sqliteObjectArray;
+
 - (instancetype)initWithSqliteObjectID:(NSString*)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName;
 
@@ -22,6 +24,7 @@
 - (NSMutableDictionary *)getUpdateDictionary;
 - (NSMutableDictionary *)getInsertDictionary;
 
+- (void)appendSqliteObjectToArray:(id)sqliteObject;
 - (NSString *)sqlStringSerializationForUpdate;
 - (NSString *)sqlStringSerializationForInsert;
 

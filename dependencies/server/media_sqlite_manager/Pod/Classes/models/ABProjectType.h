@@ -13,10 +13,7 @@
 
 @interface ABProjectType : ABSqliteObject
 
-@property(strong) NSMutableArray * ProjectNameArray;
-
 - (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath;
-
 
 + (NSMutableDictionary *)getAllProjectNames:(NSMutableDictionary *)projectTypesDictionary;
 - (void)appendProjectName:(id)projectName;

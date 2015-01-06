@@ -13,11 +13,7 @@
 
 @interface ABProjectName : ABSqliteObject
 
-@property(strong) NSMutableArray * projectListsArray;
-
-
 - (instancetype)initWithProjectName:(NSString *)projectName withProjectFullPath:(NSString *)projectFullPath;
 
-
-- (void)appendProjectList:(id)list;
+- (void)appendProjectList:(id)sqliteObject;
 @end

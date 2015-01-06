@@ -4,6 +4,7 @@
 //
 
 #import "ABSqliteObject.h"
+#import "MobileDB.h"
 
 
 @implementation ABSqliteObject {
@@ -12,7 +13,11 @@
 - (instancetype)init {
    self = [super init];
    if (self) {
+      self.sqliteObjectID = [MobileDB uniqueID];
+      self.sqliteObjectName = @"";
       self.objectFullPath = @"";
+
+      self.sqliteObjectArray = [[NSMutableArray alloc] init];
       self.lastsubDirectoryListsArray = [[NSMutableArray alloc] init];
    }
 
@@ -21,7 +26,7 @@
 
 
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName {
-   self = [super init];
+   self = [self init];
    if (self) {
       self.sqliteObjectID = sqliteObjectID;
       self.sqliteObjectName = sqliteObjectName;
@@ -31,8 +36,8 @@
 }
 
 
-- (instancetype)initWithSqliteObjectID:(NSString*)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
-   self = [super init];
+- (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
+   self = [self init];
    if (self) {
       self.sqliteObjectID = sqliteObjectID;
       self.sqliteObjectName = sqliteObjectName;
@@ -40,6 +45,11 @@
    }
 
    return self;
+}
+
+
+- (void)appendSqliteObjectToArray:(id)sqliteObject {
+   [self.sqliteObjectArray addObject:sqliteObject];
 }
 
 

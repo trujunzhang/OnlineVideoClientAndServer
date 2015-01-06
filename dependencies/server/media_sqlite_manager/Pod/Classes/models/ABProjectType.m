@@ -10,16 +10,6 @@
 @implementation ABProjectType
 
 
-- (instancetype)init {
-   self = [super init];
-   if (self) {
-      self.sqliteObjectID = [MobileDB uniqueID];
-      self.ProjectNameArray = [[NSMutableArray alloc] init];
-   }
-
-   return self;
-}
-
 
 - (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath {
    self = [self init];
@@ -58,7 +48,7 @@
 
 
 - (void)appendProjectName:(ABProjectName *)projectName {
-   [self.ProjectNameArray addObject:projectName];
+   [self.sqliteObjectArray addObject:projectName];
 }
 
 
@@ -68,7 +58,7 @@
    for (ABProjectType * projectType in projectTypesDictionary.allValues) {
       NSString * projectTypeName = projectType.sqliteObjectName;
 
-      for (ABProjectName * abProjectName in projectType.ProjectNameArray) {
+      for (ABProjectName * abProjectName in projectType.sqliteObjectArray) {
          NSString * projectName = abProjectName.sqliteObjectName;
 
          [projectNamesDictionary setObject:projectName forKey:projectTypeName];

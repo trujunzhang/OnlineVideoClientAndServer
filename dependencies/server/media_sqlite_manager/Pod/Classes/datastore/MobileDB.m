@@ -251,7 +251,7 @@ id<ABDatabase> db;
 
    [db sqlExecute:sql];
 
-   [self saveProjectTypeNamesArray:projectType.sqliteObjectID withArray:projectType.ProjectNameArray];
+   [self saveProjectTypeNamesArray:projectType.sqliteObjectID withArray:projectType.sqliteObjectArray];
 }
 
 
@@ -291,7 +291,7 @@ id<ABDatabase> db;
 
              if (isReadArray)
                 [self readProjectNameLists:projectName.sqliteObjectID
-                                 withArray:projectName.projectListsArray
+                                 withArray:projectName.sqliteObjectArray
                                isReadArray:isReadArray];
           }
       };
@@ -391,7 +391,7 @@ id<ABDatabase> db;
    [db sqlExecute:sql];
 
 
-   [self saveProjectNameListsArray:projectName.sqliteObjectID withArray:projectName.projectListsArray];
+   [self saveProjectNameListsArray:projectName.sqliteObjectID withArray:projectName.sqliteObjectArray];
 }
 
 
@@ -436,7 +436,7 @@ id<ABDatabase> db;
              [mutableArray addObject:projectList];
 
              if (isReadArray)
-                [self readProjectListFileInfos:projectList.sqliteObjectID withArray:projectList.projectFileInfoArray];
+                [self readProjectListFileInfos:projectList.sqliteObjectID withArray:projectList.sqliteObjectArray];
           }
       };
       [self readProjectListsWithResults:locationsBlock withProjectListID:projectListID];
@@ -540,7 +540,7 @@ id<ABDatabase> db;
    [db sqlExecute:sql];
 
 
-   [self saveProjectListFileInfosArray:projectList.sqliteObjectID withArray:projectList.projectFileInfoArray];
+   [self saveProjectListFileInfosArray:projectList.sqliteObjectID withArray:projectList.sqliteObjectArray];
 }
 
 
@@ -744,17 +744,17 @@ id<ABDatabase> db;
 // step02: save ABProjectName
 - (void)saveForProjectTypeArray:(ABProjectType *)projectType {
 
-   NSMutableArray * projectNameArray = projectType.ProjectNameArray;
+   NSMutableArray * projectNameArray = projectType.sqliteObjectArray;
    for (ABProjectName * projectName in projectNameArray) {
       [self saveProjectName:projectName];
 
       // step03: save ABProjectList
-      NSMutableArray * projectLists = projectName.projectListsArray;
+      NSMutableArray * projectLists = projectName.sqliteObjectArray;
       for (ABProjectList * projectList in projectLists) {
          [self saveProjectList:projectList];
 
          // step04: save ABProjectFileInfo
-         NSMutableArray * projectLists = projectList.projectFileInfoArray;
+         NSMutableArray * projectLists = projectList.sqliteObjectArray;
          for (ABProjectFileInfo * projectFileInfo in projectLists) {
             [self saveProjectFileInfo:projectFileInfo];
          }
@@ -770,7 +770,7 @@ id<ABDatabase> db;
           [dictionary setObject:projectType forKey:projectType.sqliteObjectName];
 
           [self readProjectTypeNames:projectType.sqliteObjectID
-                           withArray:projectType.ProjectNameArray
+                           withArray:projectType.sqliteObjectArray
                          isReadArray:isAllList];
        }
    };
@@ -782,7 +782,7 @@ id<ABDatabase> db;
 - (void)makeObjectFullPathForProjectListArray:(NSMutableArray *)projectListArray projectFullPath:(NSString *)projectFullPath {
    for (ABProjectList * projectList in projectListArray) {
       NSString * objectFullPath = [projectList makeObjectFullPath:projectFullPath];
-      for (ABProjectFileInfo * fileInfo in projectList.projectFileInfoArray) {
+      for (ABProjectFileInfo * fileInfo in projectList.sqliteObjectArray) {
          [fileInfo makeObjectFullPath:objectFullPath];
       }
    }
