@@ -99,13 +99,14 @@
 
                // *** online-step-{SOThumbnailInfo-6} ***
 
+//               int objectID = projectFileInfo.sqliteObjectID;
                SOThumbnailInfo * thumbnailInfo =
-                [MobileThumbnailCacheDirectoryHelper checkExistAndSaveForThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
-                                                                                       fileInforName:projectFileInfo.sqliteObjectName
+                [MobileThumbnailCacheDirectoryHelper checkExistAndSaveForThumbnailInfoWithFileInfoID:123
+                                                                                       fileInforName:aPath
                                                                                      projectFullPath:fullPath];
 
-               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
-                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
+//               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
+//                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
 
             }
          }

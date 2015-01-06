@@ -13,7 +13,7 @@
 #import "SOThumbnailInfo.h"
 
 static MobileDBThumbnail * _dbInstance;
-
+id<ABDatabase> thumbnailDataBase;
 
 @interface MobileDBThumbnail ()
 
@@ -52,9 +52,9 @@ static MobileDBThumbnail * _dbInstance;
    }
 
    // open SQLite db file
-   db = [[ABSQLiteDB alloc] init];
+   thumbnailDataBase = [[ABSQLiteDB alloc] init];
 
-   if (![db connect:filePathName]) {
+   if (![thumbnailDataBase connect:filePathName]) {
       return nil;
    }
 
@@ -80,7 +80,7 @@ static MobileDBThumbnail * _dbInstance;
 
 
 - (void)close {
-   [db close];
+   [thumbnailDataBase close];
 }
 
 
@@ -94,15 +94,14 @@ static MobileDBThumbnail * _dbInstance;
                                                  @"objectFullPath" : fullPath,
                                                 }]];
 
-   id<ABRecordset> results = [db sqlSelect:sql];
+   id<ABRecordset> results = [thumbnailDataBase sqlSelect:sql];
    while (![results eof]) {
       SOThumbnailInfo * sqliteObject = [[SOThumbnailInfo alloc] init];
 
-      sqliteObject.sqliteObjectID = [[results fieldWithName:@"projectTypeID"] intValue];
+      sqliteObject.sqliteObjectID = [[results fieldWithName:@"thumbnailInfoID"] intValue];
       sqliteObject.fileInfoID = [[results fieldWithName:@"fileInfoID"] intValue];
-      sqliteObject.sqliteObjectName = [[results fieldWithName:@"projectTypeName"] stringValue];
+      sqliteObject.sqliteObjectName = [[results fieldWithName:@"fileInforName"] stringValue];
       sqliteObject.objectFullPath = [[results fieldWithName:@"objectFullPath"] stringValue];
-
 
       [mutableArray addObject:sqliteObject];
 
@@ -132,12 +131,12 @@ static MobileDBThumbnail * _dbInstance;
    NSArray * sqlStringSerializationForInsert = [sqliteObject sqlStringSerializationForInsert];
 
    NSString * sql = [NSString stringWithFormat:
-    @"insert into OnlineVideoType(onlineVideoTypeID,%@) values(%i,%@)",
+    @"insert into ThumbnailInfo(thumbnailInfoID,%@) values(%i,%@)",
     sqlStringSerializationForInsert[0],
     sqliteObject.sqliteObjectID,
     sqlStringSerializationForInsert[1]
    ];
-   [db sqlExecute:sql];
+   [thumbnailDataBase sqlExecute:sql];
 
 
 }

@@ -15,6 +15,7 @@
 
 
 static MobileDB * _dbInstance;
+id<ABDatabase> db;
 
 
 @interface MobileDB ()
