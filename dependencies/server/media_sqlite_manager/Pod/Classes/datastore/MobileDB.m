@@ -62,10 +62,10 @@ static MobileDB * _dbInstance;
 
    if (!fileExists) {
       if (!backupDbPath || !copiedBackupDb)
-         [self makeDB];
+         [self makeForMobileDB];
    }
 
-   [self checkSchema]; // always check schema because updates are done here
+   [self checkSchemaForMobileDB]; // always check schema because updates are done here
 
    return self;
 }

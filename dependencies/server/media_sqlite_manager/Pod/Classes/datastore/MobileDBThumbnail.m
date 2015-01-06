@@ -59,10 +59,10 @@ static MobileDBThumbnail * _dbInstance;
 
    if (!fileExists) {
       if (!backupDbPath || !copiedBackupDb)
-         [self makeDB];
+         [self makeForMobileDBThumbnail];
    }
 
-   [self checkSchema]; // always check schema because updates are done here
+   [self checkSchemaForMobileDBThumbnail]; // always check schema because updates are done here
 
    return self;
 }

@@ -19,9 +19,11 @@ typedef void(^LocationResultsBlock)(NSArray * locations);
 }
 
 
+- (void)checkSchemaForMobileDBThumbnail;
 + (NSString *)uniqueID;
-- (void)makeDB;
-- (void)checkSchema;
+- (void)makeForMobileDB;
+- (void)checkSchemaForMobileDB;
+- (void)makeForMobileDBThumbnail;
 + (BOOL)checkDBFileExist:(NSString *)filePathName;
 + (NSString *)getThumbnailName:(int)sqliteObjectID;
 @end
