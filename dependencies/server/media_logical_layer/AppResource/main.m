@@ -15,14 +15,10 @@
 int main(int argc, const char * argv[]) {
    @autoreleasepool {
       // insert code here...
-
-      if ([UserCacheFolderHelper checkUserCacheFolderExistAndMake] == NO) {
-         NSLog(@"Remove failed");
-         return 0;
-      }
+      [UserCacheFolderHelper checkUserProjectDirectoryExistAndMake];
+      [UserCacheFolderHelper removeFileForVideoTrainingDB];
 
       [VideoGenerateSqliteHelper generateSqliteAndThumbnail];
-
 
       NSLog(@"Hello, World!");
    }

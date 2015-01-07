@@ -29,7 +29,7 @@
 
 
 ///Volumes/Home/djzhang/.AOnlineTutorial/.server
-+ (NSString *)RealProjectDirectory {
++ (NSString *)RealProjectServerDirectory {
    return [NSString stringWithFormat:@"%@/%@/%@",
                                      [UserCacheFolderHelper RealHomeDirectory],
                                      appProfile,
@@ -37,14 +37,17 @@
 }
 
 
-///Volumes/Home/djzhang/.AOnlineTutorial/.server/.cache
-+ (NSString *)RealProjectCacheDirectory {
-   return [NSString stringWithFormat:@"%@/%@", [UserCacheFolderHelper RealProjectDirectory], appCacheDirectory];
+///Volumes/Home/djzhang/.AOnlineTutorial/.server/VideoTrainingDB.db
++ (NSString *)RealVideoTrainingDBAbstractPath {
+   return [NSString stringWithFormat:@"%@/%@",
+                                     [UserCacheFolderHelper RealProjectServerDirectory],
+                                     dataBaseName];
 }
 
 
-+ (NSString *)getSqliteFilePath {
-   return [[UserCacheFolderHelper RealProjectCacheDirectory] stringByAppendingPathComponent:dataBaseName];
+///Volumes/Home/djzhang/.AOnlineTutorial/.server/.cache
++ (NSString *)RealProjectCacheDirectory {
+   return [NSString stringWithFormat:@"%@/%@", [UserCacheFolderHelper RealProjectServerDirectory], appCacheDirectory];
 }
 
 
@@ -141,18 +144,13 @@
 #pragma mark
 
 
-+ (BOOL)checkUserCacheFolderExistAndMake {
++ (void)checkUserProjectDirectoryExistAndMake {
 
-   BOOL fileExists = [MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]];
+//   BOOL fileExists = [MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]];
 
-//   if (fileExists == NO) {
    [UserCacheFolderHelper createDirectoryForCache:[NSFileManager defaultManager]
                                withCacheDirectory:[UserCacheFolderHelper RealProjectCacheDirectory]
                            withThumbnailDirectory:[self getThumbnailDirectory]];
-//      return YES;
-//   }
-
-   return YES;
 }
 
 
@@ -168,4 +166,10 @@
 }
 
 
++ (void)removeFileForVideoTrainingDB {
+   NSString * trainingDBAbstractPath = [self RealVideoTrainingDBAbstractPath];
+
+   NSError * error = nil;
+   [[NSFileManager defaultManager] removeItemAtPath:trainingDBAbstractPath error:&error];
+}
 @end

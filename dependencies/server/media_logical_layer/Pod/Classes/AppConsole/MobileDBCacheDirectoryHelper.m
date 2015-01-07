@@ -25,7 +25,7 @@
 
 
 + (MobileDB *)getMobileDBInstance {
-   return [MobileDB dbInstance:[UserCacheFolderHelper RealProjectDirectory]];
+   return [MobileDB dbInstance:[UserCacheFolderHelper RealProjectServerDirectory]];
 }
 
 
