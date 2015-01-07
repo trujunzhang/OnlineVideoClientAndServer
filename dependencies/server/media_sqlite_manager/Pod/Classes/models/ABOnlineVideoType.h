@@ -5,7 +5,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ABSqliteObject.h"
-@class ABProjectType;
 
 
 @interface ABOnlineVideoType : ABSqliteObject
@@ -15,5 +14,5 @@
 - (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName projectFullPath:(NSString *)projectFullPath withDictionary:(NSMutableDictionary *)dictionary;
 
 - (void)appendProjectTypeDictionary:(NSMutableDictionary *)dictionary;
-- (void)appendProjectType:(ABProjectType *)projectType;
+- (void)appendProjectType:(id)projectType;
 @end

@@ -15,7 +15,7 @@
 
 @property(strong) NSMutableArray * sqliteObjectArray;
 
-- (instancetype)initWithSqliteObjectID:(NSString*)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
+- (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName;
 
 
@@ -25,6 +25,8 @@
 - (NSMutableDictionary *)getInsertDictionary;
 
 - (void)appendSqliteObjectToArray:(id)sqliteObject;
+- (void)addLastSqliteObjectArray:(NSMutableArray *)array;
+
 - (NSString *)sqlStringSerializationForUpdate;
 - (NSString *)sqlStringSerializationForInsert;
 
@@ -35,5 +37,6 @@
 - (NSString *)makeObjectFullPath:(NSString *)parentFullPath;
 
 - (id)checkExistInSubDirectoryWithObjectName:(NSString *)sqliteObjectName;
+
 
 @end

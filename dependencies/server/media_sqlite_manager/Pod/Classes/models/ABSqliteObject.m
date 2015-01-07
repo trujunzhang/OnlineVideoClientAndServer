@@ -3,6 +3,7 @@
 // Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import "ABProjectType.h"
 #import "ABSqliteObject.h"
 #import "MobileDB.h"
 
@@ -50,6 +51,13 @@
 
 - (void)appendSqliteObjectToArray:(id)sqliteObject {
    [self.sqliteObjectArray addObject:sqliteObject];
+}
+
+
+- (void)addLastSqliteObjectArray:(NSMutableArray *)array {
+   for (id object in array) {
+      [self appendSqliteObjectToArray:object];
+   }
 }
 
 
@@ -132,5 +140,6 @@
    self.objectFullPath = [NSString stringWithFormat:@"%@/%@", parentFullPath, self.sqliteObjectName];
    return self.objectFullPath;
 }
+
 
 @end

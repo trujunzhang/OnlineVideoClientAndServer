@@ -5,6 +5,7 @@
 
 #import "MultipleTypeHelper.h"
 #import "ABOnlineVideoType.h"
+#import "ABProjectType.h"
 
 
 @implementation MultipleTypeHelper {
@@ -26,8 +27,10 @@
 
    ABOnlineVideoType * lastOnlineVideoType = [MultipleTypeHelper checkExist:onlineVideoType.sqliteObjectName
                                                                          in:singleOnlineVideoTypesArray];
+
    if (lastOnlineVideoType) {
-      [MultipleTypeHelper copyOnlineVideoTypeDictionary:onlineVideoType.onlineTypeDictionary to:lastOnlineVideoType];
+      [MultipleTypeHelper copyOnlineVideoTypeDictionary:onlineVideoType.onlineTypeDictionary
+                            toLastProjectTypeDictionary:lastOnlineVideoType.onlineTypeDictionary];
    } else {
       [singleOnlineVideoTypesArray addObject:onlineVideoType];
    }
@@ -35,12 +38,21 @@
 }
 
 
-+ (void)copyOnlineVideoTypeDictionary:(NSMutableDictionary *)onlineTypeDictionary to:(ABOnlineVideoType *)lastOnlineVideoType {
++ (void)copyOnlineVideoTypeDictionary:(NSMutableDictionary *)onlineTypeDictionary toLastProjectTypeDictionary:(NSMutableDictionary *)lastOnlineTypeDictionary {
    for (NSString * key in onlineTypeDictionary.allKeys) {
-      id object = [onlineTypeDictionary objectForKey:key];
+      //object.class:[ABProjectType]
+      ABProjectType * object = [onlineTypeDictionary objectForKey:key];
 
+      // if the same project type,then append
+      if ([[lastOnlineTypeDictionary allKeys] containsObject:key]) {
+         // contains key
+         ABProjectType * lastObject = [lastOnlineTypeDictionary objectForKey:key];
+         [lastObject addLastSqliteObjectArray:object.sqliteObjectArray];
+         return;
+      }
 
-      [lastOnlineVideoType.onlineTypeDictionary setObject:object forKey:key];
+      // or replace
+      [lastOnlineTypeDictionary setObject:object forKey:key];
    }
 }
 
