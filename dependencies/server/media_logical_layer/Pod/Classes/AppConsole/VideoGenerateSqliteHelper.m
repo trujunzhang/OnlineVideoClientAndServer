@@ -11,6 +11,7 @@
 #import "MemoryDBHelper.h"
 #import "MobileDBCacheDirectoryHelper.h"
 #import "MemoryDBHelper.h"
+#import "ServerVideoConfigure.h"
 
 
 @implementation VideoGenerateSqliteHelper {
@@ -30,11 +31,7 @@
 
 
 + (void)generateSqliteAndThumbnail {
-
-   NSMutableDictionary * onlineTypeDictionary = @{
-    @"Youtube.com" : [ServerVideoConfigure youtubeArray],
-    @"Lynda.com" : [ServerVideoConfigure lyndaArray],
-   };
+   NSMutableDictionary * onlineTypeDictionary = [ServerVideoConfigure getOnlineTypeDictionary];
 
    for (NSString * onlineTypeName in onlineTypeDictionary.allKeys) {
       NSArray * typePathArray = [onlineTypeDictionary valueForKey:onlineTypeName];

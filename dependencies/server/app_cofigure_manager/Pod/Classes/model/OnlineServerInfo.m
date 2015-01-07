@@ -5,6 +5,7 @@
 
 #import "OnlineServerInfo.h"
 #import "NSString+PJR.h"
+#import "SqliteDatabaseConstant.h"
 
 
 @interface OnlineServerInfo () {
@@ -56,7 +57,7 @@
    NSString * string = [NSString stringWithFormat:@"%@/%@/%@",
                                                   [self getCurrentDomainUrl],
                                                   [self cacheThumbmail],
-                                                  @"VideoTrainingDB.db"];
+                                                  dataBaseName];
    string = [string replaceCharcter:@"\n" withCharcter:@""];
    string = [string replaceCharcter:@" " withCharcter:@"%20"];
    return string;

@@ -4,6 +4,7 @@
 //
 
 #import "ParseLocalStore.h"
+#import "SqliteDatabaseConstant.h"
 
 
 @implementation ParseLocalStore {
@@ -33,7 +34,7 @@
                                                                  appropriateForURL:nil
                                                                             create:NO
                                                                              error:nil];
-   NSURL * sqlitePathUrl = [documentsDirectoryURL URLByAppendingPathComponent:@"VideoTrainingDB.db"];
+   NSURL * sqlitePathUrl = [documentsDirectoryURL URLByAppendingPathComponent:dataBaseName];
    NSString * filePathName = [sqlitePathUrl path];
 
    BOOL myPathIsDir;
