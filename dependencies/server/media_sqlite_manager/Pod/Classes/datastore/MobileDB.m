@@ -225,8 +225,13 @@ id<ABDatabase> db;
    BOOL exists = NO;
 
    //select projectTypeName from ProjectType where projectTypeName ='@Muse'
-   sql = [NSString stringWithFormat:@"select projectTypeName from ProjectType where projectTypeName ='%@'",
-                                    projectType.sqliteObjectName];
+   sql = [NSString stringWithFormat:@"select * from ProjectType where %@",
+                                    [ABSqliteObject getSqlStringSerializationForFilter:
+                                     @{
+                                      @"projectTypeName" : projectType.sqliteObjectName,
+                                      @"objectFullPath" : projectType.objectFullPath,
+                                     }]];
+
    id<ABRecordset> results = [db sqlSelect:sql];
    if (![results eof])
       exists = YES;
@@ -719,20 +724,6 @@ id<ABDatabase> db;
 - (void)saveForOnlineTypeArray:(ABOnlineVideoType *)onlineVideoType {
    NSMutableDictionary * onlineTypeArray = onlineVideoType.onlineTypeDictionary;
    for (ABProjectType * projectType in onlineTypeArray.allValues) {
-      [self saveProjectType:projectType];
-
-      // step02: save ABProjectName
-      [self saveForProjectTypeArray:projectType];
-   }
-}
-
-
-- (void)saveForProjectTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName {
-   NSArray * allKeys = dictionary.allKeys;
-
-   // step01: save ABProjectType
-   for (NSString * key in allKeys) {
-      ABProjectType * projectType = [dictionary objectForKey:key];
       [self saveProjectType:projectType];
 
       // step02: save ABProjectName
