@@ -28,11 +28,16 @@
 }
 
 
+///Volumes/Home/djzhang/.AOnlineTutorial/.server
 + (NSString *)RealProjectDirectory {
-   return [NSString stringWithFormat:@"%@/%@/.server", [UserCacheFolderHelper RealHomeDirectory], appProfile];
+   return [NSString stringWithFormat:@"%@/%@/%@",
+                                     [UserCacheFolderHelper RealHomeDirectory],
+                                     appProfile,
+                                     appSubDirectory];
 }
 
 
+///Volumes/Home/djzhang/.AOnlineTutorial/.server/.cache
 + (NSString *)RealProjectCacheDirectory {
    return [NSString stringWithFormat:@"%@/%@", [UserCacheFolderHelper RealProjectDirectory], appCacheDirectory];
 }

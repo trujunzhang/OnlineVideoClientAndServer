@@ -16,7 +16,7 @@
 
 
 + (MobileDBImage *)getMobileThumbnailDBInstance {
-   return [MobileDBImage dbInstance:[UserCacheFolderHelper RealProjectDirectory]];
+   return [MobileDBImage dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]];
 }
 
 
