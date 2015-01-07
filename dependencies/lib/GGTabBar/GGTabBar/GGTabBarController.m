@@ -112,7 +112,7 @@
    NSDictionary * viewsDictionary = @{ @"tabbar_view" : _tabBarView,
     @"presentation_view" : _presentationView };
 
-   [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tabbar_view]|"
+   [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tabbar_view(400)]|"
                                                                      options:0
                                                                      metrics:nil
                                                                        views:viewsDictionary]];
