@@ -20,7 +20,7 @@
 #import "AsyncDisplayKitStatic.h"
 
 static CGFloat COLLECTION_CELL_FIRST_HEIGHT = 138.0f;
-static CGFloat COLLECTION_CELL_SECOND_HEIGHT = 36.0f;
+static CGFloat COLLECTION_CELL_SECOND_HEIGHT = 50.0f;
 static CGFloat COLLECTION_CELL_THIRD_HEIGHT = 2.0f;
 
 static CGFloat VIDEO_TITLE_PADDING_LEFT = 4.0f;

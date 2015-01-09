@@ -51,7 +51,9 @@
 
 
 + (NSString *)getVideoSnippetTitle:(YTYouTubeVideoCache *)video {
-   return video.sqliteObjectName;
+   NSString * string = video.sqliteObjectName;
+   string = [string stringByDeletingPathExtension];
+   return string;
 }
 
 

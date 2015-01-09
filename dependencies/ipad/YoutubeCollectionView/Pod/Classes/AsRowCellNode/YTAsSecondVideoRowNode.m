@@ -34,7 +34,8 @@
 
 
 - (void)layout {
-   _videoTitleNode.frame = CGRectMake(VIDEO_TITLE_PADDING_LEFT, 10, self.cellRect.size.width - VIDEO_TITLE_PADDING_LEFT * 2, COLLECTION_CELL_SECOND_HEIGHT - 12);
+   _videoTitleNode.frame =
+    CGRectMake(VIDEO_TITLE_PADDING_LEFT, 10, self.cellRect.size.width - VIDEO_TITLE_PADDING_LEFT * 2, COLLECTION_CELL_SECOND_HEIGHT - 12);
 }
 
 
