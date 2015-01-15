@@ -44,7 +44,7 @@
         self.viewControllers = viewControllers;
         self.tabBarItemArrays = tabBarItemArrays;
 //      self.tabBarHeight = CGFLOAT_MIN;
-        self.tabBarHeight = 80;
+        self.tabBarHeight = 60;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self initSubViewsWithControllers:self.tabBarItemArrays];
 
