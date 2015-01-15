@@ -5,13 +5,13 @@
 #import "ClientUIHelper.h"
 #import "CollectionConstant.h"
 #import "AsFileInfoVideoCollectionViewController.h"
-#import "GGTabBarController.h"
+#import "JZGGTabBarController.h"
 #import "SqliteArraySortHelper.h"
 #import "SqliteManager.h"
 
 
 @interface MxTabBarManager () {
-    GGTabBarController *_tabBarController;
+    JZGGTabBarController *_tabBarController;
     NSArray *_tabBarViewControllerArray;
     YTLeftMenuViewController *_leftViewController;
 
@@ -47,7 +47,7 @@
 }
 
 
-- (void)registerTabBarController:(GGTabBarController *)tabBarController withLeftViewController:(AsLeftMenuViewController *)leftViewController withTabbarControllerArray:(NSArray *)array {
+- (void)registerTabBarController:(JZGGTabBarController *)tabBarController withLeftViewController:(AsLeftMenuViewController *)leftViewController withTabbarControllerArray:(NSArray *)array {
     _tabBarController = tabBarController;
     _leftViewController = leftViewController;
     _tabBarViewControllerArray = array;

@@ -12,7 +12,7 @@
 @class JZGGTabBar;
 
 
-@interface GGTabBarController : UIViewController
+@interface JZGGTabBarController : UIViewController
 @property (nonatomic, strong) JZGGTabBar *tabBarView;
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, assign) NSUInteger selectedIndex;
@@ -26,7 +26,7 @@
 
 @protocol JZGGTabBarControllerDelegate<NSObject>
 @optional
-- (BOOL)ggTabBarController:(GGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController;
+- (BOOL)ggTabBarController:(JZGGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController;
 
-- (void)ggTabBarController:(GGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
+- (void)ggTabBarController:(JZGGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
 @end

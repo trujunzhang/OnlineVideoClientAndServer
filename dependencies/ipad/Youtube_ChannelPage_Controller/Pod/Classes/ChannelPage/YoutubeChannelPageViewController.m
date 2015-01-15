@@ -9,7 +9,7 @@
 #import <google-api-services-youtube/GYoutubeHelper.h>
 #import "YoutubeChannelPageViewController.h"
 #import "YTAsyncYoutubeChannelTopCellNode.h"
-#import "GGTabBarController.h"
+#import "JZGGTabBarController.h"
 #import "JZGGLayoutStringTabBar.h"
 #import "SqliteManager.h"
 
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) YTYouTubeChannel *pageChannel;
 
 @property (nonatomic, strong) YTAsyncYoutubeChannelTopCellNode *topBanner;
-@property (nonatomic, strong) GGTabBarController *videoTabBarController;
+@property (nonatomic, strong) JZGGTabBarController *videoTabBarController;
 
 @property (nonatomic, strong) YTCollectionViewController *selectedController;
 @property (nonatomic) YTSegmentItemType selectedSegmentItemType;
@@ -84,7 +84,7 @@
                                                         selectedIndex:0
                                                           tabBarWidth:0];
 
-    GGTabBarController *tabBarController = [[GGTabBarController alloc] initWithTabBarView:topTabBar];
+    JZGGTabBarController *tabBarController = [[JZGGTabBarController alloc] initWithTabBarView:topTabBar];
     tabBarController.delegate = self;
 
     tabBarController.view.frame = parentView.bounds;// used
@@ -135,12 +135,12 @@
 #pragma mark GGTabBarControllerDelegate
 
 
-- (BOOL)ggTabBarController:(GGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+- (BOOL)ggTabBarController:(JZGGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     return YES;
 }
 
 
-- (void)ggTabBarController:(GGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+- (void)ggTabBarController:(JZGGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     if(self.selectedController == viewController)
         return;
 

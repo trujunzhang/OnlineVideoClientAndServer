@@ -18,7 +18,7 @@
 #import "CollectionConstant.h"
 #import "GYoutubeHelper.h"
 #import "JZGGTabBar.h"
-#import "GGTabBarController.h"
+#import "JZGGTabBarController.h"
 #import "JZGGIconTabBar.h"
 #import "OnlineTypeViewController.h"
 #import "FetchingOnlineInfoViewController.h"
@@ -61,7 +61,7 @@
 
     // right controller
     NSMutableArray *tabBarControllerArray = [self getTabBarControllerArray];
-    GGTabBarController *ggTabBarController = [self makeTabBarControllerWithControllerArray:tabBarControllerArray];
+    JZGGTabBarController *ggTabBarController = [self makeTabBarControllerWithControllerArray:tabBarControllerArray];
 
 
     //6
@@ -109,7 +109,7 @@
 }
 
 
-- (GGTabBarController *)makeTabBarControllerWithControllerArray:(NSMutableArray *)controllerArray {
+- (JZGGTabBarController *)makeTabBarControllerWithControllerArray:(NSMutableArray *)controllerArray {
     JZGGTabBar *topTabBar = [[JZGGIconTabBar alloc] initWithFrame:CGRectZero
                                               viewControllers:controllerArray
                                                         inTop:NO
@@ -117,7 +117,7 @@
                                                   tabBarWidth:0];
     topTabBar.backgroundColor = [UIColor clearColor];
 
-    GGTabBarController *tabBarController = [[GGTabBarController alloc] initWithTabBarView:topTabBar];
+    JZGGTabBarController *tabBarController = [[JZGGTabBarController alloc] initWithTabBarView:topTabBar];
     tabBarController.view.backgroundColor = [UIColor whiteColor];
 
     tabBarController.delegate = self;
@@ -198,7 +198,7 @@
 #pragma mark GGTabBarControllerDelegate
 
 
-- (void)ggTabBarController:(GGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+- (void)ggTabBarController:(JZGGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
 
     BOOL isSameTableBarSelectedIndex = [[MxTabBarManager sharedTabBarManager] isSameTableBarSelectedIndex:tabBarController.selectedIndex];
 
@@ -212,7 +212,7 @@
 }
 
 
-- (BOOL)ggTabBarController:(GGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+- (BOOL)ggTabBarController:(JZGGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     return YES;
 }
 

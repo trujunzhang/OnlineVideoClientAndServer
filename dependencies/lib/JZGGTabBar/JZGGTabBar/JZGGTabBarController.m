@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Goles. All rights reserved.
 //
 
-#import "GGTabBarController.h"
+#import "JZGGTabBarController.h"
 #import "JZGGTabBar.h"
 
 
-@interface GGTabBarController ()<JZGGTabBarDelegate>
+@interface JZGGTabBarController ()<JZGGTabBarDelegate>
 @property (nonatomic, strong) UIView *presentationView;
 @property (nonatomic, assign) BOOL isFirstAppear;
 @end
 
 
-@implementation GGTabBarController
+@implementation JZGGTabBarController
 
 - (instancetype)initWithTabBarView:(JZGGTabBar *)tabBarView {
     self = [super init];

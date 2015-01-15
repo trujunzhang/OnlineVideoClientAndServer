@@ -3,7 +3,7 @@
 #import "YKYouTubeVideo.h"
 #include "YoutubeParser.h"
 #import "YTAsVideoDetailViewController.h"
-#import "GGTabBarController.h"
+#import "JZGGTabBarController.h"
 #import "JZGGLayoutStringTabBar.h"
 #import "CollectionConstant.h"
 #import "YKDirectVideo.h"
@@ -27,7 +27,7 @@
 @property (nonatomic, strong) UIViewController *selectedController;
 
 
-@property (nonatomic, strong) GGTabBarController *videoTabBarController;
+@property (nonatomic, strong) JZGGTabBarController *videoTabBarController;
 
 @property (nonatomic, strong) UIViewController *firstViewController;
 @property (nonatomic, strong) UIViewController *secondViewController;
@@ -133,7 +133,7 @@
 //                                                        selectedIndex:0
                                                           tabBarWidth:0];
 
-    GGTabBarController *tabBarController = [[GGTabBarController alloc] initWithTabBarView:topTabBar];
+    JZGGTabBarController *tabBarController = [[JZGGTabBarController alloc] initWithTabBarView:topTabBar];
     tabBarController.delegate = self;
 
     CGRect rect = parentView.bounds;
@@ -305,12 +305,12 @@
 #pragma mark GGTabBarControllerDelegate
 
 
-- (BOOL)ggTabBarController:(GGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+- (BOOL)ggTabBarController:(JZGGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     return YES;
 }
 
 
-- (void)ggTabBarController:(GGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+- (void)ggTabBarController:(JZGGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     self.selectedController = viewController;
 }
 

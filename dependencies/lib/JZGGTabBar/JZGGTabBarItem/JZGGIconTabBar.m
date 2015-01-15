@@ -7,7 +7,6 @@
 //
 
 #import "JZGGIconTabBar.h"
-#import "GGTabBarAppearanceKeys.h"
 
 
 @interface JZGGIconTabBar () {
