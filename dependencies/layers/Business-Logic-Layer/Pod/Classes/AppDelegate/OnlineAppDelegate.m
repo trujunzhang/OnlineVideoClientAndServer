@@ -122,9 +122,6 @@
 
     tabBarController.delegate = self;
 
-//   CGRect rect = parentView.bounds;
-//   tabBarController.view.frame = rect;// used
-
     return tabBarController;
 }
 
