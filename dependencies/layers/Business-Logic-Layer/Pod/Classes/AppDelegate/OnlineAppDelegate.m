@@ -91,7 +91,8 @@
     NSMutableArray *controllerArray = [[NSMutableArray alloc] init];
 
     for (ABOnlineVideoType *onlineVideoType in [[SqliteManager sharedSqliteManager] getOnlineVideoTypesArray]) {
-        NSString *tabBarImageName = [self getTabbarImageName:onlineVideoType.sqliteObjectName];
+//        NSString *tabBarImageName = [self getTabbarImageName:onlineVideoType.sqliteObjectName];
+        NSString *tabBarImageName = [onlineVideoType.sqliteObjectName replaceCharcter:@".com" withCharcter:@""];
 
         [controllerArray addObject:
                 [[UITabBarItem alloc] initWithTitle:nil
