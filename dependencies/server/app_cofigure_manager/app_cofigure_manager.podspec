@@ -24,5 +24,9 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/ConfigureLocalStore/*.{h,m}'
   end
 
+  s.subspec 'VideoType' do |sub|
+    sub.source_files = 'Pod/Classes/VideoType/*.{h,m}'
+  end
+
 end
 

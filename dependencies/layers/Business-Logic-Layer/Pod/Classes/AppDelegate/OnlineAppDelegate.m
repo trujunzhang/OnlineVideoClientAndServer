@@ -119,7 +119,7 @@
     if([tabbarName containsString:@"Lynda"]) {
         return @"Lynda";
     } else if([tabbarName containsString:@"Youtube"]) {
-        return @"youtube";
+        return @"Youtube";
     }
     return @"global_normal";
 }
