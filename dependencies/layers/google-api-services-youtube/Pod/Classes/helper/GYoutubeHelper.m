@@ -71,7 +71,7 @@ static GYoutubeHelper *instance = nil;
     [[NSFileManager defaultManager] removeItemAtURL:removeUrl error:nil];
 
     void (^downloadCompletion)(NSURLResponse *, NSURL *, NSError *) = ^(NSURLResponse *response, NSURL *url, NSError *error) {
-        subtitleResponseBlock(removeUrl);
+        subtitleResponseBlock(removeUrl, error);
     };
     [Online_Request fetchingSubtitle:subtitleUrl downloadCompletionBlock:downloadCompletion];
 

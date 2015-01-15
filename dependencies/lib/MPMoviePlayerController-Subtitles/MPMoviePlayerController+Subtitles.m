@@ -140,13 +140,54 @@
 
 
 - (void)parseString:(NSString *)string parserHelper:(SRTParserHelper *)parserHelper parsed:(void (^)(BOOL parsed, NSError *error))completion {
-
+NSString *sub=@"\"1\n"
+        "00:01:24,209 --> 00:01:26,378\n"
+        "Psst!\n"
+        "\n"
+        "2\n"
+        "00:01:29,298 --> 00:01:31,466\n"
+        "Got you!\n"
+        "\n"
+        "3\n"
+        "00:01:46,648 --> 00:01:49,651\n"
+        "Now look here...\n"
+        "\n"
+        "4\n"
+        "00:01:55,157 --> 00:01:56,408\n"
+        "But mum!\n"
+        "\n"
+        "5\n"
+        "00:01:56,491 --> 00:02:00,579\n"
+        "Close the window, John.\n"
+        "\n"
+        "6\n"
+        "00:02:17,012 --> 00:02:21,642\n"
+        "To Sherlock Holmes,\n"
+        "she was always \"the woman,\"\n"
+        "\n"
+        "7\n"
+        "00:02:21,767 --> 00:02:27,773\n"
+        "the beautiful Irena Adler of\n"
+        "dubious and questionable memory.\n"
+        "\n"
+        "8\n"
+        "00:02:45,499 --> 00:02:49,878\n"
+        "At the time of our involvement\"";
     // Subtitles parts
     self.subtitlesParts = [NSMutableDictionary dictionary];
 
-    [parserHelper parseSRTString:string
-                    toDictionary:self.subtitlesParts
-                          parsed:completion];
+    @try {
+        [parserHelper parseSRTString:string
+                        toDictionary:self.subtitlesParts
+                              parsed:completion];
+    } @catch (NSException *exception) {
+        NSString *name = [exception name];
+        NSString *reason = [exception reason];
+        NSLog(@"main: Caught %@: %@", name, reason);
+    } @finally {
+        NSString *debug = @"debug";
+    }
+
 
 }
 

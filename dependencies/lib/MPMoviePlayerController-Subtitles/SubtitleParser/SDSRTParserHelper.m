@@ -97,6 +97,9 @@
                     kEnd : @(endTime),
                     kText : content ? content : @""
             };
+            if(subtitlesParts.count >= 684) {
+                NSString *debug = @"debug";
+            }
             [subtitlesParts setObject:tempInterval
                                forKey:indexString];
         }

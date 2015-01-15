@@ -67,7 +67,7 @@
 
     YKDirectVideo *_directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:[videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 
-    SubtitleResponseBlock subtitleResponseBlock = ^(NSURL *responseString) {
+    SubtitleResponseBlock subtitleResponseBlock = ^(NSURL *responseString,NSError *error) {
         [_directVideo play:YKQualityLow subtitlesPathStr:[responseString relativePath]];
     };
     [[GYoutubeHelper getInstance] fetchingSubtitle:subtitleResponseBlock
