@@ -78,11 +78,7 @@
     }
 
     // 2
-    JZGGTabBar *topTabBar = [[JZGGLayoutStringTabBar alloc] initWithFrame:CGRectZero
-                                                      viewControllers:tabBarControllers
-                                                                inTop:YES
-                                                        selectedIndex:0
-                                                          tabBarWidth:0];
+    JZGGTabBar *topTabBar = [[JZGGLayoutStringTabBar alloc] initWithFrame:CGRectZero viewControllers:tabBarControllers inTop:YES selectedIndex:0 tabBarWidth:0 tabBarItemArrays:nil];
 
     JZGGTabBarController *tabBarController = [[JZGGTabBarController alloc] initWithTabBarView:topTabBar];
     tabBarController.delegate = self;

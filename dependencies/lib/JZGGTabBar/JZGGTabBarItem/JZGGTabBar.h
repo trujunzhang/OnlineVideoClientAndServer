@@ -29,7 +29,7 @@ static CGFloat separatorWidth = 2.0f;
 
 @property (nonatomic) BOOL inTop;
 
-- (instancetype)initWithFrame:(CGRect)frame viewControllers:(NSArray *)viewControllers inTop:(BOOL)inTop selectedIndex:(NSInteger)selectedIndex tabBarWidth:(CGFloat)tabBarWidth;
+- (instancetype)initWithFrame:(CGRect)frame viewControllers:(NSArray *)viewControllers inTop:(BOOL)inTop selectedIndex:(NSInteger)selectedIndex tabBarWidth:(CGFloat)tabBarWidth tabBarItemArrays:(NSMutableArray *)tabBarItemArrays;
 
 - (void)startDebugMode;
 

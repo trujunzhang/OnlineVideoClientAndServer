@@ -79,18 +79,26 @@
 }
 
 
-- (NSMutableArray *)getTabBarControllerArray {
-    NSMutableArray *onlineVideoTypesArray = [[SqliteManager sharedSqliteManager] getOnlineVideoTypesArray];
+- (NSMutableArray *)getTabBarItemArray {
 
     NSMutableArray *controllerArray = [[NSMutableArray alloc] init];
 
-    for (ABOnlineVideoType *onlineVideoType in onlineVideoTypesArray) {
-        OnlineTypeViewController *lyndaController = [[OnlineTypeViewController alloc] init];
-
+    for (ABOnlineVideoType *onlineVideoType in [[SqliteManager sharedSqliteManager] getOnlineVideoTypesArray]) {
         NSString *tabBarImageName = [self getTabbarImageName:onlineVideoType.sqliteObjectName];
-        lyndaController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil
-                                                                   image:[UIImage imageNamed:tabBarImageName]
-                                                           selectedImage:[UIImage imageNamed:tabBarImageName]];
+
+        [controllerArray addObject:[[UITabBarItem alloc] initWithTitle:nil
+                                                                 image:[UIImage imageNamed:tabBarImageName]
+                                                         selectedImage:[UIImage imageNamed:tabBarImageName]]];
+    }
+    return controllerArray;
+}
+
+- (NSMutableArray *)getTabBarControllerArray {
+
+    NSMutableArray *controllerArray = [[NSMutableArray alloc] init];
+
+    for (ABOnlineVideoType *onlineVideoType in [[SqliteManager sharedSqliteManager] getOnlineVideoTypesArray]) {
+        OnlineTypeViewController *lyndaController = [[OnlineTypeViewController alloc] init];
 
         UINavigationController *lyndaNavigationController = [[UINavigationController alloc] initWithRootViewController:lyndaController];
         [controllerArray addObject:lyndaNavigationController];
@@ -110,11 +118,8 @@
 
 
 - (JZGGTabBarController *)makeTabBarControllerWithControllerArray:(NSMutableArray *)controllerArray {
-    JZGGTabBar *topTabBar = [[JZGGIconTabBar alloc] initWithFrame:CGRectZero
-                                              viewControllers:controllerArray
-                                                        inTop:NO
-                                                selectedIndex:0
-                                                  tabBarWidth:0];
+    JZGGTabBar *topTabBar =
+            [[JZGGIconTabBar alloc] initWithFrame:CGRectZero viewControllers:controllerArray inTop:NO selectedIndex:0 tabBarWidth:0 tabBarItemArrays:[self getTabBarItemArray]];
     topTabBar.backgroundColor = [UIColor clearColor];
 
     JZGGTabBarController *tabBarController = [[JZGGTabBarController alloc] initWithTabBarView:topTabBar];

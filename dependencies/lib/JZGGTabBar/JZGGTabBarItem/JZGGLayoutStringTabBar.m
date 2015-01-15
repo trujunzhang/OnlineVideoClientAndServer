@@ -32,7 +32,7 @@
 #pragma mark - Public API
 
 
-- (instancetype)initWithFrame:(CGRect)frame viewControllers:(NSArray *)viewControllers inTop:(BOOL)inTop selectedIndex:(NSInteger)selectedIndex tabBarWidth:(CGFloat)tabBarWidth {
+- (instancetype)initWithFrame:(CGRect)frame viewControllers:(NSArray *)viewControllers inTop:(BOOL)inTop selectedIndex:(NSInteger)selectedIndex tabBarWidth:(CGFloat)tabBarWidth tabBarItemArrays:(NSMutableArray *)tabBarItemArrays {
     self = [super initWithFrame:frame];
     if(self) {
         self.inTop = inTop;

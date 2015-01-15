@@ -126,12 +126,7 @@
 - (void)makeTabBarController:(UIView *)parentView withControllerArray:(NSArray *)controllerArray {
     [self cleanupContainer:parentView];
 
-    JZGGTabBar *topTabBar = [[JZGGLayoutStringTabBar alloc] initWithFrame:CGRectZero
-                                                      viewControllers:controllerArray
-                                                                inTop:YES
-                                                        selectedIndex:controllerArray.count - 1
-//                                                        selectedIndex:0
-                                                          tabBarWidth:0];
+    JZGGTabBar *topTabBar = [[JZGGLayoutStringTabBar alloc] initWithFrame:CGRectZero viewControllers:controllerArray inTop:YES selectedIndex:controllerArray.count - 1 tabBarWidth:0 tabBarItemArrays:nil];
 
     JZGGTabBarController *tabBarController = [[JZGGTabBarController alloc] initWithTabBarView:topTabBar];
     tabBarController.delegate = self;

@@ -32,7 +32,7 @@
 #pragma mark - Public API
 
 
-- (instancetype)initWithFrame:(CGRect)frame viewControllers:(NSArray *)viewControllers inTop:(BOOL)inTop selectedIndex:(NSInteger)selectedIndex tabBarWidth:(CGFloat)tabBarWidth {
+- (instancetype)initWithFrame:(CGRect)frame viewControllers:(NSArray *)viewControllers inTop:(BOOL)inTop selectedIndex:(NSInteger)selectedIndex tabBarWidth:(CGFloat)tabBarWidth tabBarItemArrays:(NSMutableArray *)tabBarItemArrays {
     self = [super initWithFrame:frame];
     if(self) {
         self.inTop = inTop;
@@ -43,7 +43,7 @@
 //      self.tabBarHeight = CGFLOAT_MIN;
         self.tabBarHeight = 80;
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        [self initSubViewsWithControllers:self.viewControllers];
+        [self initSubViewsWithControllers:tabBarItemArrays];
 
         [self addHeightConstraints];
         [self addAllLayoutConstraints];
@@ -104,14 +104,14 @@
 * it's Subview structure. (buttons, separators & margins).
 * note: will not lay it out right away.
 */
-- (void)initSubViewsWithControllers:(NSArray *)viewControllers {
+- (void)initSubViewsWithControllers:(NSArray *)tabBarItemArrays {
     // Add Buttons
     NSUInteger tagCounter = 0;
 
-    for (UIViewController *viewController in viewControllers) {
+    for (UITabBarItem *tabBarItem in tabBarItemArrays) {
 
         UIView *barView;
-        UIButton *button = [self getButtonView:tagCounter viewController:viewController];
+        UIButton *button = [self getButtonView:tagCounter withTabBarItem:tabBarItem];
         barView = button;
 
         [self addSubview:barView];
@@ -146,13 +146,13 @@
 }
 
 
-- (UIButton *)getButtonView:(NSUInteger)tagCounter viewController:(UIViewController *)viewController {
+- (UIButton *)getButtonView:(NSUInteger)tagCounter withTabBarItem:(UITabBarItem *)tabBarItem {
     UIButton *button = [[UIButton alloc] init];
 
     button.translatesAutoresizingMaskIntoConstraints = NO;
     button.tag = tagCounter;
-    [button setImage:viewController.tabBarItem.image forState:UIControlStateNormal];
-    [button setImage:viewController.tabBarItem.selectedImage forState:UIControlStateSelected];
+    [button setImage:tabBarItem.image forState:UIControlStateNormal];
+    [button setImage:tabBarItem.selectedImage forState:UIControlStateSelected];
     [button sizeToFit];
     [button addTarget:self action:@selector(tabButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     return button;
