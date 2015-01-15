@@ -11,14 +11,16 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/Goles/JZGGTabBar.git", :tag => "0.0.2" }
 
-  s.resources = 'resources/*.*'
+
 
   s.subspec 'JZGGTabBar' do |sub|
     sub.source_files = 'JZGGTabBar/*.{h,m}'
+    sub.resources = 'resources/*.*'
   end
 
   s.subspec 'JZGGTabBarItem' do |sub|
     sub.source_files = 'JZGGTabBarItem/*.{h,m}'
+    sub.resources = 'maintabicons/*.*'
   end
 
   s.requires_arc = true
