@@ -36,6 +36,13 @@
 
 @implementation OnlineAppDelegate
 
+- (BOOL)application123:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [self setupRevealViewController];
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -86,9 +93,10 @@
     for (ABOnlineVideoType *onlineVideoType in [[SqliteManager sharedSqliteManager] getOnlineVideoTypesArray]) {
         NSString *tabBarImageName = [self getTabbarImageName:onlineVideoType.sqliteObjectName];
 
-        [controllerArray addObject:[[UITabBarItem alloc] initWithTitle:nil
-                                                                 image:[UIImage imageNamed:tabBarImageName]
-                                                         selectedImage:[UIImage imageNamed:tabBarImageName]]];
+        [controllerArray addObject:
+                [[UITabBarItem alloc] initWithTitle:nil
+                                              image:[UIImage imageNamed:tabBarImageName]
+                                      selectedImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-selected", tabBarImageName]]]];
     }
     return controllerArray;
 }
@@ -109,9 +117,9 @@
 
 - (NSString *)getTabbarImageName:(NSString *)tabbarName {
     if([tabbarName containsString:@"Lynda"]) {
-        return @"Lynda.png";
+        return @"Lynda";
     } else if([tabbarName containsString:@"Youtube"]) {
-        return @"youtube.png";
+        return @"youtube";
     }
     return @"global_normal";
 }
