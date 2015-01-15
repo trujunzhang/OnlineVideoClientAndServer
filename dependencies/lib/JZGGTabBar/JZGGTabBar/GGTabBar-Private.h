@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Goles. All rights reserved.
 //
 
-#import "GGTabBar.h"
+#import "JZGGTabBar.h"
 
 // Exposes methods for testing
-@interface GGTabBar (Private)
+@interface JZGGTabBar (Private)
 - (NSString *)visualFormatConstraintStringWithButtons:(NSArray *)buttons
                                            separators:(NSArray *)separators
                                      marginSeparators:(NSArray *)marginSeparators;

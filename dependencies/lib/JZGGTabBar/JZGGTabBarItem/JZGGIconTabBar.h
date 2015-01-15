@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GGTabBar.h"
+#import "JZGGTabBar.h"
 
 
-@interface GGIconTabBar : GGTabBar
+@interface JZGGIconTabBar : JZGGTabBar
 
 @end
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Goles. All rights reserved.
 //
 
-#import "GGTabBar.h"
+#import "JZGGTabBar.h"
 
 
-@implementation GGTabBar
+@implementation JZGGTabBar
 
 @end

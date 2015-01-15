@@ -17,9 +17,9 @@
 #import "MxTabBarManager.h"
 #import "CollectionConstant.h"
 #import "GYoutubeHelper.h"
-#import "GGTabBar.h"
+#import "JZGGTabBar.h"
 #import "GGTabBarController.h"
-#import "GGIconTabBar.h"
+#import "JZGGIconTabBar.h"
 #import "OnlineTypeViewController.h"
 #import "FetchingOnlineInfoViewController.h"
 #import "SqliteManager.h"
@@ -29,7 +29,7 @@
 #import "NSString+PJR.h"
 
 
-@interface OnlineAppDelegate ()<FetchingOnlineInfoViewControllerDelegate, GGTabBarControllerDelegate>
+@interface OnlineAppDelegate ()<FetchingOnlineInfoViewControllerDelegate, JZGGTabBarControllerDelegate>
 
 @end
 
@@ -110,7 +110,7 @@
 
 
 - (GGTabBarController *)makeTabBarControllerWithControllerArray:(NSMutableArray *)controllerArray {
-    GGTabBar *topTabBar = [[GGIconTabBar alloc] initWithFrame:CGRectZero
+    JZGGTabBar *topTabBar = [[JZGGIconTabBar alloc] initWithFrame:CGRectZero
                                               viewControllers:controllerArray
                                                         inTop:NO
                                                 selectedIndex:0

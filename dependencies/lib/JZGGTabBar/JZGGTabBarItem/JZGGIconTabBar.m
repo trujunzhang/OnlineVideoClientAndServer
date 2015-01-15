@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Goles. All rights reserved.
 //
 
-#import "GGIconTabBar.h"
+#import "JZGGIconTabBar.h"
 #import "GGTabBarAppearanceKeys.h"
 
 
-@interface GGIconTabBar () {
+@interface JZGGIconTabBar () {
     UIButton *_selectedButton;
 }
 @property (nonatomic, strong) NSArray *viewControllers;
@@ -28,7 +28,7 @@
 @end
 
 
-@implementation GGIconTabBar
+@implementation JZGGIconTabBar
 
 #pragma mark - Public API
 

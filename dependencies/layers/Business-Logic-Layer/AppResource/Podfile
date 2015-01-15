@@ -17,7 +17,7 @@ target 'OnlineVideoClient', :exclusive => true do
   pod 'Regexer', :path => '/Volumes/Home/wanghaogithub720/cocoapods/Cocoapods_Libraries/Regexer'
 
   # ________________open projects___________________
-  pod "GGTabBar", :path => "../dependencies/lib/GGTabBar"
+  pod "JZGGTabBar", :path => "../dependencies/lib/JZGGTabBar"
   pod "YKMediaPlayerKit", :path => "../dependencies/lib/YKMediaPlayerKit"
   pod "MPMoviePlayerController-Subtitles", :path => "../dependencies/lib/MPMoviePlayerController-Subtitles"
   pod 'SWRevealViewController', :path => '/Volumes/Home/wanghaogithub720/cocoapods/Cocoapods_Libraries/SWRevealViewController'

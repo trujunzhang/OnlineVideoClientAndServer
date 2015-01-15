@@ -10,11 +10,11 @@
 #import "YoutubeChannelPageViewController.h"
 #import "YTAsyncYoutubeChannelTopCellNode.h"
 #import "GGTabBarController.h"
-#import "GGLayoutStringTabBar.h"
+#import "JZGGLayoutStringTabBar.h"
 #import "SqliteManager.h"
 
 
-@interface YoutubeChannelPageViewController ()<YoutubeCollectionNextPageDelegate, GGTabBarControllerDelegate> {
+@interface YoutubeChannelPageViewController ()<YoutubeCollectionNextPageDelegate, JZGGTabBarControllerDelegate> {
     NSMutableArray *_projectListArray;
 }
 
@@ -78,7 +78,7 @@
     }
 
     // 2
-    GGTabBar *topTabBar = [[GGLayoutStringTabBar alloc] initWithFrame:CGRectZero
+    JZGGTabBar *topTabBar = [[JZGGLayoutStringTabBar alloc] initWithFrame:CGRectZero
                                                       viewControllers:tabBarControllers
                                                                 inTop:YES
                                                         selectedIndex:0

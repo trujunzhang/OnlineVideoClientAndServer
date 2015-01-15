@@ -4,12 +4,12 @@
 #include "YoutubeParser.h"
 #import "YTAsVideoDetailViewController.h"
 #import "GGTabBarController.h"
-#import "GGLayoutStringTabBar.h"
+#import "JZGGLayoutStringTabBar.h"
 #import "CollectionConstant.h"
 #import "YKDirectVideo.h"
 
 
-@interface YTVideoDetailViewController ()<YoutubeCollectionNextPageDelegate, GGTabBarControllerDelegate> {
+@interface YTVideoDetailViewController ()<YoutubeCollectionNextPageDelegate, JZGGTabBarControllerDelegate> {
     NSArray *_lastControllerArray;
     YTYouTubeVideoCache *_detailVideo;
 
@@ -126,7 +126,7 @@
 - (void)makeTabBarController:(UIView *)parentView withControllerArray:(NSArray *)controllerArray {
     [self cleanupContainer:parentView];
 
-    GGTabBar *topTabBar = [[GGLayoutStringTabBar alloc] initWithFrame:CGRectZero
+    JZGGTabBar *topTabBar = [[JZGGLayoutStringTabBar alloc] initWithFrame:CGRectZero
                                                       viewControllers:controllerArray
                                                                 inTop:YES
                                                         selectedIndex:controllerArray.count - 1

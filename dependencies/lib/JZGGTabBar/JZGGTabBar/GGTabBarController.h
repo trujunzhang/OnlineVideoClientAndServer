@@ -8,23 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol GGTabBarControllerDelegate;
-@class GGTabBar;
+@protocol JZGGTabBarControllerDelegate;
+@class JZGGTabBar;
 
 
 @interface GGTabBarController : UIViewController
-@property (nonatomic, strong) GGTabBar *tabBarView;
+@property (nonatomic, strong) JZGGTabBar *tabBarView;
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, weak) id<GGTabBarControllerDelegate> delegate;
+@property (nonatomic, weak) id<JZGGTabBarControllerDelegate> delegate;
 @property (nonatomic, assign) BOOL debug;
 
-- (instancetype)initWithTabBarView:(GGTabBar *)tabBarView;
+- (instancetype)initWithTabBarView:(JZGGTabBar *)tabBarView;
 
 @end
 
 
-@protocol GGTabBarControllerDelegate<NSObject>
+@protocol JZGGTabBarControllerDelegate<NSObject>
 @optional
 - (BOOL)ggTabBarController:(GGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController;
 

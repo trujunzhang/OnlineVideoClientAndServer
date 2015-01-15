@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol GGTabBarDelegate;
+@protocol JZGGTabBarDelegate;
 
 static const NSInteger kSeparatorOffsetTag = 7000;
 static const NSInteger kMarginSeparatorOffsetTag = 8000;
@@ -18,11 +18,11 @@ static CGFloat tabBarPadding = 0.0f;
 static CGFloat separatorWidth = 2.0f;
 
 
-@interface GGTabBar : UIView
+@interface JZGGTabBar : UIView
 
 @property (nonatomic, strong) NSArray *viewControllers;
 
-@property (nonatomic, strong) id<GGTabBarDelegate> delegate;
+@property (nonatomic, strong) id<JZGGTabBarDelegate> delegate;
 
 @property (nonatomic, strong) UIViewController *selectedViewController;
 @property (nonatomic, strong) id selectedButton;
@@ -36,6 +36,6 @@ static CGFloat separatorWidth = 2.0f;
 @end
 
 
-@protocol GGTabBarDelegate<NSObject>
-- (void)tabBar:(GGTabBar *)tabBar didPressButton:(id)button atIndex:(NSUInteger)tabIndex;
+@protocol JZGGTabBarDelegate<NSObject>
+- (void)tabBar:(JZGGTabBar *)tabBar didPressButton:(id)button atIndex:(NSUInteger)tabIndex;
 @end

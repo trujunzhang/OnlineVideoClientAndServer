@@ -12,7 +12,7 @@
 * This is done as externs to enable Swift compatibility.
 **/
 
-/** Sets a background color for the GGTabBar.
+/** Sets a background color for the JZGGTabBar.
 *  Value Type: UIColor
 */
 extern NSString *const kTabBarAppearanceBackgroundColor;
@@ -22,7 +22,7 @@ extern NSString *const kTabBarAppearanceBackgroundColor;
 */
 extern NSString *const kTabBarAppearanceHeight;
 
-/** Sets a tint color for the GGTabBar Icons.
+/** Sets a tint color for the JZGGTabBar Icons.
 *  Value Type: UIColor
 */
 extern NSString *const kTabBarAppearanceTint;

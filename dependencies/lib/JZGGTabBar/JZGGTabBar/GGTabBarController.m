@@ -7,10 +7,10 @@
 //
 
 #import "GGTabBarController.h"
-#import "GGTabBar.h"
+#import "JZGGTabBar.h"
 
 
-@interface GGTabBarController ()<GGTabBarDelegate>
+@interface GGTabBarController ()<JZGGTabBarDelegate>
 @property (nonatomic, strong) UIView *presentationView;
 @property (nonatomic, assign) BOOL isFirstAppear;
 @end
@@ -18,7 +18,7 @@
 
 @implementation GGTabBarController
 
-- (instancetype)initWithTabBarView:(GGTabBar *)tabBarView {
+- (instancetype)initWithTabBarView:(JZGGTabBar *)tabBarView {
     self = [super init];
     if(self) {
         self.tabBarView = tabBarView;
@@ -70,7 +70,7 @@
 #pragma mark - Delegation
 
 
-- (void)tabBar:(GGTabBar *)tabBar didPressButton:(id)button atIndex:(NSUInteger)tabIndex {
+- (void)tabBar:(JZGGTabBar *)tabBar didPressButton:(id)button atIndex:(NSUInteger)tabIndex {
     UIViewController *selectedViewController = _viewControllers[tabIndex];
     self.selectedIndex = tabIndex;
 

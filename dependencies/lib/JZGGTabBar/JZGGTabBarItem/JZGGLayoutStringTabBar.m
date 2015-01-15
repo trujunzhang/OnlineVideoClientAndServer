@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Goles. All rights reserved.
 //
 
-#import "GGLayoutStringTabBar.h"
+#import "JZGGLayoutStringTabBar.h"
 
 
-@interface GGLayoutStringTabBar () {
+@interface JZGGLayoutStringTabBar () {
     UILabel *_selectedButton;
     UIView *_divider;
     NSInteger _selectedIndex;
@@ -27,7 +27,7 @@
 @end
 
 
-@implementation GGLayoutStringTabBar
+@implementation JZGGLayoutStringTabBar
 
 #pragma mark - Public API
 

@@ -1,5 +1,5 @@
 //
-//  GGLayoutStringTabBar.h
+//  JZGGLayoutStringTabBar.h
 //  Example
 //
 //  Created by djzhang on 12/6/14.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GGTabBar.h"
+#import "JZGGTabBar.h"
 
 
-@interface GGLayoutStringTabBar : GGTabBar
+@interface JZGGLayoutStringTabBar : JZGGTabBar
 
 @end
