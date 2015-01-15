@@ -15,26 +15,23 @@
 
 @implementation KRLCollectionViewGridLayout
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
-    if (self) {
+    if(self) {
         [self sharedInit];
     }
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self) {
+    if(self) {
         [self sharedInit];
     }
     return self;
 }
 
-- (void)sharedInit
-{
+- (void)sharedInit {
     _numberOfItemsPerLine = 1;
     _aspectRatio = 1;
     _sectionInset = UIEdgeInsetsZero;
@@ -43,27 +40,24 @@
     _scrollDirection = UICollectionViewScrollDirectionVertical;
 }
 
-- (void)prepareLayout
-{
+- (void)prepareLayout {
     [self calculateContentSize];
     [self calculateLayoutAttributes];
 }
 
-- (CGSize)collectionViewContentSize
-{
-    if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
+- (CGSize)collectionViewContentSize {
+    if(self.scrollDirection == UICollectionViewScrollDirectionVertical) {
         return CGSizeMake(self.collectionView.bounds.size.width, self.collectionViewContentLength);
     } else {
         return CGSizeMake(self.collectionViewContentLength, self.collectionView.bounds.size.height);
     }
 }
 
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
-{
+- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     NSMutableArray *visibleAttributes = [NSMutableArray array];
     for (NSArray *sectionAttributes in self.attributesBySection) {
         for (UICollectionViewLayoutAttributes *attributes in sectionAttributes) {
-            if (CGRectIntersectsRect(rect, attributes.frame)) {
+            if(CGRectIntersectsRect(rect, attributes.frame)) {
                 [visibleAttributes addObject:attributes];
             }
         }
@@ -71,37 +65,33 @@
     return [visibleAttributes copy];
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     return self.attributesBySection[indexPath.section][indexPath.item];
 }
 
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
-{
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
     return !CGSizeEqualToSize(newBounds.size, self.collectionView.bounds.size);
 }
 
-- (void)calculateContentSize
-{
+- (void)calculateContentSize {
     CGSize cellSize = [self cellSize];
     CGFloat contentLength = 0;
 
     NSInteger sections = [self.collectionView numberOfSections];
-    for (NSInteger section = 0; section < sections; section++) {
+    for (NSInteger section = 0;section < sections;section++) {
         contentLength += [self contentLengthForSection:section withCellSize:cellSize];
     }
 
     self.collectionViewContentLength = contentLength;
 }
 
-- (CGFloat)contentLengthForSection:(NSInteger)section withCellSize:(CGSize)cellSize
-{
+- (CGFloat)contentLengthForSection:(NSInteger)section withCellSize:(CGSize)cellSize {
     NSInteger rowsInSection = [self rowsInSection:section];
 
     CGFloat contentLength = (rowsInSection - 1) * self.lineSpacing;
     contentLength += [self lengthwiseInsetLength];
 
-    if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
+    if(self.scrollDirection == UICollectionViewScrollDirectionVertical) {
         contentLength += rowsInSection * cellSize.height;
     } else {
         contentLength += rowsInSection * cellSize.width;
@@ -109,41 +99,36 @@
     return contentLength;
 }
 
-- (NSInteger)rowsInSection:(NSInteger)section
-{
+- (NSInteger)rowsInSection:(NSInteger)section {
     NSInteger itemsInSection = [self.collectionView numberOfItemsInSection:section];
     NSInteger rowsInSection = itemsInSection / self.numberOfItemsPerLine + (itemsInSection % self.numberOfItemsPerLine > 0 ? 1 : 0);
     return rowsInSection;
 }
 
-- (CGFloat)lengthwiseInsetLength
-{
-    if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
+- (CGFloat)lengthwiseInsetLength {
+    if(self.scrollDirection == UICollectionViewScrollDirectionVertical) {
         return self.sectionInset.top + self.sectionInset.bottom;
     } else {
         return self.sectionInset.left + self.sectionInset.right;
     }
 }
 
-- (void)calculateLayoutAttributes
-{
+- (void)calculateLayoutAttributes {
     self.attributesBySection = [NSMutableArray array];
-    for (NSInteger section = 0; section < [self.collectionView numberOfSections]; section++) {
+    for (NSInteger section = 0;section < [self.collectionView numberOfSections];section++) {
         [self.attributesBySection addObject:[self layoutAttributesForItemsInSection:section]];
     }
 }
 
-- (NSArray *)layoutAttributesForItemsInSection:(NSInteger)section
-{
+- (NSArray *)layoutAttributesForItemsInSection:(NSInteger)section {
     NSMutableArray *attributes = [NSMutableArray array];
-    for (NSInteger item = 0; item < [self.collectionView numberOfItemsInSection:section]; item++) {
+    for (NSInteger item = 0;item < [self.collectionView numberOfItemsInSection:section];item++) {
         [attributes addObject:[self layoutAttributesForCellAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]]];
     }
     return attributes;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForCellAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewLayoutAttributes *)layoutAttributesForCellAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
 
     attributes.frame = [self frameForItemAtIndexPath:indexPath];
@@ -151,8 +136,7 @@
     return attributes;
 }
 
-- (CGRect)frameForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGRect)frameForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGSize cellSize = [self cellSize];
     NSInteger rowOfItem = indexPath.item / self.numberOfItemsPerLine;
     NSInteger locationInRowOfItem = indexPath.item % self.numberOfItemsPerLine;
@@ -160,7 +144,7 @@
     CGRect frame = CGRectZero;
 
     CGFloat sectionStart = [self startOfSection:indexPath.section];
-    if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
+    if(self.scrollDirection == UICollectionViewScrollDirectionVertical) {
         frame.origin.x = self.sectionInset.left + (locationInRowOfItem * cellSize.width) + (self.interitemSpacing * locationInRowOfItem);
         frame.origin.y = sectionStart + self.sectionInset.top + (rowOfItem * cellSize.height) + (self.lineSpacing * rowOfItem);
     } else {
@@ -172,34 +156,31 @@
     return frame;
 }
 
-- (CGFloat)startOfSection:(NSInteger)section
-{
+- (CGFloat)startOfSection:(NSInteger)section {
     CGFloat startOfSection = 0;
     CGSize cellSize = [self cellSize];
-    for (NSInteger index = 0; index < section; index++) {
+    for (NSInteger index = 0;index < section;index++) {
         startOfSection += [self contentLengthForSection:index withCellSize:cellSize];
     }
     return startOfSection;
 }
 
-- (CGSize)cellSize
-{
+- (CGSize)cellSize {
     CGFloat usableSpace = [self usableSpace];
     CGFloat cellLength = usableSpace / self.numberOfItemsPerLine;
 
-    if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
-       CGSize size = CGSizeMake(cellLength,
-                              cellLength * (1.0 / self.aspectRatio));
-       return size;
+    if(self.scrollDirection == UICollectionViewScrollDirectionVertical) {
+        CGSize size = CGSizeMake(cellLength,
+                cellLength * (1.0 / self.aspectRatio));
+        return size;
     } else {
         return CGSizeMake(cellLength * self.aspectRatio,
-                          cellLength);
+                cellLength);
     }
 }
 
-- (CGFloat)usableSpace
-{
-    if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
+- (CGFloat)usableSpace {
+    if(self.scrollDirection == UICollectionViewScrollDirectionVertical) {
         return (self.collectionViewContentSize.width
                 - self.sectionInset.left
                 - self.sectionInset.right
@@ -212,9 +193,8 @@
     }
 }
 
-- (void)setNumberOfItemsPerLine:(NSInteger)numberOfItemsPerLine
-{
-    if (_numberOfItemsPerLine != numberOfItemsPerLine) {
+- (void)setNumberOfItemsPerLine:(NSInteger)numberOfItemsPerLine {
+    if(_numberOfItemsPerLine != numberOfItemsPerLine) {
         _numberOfItemsPerLine = numberOfItemsPerLine;
 
         [self invalidateLayout];
@@ -222,43 +202,39 @@
 }
 
 - (void)setInteritemSpacing:(CGFloat)interitemSpacing {
-    if (_interitemSpacing != interitemSpacing) {
+    if(_interitemSpacing != interitemSpacing) {
         _interitemSpacing = interitemSpacing;
 
         [self invalidateLayout];
     }
 }
 
-- (void)setLineSpacing:(CGFloat)lineSpacing
-{
-    if (_lineSpacing != lineSpacing) {
+- (void)setLineSpacing:(CGFloat)lineSpacing {
+    if(_lineSpacing != lineSpacing) {
         _lineSpacing = lineSpacing;
 
         [self invalidateLayout];
     }
 }
 
-- (void)setSectionInset:(UIEdgeInsets)sectionInset
-{
-    if (!UIEdgeInsetsEqualToEdgeInsets(_sectionInset, sectionInset)) {
+- (void)setSectionInset:(UIEdgeInsets)sectionInset {
+    if(!UIEdgeInsetsEqualToEdgeInsets(_sectionInset, sectionInset)) {
         _sectionInset = sectionInset;
 
         [self invalidateLayout];
     }
 }
 
-- (void)setAspectRatio:(CGFloat)aspectRatio
-{
-    if (_aspectRatio != aspectRatio) {
+- (void)setAspectRatio:(CGFloat)aspectRatio {
+    if(_aspectRatio != aspectRatio) {
         _aspectRatio = aspectRatio;
 
         [self invalidateLayout];
     }
 }
 
-- (void)setScrollDirection:(UICollectionViewScrollDirection)scrollDirection
-{
-    if (_scrollDirection != scrollDirection) {
+- (void)setScrollDirection:(UICollectionViewScrollDirection)scrollDirection {
+    if(_scrollDirection != scrollDirection) {
         _scrollDirection = scrollDirection;
 
         [self invalidateLayout];

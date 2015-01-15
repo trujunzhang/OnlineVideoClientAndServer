@@ -12,133 +12,133 @@
 
 }
 - (instancetype)init {
-   self = [super init];
-   if (self) {
-      self.sqliteObjectID = [MobileDB uniqueID];
-      self.sqliteObjectName = @"";
-      self.objectFullPath = @"";
+    self = [super init];
+    if(self) {
+        self.sqliteObjectID = [MobileDB uniqueID];
+        self.sqliteObjectName = @"";
+        self.objectFullPath = @"";
 
-      self.sqliteObjectArray = [[NSMutableArray alloc] init];
-      self.lastsubDirectoryListsArray = [[NSMutableArray alloc] init];
-   }
+        self.sqliteObjectArray = [[NSMutableArray alloc] init];
+        self.lastsubDirectoryListsArray = [[NSMutableArray alloc] init];
+    }
 
-   return self;
+    return self;
 }
 
 
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName {
-   self = [self init];
-   if (self) {
-      self.sqliteObjectID = sqliteObjectID;
-      self.sqliteObjectName = sqliteObjectName;
-   }
+    self = [self init];
+    if(self) {
+        self.sqliteObjectID = sqliteObjectID;
+        self.sqliteObjectName = sqliteObjectName;
+    }
 
-   return self;
+    return self;
 }
 
 
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
-   self = [self init];
-   if (self) {
-      self.sqliteObjectID = sqliteObjectID;
-      self.sqliteObjectName = sqliteObjectName;
-      self.objectFullPath = projectFullPath;
-   }
+    self = [self init];
+    if(self) {
+        self.sqliteObjectID = sqliteObjectID;
+        self.sqliteObjectName = sqliteObjectName;
+        self.objectFullPath = projectFullPath;
+    }
 
-   return self;
+    return self;
 }
 
 
 - (void)appendSqliteObjectToArray:(id)sqliteObject {
-   [self.sqliteObjectArray addObject:sqliteObject];
+    [self.sqliteObjectArray addObject:sqliteObject];
 }
 
 
 - (void)addLastSqliteObjectArray:(NSMutableArray *)array {
-   for (id object in array) {
-      [self appendSqliteObjectToArray:object];
-   }
+    for (id object in array) {
+        [self appendSqliteObjectToArray:object];
+    }
 }
 
 
 - (NSString *)sqlStringSerializationForUpdate {
-   NSMutableDictionary * dictionary = [self appendCommonDictionary:[self getUpdateDictionary]];
+    NSMutableDictionary *dictionary = [self appendCommonDictionary:[self getUpdateDictionary]];
 
-   NSMutableArray * videoIds = [[NSMutableArray alloc] init];
+    NSMutableArray *videoIds = [[NSMutableArray alloc] init];
 
-   NSArray * allKeys = dictionary.allKeys;
-   for (NSString * key in allKeys) {
-      NSString * value = [dictionary valueForKey:key];
+    NSArray *allKeys = dictionary.allKeys;
+    for (NSString *key in allKeys) {
+        NSString *value = [dictionary valueForKey:key];
 
-      NSString * data = [NSString stringWithFormat:@"%@ = \"%@\"", key, [ABSqliteObject adjustSpecialCharactor:value]];
-      [videoIds addObject:data];
-   }
+        NSString *data = [NSString stringWithFormat:@"%@ = \"%@\"", key, [ABSqliteObject adjustSpecialCharactor:value]];
+        [videoIds addObject:data];
+    }
 
-   return [videoIds componentsJoinedByString:@","];
+    return [videoIds componentsJoinedByString:@","];
 }
 
 
 + (NSString *)adjustSpecialCharactor:(NSString *)value {
 //   return [value replaceCharcter:@"'" withCharcter:@"\'"];
-   return value;
+    return value;
 }
 
 
 - (NSArray *)sqlStringSerializationForInsert {
-   NSMutableDictionary * dictionary = [self appendCommonDictionary:[self getInsertDictionary]];
+    NSMutableDictionary *dictionary = [self appendCommonDictionary:[self getInsertDictionary]];
 
-   NSArray * allKeys = dictionary.allKeys;
-   NSString * tableFieldString = [allKeys componentsJoinedByString:@","];
-
-
-   NSMutableArray * allValues = [[NSMutableArray alloc] init];
-   for (NSString * value in dictionary.allValues) {
-      NSString * string = [NSString stringWithFormat:@"\"%@\"", [ABSqliteObject adjustSpecialCharactor:value]];
-      [allValues addObject:string];
-   }
-   NSString * tableValueString = [allValues componentsJoinedByString:@","];
+    NSArray *allKeys = dictionary.allKeys;
+    NSString *tableFieldString = [allKeys componentsJoinedByString:@","];
 
 
-   return @[ tableFieldString, tableValueString ];
+    NSMutableArray *allValues = [[NSMutableArray alloc] init];
+    for (NSString *value in dictionary.allValues) {
+        NSString *string = [NSString stringWithFormat:@"\"%@\"", [ABSqliteObject adjustSpecialCharactor:value]];
+        [allValues addObject:string];
+    }
+    NSString *tableValueString = [allValues componentsJoinedByString:@","];
+
+
+    return @[tableFieldString, tableValueString];
 }
 
 
 - (NSMutableDictionary *)appendCommonDictionary:(NSMutableDictionary *)dictionary {
-   [dictionary setObject:self.objectFullPath forKey:@"objectFullPath"];
+    [dictionary setObject:self.objectFullPath forKey:@"objectFullPath"];
 
-   return dictionary;
+    return dictionary;
 }
 
 
 + (NSString *)getSqlStringSerializationForFilter:(NSMutableDictionary *)filterDictionary {
-   if (filterDictionary.count == 0) {
-      return @"0 = 0";
-   }
+    if(filterDictionary.count == 0) {
+        return @"0 = 0";
+    }
 
-   NSMutableArray * videoIds = [[NSMutableArray alloc] init];
+    NSMutableArray *videoIds = [[NSMutableArray alloc] init];
 
-   NSArray * allKeys = filterDictionary.allKeys;
-   for (NSString * key in allKeys) {
-      NSString * value = [filterDictionary valueForKey:key];
+    NSArray *allKeys = filterDictionary.allKeys;
+    for (NSString *key in allKeys) {
+        NSString *value = [filterDictionary valueForKey:key];
 
-      NSString * data = [NSString stringWithFormat:@"%@ = \"%@\"", key, [ABSqliteObject adjustSpecialCharactor:value]];
-      [videoIds addObject:data];
-   }
+        NSString *data = [NSString stringWithFormat:@"%@ = \"%@\"", key, [ABSqliteObject adjustSpecialCharactor:value]];
+        [videoIds addObject:data];
+    }
 
 
-   return [videoIds componentsJoinedByString:@" and "];
+    return [videoIds componentsJoinedByString:@" and "];
 }
 
 
 - (void)updateSqliteObject:(ABSqliteObject *)object {
-   self.sqliteObjectID = object.sqliteObjectID;
-   self.sqliteObjectName = object.sqliteObjectName;
+    self.sqliteObjectID = object.sqliteObjectID;
+    self.sqliteObjectName = object.sqliteObjectName;
 }
 
 
 - (NSString *)makeObjectFullPath:(NSString *)parentFullPath {
-   self.objectFullPath = [NSString stringWithFormat:@"%@/%@", parentFullPath, self.sqliteObjectName];
-   return self.objectFullPath;
+    self.objectFullPath = [NSString stringWithFormat:@"%@/%@", parentFullPath, self.sqliteObjectName];
+    return self.objectFullPath;
 }
 
 

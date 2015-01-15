@@ -8,7 +8,7 @@
 
 
 @interface YTAsSecondChannelRowNode () {
-   ASTextNode * _videoTitleNode;
+    ASTextNode *_videoTitleNode;
 }
 @end
 
@@ -18,24 +18,24 @@
 }
 
 - (void)makeRowNode {
-   // 2.2
-   _videoTitleNode = [ASTextNode initWithAttributedString:
-    [NSAttributedString attributedStringForCollectionVideoTitle:[YoutubeParser getPlayListTitle:self.nodeInfo]
-                                                       fontSize:13.0f]];
+    // 2.2
+    _videoTitleNode = [ASTextNode initWithAttributedString:
+            [NSAttributedString attributedStringForCollectionVideoTitle:[YoutubeParser getPlayListTitle:self.nodeInfo]
+                                                               fontSize:13.0f]];
 
 
-   [self addSubnode:_videoTitleNode];
+    [self addSubnode:_videoTitleNode];
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-   return self.cellRect.size;
+    return self.cellRect.size;
 }
 
 
 - (void)layout {
-   _videoTitleNode.frame =
-    CGRectMake(VIDEO_TITLE_PADDING_LEFT, 10, self.cellRect.size.width - VIDEO_TITLE_PADDING_LEFT * 2, COLLECTION_CELL_SECOND_HEIGHT - 12);
+    _videoTitleNode.frame =
+            CGRectMake(VIDEO_TITLE_PADDING_LEFT, 10, self.cellRect.size.width - VIDEO_TITLE_PADDING_LEFT * 2, COLLECTION_CELL_SECOND_HEIGHT - 12);
 }
 
 @end

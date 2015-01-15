@@ -28,9 +28,9 @@ static CGFloat VIDEO_TITLE_PADDING_LEFT = 4.0f;
 
 @interface YTAsRowNode : ASDisplayNode
 
-@property(nonatomic) CGRect cellRect;
+@property (nonatomic) CGRect cellRect;
 
-@property(nonatomic, strong) id nodeInfo;
+@property (nonatomic, strong) id nodeInfo;
 
 - (void)makeRowNode;
 

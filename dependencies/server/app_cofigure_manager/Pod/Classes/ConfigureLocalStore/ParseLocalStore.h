@@ -8,6 +8,7 @@
 
 @interface ParseLocalStore : NSObject
 + (void)saveSqliteVersion:(NSString *)version;
+
 + (NSString *)readSqliteVersion;
 
 + (BOOL)checkLocalCacheSqliteExist;

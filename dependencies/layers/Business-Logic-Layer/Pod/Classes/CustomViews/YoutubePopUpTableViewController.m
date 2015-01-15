@@ -11,9 +11,9 @@
 
 
 @interface YoutubePopUpTableViewController ()<ASTableViewDataSource, ASTableViewDelegate> {
-   ASTableView * _tableView;
+    ASTableView *_tableView;
 }
-@property(strong, nonatomic) NSMutableArray * ParsingArray;
+@property (strong, nonatomic) NSMutableArray *ParsingArray;
 @end
 
 
@@ -21,35 +21,35 @@
 
 
 - (void)viewDidLoad {
-   [super viewDidLoad];
+    [super viewDidLoad];
 
-   // Do any additional setup after loading the view.
-   _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-   _tableView.asyncDataSource = self;
-   _tableView.asyncDelegate = self;
-   [self.view addSubview:_tableView];
+    // Do any additional setup after loading the view.
+    _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _tableView.asyncDataSource = self;
+    _tableView.asyncDelegate = self;
+    [self.view addSubview:_tableView];
 }
 
 
 - (void)viewWillLayoutSubviews {
-   _tableView.frame = self.view.bounds;
+    _tableView.frame = self.view.bounds;
 }
 
 
 - (void)resetTableSource:(NSMutableArray *)array {
-   self.ParsingArray = array;
-   [_tableView reloadData];
+    self.ParsingArray = array;
+    [_tableView reloadData];
 }
 
 
 - (void)empty {
-   [self resetTableSource:[[NSMutableArray alloc] init]];
+    [self resetTableSource:[[NSMutableArray alloc] init]];
 }
 
 
 - (void)didReceiveMemoryWarning {
-   [super didReceiveMemoryWarning];
-   // Dispose of any resources that can be recreated.
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
@@ -58,16 +58,16 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   return self.ParsingArray.count;
+    return self.ParsingArray.count;
 }
 
 
 - (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
-   ASTextCellNode * node = [[ASTextCellNode alloc] init];
-   node.text = self.ParsingArray[indexPath.row];
-   node.backgroundColor = [UIColor whiteColor];
+    ASTextCellNode *node = [[ASTextCellNode alloc] init];
+    node.text = self.ParsingArray[indexPath.row];
+    node.backgroundColor = [UIColor whiteColor];
 
-   return node;
+    return node;
 }
 
 
@@ -76,8 +76,8 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   NSString * value = self.ParsingArray[indexPath.row];
-   [self.popupDelegate didSelectRowWithValue:value];
+    NSString *value = self.ParsingArray[indexPath.row];
+    [self.popupDelegate didSelectRowWithValue:value];
 }
 
 

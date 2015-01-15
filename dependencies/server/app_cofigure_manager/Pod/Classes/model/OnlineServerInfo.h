@@ -9,14 +9,17 @@
 @interface OnlineServerInfo : NSObject
 
 
-@property(nonatomic, strong) NSString * domainHost;
-@property(nonatomic, strong) NSString * domainPort;
-@property(nonatomic, strong) NSString * cacheThumbmail;
-@property(nonatomic, strong) NSString * version;
-@property(nonatomic, copy) NSString * htdocs;
+@property (nonatomic, strong) NSString *domainHost;
+@property (nonatomic, strong) NSString *domainPort;
+@property (nonatomic, strong) NSString *cacheThumbmail;
+@property (nonatomic, strong) NSString *version;
+@property (nonatomic, copy) NSString *htdocs;
 
 + (OnlineServerInfo *)standardServerInfo;
+
 + (OnlineServerInfo *)localServerInfo;
+
 - (NSString *)getCurrentDomainUrl;
+
 - (NSString *)getRemoteSqliteDatabase;
 @end

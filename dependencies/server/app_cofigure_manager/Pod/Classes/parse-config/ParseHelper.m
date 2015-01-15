@@ -9,7 +9,7 @@
 #import <Bolts/BFTask.h>
 
 
-static NSString * const parseClassID = @"9RQwiYQhBS";
+static NSString *const parseClassID = @"9RQwiYQhBS";
 
 
 @implementation ParseHelper {
@@ -17,13 +17,13 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
 }
 
 + (ParseHelper *)sharedParseHelper {
-   static ParseHelper * cache;
-   static dispatch_once_t onceToken;
-   dispatch_once(&onceToken, ^{
-       cache = [[ParseHelper alloc] init];
-   });
+    static ParseHelper *cache;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        cache = [[ParseHelper alloc] init];
+    });
 
-   return cache;
+    return cache;
 }
 
 
@@ -32,15 +32,15 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
 
 
 - (void)saveOnlineVideoInfo:(OnlineServerInfo *)serverInfo {
-   PFObject * gameScore = [PFObject objectWithClassName:@"OnlineServerInfo"];
+    PFObject *gameScore = [PFObject objectWithClassName:@"OnlineServerInfo"];
 
-   gameScore[@"domainHost"] = serverInfo.domainHost;
-   gameScore[@"domainPort"] = serverInfo.domainPort;
-   gameScore[@"cacheThumbmail"] = serverInfo.cacheThumbmail;
-   gameScore[@"version"] = serverInfo.version;
-   gameScore[@"htdocs"] = serverInfo.htdocs;
+    gameScore[@"domainHost"] = serverInfo.domainHost;
+    gameScore[@"domainPort"] = serverInfo.domainPort;
+    gameScore[@"cacheThumbmail"] = serverInfo.cacheThumbmail;
+    gameScore[@"version"] = serverInfo.version;
+    gameScore[@"htdocs"] = serverInfo.htdocs;
 
-   [gameScore saveInBackground];
+    [gameScore saveInBackground];
 }
 
 
@@ -49,34 +49,34 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
 
 
 - (void)readOnlineVideoInfo:(ParseHelperResultBlock)parseHelperResultBlock {
-   PFQuery * query = [PFQuery queryWithClassName:@"OnlineServerInfo"];
-   [query getObjectInBackgroundWithId:parseClassID block:^(PFObject * gameScore, NSError * error) {
+    PFQuery *query = [PFQuery queryWithClassName:@"OnlineServerInfo"];
+    [query getObjectInBackgroundWithId:parseClassID block:^(PFObject *gameScore, NSError *error) {
 
-       if (error) {
-          // 1. Fetching local cache Objects
-          parseHelperResultBlock(nil, error);
-       } else {
-          // 1. Fetching Objects to parse Server
-          OnlineServerInfo * onlineServerInfo = [self parseInfo:gameScore];
-          parseHelperResultBlock(onlineServerInfo, error);
+        if(error) {
+            // 1. Fetching local cache Objects
+            parseHelperResultBlock(nil, error);
+        } else {
+            // 1. Fetching Objects to parse Server
+            OnlineServerInfo *onlineServerInfo = [self parseInfo:gameScore];
+            parseHelperResultBlock(onlineServerInfo, error);
 
-          // 2. Save Objects to local to cache it
-          [self saveLocalVideoInfo:onlineServerInfo];
-       }
-   }];
+            // 2. Save Objects to local to cache it
+            [self saveLocalVideoInfo:onlineServerInfo];
+        }
+    }];
 }
 
 
 - (OnlineServerInfo *)parseInfo:(PFObject *)gameScore {
-   OnlineServerInfo * serverInfo = [[OnlineServerInfo alloc] init];
+    OnlineServerInfo *serverInfo = [[OnlineServerInfo alloc] init];
 
-   serverInfo.domainHost = gameScore[@"domainHost"];
-   serverInfo.domainPort = gameScore[@"domainPort"];
-   serverInfo.cacheThumbmail = gameScore[@"cacheThumbmail"];
-   serverInfo.version = gameScore[@"version"];
-   serverInfo.htdocs = gameScore[@"htdocs"];
+    serverInfo.domainHost = gameScore[@"domainHost"];
+    serverInfo.domainPort = gameScore[@"domainPort"];
+    serverInfo.cacheThumbmail = gameScore[@"cacheThumbmail"];
+    serverInfo.version = gameScore[@"version"];
+    serverInfo.htdocs = gameScore[@"htdocs"];
 
-   return serverInfo;
+    return serverInfo;
 }
 
 
@@ -85,15 +85,15 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
 
 
 - (void)saveLocalVideoInfo:(OnlineServerInfo *)serverInfo {
-   PFObject * gameScore = [PFObject objectWithClassName:@"OnlineServerInfo"];
+    PFObject *gameScore = [PFObject objectWithClassName:@"OnlineServerInfo"];
 
-   gameScore[@"domainHost"] = serverInfo.domainHost;
-   gameScore[@"domainPort"] = serverInfo.domainPort;
-   gameScore[@"cacheThumbmail"] = serverInfo.cacheThumbmail;
-   gameScore[@"version"] = serverInfo.version;
-   gameScore[@"htdocs"] = serverInfo.htdocs;
+    gameScore[@"domainHost"] = serverInfo.domainHost;
+    gameScore[@"domainPort"] = serverInfo.domainPort;
+    gameScore[@"cacheThumbmail"] = serverInfo.cacheThumbmail;
+    gameScore[@"version"] = serverInfo.version;
+    gameScore[@"htdocs"] = serverInfo.htdocs;
 
-   [gameScore pinInBackground];//The Local Datastore
+    [gameScore pinInBackground];//The Local Datastore
 }
 
 
@@ -102,35 +102,35 @@ static NSString * const parseClassID = @"9RQwiYQhBS";
 
 
 - (void)readLocalVideoInfo:(ParseHelperResultBlock)pFunction {
-   PFObject * object = [PFObject objectWithoutDataWithClassName:@"OnlineServerInfo" objectId:@"9RQwiYQhBS"];
-   [[object fetchFromLocalDatastoreInBackground] continueWithBlock:^id(BFTask * task) {
-       if (task.error) {
-          // something went wrong
-          return task;
-       }
+    PFObject *object = [PFObject objectWithoutDataWithClassName:@"OnlineServerInfo" objectId:@"9RQwiYQhBS"];
+    [[object fetchFromLocalDatastoreInBackground] continueWithBlock:^id(BFTask *task) {
+        if(task.error) {
+            // something went wrong
+            return task;
+        }
 
-       // task.result will be your game score
-       return task;
-   }];
+        // task.result will be your game score
+        return task;
+    }];
 }
 
 
 - (void)readLocalVideoInfo123:(ParseHelperResultBlock)parseHelperResultBlock {
-   PFQuery * query = [PFQuery queryWithClassName:@"OnlineServerInfo"];
-   [query fromLocalDatastore];
+    PFQuery *query = [PFQuery queryWithClassName:@"OnlineServerInfo"];
+    [query fromLocalDatastore];
 
-   BFTask * bfTask = [query getObjectInBackgroundWithId:@"9RQwiYQhBS"];
+    BFTask *bfTask = [query getObjectInBackgroundWithId:@"9RQwiYQhBS"];
 
-   BFContinuationBlock continueWithBlock = ^id(BFTask * task) {
-       if (task.error) {
-          // something went wrong;
-          return task;
-       }
+    BFContinuationBlock continueWithBlock = ^id(BFTask *task) {
+        if(task.error) {
+            // something went wrong;
+            return task;
+        }
 
-       // task.result will be your game score
-       return task;
-   };
-   [bfTask continueWithBlock:continueWithBlock];
+        // task.result will be your game score
+        return task;
+    };
+    [bfTask continueWithBlock:continueWithBlock];
 
 }
 

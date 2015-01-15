@@ -10,31 +10,31 @@
 
 
 @implementation AsTableViewHeaderNode {
-   ASTextNode * _textNode;
+    ASTextNode *_textNode;
 }
 
 
 - (instancetype)init {
-   if (!(self = [super init]))
-      return nil;
+    if(!(self = [super init]))
+        return nil;
 
-   self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
 
-   return self;
+    return self;
 }
 
 
 - (void)didLoad {
-   // enable highlighting now that self.layer has loaded -- see ASHighlightOverlayLayer.h
-   self.layer.as_allowsHighlightDrawing = YES;
+    // enable highlighting now that self.layer has loaded -- see ASHighlightOverlayLayer.h
+    self.layer.as_allowsHighlightDrawing = YES;
 
-   [super didLoad];
+    [super didLoad];
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-   // called on a background thread.  custom nodes must call -measure: on their subnodes in -calculateSizeThatFits:
-   return CGSizeMake(constrainedSize.width, 1.0f);
+    // called on a background thread.  custom nodes must call -measure: on their subnodes in -calculateSizeThatFits:
+    return CGSizeMake(constrainedSize.width, 1.0f);
 }
 
 

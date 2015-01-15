@@ -14,11 +14,15 @@
 @interface ImageCacheInterface : NSObject
 
 + (UIImage *)getCacheImageWithURL:(NSURL *)url;
+
 + (id)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock;
+
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder;
+
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder size:(CGSize)size;
 
 + (void)removeAllCacheDiskObjects;
+
 + (void)removeAllCacheMemoryObjects;
 
 + (void)cancelDowning:(id)operation;

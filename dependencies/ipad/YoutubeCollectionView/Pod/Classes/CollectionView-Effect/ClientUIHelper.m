@@ -12,18 +12,18 @@
 }
 
 + (UIColor *)mainUIBackgroundColor {
-   return [UIColor colorWithHexString:@"ebebeb"];
+    return [UIColor colorWithHexString:@"ebebeb"];
 }
 
 
 + (UIView *)mainUIBackgroundView:(CGRect)containRect {
-   UIImage * backgroundImage = [[UIImage imageNamed:@"background.png"] stretchableImageWithLeftCapWidth:1
+    UIImage *backgroundImage = [[UIImage imageNamed:@"background.png"] stretchableImageWithLeftCapWidth:1
                                                                                            topCapHeight:0];
 
-   UIView * backgroundView = [[UIView alloc] initWithFrame:containRect];
-   [backgroundView setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:containRect];
+    [backgroundView setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
 
-   return backgroundView;
+    return backgroundView;
 }
 
 @end

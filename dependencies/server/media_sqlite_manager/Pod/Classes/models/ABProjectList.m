@@ -19,32 +19,32 @@
 
 @implementation ABProjectList
 - (instancetype)init {
-   self = [super init];
-   if (self) {
-      self.sqliteObjectID = [MobileDB uniqueID];
+    self = [super init];
+    if(self) {
+        self.sqliteObjectID = [MobileDB uniqueID];
 
-      self.sqliteObjectName = @"";
-      self.sqliteObjectArray = [[NSMutableArray alloc] init];
-   }
+        self.sqliteObjectName = @"";
+        self.sqliteObjectArray = [[NSMutableArray alloc] init];
+    }
 
-   return self;
+    return self;
 }
 
 
 - (instancetype)initWithProjectListName:(NSString *)projectListName {
-   self = [self init];
-   if (self) {
-      self.sqliteObjectName = projectListName;
-   }
+    self = [self init];
+    if(self) {
+        self.sqliteObjectName = projectListName;
+    }
 
-   return self;
+    return self;
 }
 
 
 - (BOOL)isEqual:(id)object {
-   ABProjectList * compareReport = object;
+    ABProjectList *compareReport = object;
 
-   return self.sqliteObjectID == compareReport.sqliteObjectID;
+    return self.sqliteObjectID == compareReport.sqliteObjectID;
 }
 
 
@@ -53,38 +53,37 @@
 
 
 - (NSMutableDictionary *)getUpdateDictionary {
-   NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
 
-   [dictionary setObject:self.sqliteObjectName forKey:@"projectListName"];
+    [dictionary setObject:self.sqliteObjectName forKey:@"projectListName"];
 
-   return dictionary;
+    return dictionary;
 }
 
 
 - (NSMutableDictionary *)getInsertDictionary {
 
-   return [self getUpdateDictionary];
+    return [self getUpdateDictionary];
 }
 
 
-
 - (ABProjectFileInfo *)getFirstABProjectFileInfo {
-   if (self.sqliteObjectArray.count > 0) {
-      ABProjectFileInfo * firstFileInfo = self.sqliteObjectArray[0];
+    if(self.sqliteObjectArray.count > 0) {
+        ABProjectFileInfo *firstFileInfo = self.sqliteObjectArray[0];
 
-      return firstFileInfo;
-   }
-   return nil;
+        return firstFileInfo;
+    }
+    return nil;
 }
 
 
 - (ABProjectFileInfo *)checkExistInSubDirectoryWithObjectName:(NSString *)sqliteObjectName {
-   for (ABProjectFileInfo * sqliteObject in self.lastsubDirectoryListsArray) {
-      if ([sqliteObject.sqliteObjectName isEqualToString:sqliteObjectName]) {
-         return sqliteObject;
-      }
-   }
-   return nil;
+    for (ABProjectFileInfo *sqliteObject in self.lastsubDirectoryListsArray) {
+        if([sqliteObject.sqliteObjectName isEqualToString:sqliteObjectName]) {
+            return sqliteObject;
+        }
+    }
+    return nil;
 }
 
 

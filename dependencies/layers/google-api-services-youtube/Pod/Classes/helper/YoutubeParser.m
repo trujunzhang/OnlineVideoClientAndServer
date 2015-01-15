@@ -33,7 +33,7 @@
 
 
 + (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideoCache *)video {
-   return @"";
+    return @"";
 }
 
 
@@ -46,59 +46,59 @@
 
 
 + (NSString *)getChannelIdByVideo:(YTYouTubeVideoCache *)video {
-   return @"";
+    return @"";
 }
 
 
 + (NSString *)getVideoSnippetTitle:(YTYouTubeVideoCache *)video {
-   NSString * string = video.sqliteObjectName;
-   string = [string stringByDeletingPathExtension];
-   return string;
+    NSString *string = video.sqliteObjectName;
+    string = [string stringByDeletingPathExtension];
+    return string;
 }
 
 
 + (NSString *)getVideoDescription:(YTYouTubeVideoCache *)video {
-   return @"";
+    return @"";
 }
 
 
 + (NSString *)getVideoSnippetChannelTitle:(YTYouTubeVideoCache *)video {
-   return @"";
+    return @"";
 }
 
 
 + (NSString *)getVideoSnippetChannelPublishedAt:(YTYouTubeVideoCache *)video {
-   return @"";
+    return @"";
 }
 
 
 + (NSString *)encodeAbstractPath:(NSString *)url {
-   return [url replaceCharcter:@" " withCharcter:@"%20"];
+    return [url replaceCharcter:@" " withCharcter:@"%20"];
 }
 
 
 + (NSString *)getVideoOnlineUrl:(YTYouTubeVideoCache *)fileInfo {
-   NSObject * domain = [[GYoutubeHelper getInstance] getCurrentDomainUrl];
-   NSObject * htdocs = [[GYoutubeHelper getInstance] getHtdocs];
+    NSObject *domain = [[GYoutubeHelper getInstance] getCurrentDomainUrl];
+    NSObject *htdocs = [[GYoutubeHelper getInstance] getHtdocs];
 
-   NSString * relativePath = [fileInfo.objectFullPath replaceCharcter:htdocs
+    NSString *relativePath = [fileInfo.objectFullPath replaceCharcter:htdocs
                                                          withCharcter:@""];
 
-   return [NSString stringWithFormat:@"%@%@", domain, relativePath];
+    return [NSString stringWithFormat:@"%@%@", domain, relativePath];
 }
 
 
 + (NSString *)getVideoThumbnailsGeneratedFromVideo:(YTYouTubeVideoCache *)fileInfo {
 
-   NSString * thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfo.sqliteObjectID];
-   NSObject * domain = [[GYoutubeHelper getInstance] getCurrentDomainUrl];
-   NSString * stringWithFormat = [NSString stringWithFormat:@"%@/%@/%@/%@/%@",
+    NSString *thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfo.sqliteObjectID];
+    NSObject *domain = [[GYoutubeHelper getInstance] getCurrentDomainUrl];
+    NSString *stringWithFormat = [NSString stringWithFormat:@"%@/%@/%@/%@/%@",
                                                             domain,
                                                             [[GYoutubeHelper getInstance] getServerCacheDirectory],
                                                             appCacheDirectory,
                                                             thumbnailFolder,
                                                             thumbnailName];
-   return stringWithFormat;
+    return stringWithFormat;
 }
 
 
@@ -107,63 +107,63 @@
 
 
 + (NSString *)getPlayListTitle:(YTYouTubePlayList *)channel {
-   return channel.sqliteObjectName;
+    return channel.sqliteObjectName;
 }
 
 
 + (NSString *)getPlayListThumbnailsGeneratedFromVideo:(YTYouTubePlayList *)playList {
-   if (playList.sqliteObjectArray.count == 0) {
-      return @"";
-   }
+    if(playList.sqliteObjectArray.count == 0) {
+        return @"";
+    }
 
-   ABProjectFileInfo * firstFileInfo = [playList getFirstABProjectFileInfo];
+    ABProjectFileInfo *firstFileInfo = [playList getFirstABProjectFileInfo];
 
-   NSString * generatedFromVideo = [self getVideoThumbnailsGeneratedFromVideo:firstFileInfo];
-   return generatedFromVideo;
+    NSString *generatedFromVideo = [self getVideoThumbnailsGeneratedFromVideo:firstFileInfo];
+    return generatedFromVideo;
 }
 
 
 + (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel {
-   return @"";
+    return @"";
 }
 
 
 + (NSArray *)getChannelBannerImageUrlArray:(YTYouTubeChannel *)channel {
 
-   return @[
-    @"",
-    @"",
-   ];
+    return @[
+            @"",
+            @"",
+    ];
 }
 
 
 + (NSString *)getChannelSnippetId:(YTYouTubeChannel *)channel {
-   return [NSString stringWithFormat:@"%@", channel.sqliteObjectID];
+    return [NSString stringWithFormat:@"%@", channel.sqliteObjectID];
 }
 
 
 + (NSString *)getChannelProjectFullPath:(YTYouTubeChannel *)channel {
-   return channel.objectFullPath;
+    return channel.objectFullPath;
 }
 
 
 + (NSString *)getChannelSnippetTitle:(YTYouTubeChannel *)channel {
-   return [channel.sqliteObjectName removeSubString:@"@@"];
+    return [channel.sqliteObjectName removeSubString:@"@@"];
 }
 
 
 + (NSString *)getChannelSnippetThumbnail:(YTYouTubeChannel *)channel {
-   return @"";
+    return @"";
 }
 
 
 + (NSString *)getChannelBrandingSettingsTitle:(YTYouTubeChannel *)channel {
-   return @"";
+    return @"";
 }
 
 
 + (NSString *)getChannelStatisticsSubscriberCount:(YTYouTubeChannel *)channel {
-   return @"";
+    return @"";
 }
 
 
@@ -172,16 +172,16 @@
 
 
 + (void)cacheWithKey:(NSString *)key withValue:(NSString *)value {
-   [[ISMemoryCache sharedCache] setObject:value forKey:key];
+    [[ISMemoryCache sharedCache] setObject:value forKey:key];
 }
 
 
 + (NSString *)checkAndAppendThumbnailWithChannelId:(NSString *)key {
-   return [[ISMemoryCache sharedCache] objectForKey:key];
+    return [[ISMemoryCache sharedCache] objectForKey:key];
 }
 
 
 + (NSString *)getYoutubeTypeTitle:(YTYouTubeType *)projectType {
-   return [projectType.sqliteObjectName removeSubString:@"@"];
+    return [projectType.sqliteObjectName removeSubString:@"@"];
 }
 @end

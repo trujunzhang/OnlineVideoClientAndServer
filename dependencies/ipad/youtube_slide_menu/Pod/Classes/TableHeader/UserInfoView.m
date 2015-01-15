@@ -16,14 +16,14 @@
 - (UIView *)bind {
 
 
-   // 2 UIImageView Touch event
+    // 2 UIImageView Touch event
 //   UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
 //                                                                                action:@selector(tapSignOut)];
 //   singleTap.numberOfTapsRequired = 1;
 //   [self.logOutImage setUserInteractionEnabled:YES];
 //   [self.logOutImage addGestureRecognizer:singleTap];
 
-   return self;
+    return self;
 }
 
 

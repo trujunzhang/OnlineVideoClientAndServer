@@ -15,8 +15,8 @@ static const NSInteger kLitterSize = 3;
 
 
 @interface YTAsVideoDetailViewController ()<ASTableViewDataSource, ASTableViewDelegate> {
-   ASTableView * _tableView;
-   YTYouTubeVideoCache * _video;
+    ASTableView *_tableView;
+    YTYouTubeVideoCache *_video;
 }
 
 @end
@@ -30,38 +30,38 @@ static const NSInteger kLitterSize = 3;
 
 
 - (instancetype)initWithVideo:(YTYouTubeVideoCache *)video {
-   if (!(self = [super init]))
-      return nil;
+    if(!(self = [super init]))
+        return nil;
 
-   _video = video;
+    _video = video;
 
-   _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-   _tableView.separatorStyle = UITableViewCellSeparatorStyleNone; // KittenNode has its own separator
-   _tableView.showsVerticalScrollIndicator = NO;
-   _tableView.alwaysBounceHorizontal = NO;
-   _tableView.directionalLockEnabled = YES;
+    _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone; // KittenNode has its own separator
+    _tableView.showsVerticalScrollIndicator = NO;
+    _tableView.alwaysBounceHorizontal = NO;
+    _tableView.directionalLockEnabled = YES;
 
-   _tableView.asyncDataSource = self;
-   _tableView.asyncDelegate = self;
+    _tableView.asyncDataSource = self;
+    _tableView.asyncDelegate = self;
 
-   self.title = @"info";
+    self.title = @"info";
 
-   return self;
+    return self;
 }
 
 
 - (void)viewDidLoad {
-   [super viewDidLoad];
+    [super viewDidLoad];
 
-   [self.view addSubview:_tableView];
+    [self.view addSubview:_tableView];
 }
 
 
 - (void)viewWillLayoutSubviews {
 
-   CGRect rect = self.view.bounds;
-   _tableView.frame = rect;
-   [_tableView setNeedsLayout];
+    CGRect rect = self.view.bounds;
+    _tableView.frame = rect;
+    [_tableView setNeedsLayout];
 }
 
 
@@ -70,29 +70,29 @@ static const NSInteger kLitterSize = 3;
 
 
 - (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
-   ASCellNode * node;
-   // special-case the first row
-   switch (indexPath.row) {
-      case 0:
-         node = [[AsDetailRowChannelInfo alloc] initWithVideo:_video withTableWidth:self.view.frame.size.width];
-         break;
-      case 2:
-         node = [[AsDetailRowVideoDescription alloc] initWithVideo:_video withTableWidth:self.view.frame.size.width];
-         break;
-   }
+    ASCellNode *node;
+    // special-case the first row
+    switch (indexPath.row) {
+        case 0:
+            node = [[AsDetailRowChannelInfo alloc] initWithVideo:_video withTableWidth:self.view.frame.size.width];
+            break;
+        case 2:
+            node = [[AsDetailRowVideoDescription alloc] initWithVideo:_video withTableWidth:self.view.frame.size.width];
+            break;
+    }
 
-   return node;
+    return node;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   return kLitterSize;
+    return kLitterSize;
 }
 
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-   // disable row selection
-   return NO;
+    // disable row selection
+    return NO;
 }
 
 

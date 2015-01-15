@@ -4,9 +4,9 @@
 
 @interface ABProjectFileInfo : ABSqliteObject
 
-@property(copy) NSString * subtitleName;
+@property (copy) NSString *subtitleName;
 
-@property(assign) BOOL canDelete;
+@property (assign) BOOL canDelete;
 
 - (instancetype)initWithFileInforName:(NSString *)fileInforName;
 

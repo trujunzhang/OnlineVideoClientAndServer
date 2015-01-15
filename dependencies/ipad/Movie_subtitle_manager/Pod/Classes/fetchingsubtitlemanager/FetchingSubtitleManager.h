@@ -11,5 +11,6 @@
 
 
 + (void)fetchSubtitleForVideoUrl:(NSString *)thumbnails subtitleResponseBlock:(SubtitleResponseBlock)subtitleResponseBlock;
+
 + (NSString *)convertVideoUrlToSubtitleUrl:(NSString *)url;
 @end

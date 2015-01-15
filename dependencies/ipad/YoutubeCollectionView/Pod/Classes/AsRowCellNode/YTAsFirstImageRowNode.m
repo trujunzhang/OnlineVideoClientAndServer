@@ -11,7 +11,7 @@
 
 
 @interface YTAsFirstImageRowNode () {
-   ASImageNode * _videoCoverThumbnailsNode;
+    ASImageNode *_videoCoverThumbnailsNode;
 }
 @end
 
@@ -21,16 +21,16 @@
 }
 
 - (void)makeRowNode {
-   _videoCoverThumbnailsNode = [ASCacheNetworkImageNode nodeWithImageUrl:[YoutubeParser getVideoSnippetThumbnails:self.nodeInfo]];
+    _videoCoverThumbnailsNode = [ASCacheNetworkImageNode nodeWithImageUrl:[YoutubeParser getVideoSnippetThumbnails:self.nodeInfo]];
 
-   _videoCoverThumbnailsNode.frame = self.cellRect;
+    _videoCoverThumbnailsNode.frame = self.cellRect;
 
-   [self addSubnode:_videoCoverThumbnailsNode];
+    [self addSubnode:_videoCoverThumbnailsNode];
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-   return self.cellRect.size;
+    return self.cellRect.size;
 }
 
 

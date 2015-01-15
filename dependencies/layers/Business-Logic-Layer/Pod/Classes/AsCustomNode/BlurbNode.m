@@ -19,7 +19,7 @@ static CGFloat kTextPadding = 10.0f;
 
 
 @interface BlurbNode () {
-   ASTextNode * _textNode;
+    ASTextNode *_textNode;
 }
 
 @end
@@ -28,14 +28,14 @@ static CGFloat kTextPadding = 10.0f;
 @implementation BlurbNode
 
 - (instancetype)init:(NSString *)blurb {
-   if (!(self = [super init]))
-      return nil;
+    if(!(self = [super init]))
+        return nil;
 
-   // create a text node
-   _textNode = [[ASTextNode alloc] init];
+    // create a text node
+    _textNode = [[ASTextNode alloc] init];
 
-   // configure the node to support tappable links
-   // generate an attributed string using the custom link attribute specified above
+    // configure the node to support tappable links
+    // generate an attributed string using the custom link attribute specified above
 //   NSString * blurb = @"wh placekitten.com \U0001F638";
 //   NSMutableAttributedString * string = [[NSMutableAttributedString alloc] initWithString:blurb];
 //   [string addAttribute:NSFontAttributeName
@@ -46,44 +46,44 @@ static CGFloat kTextPadding = 10.0f;
 //     NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternDot),
 //    }
 //   range:[blurb rangeOfString:@"placekitten.com"]];
-   NSDictionary * attrsNode = @{
-    NSFontAttributeName : [UIFont systemFontOfSize:32.0f],
-    NSForegroundColorAttributeName : [UIColor blueColor],
-   };
+    NSDictionary *attrsNode = @{
+            NSFontAttributeName : [UIFont systemFontOfSize:32.0f],
+            NSForegroundColorAttributeName : [UIColor blueColor],
+    };
 
-   _textNode.attributedString = [[NSAttributedString alloc] initWithString:blurb
-                                                                attributes:attrsNode];
+    _textNode.attributedString = [[NSAttributedString alloc] initWithString:blurb
+                                                                 attributes:attrsNode];
 
-   // add it as a subnode, and we're done
-   [self addSubnode:_textNode];
+    // add it as a subnode, and we're done
+    [self addSubnode:_textNode];
 
-   return self;
+    return self;
 }
 
 
 - (void)didLoad {
-   // enable highlighting now that self.layer has loaded -- see ASHighlightOverlayLayer.h
-   self.layer.as_allowsHighlightDrawing = YES;
+    // enable highlighting now that self.layer has loaded -- see ASHighlightOverlayLayer.h
+    self.layer.as_allowsHighlightDrawing = YES;
 
-   [super didLoad];
+    [super didLoad];
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-   // called on a background thread.  custom nodes must call -measure: on their subnodes in -calculateSizeThatFits:
-   CGSize measuredSize = [_textNode measure:CGSizeMake(constrainedSize.width - 2 * kTextPadding,
-    constrainedSize.height - 2 * kTextPadding)];
-   return CGSizeMake(constrainedSize.width, measuredSize.height + 2 * kTextPadding);
+    // called on a background thread.  custom nodes must call -measure: on their subnodes in -calculateSizeThatFits:
+    CGSize measuredSize = [_textNode measure:CGSizeMake(constrainedSize.width - 2 * kTextPadding,
+            constrainedSize.height - 2 * kTextPadding)];
+    return CGSizeMake(constrainedSize.width, measuredSize.height + 2 * kTextPadding);
 }
 
 
 - (void)layout {
-   // called on the main thread.  we'll use the stashed size from above, instead of blocking on text sizing
-   CGSize textNodeSize = _textNode.calculatedSize;
-   _textNode.frame = CGRectMake(roundf((self.calculatedSize.width - textNodeSize.width) / 2.0f),
-    kTextPadding,
-    textNodeSize.width,
-    textNodeSize.height);
+    // called on the main thread.  we'll use the stashed size from above, instead of blocking on text sizing
+    CGSize textNodeSize = _textNode.calculatedSize;
+    _textNode.frame = CGRectMake(roundf((self.calculatedSize.width - textNodeSize.width) / 2.0f),
+            kTextPadding,
+            textNodeSize.width,
+            textNodeSize.height);
 }
 
 

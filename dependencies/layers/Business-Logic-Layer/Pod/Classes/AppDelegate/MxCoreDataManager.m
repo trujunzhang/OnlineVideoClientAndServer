@@ -14,12 +14,12 @@
 
 + (void)saveWatchedVideoInfo:(YTYouTubeVideoCache *)videoInfo {
 
-   UIApplication *application = [UIApplication sharedApplication];
+    UIApplication *application = [UIApplication sharedApplication];
 
-   __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
-       [application endBackgroundTask:bgTask];
-       bgTask = UIBackgroundTaskInvalid;
-   }];
+    __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
+        [application endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
 
 //   [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
 //

@@ -18,12 +18,12 @@
 
 
 @interface SearchViewController ()<UISearchBarDelegate, YoutubeCollectionNextPageDelegate> {
-   YTCollectionViewController * _collectionViewController;
-   YTCollectionViewController * _lastCollectionViewController;
+    YTCollectionViewController *_collectionViewController;
+    YTCollectionViewController *_lastCollectionViewController;
 }
-@property(strong, nonatomic) UISegmentedControl * segment_title;
-@property(nonatomic, strong) UISearchBar * searchBar;
-@property(nonatomic, strong) UIBarButtonItem * sarchBarItem;
+@property (strong, nonatomic) UISegmentedControl *segment_title;
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UIBarButtonItem *sarchBarItem;
 @end
 
 
@@ -31,83 +31,83 @@
 
 
 - (void)viewDidLoad {
-   [super viewDidLoad];
-   // Do any additional setup after loading the view, typically from a nib.
-   self.view.backgroundColor = [UIColor clearColor];
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor clearColor];
 
-   [self setupNavigationRightItem];
-   [self setupNavigationTitle];
+    [self setupNavigationRightItem];
+    [self setupNavigationTitle];
 
-   if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-      self.edgesForExtendedLayout = UIRectEdgeNone;
-      self.automaticallyAdjustsScrollViewInsets = NO;
-   }
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 
 - (YTCollectionViewController *)makeNewCollectionViewForSearchBar {
-   // 1
-   if (_collectionViewController) {
-      [_collectionViewController.view removeFromSuperview];
-      [_collectionViewController removeFromParentViewController];
+    // 1
+    if(_collectionViewController) {
+        [_collectionViewController.view removeFromSuperview];
+        [_collectionViewController removeFromParentViewController];
 
-      _lastCollectionViewController = _collectionViewController;
-   }
+        _lastCollectionViewController = _collectionViewController;
+    }
 
-   // 2
-   YTCollectionViewController * controller = [[YTCollectionViewController alloc] initWithNextPageDelegate:self
+    // 2
+    YTCollectionViewController *controller = [[YTCollectionViewController alloc] initWithNextPageDelegate:self
                                                                                                 withTitle:nil
                                                                                      withProjectListArray:nil];
-   controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+    controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
-   controller.view.frame = self.view.bounds;// used
-   controller.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    controller.view.frame = self.view.bounds;// used
+    controller.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-   return controller;
+    return controller;
 }
 
 
 - (void)replaceViewController:(YoutubeAsGridCHTLayoutViewController *)controller withSearchText:(NSString *)text withItemType:(YTSegmentItemType)itemType {
-   [controller search:text withItemType:itemType];
+    [controller search:text withItemType:itemType];
 
-   [self addChildViewController:controller];
-   [self.view addSubview:controller.view];
+    [self addChildViewController:controller];
+    [self.view addSubview:controller.view];
 
-   _collectionViewController = controller;
+    _collectionViewController = controller;
 }
 
 
 - (void)setupNavigationRightItem {
-   self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 220, 19)];
-   self.searchBar.backgroundColor = [UIColor clearColor];
-   self.searchBar.showsCancelButton = YES;
-   self.searchBar.userInteractionEnabled = YES;
-   self.searchBar.placeholder = @"Search";
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 220, 19)];
+    self.searchBar.backgroundColor = [UIColor clearColor];
+    self.searchBar.showsCancelButton = YES;
+    self.searchBar.userInteractionEnabled = YES;
+    self.searchBar.placeholder = @"Search";
 
-   self.searchBar.text = @"sketch 3"; // test
-   [self segmentAction:nil]; // test
+    self.searchBar.text = @"sketch 3"; // test
+    [self segmentAction:nil]; // test
 
-   self.searchBar.delegate = self;
+    self.searchBar.delegate = self;
 
-   self.sarchBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
-   self.navigationItem.rightBarButtonItem = self.sarchBarItem;
+    self.sarchBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+    self.navigationItem.rightBarButtonItem = self.sarchBarItem;
 }
 
 
 - (void)setupNavigationTitle {
-   self.segment_title = [[UISegmentedControl alloc] initWithItems:[GYoutubeRequestInfo getSegmentTitlesArray]];
-   self.segment_title.selectedSegmentIndex = 0;
-   self.segment_title.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-   self.segment_title.frame = CGRectMake(0, 0, 300, 30);
-   [self.segment_title addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-   self.segment_title.tintColor = [UIColor redColor];
-   self.navigationItem.titleView = self.segment_title;
+    self.segment_title = [[UISegmentedControl alloc] initWithItems:[GYoutubeRequestInfo getSegmentTitlesArray]];
+    self.segment_title.selectedSegmentIndex = 0;
+    self.segment_title.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.segment_title.frame = CGRectMake(0, 0, 300, 30);
+    [self.segment_title addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+    self.segment_title.tintColor = [UIColor redColor];
+    self.navigationItem.titleView = self.segment_title;
 }
 
 
 - (void)didReceiveMemoryWarning {
-   [super didReceiveMemoryWarning];
-   // Dispose of any resources that can be recreated.
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
@@ -116,11 +116,11 @@
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-   [self segmentAction:nil];
+    [self segmentAction:nil];
 
-   [self.searchBar resignFirstResponder];
+    [self.searchBar resignFirstResponder];
 
-   [self hidePopup];
+    [self hidePopup];
 }
 
 
@@ -134,12 +134,12 @@
 
 
 - (void)segmentAction:(id)sender {
-   if (self.searchBar.text.length == 0)
-      return;
+    if(self.searchBar.text.length == 0)
+        return;
 
-   [self replaceViewController:[self makeNewCollectionViewForSearchBar]
-                withSearchText:self.searchBar.text
-                  withItemType:[GYoutubeRequestInfo getItemTypeByIndex:self.segment_title.selectedSegmentIndex]];
+    [self replaceViewController:[self makeNewCollectionViewForSearchBar]
+                 withSearchText:self.searchBar.text
+                   withItemType:[GYoutubeRequestInfo getItemTypeByIndex:self.segment_title.selectedSegmentIndex]];
 }
 
 
@@ -148,12 +148,12 @@
 
 
 - (void)executeRefreshTask {
-   [self segmentAction:nil];
+    [self segmentAction:nil];
 }
 
 
 - (void)executeNextPageTask {
-   [_collectionViewController searchByPageToken];
+    [_collectionViewController searchByPageToken];
 }
 
 
@@ -162,8 +162,8 @@
 
 
 - (void)didSelectRowWithValue:(NSString *)value {
-   self.searchBar.text = value;
-   [self searchBarSearchButtonClicked:nil];
+    self.searchBar.text = value;
+    [self searchBarSearchButtonClicked:nil];
 }
 
 

@@ -14,14 +14,13 @@
 
 @interface YTLeftRowTableViewCellNode : ASDisplayNode
 
-@property(nonatomic) CGSize const nodeCellSize;
+@property (nonatomic) CGSize const nodeCellSize;
 
-@property(nonatomic, strong) NSString * lineTitle;
-@property(nonatomic, strong) NSString * lineIconUrl;
-@property(nonatomic) BOOL isRemoteImage;
+@property (nonatomic, strong) NSString *lineTitle;
+@property (nonatomic, strong) NSString *lineIconUrl;
+@property (nonatomic) BOOL isRemoteImage;
 
 - (instancetype)initWithNodeCellSize:(struct CGSize const)nodeCellSize lineTitle:(NSString *)lineTitle lineIconUrl:(NSString *)lineIconUrl isRemoteImage:(BOOL)isRemoteImage;
-
 
 
 @end

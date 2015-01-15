@@ -12,7 +12,7 @@
 
 @interface YoutubeVideoCache : ABProjectFileInfo
 
-@property(nonatomic, strong) NSMutableArray * descriptionStringAttributeArray;// YoutubeVideoDescriptionStringAttribute
+@property (nonatomic, strong) NSMutableArray *descriptionStringAttributeArray;// YoutubeVideoDescriptionStringAttribute
 
 - (void)parseDescriptionString;
 

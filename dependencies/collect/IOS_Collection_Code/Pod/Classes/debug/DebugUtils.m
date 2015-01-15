@@ -12,35 +12,35 @@
 @implementation DebugUtils
 
 + (void)printFrameInfo:(CGRect)frame withControllerName:(NSString *)controllerName {
-   CGFloat x = frame.origin.x;
-   CGFloat y = frame.origin.y;
-   CGFloat w = frame.size.width;
-   CGFloat h = frame.size.height;
+    CGFloat x = frame.origin.x;
+    CGFloat y = frame.origin.y;
+    CGFloat w = frame.size.width;
+    CGFloat h = frame.size.height;
 
-   NSLog([NSString stringWithFormat:@"    %@     ", controllerName]);
-   NSLog(@"x = %f", x);
-   NSLog(@"y = %f", y);
-   NSLog(@"w = %f", w);
-   NSLog(@"h = %f", h);
+    NSLog([NSString stringWithFormat:@"    %@     ", controllerName]);
+    NSLog(@"x = %f", x);
+    NSLog(@"y = %f", y);
+    NSLog(@"w = %f", w);
+    NSLog(@"h = %f", h);
 }
 
 
 + (void)printCGRect:(CGRect)cellRect {
-   NSLog(@"Pretty printed rect: %@", NSStringFromCGRect(cellRect));
+    NSLog(@"Pretty printed rect: %@", NSStringFromCGRect(cellRect));
 }
 
 
 + (void)printCGSize:(CGSize)cellSize {
-   NSLog(@"Pretty printed size: %@", NSStringFromCGSize(cellSize));
+    NSLog(@"Pretty printed size: %@", NSStringFromCGSize(cellSize));
 }
 
 
 + (void)setupLogFile {
-   NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-   NSString * documentsDirectory = [paths objectAtIndex:0];
-   NSString * logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
-   NSLog(@"logPath = %@", logPath);
-   freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
+    NSLog(@"logPath = %@", logPath);
+    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
 }
 
 

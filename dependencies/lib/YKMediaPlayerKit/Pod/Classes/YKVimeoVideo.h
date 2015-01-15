@@ -12,20 +12,20 @@
 @interface YKVimeoVideo : NSObject<YKVideo>
 
 /**
-    Vimeo detailVideo url
- */
+Vimeo detailVideo url
+*/
 @property (nonatomic, strong) NSURL *contentURL;
 
 /**
-    Videos found for above mentioned content url. 
-    Available after parseWithCompletion is executed.
- */
+Videos found for above mentioned content url.
+Available after parseWithCompletion is executed.
+*/
 @property (nonatomic, strong) NSDictionary *videos;
 
 /**
-    Thumbnails found for this detailVideo.
-    Available after parseWithCompletion is executed.
- */
+Thumbnails found for this detailVideo.
+Available after parseWithCompletion is executed.
+*/
 @property (nonatomic, strong) NSDictionary *thumbs;
 
 @end

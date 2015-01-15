@@ -15,6 +15,6 @@
 
 @interface YoutubeAsGridCHTLayoutViewController : YoutubeCollectionViewBase
 
-@property(nonatomic, strong) NSArray * numbersPerLineArray;
-@property(nonatomic, strong) UICollectionViewFlowLayout * layout;
+@property (nonatomic, strong) NSArray *numbersPerLineArray;
+@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @end

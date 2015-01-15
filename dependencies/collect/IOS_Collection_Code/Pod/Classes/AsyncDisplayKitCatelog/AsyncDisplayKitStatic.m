@@ -14,21 +14,21 @@
 
 
 + (ASTextNode *)initWithAttributedString:(NSAttributedString *)attributedString {
-   ASTextNode * textNode = [[ASTextNode alloc] init];
-   textNode.attributedString = attributedString;
+    ASTextNode *textNode = [[ASTextNode alloc] init];
+    textNode.attributedString = attributedString;
 
-   return textNode;
+    return textNode;
 }
 
 
 + (ASTextNode *)initWithAttributedString:(NSAttributedString *)attributedString withLinkAttributeNames:(NSArray *)linkAttributeNames {
-   ASTextNode * textNode = [[ASTextNode alloc] init];
-   textNode.attributedString = attributedString;
-   textNode.linkAttributeNames = linkAttributeNames;
+    ASTextNode *textNode = [[ASTextNode alloc] init];
+    textNode.attributedString = attributedString;
+    textNode.linkAttributeNames = linkAttributeNames;
 
-   textNode.userInteractionEnabled = YES;
+    textNode.userInteractionEnabled = YES;
 
-   return textNode;
+    return textNode;
 }
 
 @end
@@ -38,10 +38,10 @@
 
 
 + (ASImageNode *)initWithImageNamed:(NSString *)name {
-   ASImageNode * imageNode = [[ASImageNode alloc] init];
-   imageNode.image = [UIImage imageNamed:name];
+    ASImageNode *imageNode = [[ASImageNode alloc] init];
+    imageNode.image = [UIImage imageNamed:name];
 
-   return imageNode;
+    return imageNode;
 }
 
 @end

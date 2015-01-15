@@ -13,11 +13,12 @@
 
 
 @interface GGTabBarController : UIViewController
-@property(nonatomic, strong) GGTabBar * tabBarView;
-@property(nonatomic, copy) NSArray * viewControllers;
-@property(nonatomic, assign) NSUInteger selectedIndex;
-@property(nonatomic, weak) id<GGTabBarControllerDelegate> delegate;
-@property(nonatomic, assign) BOOL debug;
+@property (nonatomic, strong) GGTabBar *tabBarView;
+@property (nonatomic, copy) NSArray *viewControllers;
+@property (nonatomic, assign) NSUInteger selectedIndex;
+@property (nonatomic, weak) id<GGTabBarControllerDelegate> delegate;
+@property (nonatomic, assign) BOOL debug;
+
 - (instancetype)initWithTabBarView:(GGTabBar *)tabBarView;
 
 @end
@@ -26,5 +27,6 @@
 @protocol GGTabBarControllerDelegate<NSObject>
 @optional
 - (BOOL)ggTabBarController:(GGTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController;
+
 - (void)ggTabBarController:(GGTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
 @end

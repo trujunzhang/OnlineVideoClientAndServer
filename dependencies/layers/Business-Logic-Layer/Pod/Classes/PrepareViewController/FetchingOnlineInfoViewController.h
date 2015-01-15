@@ -15,7 +15,7 @@
 
 
 @interface FetchingOnlineInfoViewController : UIViewController
-@property(nonatomic, weak) id<FetchingOnlineInfoViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<FetchingOnlineInfoViewControllerDelegate> delegate;
 
 - (instancetype)initWithDelegate:(id<FetchingOnlineInfoViewControllerDelegate>)delegate;
 

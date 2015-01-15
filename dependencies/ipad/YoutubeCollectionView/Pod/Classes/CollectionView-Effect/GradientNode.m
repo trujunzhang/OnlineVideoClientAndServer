@@ -16,23 +16,23 @@
      isCancelled:(asdisplaynode_iscancelled_block_t)isCancelledBlock
    isRasterizing:(BOOL)isRasterizing {
 
-   CGContextRef myContext = UIGraphicsGetCurrentContext();
-   CGContextSaveGState(myContext);
-   CGContextClipToRect(myContext, bounds);
+    CGContextRef myContext = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(myContext);
+    CGContextClipToRect(myContext, bounds);
 
-   uint componentCount = 2;
-   CGFloat locations[] = { 0.0, 1.0 };
-   CGFloat components[] = { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0 };
-
-
-   CGColorSpaceRef myColorSpace = CGColorSpaceCreateDeviceRGB();
-   CGGradientRef myGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, componentCount);
+    uint componentCount = 2;
+    CGFloat locations[] = {0.0, 1.0};
+    CGFloat components[] = {0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0};
 
 
-   CGPoint myStartPoint = CGPointMake(CGRectGetMidX(bounds), CGRectGetMaxY(bounds));
-   CGPoint myEndPoint = CGPointMake(CGRectGetMidX(bounds), CGRectGetMinY(bounds));
+    CGColorSpaceRef myColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGGradientRef myGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, componentCount);
 
-   CGContextDrawLinearGradient(myContext, myGradient, myStartPoint, myEndPoint, kCGGradientDrawsAfterEndLocation);
+
+    CGPoint myStartPoint = CGPointMake(CGRectGetMidX(bounds), CGRectGetMaxY(bounds));
+    CGPoint myEndPoint = CGPointMake(CGRectGetMidX(bounds), CGRectGetMinY(bounds));
+
+    CGContextDrawLinearGradient(myContext, myGradient, myStartPoint, myEndPoint, kCGGradientDrawsAfterEndLocation);
 }
 
 

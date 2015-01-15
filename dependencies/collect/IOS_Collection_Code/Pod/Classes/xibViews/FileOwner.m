@@ -9,7 +9,7 @@
 #import "FileOwner.h"
 
 @implementation FileOwner
-+(id)viewFromNibNamed:(NSString*) nibName {
++ (id)viewFromNibNamed:(NSString *)nibName {
     FileOwner *owner = [self new];
     [[NSBundle mainBundle] loadNibNamed:nibName owner:owner options:nil];
     return owner.view;

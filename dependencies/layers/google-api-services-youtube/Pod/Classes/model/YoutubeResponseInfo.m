@@ -16,13 +16,13 @@
 
 
 - (instancetype)init {
-   self = [super init];
-   if (self) {
-      self.array = nil;
-      self.pageToken = nil;
-   }
+    self = [super init];
+    if(self) {
+        self.array = nil;
+        self.pageToken = nil;
+    }
 
-   return self;
+    return self;
 }
 
 
@@ -31,17 +31,17 @@
 
 
 - (instancetype)initWithVideoDictionary:(NSMutableDictionary *)videoDictionary {
-   self = [super init];
-   if (self) {
-      self.videoDictionary = videoDictionary;
-   }
+    self = [super init];
+    if(self) {
+        self.videoDictionary = videoDictionary;
+    }
 
-   return self;
+    return self;
 }
 
 
 + (instancetype)infoWithVideoDictionary:(NSMutableDictionary *)videoDictionary {
-   return [[self alloc] initWithVideoDictionary:videoDictionary];
+    return [[self alloc] initWithVideoDictionary:videoDictionary];
 }
 
 
@@ -50,17 +50,17 @@
 
 
 - (instancetype)initWithSubtitleString:(NSString *)subtitleString {
-   self = [super init];
-   if (self) {
-      self.subtitleString = subtitleString;
-   }
+    self = [super init];
+    if(self) {
+        self.subtitleString = subtitleString;
+    }
 
-   return self;
+    return self;
 }
 
 
 + (instancetype)infoWithSubtitleString:(NSString *)subtitleString {
-   return [[self alloc] initWithSubtitleString:subtitleString];
+    return [[self alloc] initWithSubtitleString:subtitleString];
 }
 
 
@@ -69,18 +69,18 @@
 
 
 - (instancetype)initWithArray:(NSMutableArray *)array pageToken:(NSString *)pageToken {
-   self = [super init];
-   if (self) {
-      self.array = array;
-      self.pageToken = pageToken;
-   }
+    self = [super init];
+    if(self) {
+        self.array = array;
+        self.pageToken = pageToken;
+    }
 
-   return self;
+    return self;
 }
 
 
 + (instancetype)infoWithArray:(NSMutableArray *)array pageToken:(NSString *)pageToken {
-   return [[self alloc] initWithArray:array pageToken:pageToken];
+    return [[self alloc] initWithArray:array pageToken:pageToken];
 }
 
 

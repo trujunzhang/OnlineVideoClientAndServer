@@ -7,7 +7,7 @@
 
 
 @interface AsCacheMultiplexImageNode ()<ASMultiplexImageNodeDataSource> {
-   NSMutableDictionary * _multiplexImageUrlDictionary;
+    NSMutableDictionary *_multiplexImageUrlDictionary;
 }
 
 @end
@@ -18,32 +18,32 @@
 }
 
 - (instancetype)initWithMultiplexImageUrlArray:(NSArray *)urlArray {
-   self = [super initWithCache:nil downloader:[[ASBasicImageDownloader alloc] init]];
-   if (self) {
-      _multiplexImageUrlDictionary = [self multiplexImageUrlDictionary:urlArray];
+    self = [super initWithCache:nil downloader:[[ASBasicImageDownloader alloc] init]];
+    if(self) {
+        _multiplexImageUrlDictionary = [self multiplexImageUrlDictionary:urlArray];
 
-      self.dataSource = self;
+        self.dataSource = self;
 
-      // load low-quality images before high-quality images
-      self.downloadsIntermediateImages = YES;
+        // load low-quality images before high-quality images
+        self.downloadsIntermediateImages = YES;
 
-   }
+    }
 
-   return self;
+    return self;
 }
 
 
 + (instancetype)nodeWithImageUrlArray:(NSArray *)urlArray {
-   AsCacheMultiplexImageNode * node = [[self alloc] initWithMultiplexImageUrlArray:urlArray];
-   [node start];
+    AsCacheMultiplexImageNode *node = [[self alloc] initWithMultiplexImageUrlArray:urlArray];
+    [node start];
 
-   return node;
+    return node;
 }
 
 
 - (void)start {
-   self.imageIdentifiers = nil;
-   self.imageIdentifiers = @[ @"best", @"medium", @"worst" ]; // go!
+    self.imageIdentifiers = nil;
+    self.imageIdentifiers = @[@"best", @"medium", @"worst"]; // go!
 }
 
 
@@ -52,19 +52,19 @@
 
 
 - (NSDictionary *)multiplexImageUrlDictionary:(NSArray *)imageUrlArray {
-   return @{
-    @"worst" : imageUrlArray[0],
-    @"medium" : imageUrlArray[1],
-    @"best" : imageUrlArray[2],
-   };
+    return @{
+            @"worst" : imageUrlArray[0],
+            @"medium" : imageUrlArray[1],
+            @"best" : imageUrlArray[2],
+    };
 }
 
 
 - (NSURL *)multiplexImageNode:(ASMultiplexImageNode *)imageNode URLForImageIdentifier:(id)imageIdentifier {
 
-   NSString * string = [_multiplexImageUrlDictionary objectForKey:imageIdentifier];
+    NSString *string = [_multiplexImageUrlDictionary objectForKey:imageIdentifier];
 
-   return [NSURL URLWithString:string];
+    return [NSURL URLWithString:string];
 }
 
 

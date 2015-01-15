@@ -14,38 +14,38 @@
 
 
 - (instancetype)init {
-   self = [super init];
-   if (self) {
-      self.sqliteObjectID = [MobileDB uniqueID];
-      self.onlineTypeDictionary = [[NSMutableDictionary alloc] init];
-   }
+    self = [super init];
+    if(self) {
+        self.sqliteObjectID = [MobileDB uniqueID];
+        self.onlineTypeDictionary = [[NSMutableDictionary alloc] init];
+    }
 
-   return self;
+    return self;
 }
 
 
 - (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName projectFullPath:(NSString *)projectFullPath withDictionary:(NSMutableDictionary *)dictionary {
-   self = [self init];
-   if (self) {
-      self.sqliteObjectName = onlineTypeName;
-      self.objectFullPath = projectFullPath;
+    self = [self init];
+    if(self) {
+        self.sqliteObjectName = onlineTypeName;
+        self.objectFullPath = projectFullPath;
 
-      [self appendProjectTypeDictionary:dictionary];
-   }
+        [self appendProjectTypeDictionary:dictionary];
+    }
 
-   return self;
+    return self;
 }
 
 
 - (void)appendProjectTypeDictionary:(NSMutableDictionary *)dictionary {
-   for (ABProjectType * projectType in dictionary.allValues) {
-      [self appendProjectType:projectType];
-   }
+    for (ABProjectType *projectType in dictionary.allValues) {
+        [self appendProjectType:projectType];
+    }
 }
 
 
 - (void)appendProjectType:(ABProjectType *)projectType {
-   [self.onlineTypeDictionary setObject:projectType forKey:projectType.sqliteObjectName];
+    [self.onlineTypeDictionary setObject:projectType forKey:projectType.sqliteObjectName];
 }
 
 
@@ -54,16 +54,16 @@
 
 
 - (NSMutableDictionary *)getUpdateDictionary {
-   NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
-   [dictionary setObject:self.sqliteObjectName forKey:@"onlineVideoTypeName"];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:self.sqliteObjectName forKey:@"onlineVideoTypeName"];
 
-   return dictionary;
+    return dictionary;
 }
 
 
 - (NSMutableDictionary *)getInsertDictionary {
 
-   return [self getUpdateDictionary];
+    return [self getUpdateDictionary];
 }
 
 

@@ -6,7 +6,7 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPSessionManager.h"
 
-static NSString * const subtitleTempName = @"temp.srt";
+static NSString *const subtitleTempName = @"temp.srt";
 
 
 @interface Online_Request : AFHTTPSessionManager

@@ -4,15 +4,18 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @class OnlineServerInfo;
 
-typedef void (^ParseHelperResultBlock)(OnlineServerInfo * object, NSError * error);
+typedef void (^ParseHelperResultBlock)(OnlineServerInfo *object, NSError *error);
 
 
 @interface ParseHelper : NSObject
 
 + (ParseHelper *)sharedParseHelper;
+
 - (void)saveOnlineVideoInfo:(OnlineServerInfo *)serverInfo;
+
 - (void)readOnlineVideoInfo:(ParseHelperResultBlock)parseHelperResultBlock;
 
 @end

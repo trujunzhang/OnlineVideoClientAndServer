@@ -13,32 +13,32 @@
 
 
 - (instancetype)init {
-   self = [super init];
-   if (self) {
-      self.sqliteObjectID = [MobileDB uniqueID];
+    self = [super init];
+    if(self) {
+        self.sqliteObjectID = [MobileDB uniqueID];
 
-      self.objectFullPath = @"";
-   }
+        self.objectFullPath = @"";
+    }
 
-   return self;
+    return self;
 }
 
 
 - (instancetype)initWithProjectName:(NSString *)projectName withProjectFullPath:(NSString *)projectFullPath {
-   self = [self init];
-   if (self) {
-      self.sqliteObjectName = projectName;
-      self.objectFullPath = projectFullPath;
-   }
+    self = [self init];
+    if(self) {
+        self.sqliteObjectName = projectName;
+        self.objectFullPath = projectFullPath;
+    }
 
-   return self;
+    return self;
 }
 
 
 - (BOOL)isEqual:(id)object {
-   ABProjectName * compareLocation = object;
+    ABProjectName *compareLocation = object;
 
-   return self.sqliteObjectID == compareLocation.sqliteObjectID;
+    return self.sqliteObjectID == compareLocation.sqliteObjectID;
 }
 
 
@@ -47,28 +47,26 @@
 
 
 - (NSMutableDictionary *)getUpdateDictionary {
-   NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
-   [dictionary setObject:self.sqliteObjectName forKey:@"projectName"];
-   [dictionary setObject:self.objectFullPath forKey:@"objectFullPath"];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:self.sqliteObjectName forKey:@"projectName"];
+    [dictionary setObject:self.objectFullPath forKey:@"objectFullPath"];
 
-   return dictionary;
+    return dictionary;
 }
 
 
 - (NSMutableDictionary *)getInsertDictionary {
 
-   return [self getUpdateDictionary];
+    return [self getUpdateDictionary];
 }
 
 
-
-
 - (ABProjectList *)checkExistInSubDirectoryWithObjectName:(NSString *)sqliteObjectName {
-   for (ABProjectList * sqliteObject in self.lastsubDirectoryListsArray) {
-      if ([sqliteObject.sqliteObjectName isEqualToString:sqliteObjectName]) {
-         return sqliteObject;
-      }
-   }
-   return nil;
+    for (ABProjectList *sqliteObject in self.lastsubDirectoryListsArray) {
+        if([sqliteObject.sqliteObjectName isEqualToString:sqliteObjectName]) {
+            return sqliteObject;
+        }
+    }
+    return nil;
 }
 @end

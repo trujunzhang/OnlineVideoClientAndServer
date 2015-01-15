@@ -10,9 +10,11 @@
 @interface NSString (URLEncode)
 
 - (NSString *)URLEncode;
+
 - (NSString *)URLEncodeUsingEncoding:(NSStringEncoding)encoding;
 
 - (NSString *)URLDecode;
+
 - (NSString *)URLDecodeUsingEncoding:(NSStringEncoding)encoding;
 
 @end

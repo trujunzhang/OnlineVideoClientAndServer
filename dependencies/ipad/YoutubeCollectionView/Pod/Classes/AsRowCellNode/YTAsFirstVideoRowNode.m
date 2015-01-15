@@ -10,7 +10,7 @@
 
 
 @interface YTAsFirstVideoRowNode () {
-   ASNetworkImageNode * _videoCoverThumbnailsNode;
+    ASNetworkImageNode *_videoCoverThumbnailsNode;
 }
 
 @end
@@ -22,29 +22,29 @@
 
 
 - (void)makeRowNode {
-   _videoCoverThumbnailsNode = [[ASNetworkImageNode alloc] init];
-   _videoCoverThumbnailsNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
+    _videoCoverThumbnailsNode = [[ASNetworkImageNode alloc] init];
+    _videoCoverThumbnailsNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
 
-   NSString * playListThumbnails = [YoutubeParser getVideoThumbnailsGeneratedFromVideo:self.nodeInfo];
+    NSString *playListThumbnails = [YoutubeParser getVideoThumbnailsGeneratedFromVideo:self.nodeInfo];
 
-   _videoCoverThumbnailsNode.URL = [NSURL URLWithString:playListThumbnails];
+    _videoCoverThumbnailsNode.URL = [NSURL URLWithString:playListThumbnails];
 
-   _videoCoverThumbnailsNode.contentMode = UIViewContentModeScaleToFill;
+    _videoCoverThumbnailsNode.contentMode = UIViewContentModeScaleToFill;
 
-   [self addSubnode:_videoCoverThumbnailsNode];
+    [self addSubnode:_videoCoverThumbnailsNode];
 
-   [self setNodeTappedEvent];
+    [self setNodeTappedEvent];
 
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-   return self.cellRect.size;
+    return self.cellRect.size;
 }
 
 
 - (void)layout {
-   _videoCoverThumbnailsNode.frame = self.cellRect;
+    _videoCoverThumbnailsNode.frame = self.cellRect;
 
 }
 
@@ -54,26 +54,26 @@
 
 
 - (void)setNodeTappedEvent {
-   // configure the button
-   _videoCoverThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
-   [_videoCoverThumbnailsNode addTarget:self
-                                 action:@selector(buttonTapped:)
-                       forControlEvents:ASControlNodeEventTouchUpInside];
+    // configure the button
+    _videoCoverThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
+    [_videoCoverThumbnailsNode addTarget:self
+                                  action:@selector(buttonTapped:)
+                        forControlEvents:ASControlNodeEventTouchUpInside];
 }
 
 
 - (void)buttonTapped:(id)buttonTapped {
-   NSString * videoUrl = [YoutubeParser getVideoOnlineUrl:self.nodeInfo];
+    NSString *videoUrl = [YoutubeParser getVideoOnlineUrl:self.nodeInfo];
 
-   YKDirectVideo * _directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:[videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    YKDirectVideo *_directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:[videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 
-   SubtitleResponseBlock subtitleResponseBlock = ^(NSURL * responseString) {
-       [_directVideo play:YKQualityLow subtitlesPathStr:[responseString relativePath]];
-   };
-   [[GYoutubeHelper getInstance] fetchingSubtitle:subtitleResponseBlock
-                                          withUrl:[NSString stringWithFormat:@"%@.%@",
-                                                                             [videoUrl stringByDeletingPathExtension],
-                                                                             @"srt"]];
+    SubtitleResponseBlock subtitleResponseBlock = ^(NSURL *responseString) {
+        [_directVideo play:YKQualityLow subtitlesPathStr:[responseString relativePath]];
+    };
+    [[GYoutubeHelper getInstance] fetchingSubtitle:subtitleResponseBlock
+                                           withUrl:[NSString stringWithFormat:@"%@.%@",
+                                                                              [videoUrl stringByDeletingPathExtension],
+                                                                              @"srt"]];
 }
 
 @end

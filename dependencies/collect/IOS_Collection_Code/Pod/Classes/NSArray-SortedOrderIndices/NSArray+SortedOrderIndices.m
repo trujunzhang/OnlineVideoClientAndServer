@@ -10,24 +10,21 @@
 
 @implementation NSArray (SortedOrderIndices)
 
--(NSArray *) sortedOrderIndices
-{
+- (NSArray *)sortedOrderIndices {
     return [self sortedOrderIndicesAscending:TRUE];
 }
 
--(NSArray *) sortedOrderIndicesAscending:(BOOL) ascending
-{
+- (NSArray *)sortedOrderIndicesAscending:(BOOL)ascending {
     //Wrap array's objects into nsdictionaries
     NSMutableArray *wrappedObjs = [NSMutableArray array];
-    for (NSInteger i = 0; i < self.count; i++)
-    {
-        [wrappedObjs addObject:@{@"value": self[i], @"index":@(i)}];
+    for (NSInteger i = 0;i < self.count;i++) {
+        [wrappedObjs addObject:@{@"value" : self[i], @"index" : @(i)}];
     }
-    
+
     //Specify the value field as sort criteria and sort
     NSSortDescriptor *sd = [NSSortDescriptor sortDescriptorWithKey:@"value" ascending:ascending];
     [wrappedObjs sortUsingDescriptors:@[sd]];
-    
+
     //Fetch and return indices of sorted array
     return [wrappedObjs valueForKey:@"index"];
 }

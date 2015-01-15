@@ -19,10 +19,8 @@
 
 @implementation SDSubtitle
 
-- (id)initWithIndex:(NSUInteger)index startTime:(NSTimeInterval)startTime endTime:(NSTimeInterval)endTime content:(NSString *)content
-{
-    if ((self = [super init]))
-    {
+- (id)initWithIndex:(NSUInteger)index startTime:(NSTimeInterval)startTime endTime:(NSTimeInterval)endTime content:(NSString *)content {
+    if((self = [super init])) {
         _index = index;
         _startTime = startTime;
         _endTime = endTime;
@@ -32,8 +30,7 @@
     return self;
 }
 
-- (NSString *)description
-{
+- (NSString *)description {
     return [NSString stringWithFormat:@"#%lu %f -> %f: %@", (unsigned long)_index, _startTime, _endTime, _content];
 }
 

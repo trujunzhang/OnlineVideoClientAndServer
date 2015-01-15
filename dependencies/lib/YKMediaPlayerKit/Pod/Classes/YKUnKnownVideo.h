@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "YKVideo.h"
 
-@interface YKUnKnownVideo : NSObject <YKVideo>
+@interface YKUnKnownVideo : NSObject<YKVideo>
 
 /**
- UnKnown detailVideo url
- */
+UnKnown detailVideo url
+*/
 @property (nonatomic, strong) NSURL *contentURL;
 
 @end

@@ -18,10 +18,13 @@
 @class GYoutubeRequestInfo;
 @class OnlineServerInfo;
 
-typedef void (^YoutubeResponseBlock)(NSArray * array, NSObject * respObject);
-typedef void (^ErrorResponseBlock)(NSError * error);
-typedef void (^SqliteResponseBlock)(NSObject * respObject);
-typedef void (^SubtitleResponseBlock)(NSURL * responseString);
+typedef void (^YoutubeResponseBlock)(NSArray *array, NSObject *respObject);
+
+typedef void (^ErrorResponseBlock)(NSError *error);
+
+typedef void (^SqliteResponseBlock)(NSObject *respObject);
+
+typedef void (^SubtitleResponseBlock)(NSURL *responseString);
 
 
 @protocol GYoutubeHelperDelegate<NSObject>
@@ -37,16 +40,19 @@ typedef void (^SubtitleResponseBlock)(NSURL * responseString);
 
 }
 // Accessor for the app's single instance of the service object.
-@property(nonatomic) BOOL isSignedIn;
-@property(nonatomic, strong) OnlineServerInfo * onlineServerInfo;
+@property (nonatomic) BOOL isSignedIn;
+@property (nonatomic, strong) OnlineServerInfo *onlineServerInfo;
 
 + (GYoutubeHelper *)getInstance;
+
 - (NSString *)getCurrentDomainUrl;
 
 
 - (NSString *)getHtdocs;
+
 - (NSString *)getServerCacheDirectory;
-@property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;
+
+@property (nonatomic, weak) id<GYoutubeHelperDelegate> delegate;
 
 - (void)initOnlineClient:(SqliteResponseBlock)downloadCompletionBlock checkVersion:(BOOL)version;
 

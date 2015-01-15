@@ -11,12 +11,12 @@
 
 
 @interface MxTabBarManager () {
-   GGTabBarController * _tabBarController;
-   NSArray * _tabBarViewControllerArray;
-   YTLeftMenuViewController * _leftViewController;
+    GGTabBarController *_tabBarController;
+    NSArray *_tabBarViewControllerArray;
+    YTLeftMenuViewController *_leftViewController;
 
-   NSMutableDictionary * _tabbarYouTubeChannelDictionary;
-   NSInteger _tabBarSelectedIndex;
+    NSMutableDictionary *_tabbarYouTubeChannelDictionary;
+    NSInteger _tabBarSelectedIndex;
 }
 
 
@@ -26,31 +26,31 @@
 @implementation MxTabBarManager
 
 - (instancetype)init {
-   self = [super init];
-   if (self) {
-      _tabbarYouTubeChannelDictionary = [[NSMutableDictionary alloc] init];
-      [GYoutubeHelper getInstance].delegate = self;
-   }
+    self = [super init];
+    if(self) {
+        _tabbarYouTubeChannelDictionary = [[NSMutableDictionary alloc] init];
+        [GYoutubeHelper getInstance].delegate = self;
+    }
 
-   return self;
+    return self;
 }
 
 
 + (MxTabBarManager *)sharedTabBarManager {
-   static MxTabBarManager * cache;
-   static dispatch_once_t onceToken;
-   dispatch_once(&onceToken, ^{
-       cache = [[MxTabBarManager alloc] init];
-   });
+    static MxTabBarManager *cache;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        cache = [[MxTabBarManager alloc] init];
+    });
 
-   return cache;
+    return cache;
 }
 
 
 - (void)registerTabBarController:(GGTabBarController *)tabBarController withLeftViewController:(AsLeftMenuViewController *)leftViewController withTabbarControllerArray:(NSArray *)array {
-   _tabBarController = tabBarController;
-   _leftViewController = leftViewController;
-   _tabBarViewControllerArray = array;
+    _tabBarController = tabBarController;
+    _leftViewController = leftViewController;
+    _tabBarViewControllerArray = array;
 }
 
 
@@ -60,68 +60,68 @@
 
 
 - (void)setLeftMenuControllerDelegate:(id)delegate {
-   _leftViewController.delegate = delegate;
+    _leftViewController.delegate = delegate;
 }
 
 
 - (NSInteger)getCurrentNavigationIndex {
-   return _tabBarSelectedIndex;
+    return _tabBarSelectedIndex;
 }
 
 
 - (UINavigationController *)currentNavigationController {
-   NSUInteger integer = _tabBarController.selectedIndex;
-   return _tabBarViewControllerArray[integer];
+    NSUInteger integer = _tabBarController.selectedIndex;
+    return _tabBarViewControllerArray[integer];
 }
 
 
 - (YTVideoDetailViewController *)makeVideoDetailViewController:(id)video {
-   YTVideoDetailViewController * controller = [[YTVideoDetailViewController alloc] initWithVideo:video];
-   controller.view.backgroundColor = [ClientUIHelper mainUIBackgroundColor];
+    YTVideoDetailViewController *controller = [[YTVideoDetailViewController alloc] initWithVideo:video];
+    controller.view.backgroundColor = [ClientUIHelper mainUIBackgroundColor];
 
-   return controller;
+    return controller;
 }
 
 
 - (NSString *)getCurrentProjectNameIDString {
-   return [NSString stringWithFormat:@"%i", 0]; // Todo djzhang
+    return [NSString stringWithFormat:@"%i", 0]; // Todo djzhang
 }
 
 
 - (void)pushAndResetControllers:(NSArray *)controllers {
-   UINavigationController * navigationController = [self currentNavigationController];
+    UINavigationController *navigationController = [self currentNavigationController];
 
-   navigationController.viewControllers = controllers;
+    navigationController.viewControllers = controllers;
 
-   [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenuAndNoRearOpen];
+    [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenuAndNoRearOpen];
 }
 
 
 - (void)pushForYouTubePlayList:(ABProjectList *)playList withPlayListTitle:(NSString *)title {
-   [[SqliteManager sharedSqliteManager] sortForFileInfoArrayIn:playList];
-   NSMutableArray * projectListArray = @[ playList ];
+    [[SqliteManager sharedSqliteManager] sortForFileInfoArrayIn:playList];
+    NSMutableArray *projectListArray = @[playList];
 
-   AsFileInfoVideoCollectionViewController * controller = [[AsFileInfoVideoCollectionViewController alloc] initWithTitle:title
+    AsFileInfoVideoCollectionViewController *controller = [[AsFileInfoVideoCollectionViewController alloc] initWithTitle:title
                                                                                                     withProjectListArray:projectListArray];
-   controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+    controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
 
-   [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenuAndNoRearOpen];
+    [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenuAndNoRearOpen];
 
-   UINavigationController * navigationController = [self currentNavigationController];
+    UINavigationController *navigationController = [self currentNavigationController];
 
-   [navigationController pushViewController:controller animated:YES];
+    [navigationController pushViewController:controller animated:YES];
 }
 
 
 - (void)pushWithVideo:(id)video {
-   [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenuAndNoRearOpen];
+    [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenuAndNoRearOpen];
 
-   YTVideoDetailViewController * controller = [self makeVideoDetailViewController:video];
+    YTVideoDetailViewController *controller = [self makeVideoDetailViewController:video];
 
-   UINavigationController * navigationController = [self currentNavigationController];
+    UINavigationController *navigationController = [self currentNavigationController];
 
-   [navigationController pushViewController:controller animated:YES];
+    [navigationController pushViewController:controller animated:YES];
 }
 
 
@@ -130,13 +130,13 @@
 
 
 - (void)callbackUpdateYoutubeChannelCompletion:(NSUInteger)tabBarSelectedIndex {
-   _tabBarSelectedIndex = tabBarSelectedIndex;
-   [_leftViewController refreshChannelInfo];
+    _tabBarSelectedIndex = tabBarSelectedIndex;
+    [_leftViewController refreshChannelInfo];
 }
 
 
 - (BOOL)isSameTableBarSelectedIndex:(NSUInteger)tabBarSelectedIndex {
-   return (_tabBarSelectedIndex == tabBarSelectedIndex);
+    return (_tabBarSelectedIndex == tabBarSelectedIndex);
 }
 
 

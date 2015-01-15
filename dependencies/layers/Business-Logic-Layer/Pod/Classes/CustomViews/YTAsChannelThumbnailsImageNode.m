@@ -22,14 +22,14 @@
 @implementation YTAsChannelThumbnailsImageNode
 
 - (instancetype)initWithChannelId:(NSString *)channelId {
-   self = [super init];
-   if (self) {
-      self.channelId = channelId;
+    self = [super init];
+    if(self) {
+        self.channelId = channelId;
 
-      [self checkCacheAndFetchImage];
-   }
+        [self checkCacheAndFetchImage];
+    }
 
-   return self;
+    return self;
 }
 
 
@@ -39,58 +39,58 @@
 
 
 + (instancetype)nodeWithThumbnailUrl:(NSString *)thumbnailUrl {
-   return [YTAsChannelThumbnailsImageNode nodeWithImageUrl:thumbnailUrl];
+    return [YTAsChannelThumbnailsImageNode nodeWithImageUrl:thumbnailUrl];
 }
 
 
 + (instancetype)nodeWithThumbnailUrl:(NSString *)thumbnailUrl forCorner:(CGFloat)cornerRadius {
-   YTAsChannelThumbnailsImageNode * node = [YTAsChannelThumbnailsImageNode nodeWithImageUrl:thumbnailUrl];
+    YTAsChannelThumbnailsImageNode *node = [YTAsChannelThumbnailsImageNode nodeWithImageUrl:thumbnailUrl];
 
-   [self makeImageNodeCorner:cornerRadius node:node];
+    [self makeImageNodeCorner:cornerRadius node:node];
 
-   return node;
+    return node;
 }
 
 
 + (void)makeImageNodeCorner:(CGFloat)cornerRadius node:(YTAsChannelThumbnailsImageNode *)node {
-   node.imageModificationBlock = ^UIImage *(UIImage * image) {
-       UIImage * modifiedImage = nil;
-       CGRect rect = (CGRect) { CGPointZero, image.size };
+    node.imageModificationBlock = ^UIImage *(UIImage *image) {
+        UIImage *modifiedImage = nil;
+        CGRect rect = (CGRect){CGPointZero, image.size};
 
-       UIGraphicsBeginImageContextWithOptions(image.size, NO, [UIScreen mainScreen].scale);
+        UIGraphicsBeginImageContextWithOptions(image.size, NO, [UIScreen mainScreen].scale);
 
-       [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius] addClip];
-       [image drawInRect:rect];
-       modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
+        [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius] addClip];
+        [image drawInRect:rect];
+        modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
 
-       UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext();
 
-       return modifiedImage;
-   };
+        return modifiedImage;
+    };
 }
 
 
 + (instancetype)nodeWithChannelId:(NSString *)channelId {
-   ASImageNode * node;
+    ASImageNode *node;
 
-   NSString * thumbnailUrl = [YoutubeParser checkAndAppendThumbnailWithChannelId:channelId];
-   if (thumbnailUrl) {
-      node = [YTAsChannelThumbnailsImageNode nodeWithImageUrl:thumbnailUrl];
-   } else {
-      node = [[self alloc] initWithChannelId:channelId];
-   }
+    NSString *thumbnailUrl = [YoutubeParser checkAndAppendThumbnailWithChannelId:channelId];
+    if(thumbnailUrl) {
+        node = [YTAsChannelThumbnailsImageNode nodeWithImageUrl:thumbnailUrl];
+    } else {
+        node = [[self alloc] initWithChannelId:channelId];
+    }
 
-   return node;
+    return node;
 
 }
 
 
 + (instancetype)nodeWithChannelId:(NSString *)channelId forCorner:(CGFloat)cornerRadius {
-   YTAsChannelThumbnailsImageNode * node = [YTAsChannelThumbnailsImageNode nodeWithChannelId:channelId];
+    YTAsChannelThumbnailsImageNode *node = [YTAsChannelThumbnailsImageNode nodeWithChannelId:channelId];
 
-   [self makeImageNodeCorner:cornerRadius node:node];
+    [self makeImageNodeCorner:cornerRadius node:node];
 
-   return node;
+    return node;
 }
 
 

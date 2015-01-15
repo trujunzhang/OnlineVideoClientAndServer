@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 
 
-
-
 @interface YoutubePopUpViewControllerBase : UIViewController
 
 
 - (void)showPopupDialog:(UIBarButtonItem *)item;
+
 - (void)hidePopup;
 
 - (void)cleanUpContent;
+
 - (void)reloadContent:(NSArray *)array;
 @end

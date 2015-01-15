@@ -12,8 +12,8 @@
 @implementation LeftMenuTableHeaderView
 
 - (void)setupUI:(NSString *)title {
-   [self.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
-   self.titleLabel.text = title;
+    [self.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
+    self.titleLabel.text = title;
 }
 
 @end

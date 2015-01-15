@@ -16,90 +16,90 @@
 @implementation YTLeftRowTableViewCell
 
 - (void)awakeFromNib {
-   // Initialization code
+    // Initialization code
 }
 
 
 //MARK: Cell Reuse
 - (void)prepareForReuse {
-   [super prepareForReuse];
+    [super prepareForReuse];
 
-   NSOperation * operation = _nodeConstructionOperation;
-   if (operation)
-      [operation cancel];
+    NSOperation *operation = _nodeConstructionOperation;
+    if(operation)
+        [operation cancel];
 
-   [_containerNode setDisplaySuspended:YES];
-   [_contentLayer removeFromSuperlayer];
-   _contentLayer = nil;
-   _containerNode = nil;
+    [_containerNode setDisplaySuspended:YES];
+    [_contentLayer removeFromSuperlayer];
+    _contentLayer = nil;
+    _containerNode = nil;
 }
 
 
 - (void)bind:(NSString *)lineTitle withLineIconUrl:(NSString *)lineIconUrl isRemoteImage:(BOOL)isRemoteImage cellSize:(CGSize)cellSize nodeConstructionQueue:(NSOperationQueue *)nodeConstructionQueue {
-   self.featureImageSizeOptional = cellSize;
-   NSOperation * oldNodeConstructionOperation = _nodeConstructionOperation;
-   if (oldNodeConstructionOperation)
-      [oldNodeConstructionOperation cancel];
+    self.featureImageSizeOptional = cellSize;
+    NSOperation *oldNodeConstructionOperation = _nodeConstructionOperation;
+    if(oldNodeConstructionOperation)
+        [oldNodeConstructionOperation cancel];
 
 
-   NSOperation * newNodeConstructionOperation = [self nodeConstructionOperation:lineTitle
+    NSOperation *newNodeConstructionOperation = [self nodeConstructionOperation:lineTitle
                                                                 withLineIconUrl:lineIconUrl
                                                                   isRemoteImage:isRemoteImage];
 
 
-   _nodeConstructionOperation = newNodeConstructionOperation;
-   [nodeConstructionQueue addOperation:newNodeConstructionOperation];
+    _nodeConstructionOperation = newNodeConstructionOperation;
+    [nodeConstructionQueue addOperation:newNodeConstructionOperation];
 }
 
 
 - (NSOperation *)nodeConstructionOperation:(NSString *)lineTitle withLineIconUrl:(NSString *)lineIconUrl isRemoteImage:(BOOL)isRemoteImage {
-   NSBlockOperation * nodeConstructionOperation = [[NSBlockOperation alloc] init];
+    NSBlockOperation *nodeConstructionOperation = [[NSBlockOperation alloc] init];
 
-   __weak __typeof__(self) weakSelf = self;
-   void (^cellExecutionBlock)() = ^{
-       if (nodeConstructionOperation.cancelled)
-          return;
+    __weak __typeof__(self) weakSelf = self;
+    void (^cellExecutionBlock)() = ^{
+        if(nodeConstructionOperation.cancelled)
+            return;
 
-       __typeof__(self) strongSelf = weakSelf;
-       if (strongSelf == nil) {
-          return;
-       }
-       {
+        __typeof__(self) strongSelf = weakSelf;
+        if(strongSelf == nil) {
+            return;
+        }
+        {
 
-          YTLeftRowTableViewCellNode * containerNode =
-           [[YTLeftRowTableViewCellNode alloc]
-            initWithNodeCellSize:self.featureImageSizeOptional
-                       lineTitle:lineTitle
-                     lineIconUrl:lineIconUrl
-                   isRemoteImage:isRemoteImage];
+            YTLeftRowTableViewCellNode *containerNode =
+                    [[YTLeftRowTableViewCellNode alloc]
+                            initWithNodeCellSize:self.featureImageSizeOptional
+                                       lineTitle:lineTitle
+                                     lineIconUrl:lineIconUrl
+                                   isRemoteImage:isRemoteImage];
 
-          if (nodeConstructionOperation.cancelled)
-             return;
+            if(nodeConstructionOperation.cancelled)
+                return;
 
-          dispatch_async(dispatch_get_main_queue(), ^{
-              NSBlockOperation * strongNodeConstructionOperation = strongSelf.nodeConstructionOperation;
-              if (strongNodeConstructionOperation.cancelled)
-                 return;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSBlockOperation *strongNodeConstructionOperation = strongSelf.nodeConstructionOperation;
+                if(strongNodeConstructionOperation.cancelled)
+                    return;
 
-              if (strongSelf.nodeConstructionOperation != strongNodeConstructionOperation)
-                 return;
+                if(strongSelf.nodeConstructionOperation != strongNodeConstructionOperation)
+                    return;
 
-              if (containerNode.displaySuspended)
-                 return;
+                if(containerNode.displaySuspended)
+                    return;
 
-              //MARK: Node Layer and Wrap Up Section
-              [strongSelf.contentView.layer addSublayer:containerNode.layer];
-              [containerNode setNeedsDisplay];
-              strongSelf.contentLayer = containerNode.layer;
-              strongSelf.containerNode = containerNode;
-          });
-       }
-   };
+                //MARK: Node Layer and Wrap Up Section
+                [strongSelf.contentView.layer addSublayer:containerNode.layer];
+                [containerNode setNeedsDisplay];
+                strongSelf.contentLayer = containerNode.layer;
+                strongSelf.containerNode = containerNode;
+            });
+        }
+    };
 
-   [nodeConstructionOperation addExecutionBlock:cellExecutionBlock];
-   [nodeConstructionOperation start];
+    [nodeConstructionOperation addExecutionBlock:cellExecutionBlock];
+    [nodeConstructionOperation start];
 
-   return nodeConstructionOperation;
+    return nodeConstructionOperation;
 }
 
 

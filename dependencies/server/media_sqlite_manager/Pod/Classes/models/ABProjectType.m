@@ -10,22 +10,21 @@
 @implementation ABProjectType
 
 
-
 - (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath {
-   self = [self init];
-   if (self) {
-      self.sqliteObjectName = projectName;
-      self.objectFullPath = projectFullPath;
-   }
+    self = [self init];
+    if(self) {
+        self.sqliteObjectName = projectName;
+        self.objectFullPath = projectFullPath;
+    }
 
-   return self;
+    return self;
 }
 
 
 - (BOOL)isEqual:(id)object {
-   ABProjectType * compareLocation = object;
+    ABProjectType *compareLocation = object;
 
-   return self.sqliteObjectID == compareLocation.sqliteObjectID;
+    return self.sqliteObjectID == compareLocation.sqliteObjectID;
 }
 
 
@@ -34,33 +33,33 @@
 
 
 - (NSMutableDictionary *)getUpdateDictionary {
-   NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
-   [dictionary setObject:self.sqliteObjectName forKey:@"projectTypeName"];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:self.sqliteObjectName forKey:@"projectTypeName"];
 
-   return dictionary;
+    return dictionary;
 }
 
 
 - (NSMutableDictionary *)getInsertDictionary {
 
-   return [self getUpdateDictionary];
+    return [self getUpdateDictionary];
 }
 
 
 + (NSMutableDictionary *)getAllProjectNames:(NSMutableDictionary *)projectTypesDictionary {
-   NSMutableDictionary * projectNamesDictionary = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *projectNamesDictionary = [[NSMutableDictionary alloc] init];
 
-   for (ABProjectType * projectType in projectTypesDictionary.allValues) {
-      NSString * projectTypeName = projectType.sqliteObjectName;
+    for (ABProjectType *projectType in projectTypesDictionary.allValues) {
+        NSString *projectTypeName = projectType.sqliteObjectName;
 
-      for (ABProjectName * abProjectName in projectType.sqliteObjectArray) {
-         NSString * projectName = abProjectName.sqliteObjectName;
+        for (ABProjectName *abProjectName in projectType.sqliteObjectArray) {
+            NSString *projectName = abProjectName.sqliteObjectName;
 
-         [projectNamesDictionary setObject:projectName forKey:projectTypeName];
-      }
-   }
+            [projectNamesDictionary setObject:projectName forKey:projectTypeName];
+        }
+    }
 
-   return projectNamesDictionary;
+    return projectNamesDictionary;
 }
 
 

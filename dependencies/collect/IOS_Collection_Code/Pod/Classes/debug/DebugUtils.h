@@ -14,7 +14,10 @@
 + (void)printFrameInfo:(CGRect)frame withControllerName:(NSString *)controllerName;
 
 + (void)printCGRect:(CGRect)cellRect;
+
 + (void)printCGSize:(CGSize)cellSize;
+
 + (void)listAppHomeInfo;
+
 + (void)setupLogFile;
 @end

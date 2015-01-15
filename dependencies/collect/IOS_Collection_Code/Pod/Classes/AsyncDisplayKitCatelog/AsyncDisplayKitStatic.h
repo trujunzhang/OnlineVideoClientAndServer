@@ -13,6 +13,7 @@
 @interface ASTextNode (custom)
 
 + (ASTextNode *)initWithAttributedString:(NSAttributedString *)attributedString;
+
 + (ASTextNode *)initWithAttributedString:(NSAttributedString *)attributedString withLinkAttributeNames:(NSArray *)linkAttributeNames;
 
 @end

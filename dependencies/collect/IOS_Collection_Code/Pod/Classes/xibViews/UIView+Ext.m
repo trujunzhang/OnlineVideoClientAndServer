@@ -10,19 +10,19 @@
 #import "FileOwner.h"
 
 @implementation UIView (Ext)
-+(id)loadFromNib {
++ (id)loadFromNib {
     return [self loadFromNibNamed:NSStringFromClass(self)];
 }
 
-+(id)loadFromNibNamed:(NSString*) nibName {
++ (id)loadFromNibNamed:(NSString *)nibName {
     return [FileOwner viewFromNibNamed:nibName];
 }
 
 + (id)loadFromNibNoOwner {
     UIView *result = nil;
-    NSArray* elements = [[NSBundle mainBundle] loadNibNamed: NSStringFromClass([self class]) owner: nil options: nil];
+    NSArray *elements = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil];
     for (id anObject in elements) {
-        if ([anObject isKindOfClass:[self class]]) {
+        if([anObject isKindOfClass:[self class]]) {
             result = anObject;
             break;
         }

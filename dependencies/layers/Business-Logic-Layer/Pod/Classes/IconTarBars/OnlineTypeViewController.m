@@ -15,8 +15,8 @@
 
 
 @interface OnlineTypeViewController ()<YoutubeCollectionNextPageDelegate, LeftMenuViewBaseDelegate> {
-   YTCollectionViewController * _gridViewController;
-   YTPlaylistItemsType _playlistItemsType;
+    YTCollectionViewController *_gridViewController;
+    YTPlaylistItemsType _playlistItemsType;
 }
 
 @end
@@ -25,18 +25,18 @@
 @implementation OnlineTypeViewController
 
 - (void)viewDidLoad {
-   [super viewDidLoad];
+    [super viewDidLoad];
 
-   // Do any additional setup after loading the view, typically from a nib.
-   [[MxTabBarManager sharedTabBarManager] setLeftMenuControllerDelegate:self];
+    // Do any additional setup after loading the view, typically from a nib.
+    [[MxTabBarManager sharedTabBarManager] setLeftMenuControllerDelegate:self];
 
-   self.navigationItem.leftBarButtonItem = [self getLeftBarButtonItem];
+    self.navigationItem.leftBarButtonItem = [self getLeftBarButtonItem];
 }
 
 
 - (void)didReceiveMemoryWarning {
-   [super didReceiveMemoryWarning];
-   // Dispose of any resources that can be recreated.
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
@@ -45,48 +45,48 @@
 
 
 - (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(YTPlaylistItemsType)playlistItemsType {
-   // 1
-   YTCollectionViewController * gridViewController = [[YTCollectionViewController alloc] initWithNextPageDelegate:self
+    // 1
+    YTCollectionViewController *gridViewController = [[YTCollectionViewController alloc] initWithNextPageDelegate:self
                                                                                                         withTitle:title
                                                                                              withProjectListArray:nil];
-   gridViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+    gridViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
-   // 2
-   gridViewController.navigationItem.leftBarButtonItem = [self getLeftBarButtonItem];
+    // 2
+    gridViewController.navigationItem.leftBarButtonItem = [self getLeftBarButtonItem];
 
-   // 3
-   [[MxTabBarManager sharedTabBarManager] pushAndResetControllers:@[ gridViewController ]];
+    // 3
+    [[MxTabBarManager sharedTabBarManager] pushAndResetControllers:@[gridViewController]];
 
-   // 4
-   _playlistItemsType = playlistItemsType;
-   _gridViewController = gridViewController;
-   [_gridViewController fetchPlayListByType:playlistItemsType];
+    // 4
+    _playlistItemsType = playlistItemsType;
+    _gridViewController = gridViewController;
+    [_gridViewController fetchPlayListByType:playlistItemsType];
 }
 
 
 - (UIBarButtonItem *)getLeftBarButtonItem {
-   UIBarButtonItem * barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
                                                                       style:UIBarButtonItemStyleBordered
                                                                      target:self
                                                                      action:@selector(leftBarButtonItemAction:)];
-   return barButtonItem;
+    return barButtonItem;
 }
 
 
 - (void)endToggleLeftMenuEventForChannelPageWithChannelId:(NSString *)channelId withTitle:(NSString *)title projectFullPath:(NSString *)projectFullPath {
-   // *** readRows{ABProjectList+ABProjectFileInfo-c2} with projectList.fullPath ***
-   YoutubeChannelPageViewController * controller =
-    [[YoutubeChannelPageViewController alloc] initWithChannelId:channelId
-                                                      withTitle:title
-                                               projectListArray:[[SqliteManager sharedSqliteManager] getProjectListArray:channelId
-                                                                                                         projectFullPath:projectFullPath]];
+    // *** readRows{ABProjectList+ABProjectFileInfo-c2} with projectList.fullPath ***
+    YoutubeChannelPageViewController *controller =
+            [[YoutubeChannelPageViewController alloc] initWithChannelId:channelId
+                                                              withTitle:title
+                                                       projectListArray:[[SqliteManager sharedSqliteManager] getProjectListArray:channelId
+                                                                                                                 projectFullPath:projectFullPath]];
 
-   controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
-                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                 target:self
-                                                                                 action:@selector(leftBarButtonItemAction:)];
+    controller.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
+                                                                                   style:UIBarButtonItemStyleBordered
+                                                                                  target:self
+                                                                                  action:@selector(leftBarButtonItemAction:)];
 
-   [[MxTabBarManager sharedTabBarManager] pushAndResetControllers:@[ controller ]];
+    [[MxTabBarManager sharedTabBarManager] pushAndResetControllers:@[controller]];
 }
 
 
@@ -95,7 +95,7 @@
 
 
 - (void)leftBarButtonItemAction:(id)sender {
-   [[LeftRevealHelper sharedLeftRevealHelper] toggleReveal];
+    [[LeftRevealHelper sharedLeftRevealHelper] toggleReveal];
 }
 
 
@@ -104,12 +104,12 @@
 
 
 - (void)executeRefreshTask {
-   [_gridViewController fetchPlayListByType:_playlistItemsType];
+    [_gridViewController fetchPlayListByType:_playlistItemsType];
 }
 
 
 - (void)executeNextPageTask {
-   [_gridViewController fetchPlayListByPageToken];
+    [_gridViewController fetchPlayListByPageToken];
 }
 
 @end

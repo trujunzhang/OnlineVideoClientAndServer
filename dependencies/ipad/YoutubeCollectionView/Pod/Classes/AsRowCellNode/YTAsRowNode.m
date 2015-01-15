@@ -11,20 +11,20 @@
 }
 
 - (instancetype)initWithCellNodeRect:(CGRect)cellRect withVideo:(id)nodeInfo { //242,242
-   if (!(self = [super init]))
-      return nil;
+    if(!(self = [super init]))
+        return nil;
 
-   self.cellRect = cellRect;
-   self.nodeInfo = nodeInfo;
+    self.cellRect = cellRect;
+    self.nodeInfo = nodeInfo;
 
-   [self makeRowNode];
+    [self makeRowNode];
 
-   return self;
+    return self;
 }
 
 
 + (CGFloat)collectionCellHeight {
-   return COLLECTION_CELL_FIRST_HEIGHT + COLLECTION_CELL_SECOND_HEIGHT + COLLECTION_CELL_THIRD_HEIGHT;
+    return COLLECTION_CELL_FIRST_HEIGHT + COLLECTION_CELL_SECOND_HEIGHT + COLLECTION_CELL_THIRD_HEIGHT;
 }
 
 

@@ -19,13 +19,13 @@
 static CGFloat kTextPaddingHorizontal = 18.0f;
 static CGFloat kTextPaddingVertical = 10.0f;
 
-static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
+static NSString *kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
 
 
 @interface AsDetailRowVideoDescription ()<ASTextNodeDelegate> {
-   ASTextNode * _textNode;
+    ASTextNode *_textNode;
 
-   CGFloat _tableViewWidth;
+    CGFloat _tableViewWidth;
 }
 
 @end
@@ -35,71 +35,71 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
 
 
 - (instancetype)initWithVideo:(YTYouTubeVideoCache *)videoCache withTableWidth:(CGFloat)tableViewWidth {
-   if (!(self = [super init]))
-      return nil;
+    if(!(self = [super init]))
+        return nil;
 
-   _tableViewWidth = tableViewWidth;
+    _tableViewWidth = tableViewWidth;
 
-   self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor whiteColor];
 
-   // generate an attributed string using the custom link attribute specified above
-   NSMutableArray * linkAttributeNames = [[NSMutableArray alloc] init];
+    // generate an attributed string using the custom link attribute specified above
+    NSMutableArray *linkAttributeNames = [[NSMutableArray alloc] init];
 
-   NSMutableAttributedString * attributedString =
-    [NSAttributedString attributedStringForDetailRowDescription:[YoutubeParser getVideoDescription:videoCache]
-                                                       fontSize:16.0f];
+    NSMutableAttributedString *attributedString =
+            [NSAttributedString attributedStringForDetailRowDescription:[YoutubeParser getVideoDescription:videoCache]
+                                                               fontSize:16.0f];
 
-   // create a text node
-   _textNode = [ASTextNode initWithAttributedString:attributedString withLinkAttributeNames:linkAttributeNames];
+    // create a text node
+    _textNode = [ASTextNode initWithAttributedString:attributedString withLinkAttributeNames:linkAttributeNames];
 
-   // configure the node to support tappable links
-   _textNode.delegate = self;
+    // configure the node to support tappable links
+    _textNode.delegate = self;
 
 
-   // add it as a subnode, and we're done
-   [self addSubnode:_textNode];
+    // add it as a subnode, and we're done
+    [self addSubnode:_textNode];
 
-   return self;
+    return self;
 }
 
 
 - (void)didLoad {
-   // enable highlighting now that self.layer has loaded -- see ASHighlightOverlayLayer.h
-   self.layer.as_allowsHighlightDrawing = YES;
+    // enable highlighting now that self.layer has loaded -- see ASHighlightOverlayLayer.h
+    self.layer.as_allowsHighlightDrawing = YES;
 
-   [super didLoad];
+    [super didLoad];
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-   // called on a background thread.  custom nodes must call -measure: on their subnodes in -calculateSizeThatFits:
-   CGSize measuredSize =
-    [_textNode measure:CGSizeMake(constrainedSize.width - 2 * kTextPaddingHorizontal, constrainedSize.height)];
+    // called on a background thread.  custom nodes must call -measure: on their subnodes in -calculateSizeThatFits:
+    CGSize measuredSize =
+            [_textNode measure:CGSizeMake(constrainedSize.width - 2 * kTextPaddingHorizontal, constrainedSize.height)];
 
-   return CGSizeMake(_tableViewWidth, measuredSize.height + kTextPaddingVertical * 2);
+    return CGSizeMake(_tableViewWidth, measuredSize.height + kTextPaddingVertical * 2);
 }
 
 
 - (void)layout {
-   // called on the main thread.  we'll use the stashed size from above, instead of blocking on text sizing
-   CGSize textNodeSize = _textNode.calculatedSize;
+    // called on the main thread.  we'll use the stashed size from above, instead of blocking on text sizing
+    CGSize textNodeSize = _textNode.calculatedSize;
 
-   _textNode.frame =
-    CGRectMake(kTextPaddingHorizontal, 0, self.calculatedSize.width - kTextPaddingHorizontal * 2, textNodeSize.height);
+    _textNode.frame =
+            CGRectMake(kTextPaddingHorizontal, 0, self.calculatedSize.width - kTextPaddingHorizontal * 2, textNodeSize.height);
 
 }
 
 
 - (BOOL)textNode:(ASTextNode *)richTextNode shouldHighlightLinkAttribute:(NSString *)attribute value:(id)value atPoint:(CGPoint)point {
-   // opt into link highlighting -- tap and hold the link to try it!  must enable highlighting on a layer, see -didLoad
-   return YES;
+    // opt into link highlighting -- tap and hold the link to try it!  must enable highlighting on a layer, see -didLoad
+    return YES;
 }
 
 
 - (void)textNode:(ASTextNode *)richTextNode tappedLinkAttribute:(NSString *)attribute value:(NSURL *)URL atPoint:(CGPoint)point textRange:(NSRange)textRange {
-   // the node tapped a link, open it
-   NSLog(@"URL = %@", URL);
-   [[UIApplication sharedApplication] openURL:URL];
+    // the node tapped a link, open it
+    NSLog(@"URL = %@", URL);
+    [[UIApplication sharedApplication] openURL:URL];
 }
 
 

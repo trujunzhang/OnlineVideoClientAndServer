@@ -10,10 +10,10 @@
 
 
 @interface YTAsFirstChannelRowNode () {
-   ASNetworkImageNode * _videoCoverThumbnailsNode;
+    ASNetworkImageNode *_videoCoverThumbnailsNode;
 }
 
-@property(nonatomic) CGFloat durationLabelWidth;
+@property (nonatomic) CGFloat durationLabelWidth;
 
 @end
 
@@ -24,29 +24,29 @@
 
 
 - (void)makeRowNode {
-   _videoCoverThumbnailsNode = [[ASNetworkImageNode alloc] init];
-   _videoCoverThumbnailsNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
+    _videoCoverThumbnailsNode = [[ASNetworkImageNode alloc] init];
+    _videoCoverThumbnailsNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
 
-   NSString * playListThumbnails = [YoutubeParser getPlayListThumbnailsGeneratedFromVideo:self.nodeInfo];
+    NSString *playListThumbnails = [YoutubeParser getPlayListThumbnailsGeneratedFromVideo:self.nodeInfo];
 
-   _videoCoverThumbnailsNode.URL = [NSURL URLWithString:playListThumbnails];
+    _videoCoverThumbnailsNode.URL = [NSURL URLWithString:playListThumbnails];
 
-   _videoCoverThumbnailsNode.contentMode = UIViewContentModeScaleToFill;
+    _videoCoverThumbnailsNode.contentMode = UIViewContentModeScaleToFill;
 
-   [self addSubnode:_videoCoverThumbnailsNode];
+    [self addSubnode:_videoCoverThumbnailsNode];
 
-   [self setNodeTappedEvent];
+    [self setNodeTappedEvent];
 
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-   return self.cellRect.size;
+    return self.cellRect.size;
 }
 
 
 - (void)layout {
-   _videoCoverThumbnailsNode.frame = self.cellRect;
+    _videoCoverThumbnailsNode.frame = self.cellRect;
 
 }
 
@@ -56,18 +56,18 @@
 
 
 - (void)setNodeTappedEvent {
-   // configure the button
-   _videoCoverThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
-   [_videoCoverThumbnailsNode addTarget:self
-                                 action:@selector(buttonTapped:)
-                       forControlEvents:ASControlNodeEventTouchUpInside];
+    // configure the button
+    _videoCoverThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
+    [_videoCoverThumbnailsNode addTarget:self
+                                  action:@selector(buttonTapped:)
+                        forControlEvents:ASControlNodeEventTouchUpInside];
 }
 
 
 //YTYouTubePlayList
 - (void)buttonTapped:(id)buttonTapped {
-   [[MxTabBarManager sharedTabBarManager] pushForYouTubePlayList:self.nodeInfo
-                                               withPlayListTitle:[YoutubeParser getPlayListTitle:self.nodeInfo]];
+    [[MxTabBarManager sharedTabBarManager] pushForYouTubePlayList:self.nodeInfo
+                                                withPlayListTitle:[YoutubeParser getPlayListTitle:self.nodeInfo]];
 }
 
 @end

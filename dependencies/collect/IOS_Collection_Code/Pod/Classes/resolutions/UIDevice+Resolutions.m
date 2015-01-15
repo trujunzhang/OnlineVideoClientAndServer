@@ -29,52 +29,52 @@
 
 
 + (UIDeviceResolution)resolution {
-   UIDeviceResolution resolution = UIDeviceResolution_Unknown;
-   UIScreen * mainScreen = [UIScreen mainScreen];
-   CGFloat scale = ([mainScreen respondsToSelector:@selector(scale)] ? mainScreen.scale : 1.0f);
-   CGFloat pixelWidth = (CGRectGetWidth(mainScreen.bounds) * scale);
-   CGFloat pixelHeight = (CGRectGetHeight(mainScreen.bounds) * scale);
+    UIDeviceResolution resolution = UIDeviceResolution_Unknown;
+    UIScreen *mainScreen = [UIScreen mainScreen];
+    CGFloat scale = ([mainScreen respondsToSelector:@selector(scale)] ? mainScreen.scale : 1.0f);
+    CGFloat pixelWidth = (CGRectGetWidth(mainScreen.bounds) * scale);
+    CGFloat pixelHeight = (CGRectGetHeight(mainScreen.bounds) * scale);
 
-   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-      if (scale == 2.0f) {
-         if ([self checkScreenWithWidth:pixelWidth withHeight:pixelHeight value1:640.0f value2:960.0f]) // 640 x 960
-            resolution = UIDeviceResolution_iPhoneRetina35;
-         else if ([self checkScreenWithWidth:pixelWidth
-                                  withHeight:pixelHeight
-                                      value1:640.0f
-                                      value2:1136.0f]) //640 x 1,136
-            resolution = UIDeviceResolution_iPhoneRetina4;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if(scale == 2.0f) {
+            if([self checkScreenWithWidth:pixelWidth withHeight:pixelHeight value1:640.0f value2:960.0f]) // 640 x 960
+                resolution = UIDeviceResolution_iPhoneRetina35;
+            else if([self checkScreenWithWidth:pixelWidth
+                                    withHeight:pixelHeight
+                                        value1:640.0f
+                                        value2:1136.0f]) //640 x 1,136
+                resolution = UIDeviceResolution_iPhoneRetina4;
 
-      } else if (scale == 1.0f && pixelWidth == 480.0f)
-         resolution = UIDeviceResolution_iPhoneStandard;
+        } else if(scale == 1.0f && pixelWidth == 480.0f)
+            resolution = UIDeviceResolution_iPhoneStandard;
 
-   } else {
-      if (scale == 2.0f && [self checkScreenWithWidth:pixelWidth
-                                           withHeight:pixelHeight
-                                               value1:1536.0f
-                                               value2:2048.0f]) { //1,536 x 2,048
-         resolution = UIDeviceResolution_iPadRetina;
+    } else {
+        if(scale == 2.0f && [self checkScreenWithWidth:pixelWidth
+                                            withHeight:pixelHeight
+                                                value1:1536.0f
+                                                value2:2048.0f]) { //1,536 x 2,048
+            resolution = UIDeviceResolution_iPadRetina;
 
-      } else if (scale == 1.0f && [self checkScreenWithWidth:pixelWidth
-                                                  withHeight:pixelHeight
-                                                      value1:768.0f
-                                                      value2:1024.0f]) { //768 x 1,024
-         resolution = UIDeviceResolution_iPadStandard;
-      }
-   }
+        } else if(scale == 1.0f && [self checkScreenWithWidth:pixelWidth
+                                                   withHeight:pixelHeight
+                                                       value1:768.0f
+                                                       value2:1024.0f]) { //768 x 1,024
+            resolution = UIDeviceResolution_iPadStandard;
+        }
+    }
 
-   return resolution;
+    return resolution;
 }
 
 
 + (BOOL)checkScreenWithWidth:(CGFloat)pixelWidth withHeight:(CGFloat)pixelHeight value1:(float)value1 value2:(double)value2 {
-   if (pixelWidth == value1 && pixelHeight == value2) {
-      return YES;
-   }
-   else if (pixelWidth == value2 && pixelHeight == value1) {
-      return YES;
-   }
-   return NO;
+    if(pixelWidth == value1 && pixelHeight == value2) {
+        return YES;
+    }
+    else if(pixelWidth == value2 && pixelHeight == value1) {
+        return YES;
+    }
+    return NO;
 }
 
 

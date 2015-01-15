@@ -18,15 +18,15 @@
 
 
 @interface YoutubeCollectionViewBase () {
-   BOOL isFirstRequest;
-   GYoutubeRequestInfo * _youtubeRequestInfo;
-   NSMutableArray * _projectListArray;
+    BOOL isFirstRequest;
+    GYoutubeRequestInfo *_youtubeRequestInfo;
+    NSMutableArray *_projectListArray;
 }
 
-@property(nonatomic, strong) UIRefreshControl * refreshControl;
-@property(strong, nonatomic) UICollectionView * baseCollectionView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) UICollectionView *baseCollectionView;
 
-@property(nonatomic, strong) NSMutableDictionary * cellSizeDictionary;
+@property (nonatomic, strong) NSMutableDictionary *cellSizeDictionary;
 
 
 @end
@@ -35,64 +35,64 @@
 @implementation YoutubeCollectionViewBase
 
 - (instancetype)initWithNextPageDelegate:(id<YoutubeCollectionNextPageDelegate>)nextPageDelegate withTitle:(NSString *)title withProjectListArray:(NSMutableArray *)projectListArray {
-   self = [super init];
-   if (self) {
-      self.nextPageDelegate = nextPageDelegate;
-      self.title = title;
-      _projectListArray = projectListArray;
-      // *** readRows{ABProjectList+ABProjectFileInfo} ***
-   }
+    self = [super init];
+    if(self) {
+        self.nextPageDelegate = nextPageDelegate;
+        self.title = title;
+        _projectListArray = projectListArray;
+        // *** readRows{ABProjectList+ABProjectFileInfo} ***
+    }
 
-   return self;
+    return self;
 }
 
 
 - (GYoutubeRequestInfo *)getYoutubeRequestInfo {
-   if (_youtubeRequestInfo == nil) {
-      _youtubeRequestInfo = [[GYoutubeRequestInfo alloc] init];
-   }
-   return _youtubeRequestInfo;
+    if(_youtubeRequestInfo == nil) {
+        _youtubeRequestInfo = [[GYoutubeRequestInfo alloc] init];
+    }
+    return _youtubeRequestInfo;
 }
 
 
 - (void)viewDidLoad {
-   [super viewDidLoad];
+    [super viewDidLoad];
 
-   // Do any additional setup after loading the view.
-   NSAssert(self.baseCollectionView, @"not set UICollectionVier instance!");
-   NSAssert(self.nextPageDelegate, @"not found YoutubeCollectionNextPageDelegate!");
-   NSAssert(self.numbersPerLineArray, @"not found numbersPerLineArray!");
+    // Do any additional setup after loading the view.
+    NSAssert(self.baseCollectionView, @"not set UICollectionVier instance!");
+    NSAssert(self.nextPageDelegate, @"not found YoutubeCollectionNextPageDelegate!");
+    NSAssert(self.numbersPerLineArray, @"not found numbersPerLineArray!");
 
-   isFirstRequest = NO;
-   self.cellSizeDictionary = [[NSMutableDictionary alloc] init];
-   [self setupRefresh];
+    isFirstRequest = NO;
+    self.cellSizeDictionary = [[NSMutableDictionary alloc] init];
+    [self setupRefresh];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
-   [super viewDidAppear:animated];
+    [super viewDidAppear:animated];
 
 
-   if (isFirstRequest == NO) {
-      isFirstRequest = YES;
-      [self tableWillAppear];
-   }
+    if(isFirstRequest == NO) {
+        isFirstRequest = YES;
+        [self tableWillAppear];
+    }
 }
 
 
 - (void)dealloc {
-   _youtubeRequestInfo = nil;
+    _youtubeRequestInfo = nil;
 }
 
 
 - (void)setUICollectionView:(UICollectionView *)collectionView {
-   self.baseCollectionView = collectionView;
+    self.baseCollectionView = collectionView;
 
-   self.baseCollectionView.backgroundView = [ClientUIHelper mainUIBackgroundView:self.view.bounds];
-   [self.view addSubview:self.baseCollectionView];
+    self.baseCollectionView.backgroundView = [ClientUIHelper mainUIBackgroundView:self.view.bounds];
+    [self.view addSubview:self.baseCollectionView];
 
-   self.baseCollectionView.showsVerticalScrollIndicator = NO;
-   self.baseCollectionView.directionalLockEnabled = YES;
+    self.baseCollectionView.showsVerticalScrollIndicator = NO;
+    self.baseCollectionView.directionalLockEnabled = YES;
 }
 
 
@@ -101,42 +101,42 @@
 
 
 - (void)setupRefresh {
-   self.refreshControl = [[UIRefreshControl alloc] init];
-   self.refreshControl.tintColor = [UIColor redColor];
-   [self.refreshControl addTarget:self
-                           action:@selector(refreshControlAction)
-                 forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.tintColor = [UIColor redColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(refreshControlAction)
+                  forControlEvents:UIControlEventValueChanged];
 
-   [self.baseCollectionView addSubview:self.refreshControl];
+    [self.baseCollectionView addSubview:self.refreshControl];
 }
 
 
 - (void)showTopRefreshing {
-   [self.refreshControl beginRefreshing];
+    [self.refreshControl beginRefreshing];
 }
 
 
 - (void)hideTopRefreshing {
-   [self.refreshControl endRefreshing];
+    [self.refreshControl endRefreshing];
 }
 
 
 - (void)refreshControlAction {
-   // Enter your code for request you are creating here when you pull the collectionView. When the request is completed then the collectionView go to its original position.
-   [self performSelector:@selector(executeRefreshPerformEvent) withObject:(self) afterDelay:(4.0)];
+    // Enter your code for request you are creating here when you pull the collectionView. When the request is completed then the collectionView go to its original position.
+    [self performSelector:@selector(executeRefreshPerformEvent) withObject:(self) afterDelay:(4.0)];
 }
 
 
 - (void)executeRefreshPerformEvent {
-   [self.nextPageDelegate executeRefreshTask];//used
+    [self.nextPageDelegate executeRefreshTask];//used
 //   [self.nextPageDelegate executeNextPageTask];//test
 //   [self.refreshControl endRefreshing];//test
 }
 
 
 - (void)didReceiveMemoryWarning {
-   [super didReceiveMemoryWarning];
-   // Dispose of any resources that can be recreated.
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
@@ -145,9 +145,9 @@
 
 
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
-   [self cleanup];
+    [self cleanup];
 
-   [[self getYoutubeRequestInfo] resetRequestInfoForSearchWithItemType:itemType withQueryTeam:text];
+    [[self getYoutubeRequestInfo] resetRequestInfoForSearchWithItemType:itemType withQueryTeam:text];
 
 }
 
@@ -158,8 +158,8 @@
 
 
 - (void)cleanup {
-   [[self getYoutubeRequestInfo] resetInfo];
-   [[self baseCollectionView] reloadData];
+    [[self getYoutubeRequestInfo] resetInfo];
+    [[self baseCollectionView] reloadData];
 }
 
 
@@ -169,32 +169,32 @@
 
 - (void)fetchActivityListByType:(YTSegmentItemType)itemType withChannelId:(NSString *)channelId {
 //   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
-   [self cleanup];
+    [self cleanup];
 
-   [[self getYoutubeRequestInfo] resetRequestInfoForActivityListFromChannelWithChannelId:channelId];
+    [[self getYoutubeRequestInfo] resetRequestInfoForActivityListFromChannelWithChannelId:channelId];
 }
 
 
 - (void)fetchActivityListByPageToken {
-   NSMutableArray * projectListArray = _projectListArray;
+    NSMutableArray *projectListArray = _projectListArray;
 
-   [self updateAfterResponse:projectListArray];
+    [self updateAfterResponse:projectListArray];
 
 }
 
 
 - (void)updateAfterResponse:(NSArray *)array {
-   [self.refreshControl endRefreshing];
-   [self getYoutubeRequestInfo].isLoading = NO;
+    [self.refreshControl endRefreshing];
+    [self getYoutubeRequestInfo].isLoading = NO;
 
-   NSUInteger lastRowCount = [self getYoutubeRequestInfo].videoList.count;
-   [[self getYoutubeRequestInfo] appendNextPageData:array];
+    NSUInteger lastRowCount = [self getYoutubeRequestInfo].videoList.count;
+    [[self getYoutubeRequestInfo] appendNextPageData:array];
 
-   if (lastRowCount == 0) {
-      [self.baseCollectionView reloadData];
-   } else {
-      [self reloadTableView:array withLastRowCount:lastRowCount];
-   }
+    if(lastRowCount == 0) {
+        [self.baseCollectionView reloadData];
+    } else {
+        [self reloadTableView:array withLastRowCount:lastRowCount];
+    }
 }
 
 
@@ -205,16 +205,16 @@
 - (void)fetchVideoListFromChannel {
 //   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
 
-   [self cleanup];
+    [self cleanup];
 
-   [[self getYoutubeRequestInfo] resetRequestInfoForVideoListFromChannel];
+    [[self getYoutubeRequestInfo] resetRequestInfoForVideoListFromChannel];
 }
 
 
 - (void)fetchVideoListFromChannelByPageToken {
-   NSMutableArray * projectListArray = [[SqliteManager sharedSqliteManager] getAllFileInfoListFromProjectList:_projectListArray];
+    NSMutableArray *projectListArray = [[SqliteManager sharedSqliteManager] getAllFileInfoListFromProjectList:_projectListArray];
 
-   [self updateAfterResponse:projectListArray];
+    [self updateAfterResponse:projectListArray];
 }
 
 
@@ -225,32 +225,32 @@
 - (void)fetchPlayListFromChannelWithChannelId:(NSString *)channelId {
 //   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
 
-   [self cleanup];
+    [self cleanup];
 
-   [[self getYoutubeRequestInfo] resetRequestInfoForPlayListFromChannelWithChannelId:channelId];
+    [[self getYoutubeRequestInfo] resetRequestInfoForPlayListFromChannelWithChannelId:channelId];
 }
 
 
 - (void)fetchPlayListFromChannelByPageToken {
-   NSMutableArray * projectListArray = [[SqliteManager sharedSqliteManager] getProgressionProjectList:_projectListArray];
+    NSMutableArray *projectListArray = [[SqliteManager sharedSqliteManager] getProgressionProjectList:_projectListArray];
 
-   [self updateAfterResponse:projectListArray];
+    [self updateAfterResponse:projectListArray];
 }
 
 
 - (BOOL)checkRequest {
-   if ([[self getYoutubeRequestInfo] isLoading]) {
-      return YES;
-   }
+    if([[self getYoutubeRequestInfo] isLoading]) {
+        return YES;
+    }
 
-   if ([[self getYoutubeRequestInfo] hasNextPage]) {
-      if ([[self getYoutubeRequestInfo] isLoading] == NO) {
-         [self getYoutubeRequestInfo].isLoading = YES;
-         return NO;
-      }
-   }
+    if([[self getYoutubeRequestInfo] hasNextPage]) {
+        if([[self getYoutubeRequestInfo] isLoading] == NO) {
+            [self getYoutubeRequestInfo].isLoading = YES;
+            return NO;
+        }
+    }
 
-   return [[self getYoutubeRequestInfo] hasNextPage] == NO;
+    return [[self getYoutubeRequestInfo] hasNextPage] == NO;
 }
 
 
@@ -259,9 +259,9 @@
 
 
 - (void)fetchPlayListByType:(YTPlaylistItemsType)playlistItemsType {
-   [self cleanup];
+    [self cleanup];
 
-   [[self getYoutubeRequestInfo] resetRequestInfoForPlayList:playlistItemsType];
+    [[self getYoutubeRequestInfo] resetRequestInfoForPlayList:playlistItemsType];
 }
 
 
@@ -276,14 +276,14 @@
 
 - (void)fetchSuggestionListByVideoId:(NSString *)videoId {
 //   videoId = @"mOQ5DzROpuo";
-   [self cleanup];
+    [self cleanup];
 
-   [[self getYoutubeRequestInfo] resetRequestInfoForSuggestionList:videoId];
+    [[self getYoutubeRequestInfo] resetRequestInfoForSuggestionList:videoId];
 }
 
 
 - (void)fetchSuggestionListByPageToken {
-   [self searchByPageToken];
+    [self searchByPageToken];
 }
 
 
@@ -292,60 +292,60 @@
 
 
 - (int)getCurrentColumnCount:(UIInterfaceOrientation)orientation {
-   return [(self.numbersPerLineArray[UIInterfaceOrientationIsPortrait(orientation) ? 0 : 1]) intValue];
+    return [(self.numbersPerLineArray[UIInterfaceOrientationIsPortrait(orientation) ? 0 : 1]) intValue];
 }
 
 
 - (CGSize)cellSize {
-   CGSize size;
+    CGSize size;
 
-   UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-   NSString * key = UIInterfaceOrientationIsPortrait(orientation) ? @"vertical" : @"horizontal";
-   NSString * keyWidth = [NSString stringWithFormat:@"%@_width", key];
-   NSString * keyHeight = [NSString stringWithFormat:@"%@_height", key];
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    NSString *key = UIInterfaceOrientationIsPortrait(orientation) ? @"vertical" : @"horizontal";
+    NSString *keyWidth = [NSString stringWithFormat:@"%@_width", key];
+    NSString *keyHeight = [NSString stringWithFormat:@"%@_height", key];
 
-   NSNumber * valueWidth = [self.cellSizeDictionary objectForKey:keyWidth];
-   NSNumber * valueHeight = [self.cellSizeDictionary objectForKey:keyHeight];
-   if (valueWidth && valueHeight) {
-      size = CGSizeMake([valueWidth floatValue], [valueHeight floatValue]);
-   } else {
-      size = [self makeCellSize:orientation];
-      NSNumber * aWidth = [NSNumber numberWithFloat:size.width];
-      NSNumber * aHeight = [NSNumber numberWithFloat:size.height];
-      [self.cellSizeDictionary setObject:aWidth forKey:keyWidth];
-      [self.cellSizeDictionary setObject:aHeight forKey:keyHeight];
-   }
+    NSNumber *valueWidth = [self.cellSizeDictionary objectForKey:keyWidth];
+    NSNumber *valueHeight = [self.cellSizeDictionary objectForKey:keyHeight];
+    if(valueWidth && valueHeight) {
+        size = CGSizeMake([valueWidth floatValue], [valueHeight floatValue]);
+    } else {
+        size = [self makeCellSize:orientation];
+        NSNumber *aWidth = [NSNumber numberWithFloat:size.width];
+        NSNumber *aHeight = [NSNumber numberWithFloat:size.height];
+        [self.cellSizeDictionary setObject:aWidth forKey:keyWidth];
+        [self.cellSizeDictionary setObject:aHeight forKey:keyHeight];
+    }
 
-   return size;
+    return size;
 }
 
 
 - (CGSize)makeCellSize:(UIInterfaceOrientation)orientation {
-   int columnCount = [self getCurrentColumnCount:orientation];
-   UICollectionViewLayout * layout = self.baseCollectionView.collectionViewLayout;
+    int columnCount = [self getCurrentColumnCount:orientation];
+    UICollectionViewLayout *layout = self.baseCollectionView.collectionViewLayout;
 
-   UIEdgeInsets uiEdgeInsets = [self getUIEdgeInsetsForLayout];
+    UIEdgeInsets uiEdgeInsets = [self getUIEdgeInsetsForLayout];
 
-   CGFloat mini_num_column_space = LAYOUT_MINIMUMCOLUMNSPACING;
+    CGFloat mini_num_column_space = LAYOUT_MINIMUMCOLUMNSPACING;
 //   CGFloat aFloat = layout.collectionViewContentSize.width;
-   CGFloat aFloat = self.view.frame.size.width;
+    CGFloat aFloat = self.view.frame.size.width;
 
-   CGFloat usableSpace =
-    (aFloat
-     - uiEdgeInsets.left - uiEdgeInsets.right
-     - ((columnCount - 1) * mini_num_column_space)
-    );
+    CGFloat usableSpace =
+            (aFloat
+                    - uiEdgeInsets.left - uiEdgeInsets.right
+                    - ((columnCount - 1) * mini_num_column_space)
+            );
 
-   CGFloat cellLength = usableSpace / columnCount;
+    CGFloat cellLength = usableSpace / columnCount;
 
-   CGFloat cellHeight = [YTAsRowNode collectionCellHeight];
+    CGFloat cellHeight = [YTAsRowNode collectionCellHeight];
 
-   return CGSizeMake(cellLength, cellHeight);
+    return CGSizeMake(cellLength, cellHeight);
 }
 
 
 - (UIEdgeInsets)getUIEdgeInsetsForLayout {
-   return UIEdgeInsetsMake(10, 10, 10, 10);
+    return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 

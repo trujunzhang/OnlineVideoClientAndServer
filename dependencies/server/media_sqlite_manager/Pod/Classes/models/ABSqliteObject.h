@@ -9,25 +9,29 @@
 
 @interface ABSqliteObject : NSObject
 
-@property(copy) NSString * sqliteObjectID;
-@property(copy) NSString * sqliteObjectName;
-@property(copy) NSString * objectFullPath;
+@property (copy) NSString *sqliteObjectID;
+@property (copy) NSString *sqliteObjectName;
+@property (copy) NSString *objectFullPath;
 
-@property(strong) NSMutableArray * sqliteObjectArray;
+@property (strong) NSMutableArray *sqliteObjectArray;
 
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
+
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName;
 
 
-@property(strong) NSMutableArray * lastsubDirectoryListsArray;
+@property (strong) NSMutableArray *lastsubDirectoryListsArray;
 
 - (NSMutableDictionary *)getUpdateDictionary;
+
 - (NSMutableDictionary *)getInsertDictionary;
 
 - (void)appendSqliteObjectToArray:(id)sqliteObject;
+
 - (void)addLastSqliteObjectArray:(NSMutableArray *)array;
 
 - (NSString *)sqlStringSerializationForUpdate;
+
 - (NSString *)sqlStringSerializationForInsert;
 
 + (NSString *)getSqlStringSerializationForFilter:(NSMutableDictionary *)filterDictionary;

@@ -13,58 +13,58 @@
 }
 
 + (NSMutableArray *)getSingleOnlineVideoTypesArray:(NSMutableArray *)array {
-   NSMutableArray * singleOnlineVideoTypesArray = [[NSMutableArray alloc] init];
+    NSMutableArray *singleOnlineVideoTypesArray = [[NSMutableArray alloc] init];
 
-   for (ABOnlineVideoType * onlineVideoType in array) {
-      [MultipleTypeHelper checkExistAndAppend:onlineVideoType to:singleOnlineVideoTypesArray from:array];
-   }
+    for (ABOnlineVideoType *onlineVideoType in array) {
+        [MultipleTypeHelper checkExistAndAppend:onlineVideoType to:singleOnlineVideoTypesArray from:array];
+    }
 
-   return singleOnlineVideoTypesArray;
+    return singleOnlineVideoTypesArray;
 }
 
 
 + (void)checkExistAndAppend:(ABOnlineVideoType *)onlineVideoType to:(NSMutableArray *)singleOnlineVideoTypesArray from:(NSMutableArray *)array {
 
-   ABOnlineVideoType * lastOnlineVideoType = [MultipleTypeHelper checkExist:onlineVideoType.sqliteObjectName
+    ABOnlineVideoType *lastOnlineVideoType = [MultipleTypeHelper checkExist:onlineVideoType.sqliteObjectName
                                                                          in:singleOnlineVideoTypesArray];
 
-   if (lastOnlineVideoType) {
-      [MultipleTypeHelper copyOnlineVideoTypeDictionary:onlineVideoType.onlineTypeDictionary
-                            toLastProjectTypeDictionary:lastOnlineVideoType.onlineTypeDictionary];
-   } else {
-      [singleOnlineVideoTypesArray addObject:onlineVideoType];
-   }
+    if(lastOnlineVideoType) {
+        [MultipleTypeHelper copyOnlineVideoTypeDictionary:onlineVideoType.onlineTypeDictionary
+                              toLastProjectTypeDictionary:lastOnlineVideoType.onlineTypeDictionary];
+    } else {
+        [singleOnlineVideoTypesArray addObject:onlineVideoType];
+    }
 
 }
 
 
 + (void)copyOnlineVideoTypeDictionary:(NSMutableDictionary *)onlineTypeDictionary toLastProjectTypeDictionary:(NSMutableDictionary *)lastOnlineTypeDictionary {
-   for (NSString * key in onlineTypeDictionary.allKeys) {
-      //object.class:[ABProjectType]
-      ABProjectType * object = [onlineTypeDictionary objectForKey:key];
+    for (NSString *key in onlineTypeDictionary.allKeys) {
+        //object.class:[ABProjectType]
+        ABProjectType *object = [onlineTypeDictionary objectForKey:key];
 
-      // if the same project type,then append
-      if ([[lastOnlineTypeDictionary allKeys] containsObject:key]) {
-         // contains key
-         ABProjectType * lastObject = [lastOnlineTypeDictionary objectForKey:key];
-         [lastObject addLastSqliteObjectArray:object.sqliteObjectArray];
-         return;
-      }
+        // if the same project type,then append
+        if([[lastOnlineTypeDictionary allKeys] containsObject:key]) {
+            // contains key
+            ABProjectType *lastObject = [lastOnlineTypeDictionary objectForKey:key];
+            [lastObject addLastSqliteObjectArray:object.sqliteObjectArray];
+            return;
+        }
 
-      // or replace
-      [lastOnlineTypeDictionary setObject:object forKey:key];
-   }
+        // or replace
+        [lastOnlineTypeDictionary setObject:object forKey:key];
+    }
 }
 
 
 + (ABOnlineVideoType *)checkExist:(NSString *)onlineVideoTypeName in:(NSMutableArray *)singleOnlineVideoTypesArray {
-   for (ABOnlineVideoType * onlineVideoType in singleOnlineVideoTypesArray) {
-      if ([onlineVideoTypeName isEqualToString:onlineVideoType.sqliteObjectName]) {
-         return onlineVideoType;
-      }
-   }
+    for (ABOnlineVideoType *onlineVideoType in singleOnlineVideoTypesArray) {
+        if([onlineVideoTypeName isEqualToString:onlineVideoType.sqliteObjectName]) {
+            return onlineVideoType;
+        }
+    }
 
-   return nil;
+    return nil;
 }
 
 @end

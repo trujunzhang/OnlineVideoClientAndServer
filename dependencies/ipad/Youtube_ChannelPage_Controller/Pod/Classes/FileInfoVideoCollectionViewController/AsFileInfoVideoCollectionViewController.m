@@ -17,14 +17,14 @@
 }
 
 - (instancetype)initWithTitle:(NSString *)title withProjectListArray:(NSMutableArray *)projectListArray {
-   self = [super initWithNextPageDelegate:self
-                                withTitle:title
-                     withProjectListArray:projectListArray];
-   if (self) {
-      [self executeRefreshTask];
-   }
+    self = [super initWithNextPageDelegate:self
+                                 withTitle:title
+                      withProjectListArray:projectListArray];
+    if(self) {
+        [self executeRefreshTask];
+    }
 
-   return self;
+    return self;
 }
 
 
@@ -33,12 +33,12 @@
 
 
 - (void)executeRefreshTask {
-   [self fetchVideoListFromChannel];
+    [self fetchVideoListFromChannel];
 }
 
 
 - (void)executeNextPageTask {
-   [self fetchVideoListFromChannelByPageToken];
+    [self fetchVideoListFromChannelByPageToken];
 }
 
 

@@ -16,17 +16,17 @@
 
 
 - (NSMutableDictionary *)getUpdateDictionary {
-   NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
-   [dictionary setObject:self.fileInfoID forKey:@"fileInfoID"];
-   [dictionary setObject:self.sqliteObjectName forKey:@"fileInforName"];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:self.fileInfoID forKey:@"fileInfoID"];
+    [dictionary setObject:self.sqliteObjectName forKey:@"fileInforName"];
 
-   return dictionary;
+    return dictionary;
 }
 
 
 - (NSMutableDictionary *)getInsertDictionary {
 
-   return [self getUpdateDictionary];
+    return [self getUpdateDictionary];
 }
 
 

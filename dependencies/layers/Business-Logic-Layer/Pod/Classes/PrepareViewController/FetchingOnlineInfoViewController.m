@@ -14,9 +14,9 @@ static CGFloat kTextPadding = 100.0f;
 
 
 @interface FetchingOnlineInfoViewController ()<GYoutubeHelperDelegate> {
-   ASTextNode * _fetchingInfo;
-   ASTextNode * _reloadNode;
-   ASTextNode * _offlineNode;
+    ASTextNode *_fetchingInfo;
+    ASTextNode *_reloadNode;
+    ASTextNode *_offlineNode;
 
 }
 @end
@@ -26,163 +26,163 @@ static CGFloat kTextPadding = 100.0f;
 
 }
 - (instancetype)initWithDelegate:(id<FetchingOnlineInfoViewControllerDelegate>)delegate {
-   self = [super init];
-   if (self) {
-      self.delegate = delegate;
-      [GYoutubeHelper getInstance].delegate = self;
+    self = [super init];
+    if(self) {
+        self.delegate = delegate;
+        [GYoutubeHelper getInstance].delegate = self;
 
-      [self initOnlineClientInfo:NO];
+        [self initOnlineClientInfo:NO];
 
-      [self setupUI];
+        [self setupUI];
 
-      self.view.backgroundColor = [UIColor whiteColor];
-   }
+        self.view.backgroundColor = [UIColor whiteColor];
+    }
 
-   return self;
+    return self;
 }
 
 
 - (void)makeFetchInfoNodeAndShow:(NSString *)info {
-   [_fetchingInfo.view removeFromSuperview];
-   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-       _fetchingInfo = [self makeFetchInfoNode:info];
-       // self.view isn't a node, so we can only use it on the main thread
-       dispatch_sync(dispatch_get_main_queue(), ^{
-           [self layoutForFetchInfoNode];
+    [_fetchingInfo.view removeFromSuperview];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        _fetchingInfo = [self makeFetchInfoNode:info];
+        // self.view isn't a node, so we can only use it on the main thread
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self layoutForFetchInfoNode];
 //           [self addEffectFor:_fetchingInfo.view withViewFrame:_fetchingInfo.frame];
-           [self.view addSubview:_fetchingInfo.view];
-       });
-   });
+            [self.view addSubview:_fetchingInfo.view];
+        });
+    });
 }
 
 
 - (void)setupUI {
-   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-       // attribute a string
-       _reloadNode = [self getButtonWithTitle:@"Reload" isLeft:NO];
-       [_reloadNode addTarget:self
-                       action:@selector(reloadButtonTapped:)
-             forControlEvents:ASControlNodeEventTouchUpInside];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        // attribute a string
+        _reloadNode = [self getButtonWithTitle:@"Reload" isLeft:NO];
+        [_reloadNode addTarget:self
+                        action:@selector(reloadButtonTapped:)
+              forControlEvents:ASControlNodeEventTouchUpInside];
 
 //       _offlineNode = [self getButtonWithTitle:@"Update remote sqlite" isLeft:NO];
 //       [_offlineNode addTarget:self
 //                        action:@selector(offlineButtonTapped:)
 //              forControlEvents:ASControlNodeEventTouchUpInside];
 
-       // self.view isn't a node, so we can only use it on the main thread
-       dispatch_sync(dispatch_get_main_queue(), ^{
-           [self.view addSubview:_reloadNode.view];
-           [self.view addSubview:_offlineNode.view];
-       });
-   });
+        // self.view isn't a node, so we can only use it on the main thread
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.view addSubview:_reloadNode.view];
+            [self.view addSubview:_offlineNode.view];
+        });
+    });
 
 }
 
 
 - (ASTextNode *)getButtonWithTitle:(NSString *)buttonTitle isLeft:(BOOL)isLeft {
-   ASTextNode * shuffleNode = [[ASTextNode alloc] init];
-   shuffleNode.attributedString = [[NSAttributedString alloc] initWithString:buttonTitle
-                                                                  attributes:@{
-                                                                   NSFontAttributeName : [UIFont systemFontOfSize:26.0f],
-                                                                   NSForegroundColorAttributeName : [UIColor redColor],
-                                                                  }];
+    ASTextNode *shuffleNode = [[ASTextNode alloc] init];
+    shuffleNode.attributedString = [[NSAttributedString alloc] initWithString:buttonTitle
+                                                                   attributes:@{
+                                                                           NSFontAttributeName : [UIFont systemFontOfSize:26.0f],
+                                                                           NSForegroundColorAttributeName : [UIColor redColor],
+                                                                   }];
 
-   // configure the button
-   shuffleNode.userInteractionEnabled = YES; // opt into touch handling
+    // configure the button
+    shuffleNode.userInteractionEnabled = YES; // opt into touch handling
 
-   // size all the things
-   CGRect b = self.view.bounds; // convenience
-   CGSize size = [shuffleNode measure:CGSizeMake(b.size.width, FLT_MAX)];
+    // size all the things
+    CGRect b = self.view.bounds; // convenience
+    CGSize size = [shuffleNode measure:CGSizeMake(b.size.width, FLT_MAX)];
 
 
-   CGFloat dX = b.size.width / 2.0f - size.width;
-   if (isLeft) {
-      dX = b.size.width / 2.0f + size.width;
-   }
+    CGFloat dX = b.size.width / 2.0f - size.width;
+    if(isLeft) {
+        dX = b.size.width / 2.0f + size.width;
+    }
 
-   CGPoint origin = CGPointMake(roundf(dX), roundf((b.size.height - size.height) / 2.0f));
-   shuffleNode.frame = (CGRect) { origin, size };
+    CGPoint origin = CGPointMake(roundf(dX), roundf((b.size.height - size.height) / 2.0f));
+    shuffleNode.frame = (CGRect){origin, size};
 
-   return shuffleNode;
+    return shuffleNode;
 }
 
 
 - (void)addEffectFor:(UIView *)view withViewFrame:(CGRect)viewFrame {
-   FBShimmeringView * shimmeringView = [[FBShimmeringView alloc] initWithFrame:viewFrame];
-   [self.view addSubview:shimmeringView];
+    FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:viewFrame];
+    [self.view addSubview:shimmeringView];
 
-   shimmeringView.contentView = view;
+    shimmeringView.contentView = view;
 
-   shimmeringView.shimmering = YES;
+    shimmeringView.shimmering = YES;
 
 }
 
 
 - (ASTextNode *)makeFetchInfoNode:(NSString *)info {
-   ASTextNode * node = [[ASTextNode alloc] init];
-   NSDictionary * attrsNode = @{
-    NSFontAttributeName : [UIFont systemFontOfSize:32.0f],
-    NSForegroundColorAttributeName : [UIColor blueColor],
-   };
-   node.attributedString = [[NSAttributedString alloc] initWithString:info
-                                                           attributes:attrsNode];
-   [node measure:CGSizeMake(self.view.frame.size.width - kTextPadding, self.view.frame.size.height)];
-   node.backgroundColor = [UIColor whiteColor];
-   node.contentMode = UIViewContentModeRight;
+    ASTextNode *node = [[ASTextNode alloc] init];
+    NSDictionary *attrsNode = @{
+            NSFontAttributeName : [UIFont systemFontOfSize:32.0f],
+            NSForegroundColorAttributeName : [UIColor blueColor],
+    };
+    node.attributedString = [[NSAttributedString alloc] initWithString:info
+                                                            attributes:attrsNode];
+    [node measure:CGSizeMake(self.view.frame.size.width - kTextPadding, self.view.frame.size.height)];
+    node.backgroundColor = [UIColor whiteColor];
+    node.contentMode = UIViewContentModeRight;
 
-   return node;
+    return node;
 }
 
 
 - (void)reloadButtonTapped:(id)sender {
-   [self initOnlineClientInfo:NO];
+    [self initOnlineClientInfo:NO];
 }
 
 
 - (void)offlineButtonTapped:(id)sender {
-   [self initOnlineClientInfo:YES];
+    [self initOnlineClientInfo:YES];
 }
 
 
 - (void)viewDidLayoutSubviews {
-   [super viewDidLayoutSubviews];
+    [super viewDidLayoutSubviews];
 }
 
 
 - (void)layoutForFetchInfoNode {
-   CGRect rect = self.view.bounds;
-   CGFloat dW = rect.size.width - kTextPadding;
+    CGRect rect = self.view.bounds;
+    CGFloat dW = rect.size.width - kTextPadding;
 
-   CGSize textNodeSize = _fetchingInfo.calculatedSize;
-   CGFloat dY = (rect.size.height / 2.0f - textNodeSize.height) - 80;
-   _fetchingInfo.frame = CGRectMake(roundf((dW - textNodeSize.width) / 2.0f), dY, textNodeSize.width, textNodeSize.height);
+    CGSize textNodeSize = _fetchingInfo.calculatedSize;
+    CGFloat dY = (rect.size.height / 2.0f - textNodeSize.height) - 80;
+    _fetchingInfo.frame = CGRectMake(roundf((dW - textNodeSize.width) / 2.0f), dY, textNodeSize.width, textNodeSize.height);
 }
 
 
 - (void)initOnlineClientInfo:(BOOL)checkVersion {
-   NSString * sqliteFilePath = [self removeSqliteFile];
+    NSString *sqliteFilePath = [self removeSqliteFile];
 
-   SqliteResponseBlock sqliteResponseBlock = ^(NSObject * respObject) {
-       if ([MobileBaseDatabase checkDBFileExist:sqliteFilePath] == NO) {
-          [self showStepInfo:[NSString stringWithFormat:@"not found %@", sqliteFilePath]];
-       } else {
-          [self.delegate fetchingOnlineClientCompletion];
+    SqliteResponseBlock sqliteResponseBlock = ^(NSObject *respObject) {
+        if([MobileBaseDatabase checkDBFileExist:sqliteFilePath] == NO) {
+            [self showStepInfo:[NSString stringWithFormat:@"not found %@", sqliteFilePath]];
+        } else {
+            [self.delegate fetchingOnlineClientCompletion];
 
-          [[LeftRevealHelper sharedLeftRevealHelper] openLeftMenuAndRearOpen];
-          [[MxTabBarManager sharedTabBarManager] callbackUpdateYoutubeChannelCompletion:0];
-       }
-   };
+            [[LeftRevealHelper sharedLeftRevealHelper] openLeftMenuAndRearOpen];
+            [[MxTabBarManager sharedTabBarManager] callbackUpdateYoutubeChannelCompletion:0];
+        }
+    };
 
-   [[GYoutubeHelper getInstance] initOnlineClient:sqliteResponseBlock checkVersion:checkVersion];
+    [[GYoutubeHelper getInstance] initOnlineClient:sqliteResponseBlock checkVersion:checkVersion];
 }
 
 
 - (NSString *)removeSqliteFile {
-   NSString * dbFilePathForiOS = [MobileDB getDBFilePathForiOS];
+    NSString *dbFilePathForiOS = [MobileDB getDBFilePathForiOS];
 
-   [[NSFileManager defaultManager] removeItemAtPath:dbFilePathForiOS error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:dbFilePathForiOS error:nil];
 
-   return dbFilePathForiOS;
+    return dbFilePathForiOS;
 }
 
 
@@ -191,7 +191,7 @@ static CGFloat kTextPadding = 100.0f;
 
 
 - (void)showStepInfo:(NSString *)string {
-   [self makeFetchInfoNodeAndShow:string];
+    [self makeFetchInfoNodeAndShow:string];
 }
 
 

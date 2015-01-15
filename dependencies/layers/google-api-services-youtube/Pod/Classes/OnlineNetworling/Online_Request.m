@@ -40,55 +40,55 @@
 
 
 + (void)downloadSqliteFile:(NSString *)remoteSqliteUrl downloadCompletionBlock:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock progressBlock:(__autoreleasing NSProgress **)progressBlock {
-   NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-   AFURLSessionManager * manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 
-   //"http://192.168.1.103:8040/Home/djzhang/.AOnlineTutorial/.cache/VideoTrainingDB.db"
-   NSURL * URL = [NSURL URLWithString:remoteSqliteUrl];
+    //"http://192.168.1.103:8040/Home/djzhang/.AOnlineTutorial/.cache/VideoTrainingDB.db"
+    NSURL *URL = [NSURL URLWithString:remoteSqliteUrl];
 
-   NSURLRequest * request = [NSURLRequest requestWithURL:URL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
 
-   NSURLSessionDownloadTask * downloadTask =
-    [manager downloadTaskWithRequest:request
-                            progress:progressBlock
-                         destination:^NSURL *(NSURL * targetPath, NSURLResponse * response) {
-                             NSURL * documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
-                                                                                                    inDomain:NSUserDomainMask
-                                                                                           appropriateForURL:nil
-                                                                                                      create:NO
-                                                                                                       error:nil];
-                             return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
-                         }
-                   completionHandler:downloadCompletionBlock];
+    NSURLSessionDownloadTask *downloadTask =
+            [manager downloadTaskWithRequest:request
+                                    progress:progressBlock
+                                 destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                                     NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
+                                                                                                           inDomain:NSUserDomainMask
+                                                                                                  appropriateForURL:nil
+                                                                                                             create:NO
+                                                                                                              error:nil];
+                                     return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+                                 }
+                           completionHandler:downloadCompletionBlock];
 
-   [downloadTask resume];
+    [downloadTask resume];
 }
 
 
 + (void)fetchingSubtitle:(NSString *)remoteSqliteUrl downloadCompletionBlock:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock {
 
-   NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-   AFURLSessionManager * manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 
-   NSURL * URL = [NSURL URLWithString:[remoteSqliteUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *URL = [NSURL URLWithString:[remoteSqliteUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 
-   NSURLRequest * request = [NSURLRequest requestWithURL:URL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
 
 
-   NSURLSessionDownloadTask * downloadTask =
-    [manager downloadTaskWithRequest:request
-                            progress:nil
-                         destination:^NSURL *(NSURL * targetPath, NSURLResponse * response) {
-                             NSURL * documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
-                                                                                                    inDomain:NSUserDomainMask
-                                                                                           appropriateForURL:nil
-                                                                                                      create:NO
-                                                                                                       error:nil];
-                             return [documentsDirectoryURL URLByAppendingPathComponent:subtitleTempName];
-                         }
-                   completionHandler:downloadCompletionBlock];
+    NSURLSessionDownloadTask *downloadTask =
+            [manager downloadTaskWithRequest:request
+                                    progress:nil
+                                 destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                                     NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
+                                                                                                           inDomain:NSUserDomainMask
+                                                                                                  appropriateForURL:nil
+                                                                                                             create:NO
+                                                                                                              error:nil];
+                                     return [documentsDirectoryURL URLByAppendingPathComponent:subtitleTempName];
+                                 }
+                           completionHandler:downloadCompletionBlock];
 
-   [downloadTask resume];
+    [downloadTask resume];
 }
 
 @end

@@ -11,5 +11,5 @@
 @interface FileOwner : NSObject
 @property (nonatomic, weak) IBOutlet UIView *view;
 
-+(id)viewFromNibNamed:(NSString*) nibName;
++ (id)viewFromNibNamed:(NSString *)nibName;
 @end

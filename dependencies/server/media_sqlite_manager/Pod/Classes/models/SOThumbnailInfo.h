@@ -15,6 +15,6 @@
 */
 @interface SOThumbnailInfo : ABSqliteObject
 
-@property(copy) NSString * fileInfoID;
+@property (copy) NSString *fileInfoID;
 
 @end

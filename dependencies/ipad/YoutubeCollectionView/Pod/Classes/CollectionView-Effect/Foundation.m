@@ -18,92 +18,92 @@
 
 
 + (NSAttributedString *)attributedStringForTitleText:(NSString *)text {
-   UIFont * font = [UIFont systemFontOfSize:14];
+    UIFont *font = [UIFont systemFontOfSize:14];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor blackColor],
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor blackColor],
 //     NSShadowAttributeName : [NSShadow titleTextShadow],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForTitleText:font]
-    };
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForTitleText:font]
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
 + (NSAttributedString *)attributedStringForChannelTitleText:(NSString *)text {
-   UIFont * font = [UIFont systemFontOfSize:12];
+    UIFont *font = [UIFont systemFontOfSize:12];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor redColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForChannelTitle]
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor redColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForChannelTitle]
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
 + (NSAttributedString *)attributedStringForPageChannelTitleText:(NSString *)text {
-   UIFont * font = [UIFont systemFontOfSize:12];
+    UIFont *font = [UIFont systemFontOfSize:12];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor darkTextColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForPageChannelTitle]
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor darkTextColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForPageChannelTitle]
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
 + (NSAttributedString *)attributedStringForChannelStatisticsSubscriberCount:(NSString *)text {
-   UIFont * font = [UIFont systemFontOfSize:12];
+    UIFont *font = [UIFont systemFontOfSize:12];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor darkGrayColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForPageChannelTitle]
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor darkGrayColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForPageChannelTitle]
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
 - (NSDictionary *)createAttributesForFontStyle:(NSString *)style
                                      withTrait:(uint32_t)trait {
-   UIFontDescriptor * fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
-   UIFontDescriptor * descriptorWithTrait = [fontDescriptor fontDescriptorWithSymbolicTraits:trait];
-   UIFont * font = [UIFont fontWithDescriptor:descriptorWithTrait size:0.0];
+    UIFontDescriptor *fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    UIFontDescriptor *descriptorWithTrait = [fontDescriptor fontDescriptorWithSymbolicTraits:trait];
+    UIFont *font = [UIFont fontWithDescriptor:descriptorWithTrait size:0.0];
 
-   return @{ NSFontAttributeName : font };
+    return @{NSFontAttributeName : font};
 }
 
 
 + (NSAttributedString *)attributedStringForTitleText123:(NSString *)text {
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : [UIFont fontWithName:@"AvenirNext-Heavy" size:30],
-     NSForegroundColorAttributeName : [UIColor whiteColor],
-     NSShadowAttributeName : [NSShadow titleTextShadow],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyle]
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : [UIFont fontWithName:@"AvenirNext-Heavy" size:30],
+                    NSForegroundColorAttributeName : [UIColor whiteColor],
+                    NSShadowAttributeName : [NSShadow titleTextShadow],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyle]
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
 + (NSAttributedString *)attributedStringForDurationText:(NSString *)text {
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
-     NSForegroundColorAttributeName : [UIColor whiteColor],
-     NSBackgroundColorAttributeName : [UIColor clearColor],
-     NSShadowAttributeName : [NSShadow descriptionTextShadow],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDuration]
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
+                    NSForegroundColorAttributeName : [UIColor whiteColor],
+                    NSBackgroundColorAttributeName : [UIColor clearColor],
+                    NSShadowAttributeName : [NSShadow descriptionTextShadow],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDuration]
+            };
 
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
@@ -112,15 +112,15 @@
 
 
 + (NSAttributedString *)attributedStringForLeftMenuSubscriptionTitleText:(NSString *)text fontSize:(CGFloat)fontSize {
-   UIFont * font = [UIFont systemFontOfSize:fontSize];
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor lightTextColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForLeftMenuSubscriptionTitle]
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor lightTextColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForLeftMenuSubscriptionTitle]
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
@@ -129,17 +129,17 @@
 
 
 + (NSAttributedString *)attributedStringForCollectionVideoTitle:(NSString *)text fontSize:(CGFloat)fontSize {
-   UIFont * font =
-    [UIFont fontWithName:@"Helvetica" size:fontSize];
+    UIFont *font =
+            [UIFont fontWithName:@"Helvetica" size:fontSize];
 //    [UIFont boldSystemFontOfSize:fontSize];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor darkTextColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForCollectionVideoTitle]
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor darkTextColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForCollectionVideoTitle]
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
@@ -148,17 +148,17 @@
 
 
 + (NSAttributedString *)attributedStringForCollectionChannelTitle:(NSString *)text fontSize:(CGFloat)fontSize {
-   UIFont * font =
-    [UIFont fontWithName:@"Helvetica" size:fontSize];
+    UIFont *font =
+            [UIFont fontWithName:@"Helvetica" size:fontSize];
 //    [UIFont boldSystemFontOfSize:fontSize];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor lightGrayColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForCollectionChannelTitle]
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor lightGrayColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForCollectionChannelTitle]
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
@@ -167,75 +167,75 @@
 
 
 + (NSMutableAttributedString *)attributedStringForDetailRowDescription:(NSString *)text fontSize:(CGFloat)fontSize {
-   UIFont * font = [UIFont fontWithName:@"HelveticaNeue-Light" size:fontSize];
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:fontSize];
 
-   NSDictionary * titleAttributes =
-    @{
-     NSForegroundColorAttributeName : [UIColor blackColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDescription],
-    };
+    NSDictionary *titleAttributes =
+            @{
+                    NSForegroundColorAttributeName : [UIColor blackColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDescription],
+            };
 
-   NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:text
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:text
                                                                                          attributes:titleAttributes];
 
-   [attributedString addAttribute:NSFontAttributeName
-                            value:font
-                            range:NSMakeRange(0, text.length)];
+    [attributedString addAttribute:NSFontAttributeName
+                             value:font
+                             range:NSMakeRange(0, text.length)];
 
 
-   return attributedString;
+    return attributedString;
 }
 
 
 + (NSAttributedString *)attributedStringForDetailRowChannelTitle:(NSString *)text fontSize:(CGFloat)fontSize {
-   UIFont * font = [UIFont systemFontOfSize:fontSize];
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor blackColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDetailRowChannelTitle],
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor blackColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDetailRowChannelTitle],
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
 + (NSAttributedString *)attributedStringForDetailRowChannelPublishedAt:(NSString *)text fontSize:(CGFloat)fontSize {
-   UIFont * font = [UIFont systemFontOfSize:fontSize];
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor darkGrayColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyle],
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor darkGrayColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyle],
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
 + (NSAttributedString *)attributedStringForDetailRowVideoLikeCount:(NSString *)text fontSize:(CGFloat)fontSize {
-   UIFont * font = [UIFont systemFontOfSize:fontSize];
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor darkGrayColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForCommon],
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor darkGrayColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForCommon],
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
 + (NSAttributedString *)attributedStringForDetailRowVideoViewCount:(NSString *)text fontSize:(CGFloat)fontSize {
-   UIFont * font = [UIFont systemFontOfSize:fontSize];
+    UIFont *font = [UIFont systemFontOfSize:fontSize];
 
-   NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor darkGrayColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDetailRowVideoViewCount],
-    };
+    NSDictionary *titleAttributes =
+            @{NSFontAttributeName : font,
+                    NSForegroundColorAttributeName : [UIColor darkGrayColor],
+                    NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDetailRowVideoViewCount],
+            };
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
 
@@ -249,13 +249,13 @@
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForCommon {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   style.lineBreakMode = NSLineBreakByTruncatingTail;
-   style.alignment = NSTextAlignmentLeft;
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.lineBreakMode = NSLineBreakByTruncatingTail;
+    style.alignment = NSTextAlignmentLeft;
 
-   style.paragraphSpacing = 0.0;
+    style.paragraphSpacing = 0.0;
 
-   return style;
+    return style;
 }
 
 
@@ -264,57 +264,57 @@
 
 
 + (NSParagraphStyle *)justifiedParagraphStyle {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //   [style setAlignment:NSTextAlignmentJustified];
 //   style.lineBreakMode = NSLineBreakByTruncatingTail;
 
-   return style;
+    return style;
 }
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForDuration {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   style.alignment = NSTextAlignmentLeft;
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.alignment = NSTextAlignmentLeft;
 
-   return style;
+    return style;
 }
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForChannelTitle {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   style.lineBreakMode = NSLineBreakByTruncatingTail;
-   style.alignment = NSTextAlignmentLeft;
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.lineBreakMode = NSLineBreakByTruncatingTail;
+    style.alignment = NSTextAlignmentLeft;
 
-   return style;
+    return style;
 }
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForPageChannelTitle {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   style.lineBreakMode = NSLineBreakByTruncatingTail;
-   style.alignment = NSTextAlignmentLeft;
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.lineBreakMode = NSLineBreakByTruncatingTail;
+    style.alignment = NSTextAlignmentLeft;
 
-   return style;
+    return style;
 }
 
 
 + (NSMutableParagraphStyle *)justifiedParagraphStyleForTitleText:(UIFont *)font {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //   style.paragraphSpacing = 0.5 * font.lineHeight;
-   style.hyphenationFactor = 1.0;
+    style.hyphenationFactor = 1.0;
 //   style.lineBreakMode = NSLineBreakByTruncatingTail;
 //   style.alignment = kCTTextAlignmentCenter;
 
 
-   style.minimumLineHeight = 0.f;
-   style.maximumLineHeight = 88.0f;
-   style.firstLineHeadIndent = 0.0f;
-   style.paragraphSpacing = 0.0;
-   style.lineSpacing = 5.0;
-   style.headIndent = 0.0f;
-   style.tailIndent = 0.0f;
+    style.minimumLineHeight = 0.f;
+    style.maximumLineHeight = 88.0f;
+    style.firstLineHeadIndent = 0.0f;
+    style.paragraphSpacing = 0.0;
+    style.lineSpacing = 5.0;
+    style.headIndent = 0.0f;
+    style.tailIndent = 0.0f;
 
-   return style;
+    return style;
 }
 
 
@@ -323,11 +323,11 @@
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForCollectionVideoTitle {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 
-   style.paragraphSpacing = 1.0;
+    style.paragraphSpacing = 1.0;
 
-   return style;
+    return style;
 }
 
 
@@ -336,11 +336,11 @@
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForCollectionChannelTitle {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 
-   style.paragraphSpacing = 1.0;
+    style.paragraphSpacing = 1.0;
 
-   return style;
+    return style;
 }
 
 
@@ -349,34 +349,34 @@
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForDescription {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   style.alignment = NSTextAlignmentLeft;
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.alignment = NSTextAlignmentLeft;
 
-   style.paragraphSpacing = 1.0;
+    style.paragraphSpacing = 1.0;
 
-   return style;
+    return style;
 }
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForDetailRowChannelTitle {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   style.lineBreakMode = NSLineBreakByTruncatingTail;
-   style.alignment = NSTextAlignmentLeft;
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.lineBreakMode = NSLineBreakByTruncatingTail;
+    style.alignment = NSTextAlignmentLeft;
 
-   style.paragraphSpacing = 0.0;
+    style.paragraphSpacing = 0.0;
 
-   return style;
+    return style;
 }
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForDetailRowVideoViewCount {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   style.lineBreakMode = NSLineBreakByTruncatingTail;
-   style.alignment = NSTextAlignmentRight;
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.lineBreakMode = NSLineBreakByTruncatingTail;
+    style.alignment = NSTextAlignmentRight;
 
-   style.paragraphSpacing = 0.0;
+    style.paragraphSpacing = 0.0;
 
-   return style;
+    return style;
 }
 
 
@@ -385,12 +385,12 @@
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForLeftMenuSubscriptionTitle {
-   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   style.lineBreakMode = NSLineBreakByTruncatingTail;
-   style.alignment = NSTextAlignmentLeft;
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.lineBreakMode = NSLineBreakByTruncatingTail;
+    style.alignment = NSTextAlignmentLeft;
 
 
-   return style;
+    return style;
 }
 
 
@@ -400,25 +400,25 @@
 @implementation NSShadow (custom)
 
 + (NSShadow *)titleTextShadow {
-   NSShadow * shadow = [[NSShadow alloc] init];
-   shadow.shadowColor = [UIColor colorWithHue:0
-                                   saturation:0
-                                   brightness:0
-                                        alpha:0.3];
-   shadow.shadowOffset = CGSizeMake(0, 2);
-   shadow.shadowBlurRadius = 3.0;
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithHue:0
+                                    saturation:0
+                                    brightness:0
+                                         alpha:0.3];
+    shadow.shadowOffset = CGSizeMake(0, 2);
+    shadow.shadowBlurRadius = 3.0;
 
-   return shadow;
+    return shadow;
 }
 
 
 + (NSShadow *)descriptionTextShadow {
-   NSShadow * shadow = [[NSShadow alloc] init];
-   shadow.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.3];
-   shadow.shadowOffset = CGSizeMake(0, 1);
-   shadow.shadowBlurRadius = 3.0;
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+    shadow.shadowOffset = CGSizeMake(0, 1);
+    shadow.shadowBlurRadius = 3.0;
 
-   return shadow;
+    return shadow;
 }
 
 

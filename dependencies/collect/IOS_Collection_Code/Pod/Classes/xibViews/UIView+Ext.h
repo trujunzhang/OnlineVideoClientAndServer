@@ -10,6 +10,8 @@
 
 @interface UIView (Ext)
 + (id)loadFromNib;
-+ (id)loadFromNibNamed:(NSString*) nibName;
+
++ (id)loadFromNibNamed:(NSString *)nibName;
+
 + (id)loadFromNibNoOwner;
 @end

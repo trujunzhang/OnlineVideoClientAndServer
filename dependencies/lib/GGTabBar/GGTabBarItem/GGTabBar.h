@@ -20,14 +20,14 @@ static CGFloat separatorWidth = 2.0f;
 
 @interface GGTabBar : UIView
 
-@property(nonatomic, strong) NSArray * viewControllers;
+@property (nonatomic, strong) NSArray *viewControllers;
 
-@property(nonatomic, strong) id<GGTabBarDelegate> delegate;
+@property (nonatomic, strong) id<GGTabBarDelegate> delegate;
 
-@property(nonatomic, strong) UIViewController * selectedViewController;
-@property(nonatomic, strong) id selectedButton;
+@property (nonatomic, strong) UIViewController *selectedViewController;
+@property (nonatomic, strong) id selectedButton;
 
-@property(nonatomic) BOOL inTop;
+@property (nonatomic) BOOL inTop;
 
 - (instancetype)initWithFrame:(CGRect)frame viewControllers:(NSArray *)viewControllers inTop:(BOOL)inTop selectedIndex:(NSInteger)selectedIndex tabBarWidth:(CGFloat)tabBarWidth;
 

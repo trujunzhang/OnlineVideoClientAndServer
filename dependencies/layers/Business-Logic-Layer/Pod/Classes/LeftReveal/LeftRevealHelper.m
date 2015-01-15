@@ -12,11 +12,11 @@
 
 #import <SWRevealViewController/SWRevealViewController.h>
 
-LeftRevealHelper * instance;
+LeftRevealHelper *instance;
 
 
 @interface LeftRevealHelper () {
-   SWRevealViewController * _revealController;
+    SWRevealViewController *_revealController;
 
 }
 @end
@@ -25,10 +25,10 @@ LeftRevealHelper * instance;
 @implementation LeftRevealHelper
 
 + (LeftRevealHelper *)sharedLeftRevealHelper {
-   if (instance == nil) {
-      instance = [[LeftRevealHelper alloc] init];
-   }
-   return instance;
+    if(instance == nil) {
+        instance = [[LeftRevealHelper alloc] init];
+    }
+    return instance;
 }
 
 
@@ -37,14 +37,14 @@ LeftRevealHelper * instance;
 
 
 - (void)registerRevealController:(SWRevealViewController *)controller {
-   // 1
-   _revealController = controller;
+    // 1
+    _revealController = controller;
 
-   // 2
-   if (hasShowLeftMenu) {
+    // 2
+    if(hasShowLeftMenu) {
 //      self.isRearOpen = YES; // used
 //      [self openLeftMenu];   // used
-   }
+    }
 }
 
 
@@ -53,34 +53,34 @@ LeftRevealHelper * instance;
 
 
 - (void)toggleReveal {
-   if (self.isRearOpen) {
-      [self closeLeftMenu];
-   } else {
-      [self openLeftMenu];
-   }
-   self.isRearOpen = !self.isRearOpen;
+    if(self.isRearOpen) {
+        [self closeLeftMenu];
+    } else {
+        [self openLeftMenu];
+    }
+    self.isRearOpen = !self.isRearOpen;
 }
 
 
 - (void)closeLeftMenu {
-   [_revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+    [_revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
 }
 
 
 - (void)closeLeftMenuAndNoRearOpen {
-   [self closeLeftMenu];
-   self.isRearOpen = NO;
+    [self closeLeftMenu];
+    self.isRearOpen = NO;
 }
 
 
 - (void)openLeftMenuAndRearOpen {
-   [self openLeftMenu];
-   self.isRearOpen = YES;
+    [self openLeftMenu];
+    self.isRearOpen = YES;
 }
 
 
 - (void)openLeftMenu {
-   [_revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+    [_revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
 }
 
 
@@ -89,34 +89,34 @@ LeftRevealHelper * instance;
 
 
 - (void)beginTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex withViewCount:(NSUInteger)count {
-   self.lastTabBarSelectedIndex = selectedIndex;
-   self.isLastTabBarSelectedInRoot = (count == 1);
+    self.lastTabBarSelectedIndex = selectedIndex;
+    self.isLastTabBarSelectedInRoot = (count == 1);
 }
 
 
 - (void)endTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex {
-   if (selectedIndex != 0) {
-      [self closeLeftMenu];
-      return;
-   }
+    if(selectedIndex != 0) {
+        [self closeLeftMenu];
+        return;
+    }
 
-   if (selectedIndex != self.lastTabBarSelectedIndex) {
-      if (selectedIndex == 0) {
-         if (self.isRearOpen) {
-            [self openLeftMenu];
-         }
-      }
-      return;
-   }
-   if (!self.isLastTabBarSelectedInRoot)
-      return;
+    if(selectedIndex != self.lastTabBarSelectedIndex) {
+        if(selectedIndex == 0) {
+            if(self.isRearOpen) {
+                [self openLeftMenu];
+            }
+        }
+        return;
+    }
+    if(!self.isLastTabBarSelectedInRoot)
+        return;
 
-   if (selectedIndex == 0 && self.isLastTabBarSelectedInRoot && self.isRearOpen) {
-      [self closeLeftMenuAndNoRearOpen];
-      return;
-   }
+    if(selectedIndex == 0 && self.isLastTabBarSelectedInRoot && self.isRearOpen) {
+        [self closeLeftMenuAndNoRearOpen];
+        return;
+    }
 
-   [self toggleReveal];
+    [self toggleReveal];
 }
 
 @end

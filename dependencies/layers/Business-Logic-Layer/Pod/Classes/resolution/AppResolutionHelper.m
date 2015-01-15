@@ -29,19 +29,19 @@
 
 
 + (NSString *)resolutionNameByType:(NSUInteger)type isPortrait:(BOOL)portrait {
-   if (portrait == NO) {
-      type += 2;
-   }
-   NSArray * array = [AppResolutionHelper getResolutionImageNameArray];
-   return array[type];
+    if(portrait == NO) {
+        type += 2;
+    }
+    NSArray *array = [AppResolutionHelper getResolutionImageNameArray];
+    return array[type];
 }
 
 + (UIColor *)resolutionByType:(NSUInteger)type isPortrait:(BOOL)portrait {
-   if (portrait == NO) {
-      type += 2;
-   }
-   NSArray * array = [AppResolutionHelper getResolutionImageNameArray];
-   return [UIColor colorWithPatternImage:[UIImage imageNamed:array[type]]];
+    if(portrait == NO) {
+        type += 2;
+    }
+    NSArray *array = [AppResolutionHelper getResolutionImageNameArray];
+    return [UIColor colorWithPatternImage:[UIImage imageNamed:array[type]]];
 //   return [UIColor colorWithPatternImage:[UIImage imageNamed:@"Default-Landscape~ipad"]];
 //   return [UIColor colorWithPatternImage:[UIImage imageNamed:@"Default-Portrait~ipad"]];
 
@@ -59,17 +59,17 @@
 
 
 + (NSArray *)getResolutionImageNameArray {
-   return [NSArray arrayWithObjects:
-    @"",// {UIDeviceResolution_Unknown}
-    @"",// {iPhone 1,3,3GS Standard Display  (320x480px)}
-    @"Default", // 640 x 960
-    //[3]
-    @"Default-568h", //640 x 1,136
-    @"Default-Portrait~ipad",// 768 x 1,024
-    @"Default-Portrait~ipad",// 1,536 x 2,048
-    @"Default-Landscape~ipad",//  1,024 x 768
-    @"Default-Landscape~ipad",//2,048 x 1,536
-     nil];
+    return [NSArray arrayWithObjects:
+            @"",// {UIDeviceResolution_Unknown}
+            @"",// {iPhone 1,3,3GS Standard Display  (320x480px)}
+            @"Default", // 640 x 960
+            //[3]
+            @"Default-568h", //640 x 1,136
+            @"Default-Portrait~ipad",// 768 x 1,024
+            @"Default-Portrait~ipad",// 1,536 x 2,048
+            @"Default-Landscape~ipad",//  1,024 x 768
+            @"Default-Landscape~ipad",//2,048 x 1,536
+                    nil];
 
 }
 

@@ -7,7 +7,7 @@
 
 
 @interface YoutubeVideoDescriptionStringAttribute : NSObject
-@property(nonatomic, copy) NSString * kLinkAttributeName;
-@property(nonatomic, copy) NSString * httpString;
-@property(nonatomic) NSRange httpRang;
+@property (nonatomic, copy) NSString *kLinkAttributeName;
+@property (nonatomic, copy) NSString *httpString;
+@property (nonatomic) NSRange httpRang;
 @end

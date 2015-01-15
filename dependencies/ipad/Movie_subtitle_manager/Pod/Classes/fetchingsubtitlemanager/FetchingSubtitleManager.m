@@ -14,12 +14,11 @@
 + (void)fetchSubtitleForVideoUrl:(NSString *)videoUrl subtitleResponseBlock:(SubtitleResponseBlock)subtitleResponseBlock {
 
 
-
 }
 
 
 + (NSString *)convertVideoUrlToSubtitleUrl:(NSString *)url {
 
-   return url;
+    return url;
 }
 @end

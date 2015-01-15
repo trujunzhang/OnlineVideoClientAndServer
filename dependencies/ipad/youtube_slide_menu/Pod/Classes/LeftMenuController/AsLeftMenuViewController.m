@@ -16,7 +16,7 @@
 
 
 @interface AsLeftMenuViewController ()<ASTableViewDataSource, ASTableViewDelegate>
-@property(nonatomic, strong) ASTableView * tableView;
+@property (nonatomic, strong) ASTableView *tableView;
 
 
 @end
@@ -26,16 +26,16 @@
 
 
 - (instancetype)init {
-   if (!(self = [super init]))
-      return nil;
+    if(!(self = [super init]))
+        return nil;
 
-   self.tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-   self.tableView.asyncDataSource = self;
-   self.tableView.asyncDelegate = self;
+    self.tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView.asyncDataSource = self;
+    self.tableView.asyncDelegate = self;
 
-   self.tableView.allowsSelection = YES;
+    self.tableView.allowsSelection = YES;
 
-   return self;
+    return self;
 }
 
 
@@ -44,57 +44,57 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   return 1 + [self.headers count];
+    return 1 + [self.headers count];
 }
 
 
 - (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
-   if (indexPath.section == 0 && indexPath.row == 0) {
-      AsTableViewHeaderNode * node = [[AsTableViewHeaderNode alloc] init];
-      return node;
-   }
+    if(indexPath.section == 0 && indexPath.row == 0) {
+        AsTableViewHeaderNode *node = [[AsTableViewHeaderNode alloc] init];
+        return node;
+    }
 
-   LeftMenuItemTree * menuItemTree = self.tableSectionArray[indexPath.section - 1];
+    LeftMenuItemTree *menuItemTree = self.tableSectionArray[indexPath.section - 1];
 
-   YTYouTubeChannel * line = menuItemTree.rowsArray[indexPath.row];
+    YTYouTubeChannel *line = menuItemTree.rowsArray[indexPath.row];
 
-   YTAsLeftTableCellNode * node =
-    [[YTAsLeftTableCellNode alloc]
-     initWithNodeCellSize:CGSizeMake(250, ROW_HEIGHT)
-                lineTitle:[LeftMenuItemTree getTitleInRow:line]
-              lineIconUrl:@"Education"
-            isRemoteImage:menuItemTree.isRemoteImage];
+    YTAsLeftTableCellNode *node =
+            [[YTAsLeftTableCellNode alloc]
+                    initWithNodeCellSize:CGSizeMake(250, ROW_HEIGHT)
+                               lineTitle:[LeftMenuItemTree getTitleInRow:line]
+                             lineIconUrl:@"Education"
+                           isRemoteImage:menuItemTree.isRemoteImage];
 
-   return node;
+    return node;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   if (section == 0) {
-      return 1;
-   }
-   LeftMenuItemTree * menuItemTree = self.tableSectionArray[section - 1];
+    if(section == 0) {
+        return 1;
+    }
+    LeftMenuItemTree *menuItemTree = self.tableSectionArray[section - 1];
 
-   return menuItemTree.rowsArray.count;
+    return menuItemTree.rowsArray.count;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-   if (section == 0) {
-      return 0;
-   }
+    if(section == 0) {
+        return 0;
+    }
 
-   return 42;
+    return 42;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-   if (section > self.headers.count)
-      return nil;
-   if (section == 0) {
-      return nil;
-   }
-   return [self.headers objectAtIndex:section - 1];
+    if(section > self.headers.count)
+        return nil;
+    if(section == 0) {
+        return nil;
+    }
+    return [self.headers objectAtIndex:section - 1];
 }
 
 
@@ -103,15 +103,15 @@
 
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-   return YES;
+    return YES;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   NSInteger sectionIndex = indexPath.section - 1;
-   NSInteger rowIndex = indexPath.row;
+    NSInteger sectionIndex = indexPath.section - 1;
+    NSInteger rowIndex = indexPath.row;
 
-   [self togglePageViewController:sectionIndex rowIndex:rowIndex];
+    [self togglePageViewController:sectionIndex rowIndex:rowIndex];
 }
 
 
@@ -120,17 +120,17 @@
 
 
 - (void)viewDidLoad {
-   [self setCurrentTableView:self.tableView];
+    [self setCurrentTableView:self.tableView];
 //   [self defaultRefreshForSubscriptionList];
 
-   [super viewDidLoad];
+    [super viewDidLoad];
 }
 
 
 - (void)viewWillLayoutSubviews {
-   [super viewWillLayoutSubviews];
+    [super viewWillLayoutSubviews];
 
-   _tableView.frame = self.view.bounds;
+    _tableView.frame = self.view.bounds;
 }
 
 
@@ -139,7 +139,7 @@
 
 
 - (void)leftMenuReloadTable {
-   [_tableView reloadData];
+    [_tableView reloadData];
 }
 
 

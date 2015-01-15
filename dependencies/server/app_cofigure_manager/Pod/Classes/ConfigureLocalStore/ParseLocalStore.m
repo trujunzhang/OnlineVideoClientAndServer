@@ -12,35 +12,35 @@
 }
 
 + (void)saveSqliteVersion:(NSString *)version {
-   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-   [defaults setObject:version forKey:@"sqlite_version"];
-   [defaults synchronize];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:version forKey:@"sqlite_version"];
+    [defaults synchronize];
 }
 
 
 + (NSString *)readSqliteVersion {
-   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-   if ([defaults objectForKey:@"sqlite_version"]) {
-      return [defaults objectForKey:@"sqlite_version"];
-   }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults objectForKey:@"sqlite_version"]) {
+        return [defaults objectForKey:@"sqlite_version"];
+    }
 
-   return @"";
+    return @"";
 }
 
 
 + (BOOL)checkLocalCacheSqliteExist {
-   NSURL * documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
                                                                           inDomain:NSUserDomainMask
                                                                  appropriateForURL:nil
                                                                             create:NO
                                                                              error:nil];
-   NSURL * sqlitePathUrl = [documentsDirectoryURL URLByAppendingPathComponent:dataBaseName];
-   NSString * filePathName = [sqlitePathUrl path];
+    NSURL *sqlitePathUrl = [documentsDirectoryURL URLByAppendingPathComponent:dataBaseName];
+    NSString *filePathName = [sqlitePathUrl path];
 
-   BOOL myPathIsDir;
-   BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePathName isDirectory:&myPathIsDir];
+    BOOL myPathIsDir;
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePathName isDirectory:&myPathIsDir];
 
-   return fileExists;
+    return fileExists;
 }
 
 

@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
 - (void)startAnimation;
+
 - (void)stopAnimation;
 @end

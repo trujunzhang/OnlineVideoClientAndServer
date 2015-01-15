@@ -3,6 +3,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @protocol ABDatabase;
 
 
@@ -11,11 +12,16 @@
 }
 
 + (NSString *)uniqueID;
-- (void)makeForMobileDB:(id<ABDatabase>)db ;
-- (void)checkSchemaForMobileDB:(id<ABDatabase>)db ;
+
+- (void)makeForMobileDB:(id<ABDatabase>)db;
+
+- (void)checkSchemaForMobileDB:(id<ABDatabase>)db;
+
 - (void)makeForMobileDBThumbnail:(id<ABDatabase>)db;
-- (void)checkSchemaForMobileDBThumbnail:(id<ABDatabase>)db ;
+
+- (void)checkSchemaForMobileDBThumbnail:(id<ABDatabase>)db;
 
 + (BOOL)checkDBFileExist:(NSString *)filePathName;
-+ (NSString *)getThumbnailName:(NSString*)sqliteObjectID;
+
++ (NSString *)getThumbnailName:(NSString *)sqliteObjectID;
 @end

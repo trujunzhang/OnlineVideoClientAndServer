@@ -19,26 +19,26 @@
 
 @implementation ABProjectFileInfo
 - (instancetype)init {
-   self = [super init];
-   if (self) {
-      self.sqliteObjectID = [MobileDB uniqueID];
+    self = [super init];
+    if(self) {
+        self.sqliteObjectID = [MobileDB uniqueID];
 
-      self.sqliteObjectName = @"";
-      self.subtitleName = @"";
-      self.objectFullPath = @"";
-   }
+        self.sqliteObjectName = @"";
+        self.subtitleName = @"";
+        self.objectFullPath = @"";
+    }
 
-   return self;
+    return self;
 }
 
 
 - (instancetype)initWithFileInforName:(NSString *)fileInforName {
-   self = [self init];
-   if (self) {
-      self.sqliteObjectName = fileInforName;
-   }
+    self = [self init];
+    if(self) {
+        self.sqliteObjectName = fileInforName;
+    }
 
-   return self;
+    return self;
 }
 
 
@@ -47,28 +47,28 @@
 
 
 - (NSMutableDictionary *)getUpdateDictionary {
-   NSMutableDictionary * dictionary = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
 
-   [dictionary setObject:self.sqliteObjectName forKey:@"fileInforName"];
-   [dictionary setObject:self.subtitleName forKey:@"subtitleName"];
+    [dictionary setObject:self.sqliteObjectName forKey:@"fileInforName"];
+    [dictionary setObject:self.subtitleName forKey:@"subtitleName"];
 
-   return dictionary;
+    return dictionary;
 }
 
 
 - (NSMutableDictionary *)getInsertDictionary {
 
-   return [self getUpdateDictionary];
+    return [self getUpdateDictionary];
 }
 
 
 - (NSString *)getOnlineVideoPlayUrl:(NSString *)domain {
-   return [NSString stringWithFormat:@"%@%@", domain, [self encodeAbstractFilePath]];
+    return [NSString stringWithFormat:@"%@%@", domain, [self encodeAbstractFilePath]];
 }
 
 
 - (NSString *)encodeAbstractFilePath {
-   return [self.objectFullPath replaceCharcter:@" " withCharcter:@"%20"];
+    return [self.objectFullPath replaceCharcter:@" " withCharcter:@"%20"];
 }
 
 
@@ -78,7 +78,7 @@
 - (ABProjectFileInfo *)checkExistForFileInfoWithFileInfoName:(NSString *)sqliteObjectName {
 
 
-   return nil;
+    return nil;
 }
 
 

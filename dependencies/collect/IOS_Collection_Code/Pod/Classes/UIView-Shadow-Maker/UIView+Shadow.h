@@ -11,8 +11,10 @@
 
 @interface UIView (Shadow)
 
-- (void) makeInsetShadow;
-- (void) makeInsetShadowWithRadius:(float)radius Alpha:(float)alpha;
-- (void) makeInsetShadowWithRadius:(float)radius Color:(UIColor *)color Directions:(NSArray *)directions;
+- (void)makeInsetShadow;
+
+- (void)makeInsetShadowWithRadius:(float)radius Alpha:(float)alpha;
+
+- (void)makeInsetShadowWithRadius:(float)radius Color:(UIColor *)color Directions:(NSArray *)directions;
 
 @end

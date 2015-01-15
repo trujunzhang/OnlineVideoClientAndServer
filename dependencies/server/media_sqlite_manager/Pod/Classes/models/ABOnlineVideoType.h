@@ -9,10 +9,11 @@
 
 @interface ABOnlineVideoType : ABSqliteObject
 
-@property(strong) NSMutableDictionary * onlineTypeDictionary;
+@property (strong) NSMutableDictionary *onlineTypeDictionary;
 
 - (instancetype)initWithOnlineTypeName:(NSString *)onlineTypeName projectFullPath:(NSString *)projectFullPath withDictionary:(NSMutableDictionary *)dictionary;
 
 - (void)appendProjectTypeDictionary:(NSMutableDictionary *)dictionary;
+
 - (void)appendProjectType:(id)projectType;
 @end

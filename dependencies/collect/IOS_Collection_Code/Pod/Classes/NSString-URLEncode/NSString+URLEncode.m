@@ -15,10 +15,10 @@
 
 - (NSString *)URLEncodeUsingEncoding:(NSStringEncoding)encoding {
     return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                 (__bridge CFStringRef)self,
-                                                                                 NULL,
-                                                                                 (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
-                                                                                 CFStringConvertNSStringEncodingToEncoding(encoding));
+            (__bridge CFStringRef)self,
+            NULL,
+            (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
+            CFStringConvertNSStringEncodingToEncoding(encoding));
 }
 
 - (NSString *)URLDecode {
@@ -26,10 +26,10 @@
 }
 
 - (NSString *)URLDecodeUsingEncoding:(NSStringEncoding)encoding {
-	return (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
-                                                                                                 (__bridge CFStringRef)self,
-                                                                                                 CFSTR(""),
-                                                                                                 CFStringConvertNSStringEncodingToEncoding(encoding));
+    return (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
+            (__bridge CFStringRef)self,
+            CFSTR(""),
+            CFStringConvertNSStringEncodingToEncoding(encoding));
 }
 
 @end
