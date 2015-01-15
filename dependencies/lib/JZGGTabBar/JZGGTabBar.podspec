@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'JZGGTabBarItem' do |sub|
     sub.source_files = 'JZGGTabBarItem/*.{h,m}'
-    sub.resources = 'maintabicons/*.*'
+    sub.resources = 'sketchicons/*.*'
   end
 
   s.requires_arc = true
