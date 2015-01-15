@@ -13,6 +13,7 @@
 #import "OnlineServerInfo.h"
 #import "ParseHelper.h"
 #import "ParseLocalStore.h"
+#import "TCBlobDownloadManager.h"
 
 
 static GYoutubeHelper *instance = nil;
@@ -61,8 +62,26 @@ static GYoutubeHelper *instance = nil;
     }
 }
 
-
 - (void)fetchingSubtitle:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
+    // Blocks
+    [[TCBlobDownloadManager sharedInstance] startDownloadWithURL:[NSURL URLWithString:subtitleUrl]
+                                                      customPath:[NSString pathWithComponents:@[NSTemporaryDirectory(), @"example"]]
+                                                   firstResponse:NULL
+                                                        progress:^(uint64_t receivedLength, uint64_t totalLength, NSInteger remainingTime, float progress) {
+                                                            if(remainingTime != -1) {
+//                                                    [self.remainingTime setText:[NSString stringWithFormat:@"%lds", (long)remainingTime]];
+                                                            }
+                                                        }
+                                                           error:^(NSError *error) {
+                                                               NSLog(@"%@", error);
+                                                           }
+                                                        complete:^(BOOL downloadFinished, NSString *pathToFile) {
+                                                            NSString *str = downloadFinished ? @"Completed" : @"Cancelled";
+//                                                [self.remainingTime setText:str];
+                                                        }];
+}
+
+- (void)fetchingSubtitle123:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
     NSURL *removeUrl = [[[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
                                                                inDomain:NSUserDomainMask
                                                       appropriateForURL:nil

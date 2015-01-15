@@ -6,6 +6,8 @@
 #import "YTAsFirstVideoRowNode.h"
 #import "FetchingSubtitleManager.h"
 #import "YKDirectVideo.h"
+#import "ASNetworkImageNode.h"
+#import "ASDisplayNodeExtras.h"
 //#import "MPMoviePlayerController+Subtitles.h"
 
 
@@ -65,14 +67,18 @@
 - (void)buttonTapped:(id)buttonTapped {
     NSString *videoUrl = [YoutubeParser getVideoOnlineUrl:self.nodeInfo];
 
-    YKDirectVideo *_directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:[videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    NSString *string = [videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    YKDirectVideo *_directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:string]];
 
-    SubtitleResponseBlock subtitleResponseBlock = ^(NSURL *responseString,NSError *error) {
-        [_directVideo play:YKQualityLow subtitlesPathStr:[responseString relativePath]];
+    SubtitleResponseBlock subtitleResponseBlock = ^(NSURL *responseString, NSError *error) {
+        NSString *str = [responseString relativePath];
+        if(error)
+            str = nil;
+        [_directVideo play:YKQualityLow subtitlesPathStr:str];
     };
     [[GYoutubeHelper getInstance] fetchingSubtitle:subtitleResponseBlock
                                            withUrl:[NSString stringWithFormat:@"%@.%@",
-                                                                              [videoUrl stringByDeletingPathExtension],
+                                                                              [string stringByDeletingPathExtension],
                                                                               @"srt"]];
 }
 

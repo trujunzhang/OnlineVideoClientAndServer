@@ -111,7 +111,7 @@ CGFloat const kDirectThumbnailLocation = 1.0;
 
     BOOL myPathIsDir;
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:subtitlesPathStr isDirectory:&myPathIsDir];
-    if(fileExists == NO) {
+    if(fileExists == NO || subtitlesPathStr == nil) {
         [[UIApplication sharedApplication].keyWindow.rootViewController presentMoviePlayerViewControllerAnimated:self.player];
         [self.player.moviePlayer play];
         return;

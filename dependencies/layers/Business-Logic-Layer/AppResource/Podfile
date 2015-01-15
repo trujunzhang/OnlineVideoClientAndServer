@@ -54,6 +54,7 @@ target 'OnlineVideoClient', :exclusive => true do
 
   pod 'Shimmer', :path => '/Volumes/Home/wanghaogithub720/cocoapods/Cocoapods_Libraries/Shimmer'
 
+  pod 'TCBlobDownload', :path => '/Volumes/Home/wanghaogithub720/cocoapods/Cocoapods_Libraries/TCBlobDownload'
 end
 
 target 'OnlineVideoClientTests', :exclusive => true do
