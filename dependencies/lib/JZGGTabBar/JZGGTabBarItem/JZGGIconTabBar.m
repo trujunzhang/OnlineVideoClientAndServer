@@ -13,6 +13,8 @@
     UIButton *_selectedButton;
 }
 @property (nonatomic, strong) NSArray *viewControllers;
+@property (nonatomic, strong) NSArray *tabBarItemArrays;
+
 @property (nonatomic, strong) NSMutableArray *buttons;
 @property (nonatomic, strong) NSMutableArray *separators; // Between-buttons separators
 @property (nonatomic, strong) NSMutableArray *marginSeparators; // Start/End Separators
@@ -40,10 +42,11 @@
         _separators = [[NSMutableArray alloc] init];
         _marginSeparators = [[NSMutableArray alloc] init];
         self.viewControllers = viewControllers;
+        self.tabBarItemArrays = tabBarItemArrays;
 //      self.tabBarHeight = CGFLOAT_MIN;
         self.tabBarHeight = 80;
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        [self initSubViewsWithControllers:tabBarItemArrays];
+        [self initSubViewsWithControllers:self.tabBarItemArrays];
 
         [self addHeightConstraints];
         [self addAllLayoutConstraints];
@@ -59,13 +62,13 @@
     NSUInteger newButtonIndex = [_buttons indexOfObject:selectedButton];
 
     if(oldButtonIndex != NSNotFound) {
-        UIViewController *oldSelectedViewController = self.viewControllers[oldButtonIndex];
-        [_selectedButton setImage:oldSelectedViewController.tabBarItem.image forState:UIControlStateNormal];
+        UITabBarItem *oldTabBarItem = self.tabBarItemArrays[oldButtonIndex];
+        [_selectedButton setImage:oldTabBarItem.image forState:UIControlStateNormal];
     }
 
     if(newButtonIndex != NSNotFound) {
-        UIViewController *newSelectedViewController = self.viewControllers[newButtonIndex];
-        [selectedButton setImage:newSelectedViewController.tabBarItem.selectedImage forState:UIControlStateNormal];
+        UITabBarItem *newTabBarItem = self.tabBarItemArrays[newButtonIndex];
+        [selectedButton setImage:newTabBarItem.selectedImage forState:UIControlStateNormal];
     }
 
     _selectedButton = selectedButton;
