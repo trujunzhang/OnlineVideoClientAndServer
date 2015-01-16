@@ -72,10 +72,10 @@
     _directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:string]];
 
     SubtitleResponseBlock subtitleResponseBlock = ^(NSURL *responseString, NSError *error) {
-        NSString *str = [responseString relativePath];
+        NSString *localSRTPath = [responseString relativePath];
         if(error)
-            str = nil;
-//        [_directVideo play:YKQualityLow subtitlesPathStr:str];
+            localSRTPath = nil;
+        [_directVideo play:YKQualityLow subtitlesPathStr:localSRTPath];
     };
     [[GYoutubeHelper getInstance] fetchingSubtitle:subtitleResponseBlock
                                            withUrl:[NSString stringWithFormat:@"%@.%@", [string stringByDeletingPathExtension], @"srt"]];

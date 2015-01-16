@@ -96,13 +96,14 @@ static GYoutubeHelper *instance = nil;
 }
 
 - (void)fetchingSubtitle:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
+    // 1. remove last srt file.
     NSURL *removeUrl = [[[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
                                                                inDomain:NSUserDomainMask
                                                       appropriateForURL:nil
                                                                  create:NO
                                                                   error:nil] URLByAppendingPathComponent:subtitleTempName];
     [[NSFileManager defaultManager] removeItemAtURL:removeUrl error:nil];
-
+    // 2. fetching new srt.
     void (^downloadCompletion)(NSURLResponse *, NSURL *, NSError *) = ^(NSURLResponse *response, NSURL *url, NSError *error) {
         subtitleResponseBlock(removeUrl, error);
     };

@@ -71,15 +71,17 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"wh.srt"];
+    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:subtitleTempName];
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
 
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Successfully downloaded file to %@", path);
+        downloadCompletionBlock(path, nil, nil);
         [self readPathToArray:path];
     }                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"%@", error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+        downloadCompletionBlock(nil, nil, error);
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"%@", error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [alert show];
     }];
 
     [operation start];

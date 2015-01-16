@@ -106,19 +106,19 @@ CGFloat const kDirectThumbnailLocation = 1.0;
 }
 
 
-- (void)play:(YKQualityOptions)quality subtitlesPathStr:(NSString *)subtitlesPathStr {
+- (void)play:(YKQualityOptions)quality subtitlesPathStr:(NSString *)localSRTPath {
     if(!self.player) [self movieViewController:quality];
 
     BOOL myPathIsDir;
-    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:subtitlesPathStr isDirectory:&myPathIsDir];
-    if(fileExists == NO || subtitlesPathStr == nil) {
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:localSRTPath isDirectory:&myPathIsDir];
+    if(fileExists == NO || localSRTPath == nil) {
         [[UIApplication sharedApplication].keyWindow.rootViewController presentMoviePlayerViewControllerAnimated:self.player];
         [self.player.moviePlayer play];
         return;
     }
 
     // Create MoviePlayer
-    [self.player.moviePlayer openSRTFileAtPath:subtitlesPathStr
+    [self.player.moviePlayer openSRTFileAtPath:localSRTPath
 //                                  parserHelper:[[SDSRTParserHelper alloc] init]
                                   parserHelper:[[SRTParserHelper alloc] init]
                                     completion:^(BOOL finished) {
