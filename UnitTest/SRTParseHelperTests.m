@@ -40,6 +40,7 @@
     NSMutableDictionary *subtitlesParts = [NSMutableDictionary dictionary];
 
     void (^completion)(BOOL, NSError *) = ^(BOOL b, NSError *error) {
+        NSMutableDictionary *subtitlesPartsReturn = subtitlesParts;
         NSString *debug = @"debug";
     };
     [parserHelper parseSRTString:stringFromFile
@@ -57,6 +58,7 @@
     NSMutableDictionary *subtitlesParts = [NSMutableDictionary dictionary];
 
     void (^completion)(BOOL, NSError *) = ^(BOOL b, NSError *error) {
+        NSMutableDictionary *subtitlesPartsReturn = subtitlesParts;
         NSString *debug = @"debug";
     };
     [parserHelper parseSRTString:stringFromFile
