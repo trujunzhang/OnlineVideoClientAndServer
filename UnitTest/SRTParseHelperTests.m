@@ -10,12 +10,16 @@
 #import <XCTest/XCTest.h>
 #import "SOSubtitle.h"
 #import "BFTask.h"
+#import "SOSRTParserHelper.h"
+#import "SDSRTParserHelper.h"
 
 @interface SRTParseHelperTests : XCTestCase
 
 @end
 
-@implementation SRTParseHelperTests
+@implementation SRTParseHelperTests {
+    SOSRTParserHelper *parserHelper;
+}
 
 - (void)setUp {
     [super setUp];
@@ -26,6 +30,41 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
+
+- (void)testSDSRTParserHelper {
+    NSString *fileName = @"Alexander the Great";
+    NSString *stringFromFile = [self readStringFromFile:fileName];
+
+    parserHelper = [[SDSRTParserHelper alloc] init];
+
+    NSMutableDictionary *subtitlesParts = [NSMutableDictionary dictionary];
+
+    void (^completion)(BOOL, NSError *) = ^(BOOL b, NSError *error) {
+        NSString *debug = @"debug";
+    };
+    [parserHelper parseSRTString:stringFromFile
+                    toDictionary:subtitlesParts
+                          parsed:completion];
+
+}
+
+- (void)testSOSRTParserHelper {
+    NSString *fileName = @"Alexander the Great";
+    NSString *stringFromFile = [self readStringFromFile:fileName];
+
+    parserHelper = [[SOSRTParserHelper alloc] init];
+
+    NSMutableDictionary *subtitlesParts = [NSMutableDictionary dictionary];
+
+    void (^completion)(BOOL, NSError *) = ^(BOOL b, NSError *error) {
+        NSString *debug = @"debug";
+    };
+    [parserHelper parseSRTString:stringFromFile
+                    toDictionary:subtitlesParts
+                          parsed:completion];
+
+}
+
 
 - (void)testExampleForAlexander {
     int expect = 1264;
@@ -60,6 +99,20 @@
 
     XCTAssertEqual(array.count, expect, "equal");
     return array;
+}
+
+
+- (NSString *)readStringFromFile:(NSString *)fileName {
+    NSString *localSRTFile = [[NSBundle mainBundle] pathForResource:fileName ofType:@"srt"];
+    // Error
+    NSError *error = nil;
+
+
+    // File to string
+    NSString *subtitleString = [NSString stringWithContentsOfFile:localSRTFile
+                                                         encoding:NSUTF8StringEncoding
+                                                            error:&error];
+    return subtitleString;
 }
 
 

@@ -52,6 +52,21 @@
         index++;
     }
 
+    NSArray *orderedKeys = [subtitlesParts keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSDictionary *tempInterval1 = obj1;
+        NSDictionary *tempInterval2 = obj2;
+        NSString *indexString1 = tempInterval1[kIndex];
+        NSString *indexString2 = tempInterval2[kIndex];
+        int v1 = [indexString1 intValue];
+        int v2 = [indexString2 intValue];
+        if(v1 < v2)
+            return NSOrderedAscending;
+        else if(v1 > v2)
+            return NSOrderedDescending;
+        else
+            return NSOrderedSame;
+    }];
+
     NSString *debug = @"debug";
 
 }
