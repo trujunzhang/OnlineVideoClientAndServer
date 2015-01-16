@@ -8,7 +8,7 @@
 #import "AFHTTPSessionManager.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "YoutubeParser.h"
-
+#import "AFNetworking/AFHTTPRequestOperationManager.h"
 
 @implementation Online_Request {
 
@@ -64,8 +64,53 @@
     [downloadTask resume];
 }
 
-
 + (void)fetchingSubtitle:(NSString *)remoteSqliteUrl downloadCompletionBlock:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock {
+
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteSqliteUrl]];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"wh.srt"];
+    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
+
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Successfully downloaded file to %@", path);
+        [self readPathToArray:path];
+    }                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"%@", error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }];
+
+    [operation start];
+
+    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+        float progress = ((float)totalBytesRead) / totalBytesExpectedToRead;
+        NSLog(@"status %f", progress);
+        // self.progressView.progress = progress;
+
+    }];
+
+}
+
++ (void)readPathToArray:(NSString *)tmpFile {
+    if([[NSFileManager defaultManager] fileExistsAtPath:tmpFile]) {
+        //File exists
+        NSData *file1 = [[NSData alloc] initWithContentsOfFile:tmpFile];
+        if(file1) {
+            NSString *newStr = [[NSString alloc] initWithData:file1
+                                                     encoding:NSUTF8StringEncoding];
+
+            NSArray *array = [newStr componentsSeparatedByString:@"\n"];
+            NSString *debug = @"debug";
+        }
+    }
+    else {
+        NSLog(@"File does not exist");
+    }
+}
+
++ (void)fetchingSubtitle123:(NSString *)remoteSqliteUrl downloadCompletionBlock:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock {
 
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];

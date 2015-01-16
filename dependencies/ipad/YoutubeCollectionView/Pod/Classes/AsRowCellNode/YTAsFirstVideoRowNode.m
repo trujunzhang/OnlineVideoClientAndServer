@@ -13,6 +13,7 @@
 
 @interface YTAsFirstVideoRowNode () {
     ASNetworkImageNode *_videoCoverThumbnailsNode;
+    YKDirectVideo *_directVideo;
 }
 
 @end
@@ -65,21 +66,19 @@
 
 
 - (void)buttonTapped:(id)buttonTapped {
-    NSString *videoUrl = [YoutubeParser getVideoOnlineUrl:self.nodeInfo];
-
-    NSString *string = [videoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    YKDirectVideo *_directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:string]];
+    if(_directVideo)
+        return;
+    NSString *string = [[YoutubeParser getVideoOnlineUrl:self.nodeInfo] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    _directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:string]];
 
     SubtitleResponseBlock subtitleResponseBlock = ^(NSURL *responseString, NSError *error) {
         NSString *str = [responseString relativePath];
         if(error)
             str = nil;
-        [_directVideo play:YKQualityLow subtitlesPathStr:str];
+//        [_directVideo play:YKQualityLow subtitlesPathStr:str];
     };
     [[GYoutubeHelper getInstance] fetchingSubtitle:subtitleResponseBlock
-                                           withUrl:[NSString stringWithFormat:@"%@.%@",
-                                                                              [string stringByDeletingPathExtension],
-                                                                              @"srt"]];
+                                           withUrl:[NSString stringWithFormat:@"%@.%@", [string stringByDeletingPathExtension], @"srt"]];
 }
 
 @end

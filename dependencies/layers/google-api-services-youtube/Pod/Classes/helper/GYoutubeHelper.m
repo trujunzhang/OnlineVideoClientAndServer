@@ -62,26 +62,40 @@ static GYoutubeHelper *instance = nil;
     }
 }
 
-- (void)fetchingSubtitle:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
+- (void)fetchingSubtitle123:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
     // Blocks
     [[TCBlobDownloadManager sharedInstance] startDownloadWithURL:[NSURL URLWithString:subtitleUrl]
                                                       customPath:[NSString pathWithComponents:@[NSTemporaryDirectory(), @"example"]]
                                                    firstResponse:NULL
                                                         progress:^(uint64_t receivedLength, uint64_t totalLength, NSInteger remainingTime, float progress) {
                                                             if(remainingTime != -1) {
-//                                                    [self.remainingTime setText:[NSString stringWithFormat:@"%lds", (long)remainingTime]];
                                                             }
                                                         }
                                                            error:^(NSError *error) {
                                                                NSLog(@"%@", error);
                                                            }
                                                         complete:^(BOOL downloadFinished, NSString *pathToFile) {
+                                                            // Read both back into new NSArray and NSDictionary object
+                                                            if([[NSFileManager defaultManager] fileExistsAtPath:pathToFile]) {
+                                                                //File exists
+                                                                NSData *file1 = [[NSData alloc] initWithContentsOfFile:pathToFile];
+                                                                if(file1) {
+                                                                    NSString *newStr = [[NSString alloc] initWithData:file1
+                                                                                                             encoding:NSUTF8StringEncoding];
+
+                                                                    NSArray *array = [newStr componentsSeparatedByString:@"\n"];
+                                                                    NSString *debug = @"debug";
+                                                                }
+                                                            }
+                                                            else {
+                                                                NSLog(@"File does not exist");
+                                                            }
+
                                                             NSString *str = downloadFinished ? @"Completed" : @"Cancelled";
-//                                                [self.remainingTime setText:str];
                                                         }];
 }
 
-- (void)fetchingSubtitle123:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
+- (void)fetchingSubtitle:(SubtitleResponseBlock)subtitleResponseBlock withUrl:(NSString *)subtitleUrl {
     NSURL *removeUrl = [[[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
                                                                inDomain:NSUserDomainMask
                                                       appropriateForURL:nil
