@@ -25,13 +25,7 @@
 
 
 - (void)makeRowNode {
-    _videoCoverThumbnailsNode = [[ASNetworkImageNode alloc] init];
-    _videoCoverThumbnailsNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
-
-    NSString *playListThumbnails = [YoutubeParser getVideoThumbnailsGeneratedFromVideo:self.nodeInfo];
-
-    _videoCoverThumbnailsNode.URL = [NSURL URLWithString:playListThumbnails];
-
+    _videoCoverThumbnailsNode = [ASCacheNetworkImageNode nodeWithImageUrl:[YoutubeParser getVideoThumbnailsGeneratedFromVideo:self.nodeInfo]];
     _videoCoverThumbnailsNode.contentMode = UIViewContentModeScaleToFill;
 
     [self addSubnode:_videoCoverThumbnailsNode];

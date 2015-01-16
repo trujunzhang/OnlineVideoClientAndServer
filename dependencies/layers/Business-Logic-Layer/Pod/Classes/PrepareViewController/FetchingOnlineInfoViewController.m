@@ -64,11 +64,6 @@ static CGFloat kTextPadding = 100.0f;
                         action:@selector(reloadButtonTapped:)
               forControlEvents:ASControlNodeEventTouchUpInside];
 
-//       _offlineNode = [self getButtonWithTitle:@"Update remote sqlite" isLeft:NO];
-//       [_offlineNode addTarget:self
-//                        action:@selector(offlineButtonTapped:)
-//              forControlEvents:ASControlNodeEventTouchUpInside];
-
         // self.view isn't a node, so we can only use it on the main thread
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.view addSubview:_reloadNode.view];
