@@ -27,6 +27,9 @@
 #import <Parse/Parse.h>
 
 #import "NSString+PJR.h"
+#import "Online_Request.h"
+#import "SOSubtitle.h"
+#import "BFTask.h"
 
 
 @interface OnlineAppDelegate ()<FetchingOnlineInfoViewControllerDelegate, JZGGTabBarControllerDelegate>
@@ -55,8 +58,20 @@
     [self.window makeKeyAndVisible];
 
 //    [self readSRTToArray];
+    [self parseSRT];
 
     return YES;
+}
+
+- (void)parseSRT {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:subtitleTempName];
+
+    SOSubtitle *soSubtitle = [[SOSubtitle alloc] init];
+    BFTask *task = [soSubtitle subtitleFromFile:filePath];
+    SOSubtitle *resultSubtitle = [task result];
+    NSMutableArray *array = [resultSubtitle subtitleItems];
+    NSString *debug = @"debug";
 }
 
 - (void)readSRTToArray {

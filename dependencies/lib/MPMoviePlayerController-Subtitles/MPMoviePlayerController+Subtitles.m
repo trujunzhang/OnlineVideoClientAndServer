@@ -155,6 +155,8 @@
         NSString *debug = @"debug";
     }
 
+    NSString *debug = @"debug";
+
 
 }
 

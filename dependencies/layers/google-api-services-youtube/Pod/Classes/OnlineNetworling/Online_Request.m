@@ -77,7 +77,7 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Successfully downloaded file to %@", path);
         downloadCompletionBlock(path, nil, nil);
-        [self readPathToArray:path];
+//        [self readPathToArray:path];
     }                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         downloadCompletionBlock(nil, nil, error);
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"%@", error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

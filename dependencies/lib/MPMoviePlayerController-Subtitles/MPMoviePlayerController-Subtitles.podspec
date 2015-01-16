@@ -25,6 +25,12 @@ Pod::Spec.new do |s|
     sub.source_files = 'SubtitleParser/*.{h,m}'
   end
 
+  s.subspec 'JPSRTParserTool' do |sub|
+    sub.source_files = 'JPSRTParserTool/*.{h,m}'
+  end
 
+  s.subspec 'SOSubtitle' do |sub|
+    sub.source_files = 'SOSubtitle/*.{h,m}'
+  end
 
 end

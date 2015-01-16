@@ -10,6 +10,7 @@
 #import "MPMoviePlayerController+Subtitles.h"
 #import "SDSRTParserHelper.h"
 #import "SRTParserHelper.h"
+#import "ArraySRTParserHelper.h"
 
 CGFloat const kDirectThumbnailLocation = 1.0;
 
@@ -98,7 +99,7 @@ CGFloat const kDirectThumbnailLocation = 1.0;
 }
 
 
-- (void)play123:(YKQualityOptions)quality {
+- (void)play:(YKQualityOptions)quality {
     if(!self.player) [self movieViewController:quality];
 
     [[UIApplication sharedApplication].keyWindow.rootViewController presentMoviePlayerViewControllerAnimated:self.player];
@@ -120,7 +121,7 @@ CGFloat const kDirectThumbnailLocation = 1.0;
     // Create MoviePlayer
     [self.player.moviePlayer openSRTFileAtPath:localSRTPath
 //                                  parserHelper:[[SDSRTParserHelper alloc] init]
-                                  parserHelper:[[SRTParserHelper alloc] init]
+                                  parserHelper:[[ArraySRTParserHelper alloc] init]
                                     completion:^(BOOL finished) {
 
                                         // Activate subtitles
