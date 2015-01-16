@@ -143,21 +143,9 @@
     // Subtitles parts
     self.subtitlesParts = [NSMutableDictionary dictionary];
 
-    @try {
-        [parserHelper parseSRTString:string
-                        toDictionary:self.subtitlesParts
-                              parsed:completion];
-    } @catch (NSException *exception) {
-        NSString *name = [exception name];
-        NSString *reason = [exception reason];
-        NSLog(@"main: Caught %@: %@", name, reason);
-    } @finally {
-        NSString *debug = @"debug";
-    }
-
-    NSString *debug = @"debug";
-
-
+    [parserHelper parseSRTString:string
+                    toDictionary:self.subtitlesParts
+                          parsed:completion];
 }
 
 

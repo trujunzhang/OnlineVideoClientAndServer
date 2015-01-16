@@ -7,5 +7,5 @@
 #import "SRTParserInterface.h"
 
 
-@interface ArraySRTParserHelper : SRTParserInterface
+@interface SOSRTParserHelper : SRTParserInterface
 @end

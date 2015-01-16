@@ -10,7 +10,7 @@
 #import "MPMoviePlayerController+Subtitles.h"
 #import "SDSRTParserHelper.h"
 #import "SRTParserHelper.h"
-#import "ArraySRTParserHelper.h"
+#import "SOSRTParserHelper.h"
 
 CGFloat const kDirectThumbnailLocation = 1.0;
 
@@ -121,7 +121,7 @@ CGFloat const kDirectThumbnailLocation = 1.0;
     // Create MoviePlayer
     [self.player.moviePlayer openSRTFileAtPath:localSRTPath
 //                                  parserHelper:[[SDSRTParserHelper alloc] init]
-                                  parserHelper:[[ArraySRTParserHelper alloc] init]
+                                  parserHelper:[[SOSRTParserHelper alloc] init]
                                     completion:^(BOOL finished) {
 
                                         // Activate subtitles
