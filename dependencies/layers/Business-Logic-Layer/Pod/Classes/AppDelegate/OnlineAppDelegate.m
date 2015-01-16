@@ -57,54 +57,7 @@
 
     [self.window makeKeyAndVisible];
 
-//    [self readSRTToArray];
-    [self parseSRT];
-
     return YES;
-}
-
-- (void)parseSRT {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:subtitleTempName];
-
-    SOSubtitle *soSubtitle = [[SOSubtitle alloc] init];
-    BFTask *task = [soSubtitle subtitleFromFile:filePath];
-    SOSubtitle *resultSubtitle = [task result];
-    NSMutableArray *array = [resultSubtitle subtitleItems];
-    NSString *debug = @"debug";
-}
-
-- (void)readSRTToArray {
-    NSString *string = [NSString pathWithComponents:@[NSTemporaryDirectory(), @"example"]];
-    NSString *tmpFile = [string stringByAppendingPathComponent:@"The Adventures Of Sherlock Holmes - S01E01 - A Scandal In Bohemia.srt"];
-
-//    NSString *path;
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSTemporaryDirectory, NSUserDomainMask, YES);
-//    path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"example"];
-//    path = [path stringByAppendingPathComponent:@"The Adventures Of Sherlock Holmes - S01E01 - A Scandal In Bohemia.srt"];
-
-    if([[NSFileManager defaultManager] fileExistsAtPath:tmpFile]) {
-        //File exists
-        NSData *file1 = [[NSData alloc] initWithContentsOfFile:tmpFile];
-        if(file1) {
-            NSString *newStr = [[NSString alloc] initWithData:file1
-                                                     encoding:NSUTF8StringEncoding];
-
-            NSArray *array = [newStr componentsSeparatedByString:@"\n"];
-            NSString *debug = @"debug";
-        }
-    }
-    else {
-        NSLog(@"File does not exist");
-    }
-
-    NSString *myfilePath = @"/Volumes/Home/djzhang/Library/Developer/CoreSimulator/Devices/DDB573E9-BFA4-4107-850F-BBA9C6A62424/data/Containers/Data/Application/78073E9E-931A-4464-9955-6DA8F41CF6F3/tmp/example/The Adventures Of Sherlock Holmes - S01E01 - A Scandal In Bohemia.srt";
-//            [[NSBundle mainBundle] pathForResource:@"poem" ofType:@"txt"];
-
-    NSString *linesFromFile = [[NSString alloc] initWithContentsOfFile:myfilePath encoding:NSUTF8StringEncoding error:nil];
-
-    NSArray *myArrayOfLines = [NSArray alloc];
-    myArrayOfLines = [linesFromFile componentsSeparatedByString:@"\n"];
 }
 
 
