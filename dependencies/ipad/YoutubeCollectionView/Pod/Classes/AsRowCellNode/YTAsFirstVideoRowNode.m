@@ -66,8 +66,6 @@
 
 
 - (void)buttonTapped:(id)buttonTapped {
-    if(_directVideo)
-        return;
     NSString *string = [[YoutubeParser getVideoOnlineUrl:self.nodeInfo] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     _directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:string]];
 
