@@ -17,6 +17,8 @@ Pod::Spec.new do |s|
                     :tag => "1.0.2" 
                     }
 
+  s.resources = "SRT-files/*.*"
+
   s.subspec 'MPMoviePlayerController+Subtitles' do |sub|
     sub.source_files = 'MPMoviePlayerController+Subtitles.h', 'MPMoviePlayerController+Subtitles.m'
   end
