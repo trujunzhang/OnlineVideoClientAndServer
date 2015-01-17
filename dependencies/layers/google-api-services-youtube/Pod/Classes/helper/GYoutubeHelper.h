@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <google-api-services-youtube/GYoutubeHelper.h>
-
 
 #import "YoutubeConstants.h"
 #import "GYoutubeRequestInfo.h"

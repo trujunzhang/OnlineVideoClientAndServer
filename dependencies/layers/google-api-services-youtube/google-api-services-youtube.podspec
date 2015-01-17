@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.homepage = 'http://www.github.com/wanghaogithub720'
   s.author   = { 'Jin Budelmann' => 'jin@bitcrank.com' }
   s.source   = { :git => 'https://github.com/wanghaogithub720/mxYoutube.git', :tag => '0.1.0' }
-  s.platform = :ios
+  s.platform = :ios , '7.0'
   s.source_files = 'Pod/Classes/*.{h,m}'
   s.resources = "Pod/Assets/*/*.*"
   s.requires_arc = true
