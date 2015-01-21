@@ -57,9 +57,6 @@ end
 
 target 'OnlineVideoClientTests', :exclusive => true do
   import_pods
-
-  pod 'UnitTest', :path => '../UnitTest'
-
   pod 'Expecta'
 
 end
