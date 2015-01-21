@@ -12,27 +12,25 @@
 
 }
 
-+ (NSMutableArray *)getSingleOnlineVideoTypesArray:(NSMutableArray *)array {
-    NSMutableArray *singleOnlineVideoTypesArray = [[NSMutableArray alloc] init];
++ (NSMutableArray *)getsingleArray:(NSMutableArray *)array {
+    NSMutableArray *singleArray = [[NSMutableArray alloc] init];
 
     for (ABOnlineVideoType *onlineVideoType in array) {
-        [MultipleTypeHelper checkExistAndAppend:onlineVideoType to:singleOnlineVideoTypesArray from:array];
+        [self checkExistAndAppend:onlineVideoType to:singleArray from:array];
     }
 
-    return singleOnlineVideoTypesArray;
+    return singleArray;
 }
 
 
-+ (void)checkExistAndAppend:(ABOnlineVideoType *)onlineVideoType to:(NSMutableArray *)singleOnlineVideoTypesArray from:(NSMutableArray *)array {
++ (void)checkExistAndAppend:(ABOnlineVideoType *)onlineVideoType to:(NSMutableArray *)singleArray from:(NSMutableArray *)array {
 
-    ABOnlineVideoType *lastOnlineVideoType = [MultipleTypeHelper checkExist:onlineVideoType.sqliteObjectName
-                                                                         in:singleOnlineVideoTypesArray];
+    ABOnlineVideoType *lastVideoType = [self checkExist:onlineVideoType.sqliteObjectName in:singleArray];
 
-    if(lastOnlineVideoType) {
-        [MultipleTypeHelper copyOnlineVideoTypeDictionary:onlineVideoType.onlineTypeDictionary
-                              toLastProjectTypeDictionary:lastOnlineVideoType.onlineTypeDictionary];
+    if(lastVideoType) {
+        [self copyOnlineVideoTypeDictionary:onlineVideoType.onlineTypeDictionary toLastProjectTypeDictionary:lastVideoType.onlineTypeDictionary];
     } else {
-        [singleOnlineVideoTypesArray addObject:onlineVideoType];
+        [singleArray addObject:onlineVideoType];
     }
 
 }
@@ -57,8 +55,8 @@
 }
 
 
-+ (ABOnlineVideoType *)checkExist:(NSString *)onlineVideoTypeName in:(NSMutableArray *)singleOnlineVideoTypesArray {
-    for (ABOnlineVideoType *onlineVideoType in singleOnlineVideoTypesArray) {
++ (ABOnlineVideoType *)checkExist:(NSString *)onlineVideoTypeName in:(NSMutableArray *)singleArray {
+    for (ABOnlineVideoType *onlineVideoType in singleArray) {
         if([onlineVideoTypeName isEqualToString:onlineVideoType.sqliteObjectName]) {
             return onlineVideoType;
         }
@@ -66,5 +64,6 @@
 
     return nil;
 }
+
 
 @end
