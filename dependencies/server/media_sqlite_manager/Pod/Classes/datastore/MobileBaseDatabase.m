@@ -143,9 +143,9 @@
 }
 
 
-+ (BOOL)checkDBFileExist:(NSString *)filePathName {
++ (BOOL)checkDBFileExist:(NSString *)path {
     BOOL myPathIsDir;
-    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePathName isDirectory:&myPathIsDir];
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&myPathIsDir];
     return fileExists;
 }
 

@@ -18,34 +18,37 @@
 
 }
 + (void)generateSqliteFromSourceWithTypeName:(NSString *)onlineTypeName withLocalPath:(NSString *)onlineVideoTypePath withScanFolder:(NSString *)videoScanFold saveSqlitTo:(NSString *)dbDirectory {
-   // 1
-   OnlineVideoStatisticsHelper * onlineVideoStatisticsHelper = [[OnlineVideoStatisticsHelper alloc] initWithOnlinePath:videoScanFold
+    // 1
+    OnlineVideoStatisticsHelper *onlineVideoStatisticsHelper = [[OnlineVideoStatisticsHelper alloc] initWithOnlinePath:videoScanFold
                                                                                                     withCacheDirectory:dbDirectory];
 
-   // 2
-   [MobileDBCacheDirectoryHelper saveForOnlineVideoTypeDictionary:onlineVideoStatisticsHelper.projectTypesDictionary
-                                                         withName:onlineTypeName
-                                         whithOnlineVideoTypePath:onlineVideoTypePath
-   ];
+    // 2
+    [MobileDBCacheDirectoryHelper saveForOnlineVideoTypeDictionary:onlineVideoStatisticsHelper.projectTypesDictionary
+                                                          withName:onlineTypeName
+                                          whithOnlineVideoTypePath:onlineVideoTypePath
+    ];
 }
 
 
 + (void)generateSqliteAndThumbnail {
-   NSMutableDictionary * onlineTypeDictionary = [ServerVideoConfigure getOnlineTypeDictionary];
+    NSMutableDictionary *onlineTypeDictionary = [ServerVideoConfigure getOnlineTypeDictionary];
 
-   for (NSString * onlineTypeName in onlineTypeDictionary.allKeys) {
-      NSArray * typePathArray = [onlineTypeDictionary valueForKey:onlineTypeName];
+    for (NSString *onlineTypeName in onlineTypeDictionary.allKeys) {
+        NSArray *typePathArray = [onlineTypeDictionary valueForKey:onlineTypeName];
 
-      for (NSString * videoScanFold in typePathArray) {
-         [VideoGenerateSqliteHelper generateSqliteFromSourceWithTypeName:onlineTypeName// Youtube.com
-                                                           withLocalPath:[videoScanFold replaceCharcter:htdocs
-                                                                                           withCharcter:@""]// local path: "/macshare/MacPE/youtubes"
-                                                          withScanFolder:videoScanFold// "/Volumes/macshare/MacPE/youtubes"
-                                                             saveSqlitTo:[UserCacheFolderHelper RealProjectCacheDirectory]// "/Volumes/Home/djzhang/.AOnlineTutorial/.cache"+"xxx.db"
-         ];
+        for (NSString *videoScanFold in typePathArray) {
+            BOOL fileExists = [MobileBaseDatabase checkDBFileExist:videoScanFold];
+            if(fileExists == NO) {
+                continue;
+            }
+            [VideoGenerateSqliteHelper generateSqliteFromSourceWithTypeName:onlineTypeName// Youtube.com
+                                                              withLocalPath:[videoScanFold replaceCharcter:htdocs withCharcter:@""]// local path: "/macshare/MacPE/youtubes"
+                                                             withScanFolder:videoScanFold// "/Volumes/macshare/MacPE/youtubes"
+                                                                saveSqlitTo:[UserCacheFolderHelper RealProjectCacheDirectory]// "/Volumes/Home/djzhang/.AOnlineTutorial/.cache"+"xxx.db"
+            ];
 
-      }
-   }
+        }
+    }
 
 
 }

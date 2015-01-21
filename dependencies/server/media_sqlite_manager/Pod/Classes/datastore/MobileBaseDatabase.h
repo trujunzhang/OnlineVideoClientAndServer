@@ -21,7 +21,7 @@
 
 - (void)checkSchemaForMobileDBThumbnail:(id<ABDatabase>)db;
 
-+ (BOOL)checkDBFileExist:(NSString *)filePathName;
++ (BOOL)checkDBFileExist:(NSString *)path;
 
 + (NSString *)getThumbnailName:(NSString *)sqliteObjectID;
 @end

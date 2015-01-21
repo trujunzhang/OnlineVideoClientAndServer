@@ -5,8 +5,6 @@
 
 #import "SqliteManager.h"
 #import "MobileDB.h"
-#import "YoutubeConstants.h"
-#import "AnimatedContentsDisplayLayer.h"
 #import "ABOnlineVideoType.h"
 #import "MultipleTypeHelper.h"
 #import "SqliteArraySortHelper.h"
@@ -93,8 +91,8 @@ NSMutableArray *_onlineVideoTypeArray;
 - (NSMutableArray *)getAllFileInfoListFromProjectList:(NSMutableArray *)projectLists {
     NSMutableArray *allFileInfoArray = [[NSMutableArray alloc] init];
 
-    for (YTYouTubePlayList *playList in projectLists) {
-        for (YTYouTubeVideoCache *videoCache in playList.sqliteObjectArray) {
+    for (ABProjectList *playList in projectLists) {
+        for (ABProjectList *videoCache in playList.sqliteObjectArray) {
             [allFileInfoArray addObject:videoCache];
         }
     }

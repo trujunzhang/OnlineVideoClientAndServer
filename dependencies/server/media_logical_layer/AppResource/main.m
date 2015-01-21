@@ -16,9 +16,10 @@ int main(int argc, const char *argv[]) {
     @autoreleasepool {
         // insert code here...
         [UserCacheFolderHelper checkUserProjectDirectoryExistAndMake];
-        [UserCacheFolderHelper removeFileForVideoTrainingDB];
+        [UserCacheFolderHelper removeFilesForVideoTrainingDB];
 
         [VideoGenerateSqliteHelper generateSqliteAndThumbnail];
+        [UserCacheFolderHelper zipFileForDatabase];
 
         NSLog(@"Hello, World!");
     }
