@@ -12,19 +12,18 @@
 }
 
 
-+ (void)downloadSqliteFile:(NSString *)remoteSqliteUrl downloadCompletionBlock:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock progressBlock:(__autoreleasing NSProgress **)progressBlock downloadFileName:(NSString *)downloadFileName {
++ (void)downloadSqliteFile:(NSString *)remoteSqliteUrl downloadCompletionBlock:(RemoteSqliteResponseBlock)downloadCompletionBlock progressBlock:(__autoreleasing NSProgress **)progressBlock downloadFileName:(NSString *)downloadFileName {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteSqliteUrl]];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:downloadFileName];
+    NSString *path = [[self getDownloadCachePath] stringByAppendingPathComponent:downloadFileName];
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
 
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Successfully downloaded file to %@", path);
-        downloadCompletionBlock(path, nil, nil);
+        downloadCompletionBlock(path, nil);
     }                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        downloadCompletionBlock(nil, nil, error);
+        downloadCompletionBlock(nil, error);
     }];
 
     [operation start];
@@ -37,12 +36,18 @@
     }];
 }
 
++ (NSString *)getDownloadCachePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *downloadFold = [paths objectAtIndex:0];
+    return downloadFold;
+}
+
 + (void)fetchingSubtitle:(NSString *)remoteSqliteUrl downloadCompletionBlock:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteSqliteUrl]];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:subtitleTempName];
+    NSString *path = [[self getDownloadCachePath] stringByAppendingPathComponent:subtitleTempName];
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
 
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {

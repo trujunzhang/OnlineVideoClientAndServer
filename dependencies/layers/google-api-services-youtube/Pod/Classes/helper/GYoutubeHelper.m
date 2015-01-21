@@ -76,7 +76,6 @@ static GYoutubeHelper *instance = nil;
         subtitleResponseBlock(removeUrl, error);
     };
     [Online_Request fetchingSubtitle:subtitleUrl downloadCompletionBlock:downloadCompletion];
-
 }
 
 
@@ -86,29 +85,26 @@ static GYoutubeHelper *instance = nil;
     [self.delegate showStepInfo:[NSString stringWithFormat:@"Downloading sqlite file from %@", remoteSqliteUrl]];
 
     NSProgress *progress;
-    void (^downloadCompletion)(NSURLResponse *, NSURL *, NSError *) = ^(NSURLResponse *response, NSURL *url, NSError *error) {
+
+    RemoteSqliteResponseBlock downloadCompletion = ^(NSString *localPath, NSError *error) {
         if(error) {
             id objectForKey = [[error userInfo] objectForKey:@"NSErrorFailingURLKey"];
 
             [self.delegate showStepInfo:[NSString stringWithFormat:@"Downloaded %@ failure?",
                                                                    [[objectForKey absoluteURL] absoluteString]]];
         } else {
-            [ParseLocalStore saveSqliteVersion:self.onlineServerInfo.version];
-            [self unzippingDatabase];
+            [self unzippingDatabase:localPath];
             downloadCompletionBlock(nil);
         }
     };
-    // 2
     [Online_Request downloadSqliteFile:remoteSqliteUrl downloadCompletionBlock:downloadCompletion progressBlock:&progress downloadFileName:dataBaseZipName];
 
 }
 
-- (void)unzippingDatabase {
+- (void)unzippingDatabase:(NSString *)zipPath {
     // Unzipping
-    NSString *zipPath = @"path_to_your_zip_file";
-    NSString *destinationPath = @"path_to_the_folder_where_you_want_it_unzipped";
+    NSString *destinationPath = [Online_Request getDownloadCachePath];
     [SSZipArchive unzipFileAtPath:zipPath toDestination:destinationPath];
-
 }
 
 
@@ -127,11 +123,6 @@ static GYoutubeHelper *instance = nil;
 
 
     return NO;
-}
-
-
-- (void)fetchSqliteRemoteFile:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock progressBlock:(__autoreleasing NSProgress **)progressBlock {
-    [Online_Request downloadSqliteFile:[self.onlineServerInfo getRemoteSqliteDatabase] downloadCompletionBlock:downloadCompletionBlock progressBlock:progressBlock downloadFileName:nil];
 }
 
 
