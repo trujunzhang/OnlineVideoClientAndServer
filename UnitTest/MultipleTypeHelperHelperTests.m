@@ -10,9 +10,11 @@
 #import <XCTest/XCTest.h>
 
 #import "Expecta.h"
+#import "ABOnlineVideoTypeStore.h"
+#import "MultipleTypeHelper.h"
 
 @interface MultipleTypeHelperHelperTests : XCTestCase
-
+@property (nonatomic, strong) ABOnlineVideoTypeStore *onlineVideoTypeStore;
 @end
 
 
@@ -21,6 +23,7 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.onlineVideoTypeStore = [[UIActionSheet alloc] init];
 }
 
 
@@ -31,6 +34,11 @@
 
 
 - (void)testExample {
+    NSMutableArray *videoTypeArray = [self.onlineVideoTypeStore getTheSameVideoTypeArray];
+
+    NSMutableArray *array = [MultipleTypeHelper getSingleOnlineVideoTypesArray:videoTypeArray];
+
+    NSString *debug = @"debug";
 }
 
 

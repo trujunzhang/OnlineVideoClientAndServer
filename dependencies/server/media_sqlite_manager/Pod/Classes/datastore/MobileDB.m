@@ -173,9 +173,9 @@ id<ABDatabase> db;
 
         [onlineVideoTypeArray addObject:sqliteObject];
 
-        [self readOnlineTypeArray:sqliteObject.sqliteObjectID
-                        withArray:sqliteObject.onlineTypeDictionary
-                      isReadArray:isReadArray];
+        [self readOnlineTypeArrayByVideoTypeId:sqliteObject.sqliteObjectID
+                                  toDictionary:sqliteObject.onlineTypeDictionary
+                                   isReadArray:isReadArray];
 
         [results moveNext];
     }
@@ -191,7 +191,7 @@ id<ABDatabase> db;
 }
 
 
-- (void)readOnlineTypeArray:(NSString *)onlineVideoTypeID withArray:(NSMutableDictionary *)dictionary isReadArray:(BOOL)isReadArray {
+- (void)readOnlineTypeArrayByVideoTypeId:(NSString *)onlineVideoTypeID toDictionary:(NSMutableDictionary *)dictionary isReadArray:(BOOL)isReadArray {
     NSString *sql;
     sql = [NSString stringWithFormat:@"select ProjectTypeID from OnlineVideoTypeProjectTypes where onlineVideoTypeID = '%@'",
                                      onlineVideoTypeID];

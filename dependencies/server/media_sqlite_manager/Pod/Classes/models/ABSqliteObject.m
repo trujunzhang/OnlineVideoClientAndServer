@@ -25,6 +25,15 @@
     return self;
 }
 
+- (instancetype)initWithSqliteObjectName:(NSString *)sqliteObjectName {
+    self = [self init];
+    if(self) {
+        self.sqliteObjectName = sqliteObjectName;
+    }
+
+    return self;
+}
+
 
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName {
     self = [self init];

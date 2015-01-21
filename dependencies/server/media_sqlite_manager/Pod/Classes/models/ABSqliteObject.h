@@ -14,13 +14,15 @@
 @property (copy) NSString *objectFullPath;
 
 @property (strong) NSMutableArray *sqliteObjectArray;
+@property (strong) NSMutableArray *lastsubDirectoryListsArray;
 
-- (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
+
+- (instancetype)initWithSqliteObjectName:(NSString *)sqliteObjectName;
 
 - (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName;
 
+- (instancetype)initWithSqliteObjectID:(NSString *)sqliteObjectID sqliteObjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath;
 
-@property (strong) NSMutableArray *lastsubDirectoryListsArray;
 
 - (NSMutableDictionary *)getUpdateDictionary;
 
