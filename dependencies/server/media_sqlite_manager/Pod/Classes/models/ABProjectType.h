@@ -10,7 +10,9 @@
 #import <MapKit/MapKit.h>
 #import "ABSqliteObject.h"
 
-
+/**
+* tag:[@]
+*/
 @interface ABProjectType : ABSqliteObject
 
 - (instancetype)initWithProjectName:(NSString *)projectName projectFullPath:(NSString *)projectFullPath;

@@ -12,6 +12,7 @@
 #import "Expecta.h"
 #import "ABOnlineVideoTypeStore.h"
 #import "MultipleTypeHelper.h"
+#import "ABOnlineVideoType.h"
 
 @interface MultipleTypeHelperHelperTests : XCTestCase
 @property (nonatomic, strong) ABOnlineVideoTypeStore *onlineVideoTypeStore;
@@ -38,7 +39,15 @@
 
     NSMutableArray *array = [MultipleTypeHelper getSingleOnlineVideoTypesArray:videoTypeArray];
 
-    NSString *debug = @"debug";
+    XCTAssertEqual(array.count, 1, "equal");
+
+    if(array.count > 0) {
+        ABOnlineVideoType *newVideoType = array[0];
+        NSUInteger dictionaryCount = newVideoType.onlineTypeDictionary.count;
+
+        XCTAssertEqual(dictionaryCount, 3, "equal");
+        NSString *debug = @"debug";
+    }
 }
 
 

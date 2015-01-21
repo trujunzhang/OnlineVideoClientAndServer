@@ -12,7 +12,7 @@
 
 }
 
-+ (NSMutableArray *)getsingleArray:(NSMutableArray *)array {
++ (NSMutableArray *)getSingleOnlineVideoTypesArray:(NSMutableArray *)array {
     NSMutableArray *singleArray = [[NSMutableArray alloc] init];
 
     for (ABOnlineVideoType *onlineVideoType in array) {
@@ -28,7 +28,7 @@
     ABOnlineVideoType *lastVideoType = [self checkExist:onlineVideoType.sqliteObjectName in:singleArray];
 
     if(lastVideoType) {
-        [self copyOnlineVideoTypeDictionary:onlineVideoType.onlineTypeDictionary toLastProjectTypeDictionary:lastVideoType.onlineTypeDictionary];
+        [self copyCurrentTypeDictionary:onlineVideoType.onlineTypeDictionary toLastProjectTypeDictionary:lastVideoType.onlineTypeDictionary];
     } else {
         [singleArray addObject:onlineVideoType];
     }
@@ -36,21 +36,19 @@
 }
 
 //(5+6)-3=11-3=8(5)
-+ (void)copyOnlineVideoTypeDictionary:(NSMutableDictionary *)onlineTypeDictionary toLastProjectTypeDictionary:(NSMutableDictionary *)lastOnlineTypeDictionary {
-    for (NSString *key in onlineTypeDictionary.allKeys) {
-        //object.class:[ABProjectType]
-        ABProjectType *object = [onlineTypeDictionary objectForKey:key];
++ (void)copyCurrentTypeDictionary:(NSMutableDictionary *)newDictionary toLastProjectTypeDictionary:(NSMutableDictionary *)lastDictionary {
+    for (NSString *key in newDictionary.allKeys) {
+        ABProjectType *object = [newDictionary objectForKey:key];
 
-        // if the same project type,then append
-        if([[lastOnlineTypeDictionary allKeys] containsObject:key]) {
-            // contains key
-            ABProjectType *lastObject = [lastOnlineTypeDictionary objectForKey:key];
+        if([[lastDictionary allKeys] containsObject:key]) {
+            ABProjectType *lastObject = [lastDictionary objectForKey:key];
             [lastObject addLastSqliteObjectArray:object.sqliteObjectArray];
-            return;
+
+            continue;
         }
 
         // or replace
-        [lastOnlineTypeDictionary setObject:object forKey:key];
+        [lastDictionary setObject:object forKey:key];
     }
 }
 
