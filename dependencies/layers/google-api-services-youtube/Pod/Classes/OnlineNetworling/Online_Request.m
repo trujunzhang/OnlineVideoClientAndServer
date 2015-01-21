@@ -6,19 +6,18 @@
 #import "Online_Request.h"
 
 #import "AFHTTPRequestOperationManager.h"
-#import "SqliteDatabaseConstant.h"
 
 @implementation Online_Request {
 
 }
 
 
-+ (void)downloadSqliteFile:(NSString *)remoteSqliteUrl downloadCompletionBlock:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock progressBlock:(__autoreleasing NSProgress **)progressBlock {
++ (void)downloadSqliteFile:(NSString *)remoteSqliteUrl downloadCompletionBlock:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock progressBlock:(__autoreleasing NSProgress **)progressBlock downloadFileName:(NSString *)downloadFileName {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteSqliteUrl]];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:dataBaseName];
+    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:downloadFileName];
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
 
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {

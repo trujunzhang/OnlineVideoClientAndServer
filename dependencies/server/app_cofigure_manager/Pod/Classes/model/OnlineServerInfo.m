@@ -57,9 +57,9 @@
     NSString *string = [NSString stringWithFormat:@"%@/%@/%@",
                                                   [self getCurrentDomainUrl],
                                                   [self cacheThumbmail],
-                                                  dataBaseName];
-    string = [string replaceCharcter:@"\n" withCharcter:@""];
-    string = [string replaceCharcter:@" " withCharcter:@"%20"];
+                                                  dataBaseZipName];
+
+//    string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return string;
 }
 @end

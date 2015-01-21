@@ -14,6 +14,8 @@
 #import "OnlineServerInfo.h"
 #import "ParseHelper.h"
 #import "ParseLocalStore.h"
+#import "SqliteDatabaseConstant.h"
+#import "SSZipArchive.h"
 
 static GYoutubeHelper *instance = nil;
 
@@ -50,7 +52,7 @@ static GYoutubeHelper *instance = nil;
         if(error) {
             [self.delegate showStepInfo:@"Fetching failure?"];
         } else {
-            [self fetchingSqliteFileFromRemote:downloadCompletionBlock];
+            [self fetchingRemoteSqliteFile:downloadCompletionBlock];
         }
     };
 
@@ -78,7 +80,7 @@ static GYoutubeHelper *instance = nil;
 }
 
 
-- (void)fetchingSqliteFileFromRemote:(SqliteResponseBlock)downloadCompletionBlock {
+- (void)fetchingRemoteSqliteFile:(SqliteResponseBlock)downloadCompletionBlock {
     NSString *remoteSqliteUrl = [self.onlineServerInfo getRemoteSqliteDatabase];
 
     [self.delegate showStepInfo:[NSString stringWithFormat:@"Downloading sqlite file from %@", remoteSqliteUrl]];
@@ -92,27 +94,21 @@ static GYoutubeHelper *instance = nil;
                                                                    [[objectForKey absoluteURL] absoluteString]]];
         } else {
             [ParseLocalStore saveSqliteVersion:self.onlineServerInfo.version];
+            [self unzippingDatabase];
             downloadCompletionBlock(nil);
         }
     };
     // 2
-    [Online_Request downloadSqliteFile:remoteSqliteUrl
-               downloadCompletionBlock:downloadCompletion
-                         progressBlock:&progress];
+    [Online_Request downloadSqliteFile:remoteSqliteUrl downloadCompletionBlock:downloadCompletion progressBlock:&progress downloadFileName:dataBaseZipName];
 
-    // Observe fractionCompleted using KVO
-    [progress addObserver:self
-               forKeyPath:@"fractionCompleted"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
 }
 
+- (void)unzippingDatabase {
+    // Unzipping
+    NSString *zipPath = @"path_to_your_zip_file";
+    NSString *destinationPath = @"path_to_the_folder_where_you_want_it_unzipped";
+    [SSZipArchive unzipFileAtPath:zipPath toDestination:destinationPath];
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if([keyPath isEqualToString:@"fractionCompleted"] && [object isKindOfClass:[NSProgress class]]) {
-        NSProgress *progress = (NSProgress *)object;
-//        NSLog(@"Progress is %f", progress.fractionCompleted);
-    }
 }
 
 
@@ -135,9 +131,7 @@ static GYoutubeHelper *instance = nil;
 
 
 - (void)fetchSqliteRemoteFile:(void (^)(NSURLResponse *, NSURL *, NSError *))downloadCompletionBlock progressBlock:(__autoreleasing NSProgress **)progressBlock {
-    [Online_Request downloadSqliteFile:[self.onlineServerInfo getRemoteSqliteDatabase]
-               downloadCompletionBlock:downloadCompletionBlock
-                         progressBlock:progressBlock];
+    [Online_Request downloadSqliteFile:[self.onlineServerInfo getRemoteSqliteDatabase] downloadCompletionBlock:downloadCompletionBlock progressBlock:progressBlock downloadFileName:nil];
 }
 
 

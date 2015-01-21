@@ -17,7 +17,6 @@ static CGFloat kTextPadding = 100.0f;
     ASTextNode *_fetchingInfo;
     ASTextNode *_reloadNode;
     ASTextNode *_offlineNode;
-
 }
 @end
 
