@@ -8,8 +8,8 @@
 
 
 @interface OnlineVideoProjectListHelper : NSObject
-@property(nonatomic, strong) NSString * onlinePath;
-@property(nonatomic, copy) NSString * cacheDirectory;
+@property (nonatomic, strong) NSString *onlinePath;
+@property (nonatomic, copy) NSString *cacheDirectory;
 
 - (instancetype)initWithOnlinePath:(NSString *)onlinePath withCacheDirectory:(NSString *)cacheDirectory;
 

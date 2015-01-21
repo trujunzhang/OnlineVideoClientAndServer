@@ -2,6 +2,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'OnlineVideoClientConsole', :exclusive => true do
 
+  pod 'ssziparchive'
+
   pod 'ABSQLite', :path => '/Volumes/Home/wanghaogithub720/cocoapods/Cocoapods_Libraries/ABSQLite'
 
   pod 'media_sqlite_manager', :path => '../dependencies/server/media_sqlite_manager'

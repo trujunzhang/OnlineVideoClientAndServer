@@ -11,7 +11,7 @@
 #include <assert.h>
 #import "ServerVideoConfigure.h"
 #import "SqliteDatabaseConstant.h"
-
+#import "SSZipArchive.h"
 
 @implementation UserCacheFolderHelper {
 
@@ -22,46 +22,52 @@
 
 
 + (NSString *)RealHomeDirectory {
-   struct passwd * pw = getpwuid(getuid());
-   assert(pw);
-   return [NSString stringWithUTF8String:pw->pw_dir];
+    struct passwd *pw = getpwuid(getuid());
+    assert(pw);
+    return [NSString stringWithUTF8String:pw->pw_dir];
 }
 
 
 ///Volumes/Home/djzhang/.AOnlineTutorial/.server
 + (NSString *)RealProjectServerDirectory {
-   return [NSString stringWithFormat:@"%@/%@/%@",
-                                     [UserCacheFolderHelper RealHomeDirectory],
-                                     appProfile,
-                                     appSubDirectory];
+    return [NSString stringWithFormat:@"%@/%@/%@",
+                                      [UserCacheFolderHelper RealHomeDirectory],
+                                      appProfile,
+                                      appSubDirectory];
 }
 
 
 ///Volumes/Home/djzhang/.AOnlineTutorial/.server/VideoTrainingDB.db
 + (NSString *)RealVideoTrainingDBAbstractPath {
-   return [NSString stringWithFormat:@"%@/%@",
-                                     [UserCacheFolderHelper RealProjectServerDirectory],
-                                     dataBaseName];
+    return [NSString stringWithFormat:@"%@/%@",
+                                      [UserCacheFolderHelper RealProjectServerDirectory],
+                                      dataBaseName];
+}
+
++ (NSString *)RealVideoTrainingZipDBAbstractPath {
+    return [NSString stringWithFormat:@"%@/%@",
+                                      [UserCacheFolderHelper RealProjectServerDirectory],
+                                      dataBaseZipName];
 }
 
 
 ///Volumes/Home/djzhang/.AOnlineTutorial/.server/.cache
 + (NSString *)RealProjectCacheDirectory {
-   return [NSString stringWithFormat:@"%@/%@", [UserCacheFolderHelper RealProjectServerDirectory], appCacheDirectory];
+    return [NSString stringWithFormat:@"%@/%@", [UserCacheFolderHelper RealProjectServerDirectory], appCacheDirectory];
 }
 
 
 + (NSString *)getThumbnailDirectory {
-   return [NSString stringWithFormat:@"%@/%@",
-                                     [UserCacheFolderHelper RealProjectCacheDirectory],
-                                     thumbnailFolder];
+    return [NSString stringWithFormat:@"%@/%@",
+                                      [UserCacheFolderHelper RealProjectCacheDirectory],
+                                      thumbnailFolder];
 }
 
 
 + (NSString *)getThumbnailDirectory:(NSString *)dbDirectory {
-   return [NSString stringWithFormat:@"%@/%@",
-                                     dbDirectory,
-                                     thumbnailFolder];
+    return [NSString stringWithFormat:@"%@/%@",
+                                      dbDirectory,
+                                      thumbnailFolder];
 }
 
 
@@ -70,20 +76,20 @@
 
 
 + (void)createDirectoryForCache:(NSFileManager *)filemgr withCacheDirectory:(NSString *)cacheDirectory withThumbnailDirectory:(NSString *)thumbnailDirectory {
-   NSError * error = nil;
-   if (![filemgr createDirectoryAtPath:cacheDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
-      // An error has occurred, do something to handle it
-      NSLog(@"Failed to create directory \"%@\". Error: %@", cacheDirectory, error);
-   }
+    NSError *error = nil;
+    if(![filemgr createDirectoryAtPath:cacheDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
+        // An error has occurred, do something to handle it
+        NSLog(@"Failed to create directory \"%@\". Error: %@", cacheDirectory, error);
+    }
 
 
-   if (![filemgr createDirectoryAtPath:thumbnailDirectory
+    if(![filemgr createDirectoryAtPath:thumbnailDirectory
            withIntermediateDirectories:YES
                             attributes:nil
                                  error:&error]) {
-      // An error has occurred, do something to handle it
-      NSLog(@"Failed to create directory \"%@\". Error: %@", thumbnailDirectory, error);
-   }
+        // An error has occurred, do something to handle it
+        NSLog(@"Failed to create directory \"%@\". Error: %@", thumbnailDirectory, error);
+    }
 }
 
 
@@ -92,51 +98,51 @@
 
 
 + (void)emptyCacheThumbnailDirectory:(NSFileManager *)filemgr forDir:(NSString *)dirToEmpty {
-   NSFileManager * manager = [NSFileManager defaultManager];
-   NSError * error = nil;
-   NSArray * files = [manager contentsOfDirectoryAtPath:dirToEmpty
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    NSArray *files = [manager contentsOfDirectoryAtPath:dirToEmpty
                                                   error:&error];
 
-   if (error) {
-      //deal with error and bail.
-      return;
-   }
+    if(error) {
+        //deal with error and bail.
+        return;
+    }
 
-   for (NSString * file in files) {
-      [manager removeItemAtPath:[dirToEmpty stringByAppendingPathComponent:file]
-                          error:&error];
-      if (error) {
-         //an error occurred...
-      }
-   }
+    for (NSString *file in files) {
+        [manager removeItemAtPath:[dirToEmpty stringByAppendingPathComponent:file]
+                            error:&error];
+        if(error) {
+            //an error occurred...
+        }
+    }
 }
 
 
 + (BOOL)cleanupCache:(NSString *)cacheDirectory {
-   NSFileManager * filemgr = [NSFileManager defaultManager];
+    NSFileManager *filemgr = [NSFileManager defaultManager];
 
-   NSString * dbFilePath = [cacheDirectory stringByAppendingPathComponent:dataBaseName];
+    NSString *dbFilePath = [cacheDirectory stringByAppendingPathComponent:dataBaseName];
 
-   NSString * thumbnailDirectory = [self getThumbnailDirectory:cacheDirectory];
+    NSString *thumbnailDirectory = [self getThumbnailDirectory:cacheDirectory];
 
-   BOOL fileExists = [MobileBaseDatabase checkDBFileExist:dbFilePath];
-   if (fileExists == NO) {
-      [UserCacheFolderHelper createDirectoryForCache:filemgr
-                                  withCacheDirectory:cacheDirectory
-                              withThumbnailDirectory:thumbnailDirectory];
-      return YES;
-   }
+    BOOL fileExists = [MobileBaseDatabase checkDBFileExist:dbFilePath];
+    if(fileExists == NO) {
+        [UserCacheFolderHelper createDirectoryForCache:filemgr
+                                    withCacheDirectory:cacheDirectory
+                                withThumbnailDirectory:thumbnailDirectory];
+        return YES;
+    }
 
-   [UserCacheFolderHelper emptyCacheThumbnailDirectory:filemgr forDir:thumbnailDirectory];
+    [UserCacheFolderHelper emptyCacheThumbnailDirectory:filemgr forDir:thumbnailDirectory];
 
-   if ([filemgr removeItemAtPath:dbFilePath error:NULL] == YES) {
-      return YES;
-   }
-   else {
-      NSLog(@"Remove failed");
-   }
+    if([filemgr removeItemAtPath:dbFilePath error:NULL] == YES) {
+        return YES;
+    }
+    else {
+        NSLog(@"Remove failed");
+    }
 
-   return NO;
+    return NO;
 }
 
 
@@ -145,31 +151,37 @@
 
 
 + (void)checkUserProjectDirectoryExistAndMake {
-
-//   BOOL fileExists = [MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]];
-
-   [UserCacheFolderHelper createDirectoryForCache:[NSFileManager defaultManager]
-                               withCacheDirectory:[UserCacheFolderHelper RealProjectCacheDirectory]
-                           withThumbnailDirectory:[self getThumbnailDirectory]];
+    [UserCacheFolderHelper createDirectoryForCache:[NSFileManager defaultManager]
+                                withCacheDirectory:[UserCacheFolderHelper RealProjectCacheDirectory]
+                            withThumbnailDirectory:[self getThumbnailDirectory]];
 }
 
 
 + (BOOL)cleanupCache {
-   NSString * dbDirectory = [UserCacheFolderHelper RealProjectCacheDirectory];
+    NSString *dbDirectory = [UserCacheFolderHelper RealProjectCacheDirectory];
 
-   if ([UserCacheFolderHelper cleanupCache:dbDirectory] == NO) {
-      NSLog(@"Remove failed");
-      return NO;
-   }
+    if([UserCacheFolderHelper cleanupCache:dbDirectory] == NO) {
+        NSLog(@"Remove failed");
+        return NO;
+    }
 
-   return YES;
+    return YES;
 }
 
 
-+ (void)removeFileForVideoTrainingDB {
-   NSString * trainingDBAbstractPath = [self RealVideoTrainingDBAbstractPath];
++ (void)removeFilesForVideoTrainingDB {
+    NSError *error = nil;
+    [[NSFileManager defaultManager] removeItemAtPath:[self RealVideoTrainingDBAbstractPath] error:&error];
+    [[NSFileManager defaultManager] removeItemAtPath:[self RealVideoTrainingZipDBAbstractPath] error:&error];
+}
 
-   NSError * error = nil;
-   [[NSFileManager defaultManager] removeItemAtPath:trainingDBAbstractPath error:&error];
+#pragma mark -
+#pragma mark zip database
+
++ (void)zipFileForDatabase {
+    // Zipping
+    NSString *zippedPath = [self RealVideoTrainingZipDBAbstractPath];
+    NSArray *inputPaths = @[[self RealVideoTrainingDBAbstractPath]];
+    [SSZipArchive createZipFileAtPath:zippedPath withFilesAtPaths:inputPaths];
 }
 @end

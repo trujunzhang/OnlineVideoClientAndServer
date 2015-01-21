@@ -16,20 +16,20 @@
 
 
 + (MobileDBImage *)getMobileThumbnailDBInstance {
-   return [MobileDBImage dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]];
+    return [MobileDBImage dbInstance:[UserCacheFolderHelper RealProjectCacheDirectory]];
 }
 
 
 + (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoIDProjectFullPath:(NSString *)fullPath {
-   return [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoIDProjectFullPath:fullPath];
+    return [[self getMobileThumbnailDBInstance] checkExistForThumbnailInfoWithFileInfoIDProjectFullPath:fullPath];
 }
 
 
 + (void)saveThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath {
-   [[self getMobileThumbnailDBInstance] saveThumbnailInfoWithFileInfoID:sqliteObjectID
-                                                          fileInforName:sqliteObjectName
-                                                        projectFullPath:fullPath
+    [[self getMobileThumbnailDBInstance] saveThumbnailInfoWithFileInfoID:sqliteObjectID
+                                                           fileInforName:sqliteObjectName
+                                                         projectFullPath:fullPath
 
-   ];
+    ];
 }
 @end

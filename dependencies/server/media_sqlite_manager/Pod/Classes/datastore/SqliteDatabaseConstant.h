@@ -1,4 +1,6 @@
 static NSString *const dataBaseName = @"VideoTrainingDB.db";
+static NSString *const dataBaseZipName = @"VideoTrainingDB.zip";
+
 static NSString *const imageDataBaseName = @"imageDB.db";
 
 static NSString *const thumbnailPrefix = @"TH_";

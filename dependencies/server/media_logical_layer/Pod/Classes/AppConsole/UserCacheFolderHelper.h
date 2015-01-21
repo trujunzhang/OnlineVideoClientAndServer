@@ -9,11 +9,20 @@
 @interface UserCacheFolderHelper : NSObject
 
 + (NSString *)RealProjectServerDirectory;
+
 + (NSString *)RealVideoTrainingDBAbstractPath;
+
 + (NSString *)RealProjectCacheDirectory;
+
 + (NSString *)getSqliteFilePath;
+
 + (BOOL)cleanupCache:(NSString *)cacheDirectory;
+
 + (void)checkUserProjectDirectoryExistAndMake;
+
 + (BOOL)cleanupCache;
-+ (void)removeFileForVideoTrainingDB;
+
++ (void)removeFilesForVideoTrainingDB;
+
++ (void)zipFileForDatabase;
 @end

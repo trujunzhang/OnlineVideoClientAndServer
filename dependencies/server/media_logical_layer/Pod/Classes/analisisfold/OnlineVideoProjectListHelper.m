@@ -23,137 +23,137 @@
 }
 
 - (instancetype)initWithOnlinePath:(NSString *)onlinePath withCacheDirectory:(NSString *)cacheDirectory {
-   self = [super init];
-   if (self) {
-      self.onlinePath = onlinePath;
-      self.cacheDirectory = cacheDirectory;
-   }
+    self = [super init];
+    if(self) {
+        self.onlinePath = onlinePath;
+        self.cacheDirectory = cacheDirectory;
+    }
 
-   return self;
+    return self;
 }
 
 
 - (void)makeProjectList:(NSString *)aPath withFullPath:(NSString *)fullPath to:(ABProjectType *)projectType {
-   // *** online-step-{ABProjectName-3} ***
-   ABProjectName * projectName = [MobileDBCacheDirectoryHelper checkExistForProjectNameWithProjectName:aPath
+    // *** online-step-{ABProjectName-3} ***
+    ABProjectName *projectName = [MobileDBCacheDirectoryHelper checkExistForProjectNameWithProjectName:aPath
                                                                                        projectFullPath:fullPath];
-   if (projectName == nil)
-      projectName = [[ABProjectName alloc] initWithProjectName:aPath withProjectFullPath:fullPath];
+    if(projectName == nil)
+        projectName = [[ABProjectName alloc] initWithProjectName:aPath withProjectFullPath:fullPath];
 
-   [projectType appendSqliteObjectToArray:projectName];
+    [projectType appendSqliteObjectToArray:projectName];
 
-   [self analysisProjectList:fullPath to:projectName];
+    [self analysisProjectList:fullPath to:projectName];
 }
 
 
 - (void)analysisProjectList:(NSString *)appDocDir to:(ABProjectName *)projectName {
-   NSArray * contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
-   for (NSString * aPath in contentOfFolder) {
-      NSString * fullPath = [appDocDir stringByAppendingPathComponent:aPath];
-      BOOL isDir = NO;
-      if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir]) {
-         if (isDir == YES) {
-            if ([self checkIgnoureProjectType:aPath] == NO) {
-               // *** online-step-{ABProjectList-4} ***
-               ABProjectList * projectList = [projectName checkExistInSubDirectoryWithObjectName:aPath];
-               if (projectList) {
-                  [MobileDBCacheDirectoryHelper getFileInfoArrayForProjectList:projectList];
-               } else {
-                  projectList = [[ABProjectList alloc] initWithProjectListName:aPath];
-               }
+    NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
+    for (NSString *aPath in contentOfFolder) {
+        NSString *fullPath = [appDocDir stringByAppendingPathComponent:aPath];
+        BOOL isDir = NO;
+        if([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir]) {
+            if(isDir == YES) {
+                if([self checkIgnoureProjectType:aPath] == NO) {
+                    // *** online-step-{ABProjectList-4} ***
+                    ABProjectList *projectList = [projectName checkExistInSubDirectoryWithObjectName:aPath];
+                    if(projectList) {
+                        [MobileDBCacheDirectoryHelper getFileInfoArrayForProjectList:projectList];
+                    } else {
+                        projectList = [[ABProjectList alloc] initWithProjectListName:aPath];
+                    }
 
-               [projectName appendSqliteObjectToArray:projectList];
-               [self analysisProjectNames:fullPath to:projectList];
+                    [projectName appendSqliteObjectToArray:projectList];
+                    [self analysisProjectNames:fullPath to:projectList];
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }
 
 
 - (BOOL)checkIgnoureProjectType:(NSString *)sqliteObjectName {
-   for (NSString * ignoreName in [ServerVideoConfigure ignoreProjectTypeNameArray]) {
-      if ([sqliteObjectName isEqualToString:ignoreName]) {
-         return YES;
-      }
-   }
+    for (NSString *ignoreName in [ServerVideoConfigure ignoreProjectTypeNameArray]) {
+        if([sqliteObjectName isEqualToString:ignoreName]) {
+            return YES;
+        }
+    }
 
-   return NO;
+    return NO;
 }
 
 
 - (void)analysisProjectNames:(NSString *)appDocDir to:(ABProjectList *)projectList {
-   NSArray * contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
-   for (NSString * aPath in contentOfFolder) {
-      NSString * fullPath = [appDocDir stringByAppendingPathComponent:aPath];
-      BOOL isDir = NO;
-      if ([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir]) {
-         if (isDir == YES) {
-         } else {
-            if ([self checkIsMovieFile:aPath]) {
-               // *** online-step-{SOThumbnailInfo-6} ***
-               SOThumbnailInfo * thumbnailInfo = [MobileThumbnailCacheDirectoryHelper checkExistForThumbnailInfoWithFileInfoIDProjectFullPath:fullPath];
+    NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appDocDir error:NULL];
+    for (NSString *aPath in contentOfFolder) {
+        NSString *fullPath = [appDocDir stringByAppendingPathComponent:aPath];
+        BOOL isDir = NO;
+        if([[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&isDir]) {
+            if(isDir == YES) {
+            } else {
+                if([self checkIsMovieFile:aPath]) {
+                    // *** online-step-{SOThumbnailInfo-6} ***
+                    SOThumbnailInfo *thumbnailInfo = [MobileThumbnailCacheDirectoryHelper checkExistForThumbnailInfoWithFileInfoIDProjectFullPath:fullPath];
 
-               // *** online-step-{ABProjectFileInfo-5} ***
-               ABProjectFileInfo * projectFileInfo = [projectList checkExistInSubDirectoryWithObjectName:aPath];
-               if (projectFileInfo == nil) {
-                  projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
-                  // if movie path exist in image database, but movie database not exist, then give old id to ProjectFileInfo.
-                  if (thumbnailInfo)
-                     projectFileInfo.sqliteObjectID = thumbnailInfo.fileInfoID;
-                  [projectList appendSqliteObjectToArray:projectFileInfo];
-               } else if (thumbnailInfo) {
-                  if ([thumbnailInfo.fileInfoID isEqualToString:projectFileInfo.sqliteObjectID] == NO) {
-                     NSLog(@"thumbnailInfo.fileInfoID not equal to projectFileInfo.sqliteObjectID");
-                  }
-               }
+                    // *** online-step-{ABProjectFileInfo-5} ***
+                    ABProjectFileInfo *projectFileInfo = [projectList checkExistInSubDirectoryWithObjectName:aPath];
+                    if(projectFileInfo == nil) {
+                        projectFileInfo = [[ABProjectFileInfo alloc] initWithFileInforName:aPath];
+                        // if movie path exist in image database, but movie database not exist, then give old id to ProjectFileInfo.
+                        if(thumbnailInfo)
+                            projectFileInfo.sqliteObjectID = thumbnailInfo.fileInfoID;
+                        [projectList appendSqliteObjectToArray:projectFileInfo];
+                    } else if(thumbnailInfo) {
+                        if([thumbnailInfo.fileInfoID isEqualToString:projectFileInfo.sqliteObjectID] == NO) {
+                            NSLog(@"thumbnailInfo.fileInfoID not equal to projectFileInfo.sqliteObjectID");
+                        }
+                    }
 
 
-               if (thumbnailInfo == nil) {
-                  [MobileThumbnailCacheDirectoryHelper saveThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
-                                                                         fileInforName:aPath
-                                                                       projectFullPath:fullPath];
-               }
+                    if(thumbnailInfo == nil) {
+                        [MobileThumbnailCacheDirectoryHelper saveThumbnailInfoWithFileInfoID:projectFileInfo.sqliteObjectID
+                                                                               fileInforName:aPath
+                                                                             projectFullPath:fullPath];
+                    }
 
-               [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
-                                            forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
+                    [self checkExistAndGenerateThumbnail:projectFileInfo.sqliteObjectID
+                                                 forFile:[NSString stringWithFormat:@"%@/%@", appDocDir, aPath]];
 
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }
 
 
 - (void)checkExistAndGenerateThumbnail:(NSString *)fileInfoID forFile:(NSString *)fileAbstractPath {
-   if (needGenerateThumbnail == NO)
-      return;
+    if(needGenerateThumbnail == NO)
+        return;
 
-   NSObject * thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfoID];
-   NSObject * cacheDirectory = [NSString stringWithFormat:@"%@/%@", self.cacheDirectory, thumbnailFolder];
-   NSString * destinateThumbnailPath = [NSString stringWithFormat:@"%@/%@", cacheDirectory, thumbnailName];
+    NSObject *thumbnailName = [MobileBaseDatabase getThumbnailName:fileInfoID];
+    NSObject *cacheDirectory = [NSString stringWithFormat:@"%@/%@", self.cacheDirectory, thumbnailFolder];
+    NSString *destinateThumbnailPath = [NSString stringWithFormat:@"%@/%@", cacheDirectory, thumbnailName];
 
-   BOOL myPathIsDir;
-   BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:destinateThumbnailPath isDirectory:&myPathIsDir];
+    BOOL myPathIsDir;
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:destinateThumbnailPath isDirectory:&myPathIsDir];
 
-   if (fileExists) {
-   } else {
-      [GenerateThumbnailTask executeGenerateThumbnailTaskFrom:fileAbstractPath to:destinateThumbnailPath];
-   }
+    if(fileExists) {
+    } else {
+        [GenerateThumbnailTask executeGenerateThumbnailTaskFrom:fileAbstractPath to:destinateThumbnailPath];
+    }
 
 }
 
 
 - (BOOL)checkIsMovieFile:(NSString *)path {
-   NSString * extension = [[path pathExtension] lowercaseString];
+    NSString *extension = [[path pathExtension] lowercaseString];
 
-   for (NSString * type in [ServerVideoConfigure movieSupportedType]) {
-      if ([extension isEqualToString:type]) {
-         return YES;
-      }
-   }
+    for (NSString *type in [ServerVideoConfigure movieSupportedType]) {
+        if([extension isEqualToString:type]) {
+            return YES;
+        }
+    }
 
-   return NO;
+    return NO;
 }
 
 

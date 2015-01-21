@@ -16,24 +16,24 @@
 }
 
 + (void)saveForOnlineVideoTypeDictionary:(NSMutableDictionary *)dictionary withName:(NSString *)onlineTypeName whithOnlineVideoTypePath:(NSString *)onlineVideoTypePath {
-   [[self getMobileDBInstance]
-    saveForOnlineVideoTypeDictionary:dictionary
-                            withName:onlineTypeName
-            whithOnlineVideoTypePath:onlineVideoTypePath
-   ];
+    [[self getMobileDBInstance]
+            saveForOnlineVideoTypeDictionary:dictionary
+                                    withName:onlineTypeName
+                    whithOnlineVideoTypePath:onlineVideoTypePath
+    ];
 }
 
 
 + (MobileDB *)getMobileDBInstance {
-   return [MobileDB dbInstance:[UserCacheFolderHelper RealProjectServerDirectory]];
+    return [MobileDB dbInstance:[UserCacheFolderHelper RealProjectServerDirectory]];
 }
 
 
 + (BOOL)checkExistForFileInfoWithAbstractPath:(NSString *)fileAbstractPath {
-   if ([MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]] == NO)
-      return NO;
+    if([MobileBaseDatabase checkDBFileExist:[UserCacheFolderHelper getSqliteFilePath]] == NO)
+        return NO;
 
-   return [[self getMobileDBInstance] checkFileInfoExist:fileAbstractPath];
+    return [[self getMobileDBInstance] checkFileInfoExist:fileAbstractPath];
 }
 
 
@@ -42,19 +42,19 @@
 
 
 + (ABProjectType *)checkExistForProjectTypeWithProjectTypeName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
-   return [[self getMobileDBInstance] checkExistForProjectTypeWithProjectTypeName:sqliteObjectName
-                                                                  projectFullPath:projectFullPath];
+    return [[self getMobileDBInstance] checkExistForProjectTypeWithProjectTypeName:sqliteObjectName
+                                                                   projectFullPath:projectFullPath];
 }
 
 
 + (ABProjectName *)checkExistForProjectNameWithProjectName:(NSString *)sqliteObjectName projectFullPath:(NSString *)projectFullPath {
-   return [[self getMobileDBInstance] checkExistForProjectNameWithProjectName:sqliteObjectName
-                                                              projectFullPath:projectFullPath];
+    return [[self getMobileDBInstance] checkExistForProjectNameWithProjectName:sqliteObjectName
+                                                               projectFullPath:projectFullPath];
 }
 
 
 + (void)getFileInfoArrayForProjectList:(ABProjectList *)projectList {
-   [[self getMobileDBInstance] getFileInfoArrayForProjectList:projectList];
+    [[self getMobileDBInstance] getFileInfoArrayForProjectList:projectList];
 }
 
 @end

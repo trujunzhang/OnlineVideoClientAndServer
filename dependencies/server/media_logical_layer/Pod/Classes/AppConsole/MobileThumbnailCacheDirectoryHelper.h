@@ -4,11 +4,13 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @class SOThumbnailInfo;
 
 
 @interface MobileThumbnailCacheDirectoryHelper : NSObject
 
 + (SOThumbnailInfo *)checkExistForThumbnailInfoWithFileInfoIDProjectFullPath:(NSString *)fullPath;
+
 + (void)saveThumbnailInfoWithFileInfoID:(NSString *)sqliteObjectID fileInforName:(NSString *)sqliteObjectName projectFullPath:(NSString *)fullPath;
 @end

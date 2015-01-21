@@ -12,17 +12,17 @@
 #import "UserCacheFolderHelper.h"
 
 
-int main(int argc, const char * argv[]) {
-   @autoreleasepool {
-      // insert code here...
-      [UserCacheFolderHelper checkUserProjectDirectoryExistAndMake];
-      [UserCacheFolderHelper removeFileForVideoTrainingDB];
+int main(int argc, const char *argv[]) {
+    @autoreleasepool {
+        // insert code here...
+        [UserCacheFolderHelper checkUserProjectDirectoryExistAndMake];
+        [UserCacheFolderHelper removeFileForVideoTrainingDB];
 
-      [VideoGenerateSqliteHelper generateSqliteAndThumbnail];
+        [VideoGenerateSqliteHelper generateSqliteAndThumbnail];
 
-      NSLog(@"Hello, World!");
-   }
-   return 0;
+        NSLog(@"Hello, World!");
+    }
+    return 0;
 }
 
 

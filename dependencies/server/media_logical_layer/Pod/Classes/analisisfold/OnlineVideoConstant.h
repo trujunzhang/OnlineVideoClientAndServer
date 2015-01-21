@@ -6,8 +6,8 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM (NSUInteger, TFOLD_TYPE) {
-   TFOLD_CATELOGY,
-   TFOLD_PROJECT
+    TFOLD_CATELOGY,
+    TFOLD_PROJECT
 };
 
 

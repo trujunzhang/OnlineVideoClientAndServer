@@ -8,14 +8,14 @@
 #import "MobileDBCacheDirectoryHelper.h"
 #import "ABOnlineVideoType.h"
 
-static MemoryDBHelper * _dbInstance;
+static MemoryDBHelper *_dbInstance;
 
-static NSString * _onlineTypeName;
-static NSString * _onlineVideoTypePath;
+static NSString *_onlineTypeName;
+static NSString *_onlineVideoTypePath;
 
 
 @interface MemoryDBHelper () {
-   ABOnlineVideoType * _onlineVideoType;
+    ABOnlineVideoType *_onlineVideoType;
 }
 @end
 
@@ -25,46 +25,46 @@ static NSString * _onlineVideoTypePath;
 }
 
 - (instancetype)init {
-   self = [super init];
-   if (self) {
+    self = [super init];
+    if(self) {
 
-      NSDictionary * dictionary = @{
-       @"onlineVideoTypeName" : _onlineTypeName,
-       @"onlineVideoTypePath" : _onlineVideoTypePath,
-      };
+        NSDictionary *dictionary = @{
+                @"onlineVideoTypeName" : _onlineTypeName,
+                @"onlineVideoTypePath" : _onlineVideoTypePath,
+        };
 
-      NSMutableArray * mutableArray =
-       [[MobileDBCacheDirectoryHelper getMobileDBInstance] readOnlineVideoTypes:dictionary
-                                                                           isReadArray:YES];
+        NSMutableArray *mutableArray =
+                [[MobileDBCacheDirectoryHelper getMobileDBInstance] readOnlineVideoTypes:dictionary
+                                                                             isReadArray:YES];
 
-      if (mutableArray.count == 1) {
-         _onlineVideoType = mutableArray[0];
-      } else {
-         _onlineVideoType = [[ABOnlineVideoType alloc] initWithOnlineTypeName:_onlineTypeName
-                                                              projectFullPath:_onlineVideoTypePath
-                                                               withDictionary:[[NSMutableDictionary alloc] init]];
-      }
-   }
+        if(mutableArray.count == 1) {
+            _onlineVideoType = mutableArray[0];
+        } else {
+            _onlineVideoType = [[ABOnlineVideoType alloc] initWithOnlineTypeName:_onlineTypeName
+                                                                 projectFullPath:_onlineVideoTypePath
+                                                                  withDictionary:[[NSMutableDictionary alloc] init]];
+        }
+    }
 
-   return self;
+    return self;
 }
 
 
 + (MemoryDBHelper *)sharedInstanceWithTypeName:(NSString *)onlineTypeName withLocalPath:(NSString *)onlineVideoTypePath {
-   if (
-    (![_onlineVideoTypePath isEqualToString:onlineVideoTypePath]) ||
-     (![_onlineTypeName isEqualToString:onlineTypeName])
-    ) {
-      _onlineTypeName = onlineTypeName;
-      _onlineVideoTypePath = onlineVideoTypePath;
-      _dbInstance = nil;
-   }
+    if(
+            (![_onlineVideoTypePath isEqualToString:onlineVideoTypePath]) ||
+                    (![_onlineTypeName isEqualToString:onlineTypeName])
+            ) {
+        _onlineTypeName = onlineTypeName;
+        _onlineVideoTypePath = onlineVideoTypePath;
+        _dbInstance = nil;
+    }
 
-   if (!_dbInstance) {
-      _dbInstance = [[MemoryDBHelper alloc] init];
-   }
+    if(!_dbInstance) {
+        _dbInstance = [[MemoryDBHelper alloc] init];
+    }
 
-   return _dbInstance;
+    return _dbInstance;
 }
 
 

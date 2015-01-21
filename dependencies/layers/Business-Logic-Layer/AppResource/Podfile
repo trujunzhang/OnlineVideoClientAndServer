@@ -16,6 +16,7 @@ target 'OnlineVideoClient', :exclusive => true do
   pod 'SDWebImage'
   pod 'parse'
 
+  pod 'SSZipArchive'
   pod 'Regexer'
   pod 'SWRevealViewController'
   pod 'AFNetworking'
