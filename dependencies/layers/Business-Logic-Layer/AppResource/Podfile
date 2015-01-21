@@ -2,8 +2,12 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, 7.0
 
+def import_pods
+  pod 'media_sqlite_manager', :path => '../dependencies/server/media_sqlite_manager'
+end
 
 target 'OnlineVideoClient', :exclusive => true do
+  import_pods
 
   pod 'AsyncDisplayKit'
 
@@ -47,15 +51,15 @@ target 'OnlineVideoClient', :exclusive => true do
   pod "YoutubeCollectionView", :path => "../dependencies/ipad/YoutubeCollectionView"
   pod "Movie_subtitle_manager", :path => "../dependencies/ipad/Movie_subtitle_manager"
 
-  pod 'media_sqlite_manager', :path => '../dependencies/server/media_sqlite_manager'
   pod 'app_cofigure_manager', :path => '../dependencies/server/app_cofigure_manager'
-
 
 end
 
 target 'OnlineVideoClientTests', :exclusive => true do
+  import_pods
 
-  # pod 'OCMockito', '~> 1.0'
-  pod 'media_sqlite_manager', :path => '../dependencies/server/media_sqlite_manager'
+  pod 'UnitTest', :path => '../UnitTest'
+
+  pod 'Expecta'
 
 end

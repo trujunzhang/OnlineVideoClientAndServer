@@ -37,7 +37,7 @@
 
 }
 
-
+//(5+6)-3=11-3=8(5)
 + (void)copyOnlineVideoTypeDictionary:(NSMutableDictionary *)onlineTypeDictionary toLastProjectTypeDictionary:(NSMutableDictionary *)lastOnlineTypeDictionary {
     for (NSString *key in onlineTypeDictionary.allKeys) {
         //object.class:[ABProjectType]

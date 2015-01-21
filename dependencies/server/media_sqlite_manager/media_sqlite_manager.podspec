@@ -31,6 +31,10 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/ArraySort/*.{h,m}'
   end
 
+  s.subspec 'SqliteStore' do |sub|
+    sub.source_files = 'Pod/Classes/SqliteStore/*.{h,m}'
+  end
+
 end
 
 
