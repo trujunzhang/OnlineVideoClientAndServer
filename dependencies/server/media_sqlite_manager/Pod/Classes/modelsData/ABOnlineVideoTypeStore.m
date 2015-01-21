@@ -16,8 +16,6 @@
 
 - (NSMutableArray *)getTheSameVideoTypeArray {
     NSMutableArray *onlineVideoTypeArray = [[NSMutableArray alloc] init];
-
-
     NSString *objectName = @"Youtube.com";
 
     for (int i = 0;i < 2;i++) {
