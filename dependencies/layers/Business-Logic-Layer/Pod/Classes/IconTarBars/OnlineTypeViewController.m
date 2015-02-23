@@ -8,6 +8,8 @@
 #import "LeftRevealHelper.h"
 #import "MxTabBarManager.h"
 #import "SqliteManager.h"
+#import "YoutubeCollectionViewBase.h"
+#import "LeftMenuViewBase.h"
 
 #import "YoutubeChannelPageViewController.h"
 
