@@ -15,7 +15,7 @@
 
 
 @interface OnlineTypeViewController ()<YoutubeCollectionNextPageDelegate, LeftMenuViewBaseDelegate> {
-    YTCollectionViewController *_gridViewController;
+    YoutubeAsGridCHTLayoutViewController *_gridViewController;
     YTPlaylistItemsType _playlistItemsType;
 }
 
@@ -46,7 +46,7 @@
 
 - (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(YTPlaylistItemsType)playlistItemsType {
     // 1
-    YTCollectionViewController *gridViewController = [[YTCollectionViewController alloc] initWithNextPageDelegate:self
+    YoutubeAsGridCHTLayoutViewController *gridViewController = [[YoutubeAsGridCHTLayoutViewController alloc] initWithNextPageDelegate:self
                                                                                                         withTitle:title
                                                                                              withProjectListArray:nil];
     gridViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];

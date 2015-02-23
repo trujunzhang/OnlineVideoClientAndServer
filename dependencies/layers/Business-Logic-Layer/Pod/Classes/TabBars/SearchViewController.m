@@ -18,8 +18,8 @@
 
 
 @interface SearchViewController ()<UISearchBarDelegate, YoutubeCollectionNextPageDelegate> {
-    YTCollectionViewController *_collectionViewController;
-    YTCollectionViewController *_lastCollectionViewController;
+    YoutubeAsGridCHTLayoutViewController *_collectionViewController;
+    YoutubeAsGridCHTLayoutViewController *_lastCollectionViewController;
 }
 @property (strong, nonatomic) UISegmentedControl *segment_title;
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -45,7 +45,7 @@
 }
 
 
-- (YTCollectionViewController *)makeNewCollectionViewForSearchBar {
+- (YoutubeAsGridCHTLayoutViewController *)makeNewCollectionViewForSearchBar {
     // 1
     if(_collectionViewController) {
         [_collectionViewController.view removeFromSuperview];
@@ -55,7 +55,7 @@
     }
 
     // 2
-    YTCollectionViewController *controller = [[YTCollectionViewController alloc] initWithNextPageDelegate:self
+    YoutubeAsGridCHTLayoutViewController *controller = [[YoutubeAsGridCHTLayoutViewController alloc] initWithNextPageDelegate:self
                                                                                                 withTitle:nil
                                                                                      withProjectListArray:nil];
     controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];

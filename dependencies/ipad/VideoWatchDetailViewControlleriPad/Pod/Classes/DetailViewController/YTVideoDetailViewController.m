@@ -31,7 +31,7 @@
 
 @property (nonatomic, strong) UIViewController *firstViewController;
 @property (nonatomic, strong) UIViewController *secondViewController;
-@property (nonatomic, strong) YTCollectionViewController *thirdViewController;
+@property (nonatomic, strong) YoutubeAsGridCHTLayoutViewController *thirdViewController;
 
 @end
 
@@ -102,7 +102,7 @@
     self.secondViewController = [[UIViewController alloc] init];
     self.secondViewController.title = @"More From";
 
-    self.thirdViewController = [[YTCollectionViewController alloc] initWithNextPageDelegate:self
+    self.thirdViewController = [[YoutubeAsGridCHTLayoutViewController alloc] initWithNextPageDelegate:self
                                                                                   withTitle:@"Suggestions"
                                                                        withProjectListArray:nil];
     self.thirdViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];

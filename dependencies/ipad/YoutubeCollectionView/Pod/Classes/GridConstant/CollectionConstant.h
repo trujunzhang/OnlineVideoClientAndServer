@@ -8,8 +8,8 @@
 
 
 
-//#define YTCollectionViewController YoutubeGridLayoutViewController
-//#define YTCollectionViewController YoutubeGridCHTLayoutViewController
-#define YTCollectionViewController YoutubeAsGridCHTLayoutViewController
+//#define YoutubeAsGridCHTLayoutViewController YoutubeGridLayoutViewController
+//#define YoutubeAsGridCHTLayoutViewController YoutubeGridCHTLayoutViewController
+#define YoutubeAsGridCHTLayoutViewController YoutubeAsGridCHTLayoutViewController
 
 

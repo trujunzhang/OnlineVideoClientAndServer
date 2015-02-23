@@ -7,7 +7,7 @@
 #import "CollectionConstant.h"
 
 
-@interface AsFileInfoVideoCollectionViewController : YTCollectionViewController
+@interface AsFileInfoVideoCollectionViewController : YoutubeAsGridCHTLayoutViewController
 
 - (instancetype)initWithTitle:(NSString *)title withProjectListArray:(NSMutableArray *)projectListArray;
 @end

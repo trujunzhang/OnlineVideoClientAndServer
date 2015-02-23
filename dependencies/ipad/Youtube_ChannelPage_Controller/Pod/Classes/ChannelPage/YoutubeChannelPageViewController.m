@@ -28,7 +28,7 @@
 @property (nonatomic, strong) YTAsyncYoutubeChannelTopCellNode *topBanner;
 @property (nonatomic, strong) JZGGTabBarController *videoTabBarController;
 
-@property (nonatomic, strong) YTCollectionViewController *selectedController;
+@property (nonatomic, strong) YoutubeAsGridCHTLayoutViewController *selectedController;
 @property (nonatomic) YTSegmentItemType selectedSegmentItemType;
 
 @end
@@ -68,7 +68,7 @@
     // 1
     NSMutableArray *tabBarControllers = [[NSMutableArray alloc] init];
     for (NSString *title in [GYoutubeRequestInfo getChannelPageSegmentTitlesArray]) {
-        YTCollectionViewController *controller = [[YTCollectionViewController alloc] initWithNextPageDelegate:self
+        YoutubeAsGridCHTLayoutViewController *controller = [[YoutubeAsGridCHTLayoutViewController alloc] initWithNextPageDelegate:self
                                                                                                     withTitle:title
                                                                                          withProjectListArray:_projectListArray];
 
@@ -144,7 +144,7 @@
 }
 
 
-- (void)fetchListWithController:(YTCollectionViewController *)controller withType:(YTSegmentItemType)type {
+- (void)fetchListWithController:(YoutubeAsGridCHTLayoutViewController *)controller withType:(YTSegmentItemType)type {
     self.selectedController = controller;
     self.selectedSegmentItemType = type;
 

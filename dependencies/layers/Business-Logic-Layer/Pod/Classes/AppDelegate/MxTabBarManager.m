@@ -8,6 +8,7 @@
 #import "JZGGTabBarController.h"
 #import "SqliteArraySortHelper.h"
 #import "SqliteManager.h"
+#import "AsLeftMenuViewController.h"
 
 
 @interface MxTabBarManager () {
