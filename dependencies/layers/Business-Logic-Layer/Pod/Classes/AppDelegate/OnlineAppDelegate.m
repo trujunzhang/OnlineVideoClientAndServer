@@ -60,7 +60,7 @@
 
 - (UIViewController *)setupRevealViewController {
     // left controller
-    YTLeftMenuViewController *leftViewController = [[YTLeftMenuViewController alloc] init];
+    AsLeftMenuViewController *leftViewController = [[AsLeftMenuViewController alloc] init];
 
     // right controller
     NSMutableArray *tabBarControllerArray = [self getTabBarControllerArray];

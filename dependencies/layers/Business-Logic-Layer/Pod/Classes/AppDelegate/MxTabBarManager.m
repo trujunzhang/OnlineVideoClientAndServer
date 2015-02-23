@@ -13,7 +13,7 @@
 @interface MxTabBarManager () {
     JZGGTabBarController *_tabBarController;
     NSArray *_tabBarViewControllerArray;
-    YTLeftMenuViewController *_leftViewController;
+    AsLeftMenuViewController *_leftViewController;
 
     NSMutableDictionary *_tabbarYouTubeChannelDictionary;
     NSInteger _tabBarSelectedIndex;
