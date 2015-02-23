@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <ASImageResize/UIImage+Resize.h>
+#import "UIImage+Resize.h"
 #import "SDWebImageCacheImplement.h"
 #import "SDImageCache.h"
 #import "SDWebImageManager.h"

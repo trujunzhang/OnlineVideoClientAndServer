@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import "AsyncDisplayKit.h"
 
 
 @interface ImageCacheInterface : NSObject

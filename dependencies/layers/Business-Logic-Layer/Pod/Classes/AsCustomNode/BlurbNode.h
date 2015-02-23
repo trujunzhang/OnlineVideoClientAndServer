@@ -9,8 +9,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
-
+#import "AsyncDisplayKit.h"
 
 /**
 * Simple node that displays a placekitten.com attribution.

@@ -10,7 +10,7 @@
 #import "LeftRevealHelper.h"
 #import "YoutubeConstants.h"
 
-#import <SWRevealViewController/SWRevealViewController.h>
+#import "SWRevealViewController.h"
 
 LeftRevealHelper *instance;
 

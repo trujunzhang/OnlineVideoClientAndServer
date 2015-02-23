@@ -12,7 +12,6 @@ target 'OnlineVideoClient', :exclusive => true do
   pod 'AsyncDisplayKit'
 
   pod 'Reveal-iOS-SDK'
-  pod 'pop'
   pod 'SDWebImage'
   pod 'parse'
 

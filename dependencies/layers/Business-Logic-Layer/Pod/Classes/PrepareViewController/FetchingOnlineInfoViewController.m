@@ -7,7 +7,6 @@
 #import "GYoutubeHelper.h"
 #import "LeftRevealHelper.h"
 #import "MxTabBarManager.h"
-#import "FBShimmeringView.h"
 #import "MobileDB.h"
 
 static CGFloat kTextPadding = 100.0f;
@@ -102,12 +101,7 @@ static CGFloat kTextPadding = 100.0f;
 
 
 - (void)addEffectFor:(UIView *)view withViewFrame:(CGRect)viewFrame {
-    FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:viewFrame];
-    [self.view addSubview:shimmeringView];
 
-    shimmeringView.contentView = view;
-
-    shimmeringView.shimmering = YES;
 
 }
 

@@ -99,7 +99,7 @@
 
 #import <float.h>
 
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import "AsyncDisplayKit.h"
 
 
 @implementation UIImage (ImageEffects)

@@ -34,4 +34,4 @@ _runProject(){
 
 _cleanup
 _cocoapodsInstall
-#_runProject
+_runProject

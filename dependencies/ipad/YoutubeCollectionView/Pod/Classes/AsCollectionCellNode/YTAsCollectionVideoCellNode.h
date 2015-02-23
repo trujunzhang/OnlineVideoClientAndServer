@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
+#import "AsyncDisplayKit.h"
 #import "ASControlNode+Subclasses.h"
 #import "ASDisplayNode+Subclasses.h"
 
