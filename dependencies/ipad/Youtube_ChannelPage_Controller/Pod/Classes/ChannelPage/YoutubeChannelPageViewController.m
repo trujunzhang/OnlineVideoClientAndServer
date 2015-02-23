@@ -11,8 +11,6 @@
 #import "YTAsyncYoutubeChannelTopCellNode.h"
 #import "JZGGTabBarController.h"
 #import "JZGGLayoutStringTabBar.h"
-#import "SqliteManager.h"
-
 
 @interface YoutubeChannelPageViewController ()<YoutubeCollectionNextPageDelegate, JZGGTabBarControllerDelegate> {
     NSMutableArray *_projectListArray;

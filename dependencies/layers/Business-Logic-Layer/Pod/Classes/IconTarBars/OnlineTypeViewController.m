@@ -5,13 +5,11 @@
 
 #import "OnlineTypeViewController.h"
 
-#import "YTVideoDetailViewController.h"
 #import "LeftRevealHelper.h"
-#import "YoutubeChannelPageViewController.h"
-
 #import "MxTabBarManager.h"
-#import "LeftMenuViewBase.h"
 #import "SqliteManager.h"
+
+#import "YoutubeChannelPageViewController.h"
 
 
 @interface OnlineTypeViewController ()<YoutubeCollectionNextPageDelegate, LeftMenuViewBaseDelegate> {
