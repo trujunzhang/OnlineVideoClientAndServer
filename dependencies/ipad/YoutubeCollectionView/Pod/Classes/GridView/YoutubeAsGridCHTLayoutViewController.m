@@ -13,10 +13,6 @@
 
 
 
-//#define ASGRIDROWCELL YTGridVideoCellNode
-//#define ASGRIDROWCELL YTAsCollectionVideoCellNode
-//#define ASGRIDROWCELL YTAsGridVideoCellNode
-
 @interface YoutubeAsGridCHTLayoutViewController ()<ASCollectionViewDataSource, ASCollectionViewDelegate>
 @property (strong, nonatomic) ASCollectionView *collectionView;
 @end
