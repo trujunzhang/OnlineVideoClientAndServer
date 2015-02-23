@@ -148,11 +148,11 @@ static CGFloat kTextPadding = 100.0f;
 
 
 - (void)initOnlineClientInfo:(BOOL)checkVersion {
-    NSString *sqliteFilePath = [self removeSqliteFile];
+    NSString *dbPath = [self remoteSqliteFile];
 
     SqliteResponseBlock sqliteResponseBlock = ^(NSObject *respObject) {
-        if([MobileBaseDatabase checkDBFileExist:sqliteFilePath] == NO) {
-            [self showStepInfo:[NSString stringWithFormat:@"not found %@", sqliteFilePath]];
+        if([MobileBaseDatabase checkDBFileExist:dbPath] == NO) {
+            [self showStepInfo:[NSString stringWithFormat:@"not found %@", dbPath]];
         } else {
             [self.delegate fetchingOnlineClientCompletion];
 
@@ -165,7 +165,7 @@ static CGFloat kTextPadding = 100.0f;
 }
 
 
-- (NSString *)removeSqliteFile {
+- (NSString *)remoteSqliteFile {
     NSString *dbFilePathForiOS = [MobileDB getDBFilePathForiOS];
 
     [[NSFileManager defaultManager] removeItemAtPath:dbFilePathForiOS error:nil];
