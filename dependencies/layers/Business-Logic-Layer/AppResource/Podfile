@@ -34,7 +34,7 @@ target 'OnlineVideoClient', :exclusive => true do
   pod "YKMediaPlayerKit", :path => "../dependencies/lib/YKMediaPlayerKit"
   pod "MPMoviePlayerController-Subtitles", :path => "../dependencies/lib/MPMoviePlayerController-Subtitles"
 
-  pod "KRLCollectionViewGridLayout", :path => "../dependencies/lib/KRLCollectionViewGridLayout"
+  # pod "KRLCollectionViewGridLayout", :path => "../dependencies/lib/KRLCollectionViewGridLayout"
 
   # ________________collect common library___________________
   pod "IOS_Collection_Code", :path => "../dependencies/collect/IOS_Collection_Code"

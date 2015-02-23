@@ -7,9 +7,3 @@
 #endif
 
 
-
-//#define YoutubeAsGridCHTLayoutViewController YoutubeGridLayoutViewController
-//#define YoutubeAsGridCHTLayoutViewController YoutubeGridCHTLayoutViewController
-#define YoutubeAsGridCHTLayoutViewController YoutubeAsGridCHTLayoutViewController
-
-
