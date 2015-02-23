@@ -19,11 +19,13 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/ChannelPage/*.{h,m}'
   end
 
-    s.subspec 'FileInfoVideoCollectionViewController' do |sub|
-      sub.source_files = 'Pod/Classes/FileInfoVideoCollectionViewController/*.{h,m}'
-    end
+  s.subspec 'FileInfoVideoCollectionViewController' do |sub|
+    sub.source_files = 'Pod/Classes/FileInfoVideoCollectionViewController/*.{h,m}'
+  end
 
-
+  s.subspec 'TabbarPage' do |sub|
+    sub.source_files = 'Pod/Classes/TabbarPage/*.{h,m}'
+  end
 
 end
 
